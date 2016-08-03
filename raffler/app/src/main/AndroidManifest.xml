@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.fibelatti.raffler">
+
+    <!-- Declaring uses-permission -->
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <!-- Declaring uses-feature -->
+    <application
+        android:name=".RafflerApplication"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity
+            android:name="com.fibelatti.raffler.views.activities.MainActivity"
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".views.activities.GroupActivity"
+            android:label="@string/title_activity_group"
+            android:parentActivityName="com.fibelatti.raffler.views.activities.MainActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.fibelatti.raffler.views.activities.MainActivity" />
+
+            <intent-filter>
+                <action android:name="android.intent.action.ROULETTE" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".views.activities.GroupFormActivity"
+            android:label="@string/title_activity_group_form"
+            android:parentActivityName=".views.activities.GroupActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".views.activities.GroupActivity" />
+
+            <intent-filter>
+                <action android:name="android.intent.action.ROULETTE_DETAIL" />
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>
