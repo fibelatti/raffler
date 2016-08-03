@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorWhite">#FFFFFF</color>
+    <color name="colorBlack">#000000</color>
+
+    <color name="colorGrayLight">#C2C2C2</color>
+    <color name="colorGray">#999999</color>
+    <color name="colorGrayDark">#222222</color>
+
+    <color name="colorBlue">#3F51B5</color>
+    <color name="colorBlueDark">#303F9F</color>
+    <color name="colorPink">#FF4081</color>
+
+    <color name="colorPrimary">@color/colorBlue</color>
+    <color name="colorPrimaryDark">@color/colorBlueDark</color>
+    <color name="colorCallToAction">@color/colorPink</color>
+    <color name="textPrimary">@color/colorGray</color>
+    <color name="textPrimaryDark">@color/colorGrayDark</color>
+</resources>
