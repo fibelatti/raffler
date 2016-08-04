@@ -44,7 +44,7 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.GroupViewHolde
     @Override
     public GroupViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.group_list_row, parent, false);
+                .inflate(R.layout.list_row_group, parent, false);
 
         return new GroupViewHolder(itemView);
     }
