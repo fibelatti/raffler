@@ -25,7 +25,7 @@
                 android:id="@+id/input_group_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/hint_group_name"
+                android:hint="@string/group_form_hint_name"
                 android:imeOptions="actionNext"
                 android:singleLine="true"
                 android:textColor="@color/textPrimaryDark"
@@ -50,7 +50,7 @@
                     android:id="@+id/input_group_item_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/hint_group_item_name"
+                    android:hint="@string/group_form_hint_item_name"
                     android:imeOptions="actionNext"
                     android:singleLine="true"
                     android:textColor="@color/textPrimaryDark"
@@ -62,10 +62,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@null"
-                android:contentDescription="@string/action_add_to_group"
+                android:contentDescription="@string/group_form_action_add"
                 android:padding="@dimen/padding_small"
                 android:src="@mipmap/ic_add_box_white"
-                android:text="@string/action_add_to_group"
+                android:text="@string/group_form_action_add"
                 android:tint="@color/colorCallToAction" />
         </LinearLayout>
 

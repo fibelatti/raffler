@@ -111,9 +111,9 @@ public class GroupFormActivity extends BaseActivity implements AlertDialogHelper
 
     private void setUpMenuAndTitle() {
         if (group.getId() != null) {
-            this.setTitle(getResources().getString(R.string.title_activity_group_form_edit));
+            this.setTitle(getResources().getString(R.string.group_form_title_edit));
         } else {
-            this.setTitle(getResources().getString(R.string.title_activity_group_form_new));
+            this.setTitle(getResources().getString(R.string.group_form_title_new));
         }
     }
 
@@ -148,10 +148,10 @@ public class GroupFormActivity extends BaseActivity implements AlertDialogHelper
     private void saveGroup() {
         if (validateForm()) {
             if (Database.groupDao.saveGroup(group)) {
-                Toast.makeText(this, getString(R.string.msg_scs_group_save), Toast.LENGTH_LONG).show();
+                Toast.makeText(this, getString(R.string.group_form_msg_save), Toast.LENGTH_LONG).show();
                 finish();
             } else {
-                Toast.makeText(this, getString(R.string.msg_err_generic), Toast.LENGTH_LONG).show();
+                Toast.makeText(this, getString(R.string.generic_msg_error), Toast.LENGTH_LONG).show();
             }
         }
     }
@@ -164,7 +164,7 @@ public class GroupFormActivity extends BaseActivity implements AlertDialogHelper
         String newGroupName = groupName.getText().toString();
 
         if (StringHelper.isNullOrEmpty(newGroupName)) {
-            groupNameLayout.setError(getString(R.string.msg_err_name));
+            groupNameLayout.setError(getString(R.string.group_form_msg_validate_name));
             requestFocus(groupName);
             return false;
         } else {
@@ -177,7 +177,7 @@ public class GroupFormActivity extends BaseActivity implements AlertDialogHelper
 
     private boolean validateItemName() {
         if (StringHelper.isNullOrEmpty(groupItemName.getText().toString())) {
-            groupItemNameLayout.setError(getString(R.string.msg_err_item_name));
+            groupItemNameLayout.setError(getString(R.string.group_form_msg_validate_item_name));
             requestFocus(groupItemName);
             return false;
         } else {
@@ -189,7 +189,7 @@ public class GroupFormActivity extends BaseActivity implements AlertDialogHelper
 
     private boolean validateItems() {
         if (group.getItems().size() == 0) {
-            Toast.makeText(this, getString(R.string.msg_err_items), Toast.LENGTH_LONG).show();
+            Toast.makeText(this, getString(R.string.group_form_msg_validate_items), Toast.LENGTH_LONG).show();
             return false;
         }
 
@@ -205,10 +205,10 @@ public class GroupFormActivity extends BaseActivity implements AlertDialogHelper
     private void deleteItems() {
         if (adapter.getSelectedItemsCount() > 0) {
             AlertDialogHelper dialogHelper = new AlertDialogHelper(this, this);
-            dialogHelper.createYesNoDialog(getString(R.string.dialog_delete_group_items_title),
-                    getString(R.string.dialog_delete_group_items_msg)).show();
+            dialogHelper.createYesNoDialog(getString(R.string.group_form_dialog_title_delete_items),
+                    getString(R.string.group_form_dialog_msg_delete_items)).show();
         } else {
-            Toast.makeText(this, getString(R.string.msg_err_group_items_delete), Toast.LENGTH_LONG).show();
+            Toast.makeText(this, getString(R.string.group_form_msg_delete_items), Toast.LENGTH_LONG).show();
         }
     }
 

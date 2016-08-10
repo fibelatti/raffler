@@ -19,7 +19,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="@dimen/padding_small"
-            android:text="@string/hint_group_activity_header"
+            android:text="@string/group_hint_header"
             android:textColor="@color/textPrimary"
             android:textSize="@dimen/text_size_small" />
 
