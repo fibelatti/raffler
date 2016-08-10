@@ -11,6 +11,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 
 import com.fibelatti.raffler.R;
 import com.fibelatti.raffler.db.Database;
@@ -33,6 +34,8 @@ public class MainActivity extends BaseActivity {
 
     @BindView(R.id.toolbar)
     Toolbar toolbar;
+    @BindView(R.id.placeholder)
+    TextView placeholder;
     @BindView(R.id.recycler_view)
     RecyclerView recyclerView;
     @BindView(R.id.fab)
@@ -53,6 +56,7 @@ public class MainActivity extends BaseActivity {
     public void onResume() {
         super.onResume();
         fetchData();
+        setUpValues();
     }
 
     @Override
@@ -114,6 +118,13 @@ public class MainActivity extends BaseActivity {
                 startGroupFormActivity();
             }
         });
+    }
+
+    private void setUpValues() {
+        if (groupList.size() > 0) {
+            placeholder.setVisibility(View.GONE);
+            recyclerView.setVisibility(View.VISIBLE);
+        }
     }
 
     private void fetchData() {

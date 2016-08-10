@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">Raffler!</string>
 
+    <!-- Main -->
     <string name="menu_settings">Settings</string>
 
     <string name="action_check_all">Check All</string>
@@ -28,6 +29,9 @@
     </plurals>
 
     <string name="hint_group_activity_header">Choose which items to include in this raffle by toggling their checkboxes. Bulk edit using the menu.</string>
+
+    <string name="hint_placeholder_main">Have you ever needed help deciding which option to choose?
+        \n\nUse Raffler! to create groups of options to help you pick one (or many!) randomly. You can also use it to form smaller groups among your options.</string>
 
     <string name="msg_scs_group_save">Group saved!</string>
     <string name="msg_err_generic">Oops! Something went wrong. Please try again.</string>

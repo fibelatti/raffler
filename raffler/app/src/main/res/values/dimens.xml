@@ -10,8 +10,9 @@
     <dimen name="text_size_large">20sp</dimen>
     <dimen name="text_size_extra_large">24sp</dimen>
 
-    <dimen name="padding_regular">16dp</dimen>
     <dimen name="padding_small">10dp</dimen>
+    <dimen name="padding_regular">16dp</dimen>
+    <dimen name="padding_large">24dp</dimen>
 
     <dimen name="margin_large">40dp</dimen>
 
