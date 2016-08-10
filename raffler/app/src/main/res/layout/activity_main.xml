@@ -9,11 +9,24 @@
 
     <include layout="@layout/toolbar_default" />
 
+    <TextView
+        android:id="@+id/placeholder"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center_vertical"
+        android:padding="@dimen/padding_large"
+        android:text="@string/hint_placeholder_main"
+        android:textAlignment="center"
+        android:textColor="@color/textPrimary"
+        android:textSize="@dimen/text_size_regular"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycler_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scrollbars="vertical"
+        android:visibility="gone"
         app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
     <android.support.design.widget.FloatingActionButton
