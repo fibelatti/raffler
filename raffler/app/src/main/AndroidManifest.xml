@@ -23,6 +23,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity
             android:name=".views.activities.GroupActivity"
             android:label="@string/label_group_activity"
@@ -31,11 +32,8 @@
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.fibelatti.raffler.views.activities.MainActivity" />
-
-            <intent-filter>
-                <action android:name="android.intent.action.ROULETTE" />
-            </intent-filter>
         </activity>
+
         <activity
             android:name=".views.activities.GroupFormActivity"
             android:label="@string/label_group_form_activity"
@@ -44,10 +42,16 @@
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".views.activities.GroupActivity" />
+        </activity>
 
-            <intent-filter>
-                <action android:name="android.intent.action.ROULETTE_DETAIL" />
-            </intent-filter>
+        <activity
+            android:name=".views.activities.RouletteActivity"
+            android:label="@string/label_roulette_activity"
+            android:parentActivityName=".views.activities.GroupActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".views.activities.GroupActivity" />
         </activity>
     </application>
 

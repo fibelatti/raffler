@@ -58,14 +58,10 @@ public class GroupFormActivity extends BaseActivity implements AlertDialogHelper
         group = (Group) getIntent().getSerializableExtra(Constants.INTENT_EXTRA_GROUP);
         adapter = new GroupAdapter(this, group.getItems());
 
+        BusHelper.getInstance().getBus().register(adapter);
+
         setUpLayout();
         setValues();
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        BusHelper.getInstance().getBus().register(adapter);
     }
 
     @Override
