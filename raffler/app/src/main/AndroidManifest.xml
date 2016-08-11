@@ -53,6 +53,10 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".views.activities.GroupActivity" />
         </activity>
+
+        <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="21ac174587c02c5e779604c9644c6aca94dd72eb" />
     </application>
 
 </manifest>
