@@ -97,6 +97,14 @@ public class GroupAdapter extends RecyclerView.Adapter<GroupAdapter.GroupItemVie
         }
     }
 
+    public void clearSelectedItems() {
+        selectedItems.clear();
+    }
+
+    public Set<GroupItem> getSelectedItems() {
+        return selectedItems;
+    }
+
     public int getSelectedItemsCount() {
         return selectedItems.size();
     }

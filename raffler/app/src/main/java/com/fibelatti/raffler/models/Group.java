@@ -4,6 +4,7 @@ import com.fibelatti.raffler.db.Database;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 public class Group implements Serializable {
@@ -47,6 +48,10 @@ public class Group implements Serializable {
 
     public void setItems(List<GroupItem> items) {
         this.items = items;
+    }
+
+    public void setItems(Collection<GroupItem> items) {
+        this.items.addAll(items);
     }
 
     public Integer getItemCount() {

@@ -5,7 +5,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -46,6 +45,8 @@ public class GroupActivity extends BaseActivity implements AlertDialogHelper.Ale
         context = getApplicationContext();
         group = fetchDataFromIntent();
         adapter = new GroupAdapter(this, group.getItems());
+
+        BusHelper.getInstance().getBus().register(adapter);
 
         setUpLayout();
         setValues();
@@ -119,8 +120,12 @@ public class GroupActivity extends BaseActivity implements AlertDialogHelper.Ale
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                if (validateSelection()) {
+                    Group newGroup = new Group();
+                    newGroup.setItems(adapter.getSelectedItems());
+                    adapter.clearSelectedItems();
+                    startRouletteActivity(newGroup);
+                }
             }
         });
     }
@@ -147,17 +152,32 @@ public class GroupActivity extends BaseActivity implements AlertDialogHelper.Ale
 
     private void deleteGroup() {
         AlertDialogHelper dialogHelper = new AlertDialogHelper(this, this);
-        dialogHelper.createYesNoDialog(getString(R.string.dialog_delete_group_title),
-                getString(R.string.dialog_delete_group_msg)).show();
+        dialogHelper.createYesNoDialog(getString(R.string.group_dialog_title_delete),
+                getString(R.string.group_dialog_msg_delete)).show();
+    }
+
+    private boolean validateSelection() {
+        if (adapter.getSelectedItems().size() < 2) {
+            Toast.makeText(this, getString(R.string.group_msg_validate_selection), Toast.LENGTH_LONG).show();
+            return false;
+        }
+
+        return true;
+    }
+
+    private void startRouletteActivity(Group group) {
+        Intent intent = new Intent(this, RouletteActivity.class);
+        intent.putExtra(Constants.INTENT_EXTRA_GROUP, group);
+        startActivity(intent);
     }
 
     @Override
     public void positiveCallback(DialogInterface dialog, int id) {
         if (Database.groupDao.deleteGroup(group)) {
-            Toast.makeText(this, getString(R.string.msg_scs_group_delete), Toast.LENGTH_LONG).show();
+            Toast.makeText(this, getString(R.string.group_msg_delete_scs), Toast.LENGTH_LONG).show();
             finish();
         } else {
-            Toast.makeText(this, getString(R.string.msg_err_generic), Toast.LENGTH_LONG).show();
+            Toast.makeText(this, getString(R.string.generic_msg_error), Toast.LENGTH_LONG).show();
             finish();
         }
     }
