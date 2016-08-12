@@ -22,5 +22,5 @@
 
     <dimen name="divider_size">1dp</dimen>
 
-    <dimen name="radius_smaller">2dp</dimen>
+    <dimen name="label_radius">2dp</dimen>
 </resources>
