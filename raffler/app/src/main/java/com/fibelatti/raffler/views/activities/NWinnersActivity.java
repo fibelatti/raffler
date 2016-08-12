@@ -51,7 +51,7 @@ public class NWinnersActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
 
         context = getApplicationContext();
-        group = (Group) getIntent().getSerializableExtra(Constants.INTENT_EXTRA_GROUP);
+        group = fetchDataFromIntent();
         adapter = new NWinnersAdapter(this, winners);
 
         setUpLayout();
@@ -98,6 +98,10 @@ public class NWinnersActivity extends BaseActivity {
 
     private void setValues() {
         this.setTitle(getResources().getString(R.string.nwinners_title));
+    }
+
+    private Group fetchDataFromIntent() {
+        return (Group) getIntent().getSerializableExtra(Constants.INTENT_EXTRA_GROUP);
     }
 
     private void raffleWinners() {
