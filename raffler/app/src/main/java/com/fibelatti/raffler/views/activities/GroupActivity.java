@@ -153,6 +153,18 @@ public class GroupActivity extends BaseActivity implements OkOnlyDialogListener,
                 }
             }
         });
+
+        fab_group.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (validateSelection()) {
+                    Group newGroup = new Group();
+                    newGroup.setItems(adapter.getSelectedItems());
+                    adapter.clearSelectedItems();
+                    startSubGroupsActivity(newGroup);
+                }
+            }
+        });
     }
 
     private void setValues() {
@@ -204,6 +216,12 @@ public class GroupActivity extends BaseActivity implements OkOnlyDialogListener,
 
     private void startNWinnersActivity(Group group) {
         Intent intent = new Intent(this, NWinnersActivity.class);
+        intent.putExtra(Constants.INTENT_EXTRA_GROUP, group);
+        startActivity(intent);
+    }
+
+    private void startSubGroupsActivity(Group group) {
+        Intent intent = new Intent(this, SubGroupsActivity.class);
         intent.putExtra(Constants.INTENT_EXTRA_GROUP, group);
         startActivity(intent);
     }
