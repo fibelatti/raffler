@@ -3,6 +3,8 @@ package com.fibelatti.raffler.views.activities;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.support.design.widget.CoordinatorLayout;
+import android.support.design.widget.Snackbar;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
@@ -14,7 +16,6 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.Toast;
 
 import com.fibelatti.raffler.R;
 import com.fibelatti.raffler.db.Database;
@@ -35,6 +36,8 @@ public class GroupFormActivity extends BaseActivity implements AlertDialogHelper
     private Group group;
     private GroupAdapter adapter;
 
+    @BindView(R.id.coordinator_layout)
+    CoordinatorLayout layout;
     @BindView(R.id.toolbar)
     Toolbar toolbar;
     @BindView(R.id.recycler_view)
@@ -144,10 +147,10 @@ public class GroupFormActivity extends BaseActivity implements AlertDialogHelper
     private void saveGroup() {
         if (validateForm()) {
             if (Database.groupDao.saveGroup(group)) {
-                Toast.makeText(this, getString(R.string.group_form_msg_save), Toast.LENGTH_LONG).show();
+                Snackbar.make(layout, getString(R.string.group_form_msg_save), Snackbar.LENGTH_LONG).show();
                 finish();
             } else {
-                Toast.makeText(this, getString(R.string.generic_msg_error), Toast.LENGTH_LONG).show();
+                Snackbar.make(layout, getString(R.string.generic_msg_error), Snackbar.LENGTH_LONG).show();
             }
         }
     }
@@ -185,7 +188,7 @@ public class GroupFormActivity extends BaseActivity implements AlertDialogHelper
 
     private boolean validateItems() {
         if (group.getItems().size() == 0) {
-            Toast.makeText(this, getString(R.string.group_form_msg_validate_items), Toast.LENGTH_LONG).show();
+            Snackbar.make(layout, getString(R.string.group_form_msg_validate_items), Snackbar.LENGTH_LONG).show();
             return false;
         }
 
@@ -205,7 +208,7 @@ public class GroupFormActivity extends BaseActivity implements AlertDialogHelper
                     getString(R.string.group_form_dialog_title_delete_items),
                     getString(R.string.group_form_dialog_msg_delete_items)).show();
         } else {
-            Toast.makeText(this, getString(R.string.group_form_msg_delete_items), Toast.LENGTH_LONG).show();
+            Snackbar.make(layout, getString(R.string.group_form_msg_delete_items), Snackbar.LENGTH_LONG).show();
         }
     }
 

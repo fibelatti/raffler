@@ -2,12 +2,13 @@ package com.fibelatti.raffler.views.activities;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextSwitcher;
-import android.widget.Toast;
 
 import com.fibelatti.raffler.R;
 import com.fibelatti.raffler.models.Group;
@@ -22,6 +23,8 @@ public class RouletteActivity extends BaseActivity {
     private Group group;
     private RouletteHelper rouletteHelper;
 
+    @BindView(R.id.coordinator_layout)
+    CoordinatorLayout layout;
     @BindView(R.id.toolbar)
     Toolbar toolbar;
     @BindView(R.id.text_switcher)
@@ -77,7 +80,7 @@ public class RouletteActivity extends BaseActivity {
             @Override
             public void onClick(View view) {
                 rouletteHelper.stopRoulette();
-                Toast.makeText(context, getString(R.string.roulette_msg_stopping), Toast.LENGTH_LONG).show();
+                Snackbar.make(layout, getString(R.string.roulette_msg_stopping), Snackbar.LENGTH_LONG).show();
             }
         });
     }
