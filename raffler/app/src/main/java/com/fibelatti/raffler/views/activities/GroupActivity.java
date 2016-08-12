@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -12,6 +11,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.animation.AnimationUtils;
 import android.widget.Toast;
 
 import com.fibelatti.raffler.R;
@@ -22,6 +22,8 @@ import com.fibelatti.raffler.views.extensions.DividerItemDecoration;
 import com.fibelatti.raffler.views.utils.AlertDialogHelper;
 import com.fibelatti.raffler.views.utils.BusHelper;
 import com.fibelatti.raffler.views.utils.Constants;
+import com.github.clans.fab.FloatingActionButton;
+import com.github.clans.fab.FloatingActionMenu;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -35,8 +37,14 @@ public class GroupActivity extends BaseActivity implements AlertDialogHelper.Ale
     Toolbar toolbar;
     @BindView(R.id.recycler_view)
     RecyclerView recyclerView;
-    @BindView(R.id.fab)
-    FloatingActionButton fab;
+    @BindView(R.id.fam)
+    FloatingActionMenu fam;
+    @BindView(R.id.fab_roulette)
+    FloatingActionButton fab_roulette;
+    @BindView(R.id.fab_list)
+    FloatingActionButton fab_list;
+    @BindView(R.id.fab_group)
+    FloatingActionButton fab_group;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -107,17 +115,20 @@ public class GroupActivity extends BaseActivity implements AlertDialogHelper.Ale
         recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-                if (dy > 0 && fab.isShown()) {
-                    fab.hide();
-                } else if (dy < 0 && !fab.isShown()) {
-                    fab.show();
+                if (dy > 0 && fam.isShown()) {
+                    fam.hideMenu(true);
+                } else if (dy < 0 && !fam.isShown()) {
+                    fam.showMenu(true);
                 }
             }
         });
     }
 
     private void setUpFab() {
-        fab.setOnClickListener(new View.OnClickListener() {
+        fam.setMenuButtonShowAnimation(AnimationUtils.loadAnimation(this, R.anim.show_from_bottom));
+        fam.setMenuButtonHideAnimation(AnimationUtils.loadAnimation(this, R.anim.hide_to_bottom));
+
+        fab_roulette.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (validateSelection()) {
