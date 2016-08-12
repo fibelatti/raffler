@@ -5,6 +5,7 @@
     <string name="label_group_activity">GroupActivity</string>
     <string name="label_group_form_activity">GroupFormActivity</string>
     <string name="label_roulette_activity">RouletteActivity</string>
+    <string name="label_nwinners_activity">NWinnersActivity</string>
 
     <!-- Generics -->
     <string name="hint_ok">Ok</string>
@@ -72,4 +73,10 @@
     <!-- RouletteActivity -->
     <string name="roulette_title">Roulette!</string>
     <string name="roulette_msg_stopping">Stopping&#8230;</string>
+
+    <!-- NWinnersActivity -->
+    <string name="nwinners_title">N Winners!</string>
+    <string name="nwinners_hint_quantity">Quantity of winners</string>
+    <string name="nwinners_action_raffle">Raffle</string>
+    <string name="nwinners_msg_validate_quantity">Quantity should be less than %d</string>
 </resources>
