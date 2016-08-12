@@ -123,17 +123,6 @@ public class GroupActivity extends BaseActivity implements OkOnlyDialogListener,
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
         recyclerView.setAdapter(adapter);
-
-        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
-            @Override
-            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-                if (dy > 0 && fam.isShown()) {
-                    fam.hideMenu(true);
-                } else if (dy < 0 && !fam.isShown()) {
-                    fam.showMenu(true);
-                }
-            }
-        });
     }
 
     private void setUpFab() {

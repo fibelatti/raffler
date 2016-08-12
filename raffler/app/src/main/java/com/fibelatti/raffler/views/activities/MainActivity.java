@@ -81,17 +81,6 @@ public class MainActivity extends BaseActivity {
                 startGroupActivity(group);
             }
         }));
-
-        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
-            @Override
-            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-                if (dy > 0 && fab.isShown()) {
-                    fab.hide(true);
-                } else if (dy < 0 && !fab.isShown()) {
-                    fab.show(true);
-                }
-            }
-        });
     }
 
     private void setUpFab() {
