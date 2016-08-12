@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context=".views.activities.NWinnersActivity">
+    tools:context=".views.activities.SubGroupsActivity">
 
     <include layout="@layout/toolbar_default" />
 
@@ -16,23 +16,23 @@
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <LinearLayout
-            android:id="@+id/layout_winners_quantity"
+            android:id="@+id/layout_subgroups_quantity"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:padding="@dimen/padding_small">
 
             <android.support.design.widget.TextInputLayout
-                android:id="@+id/input_layout_winners_quantity"
+                android:id="@+id/input_layout_subgroups_quantity"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1">
 
                 <EditText
-                    android:id="@+id/input_winners_quantity"
+                    android:id="@+id/input_subgroups_quantity"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/nwinners_hint_quantity"
+                    android:hint="@string/subgroups_hint_quantity"
                     android:imeOptions="actionNext"
                     android:inputType="number"
                     android:singleLine="true"
@@ -41,14 +41,14 @@
             </android.support.design.widget.TextInputLayout>
 
             <ImageButton
-                android:id="@+id/btn_raffle_winners"
+                android:id="@+id/btn_raffle_subgroups"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@null"
-                android:contentDescription="@string/nwinners_action_raffle"
+                android:contentDescription="@string/subgroups_action_raffle"
                 android:padding="@dimen/padding_small"
                 android:src="@drawable/ic_play_circle_white"
-                android:text="@string/nwinners_action_raffle"
+                android:text="@string/subgroups_action_raffle"
                 android:tint="@color/colorCallToAction" />
         </LinearLayout>
 
@@ -56,7 +56,7 @@
             android:id="@+id/recycler_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@id/layout_winners_quantity"
+            android:layout_below="@id/layout_subgroups_quantity"
             android:paddingLeft="@dimen/padding_small"
             android:paddingRight="@dimen/padding_small"
             android:scrollbars="vertical" />
