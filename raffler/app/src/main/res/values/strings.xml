@@ -58,4 +58,5 @@
 
     <!-- RouletteActivity -->
     <string name="roulette_title">Raffling</string>
+    <string name="roulette_msg_stopping">Stopping&#8230;</string>
 </resources>
