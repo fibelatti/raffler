@@ -64,7 +64,7 @@
                 android:background="@null"
                 android:contentDescription="@string/group_form_action_add"
                 android:padding="@dimen/padding_small"
-                android:src="@drawable/ic_add_box_white"
+                android:src="@drawable/ic_add_circle_white"
                 android:text="@string/group_form_action_add"
                 android:tint="@color/colorCallToAction" />
         </LinearLayout>
