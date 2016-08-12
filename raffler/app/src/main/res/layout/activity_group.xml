@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:fab="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -31,13 +32,50 @@
             android:scrollbars="vertical" />
     </RelativeLayout>
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab"
+    <com.github.clans.fab.FloatingActionMenu
+        android:id="@+id/fam"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
         android:layout_gravity="bottom|end"
-        android:layout_margin="@dimen/fab_margin"
-        android:src="@drawable/ic_play_arrow_white" />
-    <!--app:layout_behavior=".views.extensions.ScrollAwareFABBehavior" />-->
+        android:layout_marginEnd="@dimen/fab_margin"
+        android:layout_marginBottom="@dimen/fab_margin"
+        fab:menu_colorNormal="@color/colorCallToAction"
+        fab:menu_colorPressed="@color/colorCallToAction"
+        fab:menu_icon="@drawable/ic_play_arrow_white"
+        fab:menu_labels_position="left"
+        fab:menu_labels_style="@style/menu_labels_style">
+
+        <com.github.clans.fab.FloatingActionButton
+            android:id="@+id/fab_roulette"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_roulette_white"
+            fab:fab_colorNormal="@color/colorCallToAction"
+            fab:fab_colorPressed="@color/colorCallToAction"
+            fab:fab_label="@string/group_label_fab_roulette"
+            fab:fab_size="mini" />
+
+        <com.github.clans.fab.FloatingActionButton
+            android:id="@+id/fab_list"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_list_white"
+            fab:fab_colorNormal="@color/colorCallToAction"
+            fab:fab_colorPressed="@color/colorCallToAction"
+            fab:fab_label="@string/group_label_fab_list"
+            fab:fab_size="mini" />
+
+        <com.github.clans.fab.FloatingActionButton
+            android:id="@+id/fab_group"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_groups_white"
+            fab:fab_colorNormal="@color/colorCallToAction"
+            fab:fab_colorPressed="@color/colorCallToAction"
+            fab:fab_label="@string/group_label_fab_groups"
+            fab:fab_size="mini" />
+
+    </com.github.clans.fab.FloatingActionMenu>
 
 </android.support.design.widget.CoordinatorLayout>
