@@ -20,6 +20,8 @@ import com.fibelatti.raffler.models.Group;
 import com.fibelatti.raffler.views.adapters.GroupAdapter;
 import com.fibelatti.raffler.views.extensions.DividerItemDecoration;
 import com.fibelatti.raffler.views.utils.AlertDialogHelper;
+import com.fibelatti.raffler.views.utils.AlertDialogHelper.OkOnlyDialogListener;
+import com.fibelatti.raffler.views.utils.AlertDialogHelper.YesNoDialogListener;
 import com.fibelatti.raffler.views.utils.BusHelper;
 import com.fibelatti.raffler.views.utils.Constants;
 import com.github.clans.fab.FloatingActionButton;
@@ -28,10 +30,12 @@ import com.github.clans.fab.FloatingActionMenu;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class GroupActivity extends BaseActivity implements AlertDialogHelper.AlertDialogHelperListener {
+public class GroupActivity extends BaseActivity implements OkOnlyDialogListener, YesNoDialogListener {
     private Context context;
     private Group group;
     private GroupAdapter adapter;
+
+    private AlertDialogHelper dialogHelper;
 
     @BindView(R.id.toolbar)
     Toolbar toolbar;
@@ -53,6 +57,8 @@ public class GroupActivity extends BaseActivity implements AlertDialogHelper.Ale
         context = getApplicationContext();
         group = fetchDataFromIntent();
         adapter = new GroupAdapter(this, group.getItems());
+
+        dialogHelper = new AlertDialogHelper(this);
 
         BusHelper.getInstance().getBus().register(adapter);
 
@@ -77,6 +83,9 @@ public class GroupActivity extends BaseActivity implements AlertDialogHelper.Ale
         switch (item.getItemId()) {
             case android.R.id.home:
                 finish();
+                return true;
+            case R.id.action_help:
+                showHelp();
                 return true;
             case R.id.action_check_all:
                 adapter.checkAllItems();
@@ -156,6 +165,12 @@ public class GroupActivity extends BaseActivity implements AlertDialogHelper.Ale
         setValues();
     }
 
+    private void showHelp() {
+        dialogHelper.createOkOnlyDialog(this,
+                getString(R.string.group_dialog_title_help),
+                getText(R.string.group_dialog_msg_help)).show();
+    }
+
     private void editGroup() {
         Intent intent = new Intent(this, GroupFormActivity.class);
         intent.putExtra(Constants.INTENT_EXTRA_GROUP, group);
@@ -163,8 +178,8 @@ public class GroupActivity extends BaseActivity implements AlertDialogHelper.Ale
     }
 
     private void deleteGroup() {
-        AlertDialogHelper dialogHelper = new AlertDialogHelper(this, this);
-        dialogHelper.createYesNoDialog(getString(R.string.group_dialog_title_delete),
+        dialogHelper.createYesNoDialog(this,
+                getString(R.string.group_dialog_title_delete),
                 getString(R.string.group_dialog_msg_delete)).show();
     }
 
@@ -184,7 +199,12 @@ public class GroupActivity extends BaseActivity implements AlertDialogHelper.Ale
     }
 
     @Override
-    public void positiveCallback(DialogInterface dialog, int id) {
+    public void okCallback(DialogInterface dialog, int id) {
+
+    }
+
+    @Override
+    public void yesCallback(DialogInterface dialog, int id) {
         if (Database.groupDao.deleteGroup(group)) {
             Toast.makeText(this, getString(R.string.group_msg_delete_scs), Toast.LENGTH_LONG).show();
             finish();
@@ -195,7 +215,7 @@ public class GroupActivity extends BaseActivity implements AlertDialogHelper.Ale
     }
 
     @Override
-    public void negativeCallback(DialogInterface dialog, int id) {
+    public void noCallback(DialogInterface dialog, int id) {
 
     }
 }
