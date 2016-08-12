@@ -70,6 +70,6 @@
     <string name="group_form_dialog_msg_delete_items">Are you sure you want to delete the selected items?</string>
 
     <!-- RouletteActivity -->
-    <string name="roulette_title">Raffling</string>
+    <string name="roulette_title">Roulette!</string>
     <string name="roulette_msg_stopping">Stopping&#8230;</string>
 </resources>
