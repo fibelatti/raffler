@@ -54,6 +54,16 @@
                 android:value=".views.activities.GroupActivity" />
         </activity>
 
+        <activity
+            android:name=".views.activities.NWinnersActivity"
+            android:label="@string/label_nwinners_activity"
+            android:parentActivityName=".views.activities.GroupActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".views.activities.GroupActivity" />
+        </activity>
+
         <meta-data
             android:name="io.fabric.ApiKey"
             android:value="${fabricApiKey}" />
