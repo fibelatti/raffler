@@ -8,23 +8,20 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.fibelatti.raffler.R;
-import com.fibelatti.raffler.models.Group;
 
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class RaffleAdapter extends RecyclerView.Adapter<RaffleAdapter.GroupViewHolder> {
+public class SubGroupsAdapter extends RecyclerView.Adapter<SubGroupsAdapter.GroupViewHolder> {
 
     private Context context;
-    private List<Group> groupList;
+    private List<String> subgroupsList;
 
     public class GroupViewHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.name)
         public TextView name;
-        @BindView(R.id.item_count)
-        public TextView itemCount;
 
         public GroupViewHolder(View view) {
             super(view);
@@ -32,9 +29,9 @@ public class RaffleAdapter extends RecyclerView.Adapter<RaffleAdapter.GroupViewH
         }
     }
 
-    public RaffleAdapter(Context context, List<Group> groupList) {
+    public SubGroupsAdapter(Context context, List<String> subgroupsList) {
         this.context = context;
-        this.groupList = groupList;
+        this.subgroupsList = subgroupsList;
     }
 
     private Context getContext() {
@@ -44,22 +41,20 @@ public class RaffleAdapter extends RecyclerView.Adapter<RaffleAdapter.GroupViewH
     @Override
     public GroupViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.list_row_group, parent, false);
+                .inflate(R.layout.list_row_sub_groups, parent, false);
 
         return new GroupViewHolder(itemView);
     }
 
     @Override
     public void onBindViewHolder(GroupViewHolder holder, int position) {
-        Group group = groupList.get(position);
+        String subgroup = subgroupsList.get(position);
 
-        holder.name.setText(group.getName());
-        holder.itemCount.setText(getContext().getResources().getQuantityString(R.plurals.hint_group_items_quantity,
-                group.getItemCount(), group.getItemCount()));
+        holder.name.setText(subgroup);
     }
 
     @Override
     public int getItemCount() {
-        return groupList.size();
+        return subgroupsList.size();
     }
 }
