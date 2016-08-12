@@ -7,6 +7,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextSwitcher;
+import android.widget.Toast;
 
 import com.fibelatti.raffler.R;
 import com.fibelatti.raffler.models.Group;
@@ -76,6 +77,7 @@ public class RouletteActivity extends BaseActivity {
             @Override
             public void onClick(View view) {
                 rouletteHelper.stopRoulette();
+                Toast.makeText(context, getString(R.string.roulette_msg_stopping), Toast.LENGTH_LONG).show();
             }
         });
     }
