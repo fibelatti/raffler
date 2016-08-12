@@ -90,12 +90,6 @@ public class GroupFormActivity extends BaseActivity implements AlertDialogHelper
         return super.onOptionsItemSelected(item);
     }
 
-    @Override
-    protected void onStop() {
-        super.onStop();
-        BusHelper.getInstance().getBus().unregister(adapter);
-    }
-
     private void setUpLayout() {
         setContentView(R.layout.activity_group_form);
         ButterKnife.bind(this);
@@ -103,12 +97,12 @@ public class GroupFormActivity extends BaseActivity implements AlertDialogHelper
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        setUpMenuAndTitle();
+        setUpTitle();
         setUpRecyclerView();
         setUpAddButton();
     }
 
-    private void setUpMenuAndTitle() {
+    private void setUpTitle() {
         if (group.getId() != null) {
             this.setTitle(getResources().getString(R.string.group_form_title_edit));
         } else {
