@@ -58,7 +58,7 @@ public class GroupFormActivity extends BaseActivity implements AlertDialogHelper
         super.onCreate(savedInstanceState);
 
         context = getApplicationContext();
-        group = (Group) getIntent().getSerializableExtra(Constants.INTENT_EXTRA_GROUP);
+        group = fetchDataFromIntent();
         adapter = new GroupAdapter(this, group.getItems());
 
         BusHelper.getInstance().getBus().register(adapter);
@@ -128,6 +128,10 @@ public class GroupFormActivity extends BaseActivity implements AlertDialogHelper
 
     private void setValues() {
         groupName.setText(group.getName());
+    }
+
+    private Group fetchDataFromIntent() {
+        return (Group) getIntent().getSerializableExtra(Constants.INTENT_EXTRA_GROUP);
     }
 
     private void addItem() {
