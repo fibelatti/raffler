@@ -3,7 +3,6 @@ package com.fibelatti.raffler.views.activities;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -11,6 +10,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.animation.AnimationUtils;
 import android.widget.TextView;
 
 import com.fibelatti.raffler.R;
@@ -21,6 +21,7 @@ import com.fibelatti.raffler.views.extensions.DividerItemDecoration;
 import com.fibelatti.raffler.views.extensions.RecyclerTouchListener;
 import com.fibelatti.raffler.views.extensions.RecyclerTouchListener.OnItemClickListener;
 import com.fibelatti.raffler.views.utils.Constants;
+import com.github.clans.fab.FloatingActionButton;
 
 import java.util.List;
 
@@ -103,9 +104,9 @@ public class MainActivity extends BaseActivity {
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                 if (dy > 0 && fab.isShown()) {
-                    fab.hide();
+                    fab.hide(true);
                 } else if (dy < 0 && !fab.isShown()) {
-                    fab.show();
+                    fab.show(true);
                 }
             }
         });
@@ -118,6 +119,9 @@ public class MainActivity extends BaseActivity {
                 startGroupFormActivity();
             }
         });
+
+        fab.setShowAnimation(AnimationUtils.loadAnimation(this, R.anim.show_from_bottom));
+        fab.setHideAnimation(AnimationUtils.loadAnimation(this, R.anim.hide_to_bottom));
     }
 
     private void setUpValues() {

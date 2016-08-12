@@ -127,6 +127,7 @@ public class GroupActivity extends BaseActivity implements AlertDialogHelper.Ale
     private void setUpFab() {
         fam.setMenuButtonShowAnimation(AnimationUtils.loadAnimation(this, R.anim.show_from_bottom));
         fam.setMenuButtonHideAnimation(AnimationUtils.loadAnimation(this, R.anim.hide_to_bottom));
+        fam.setClosedOnTouchOutside(true);
 
         fab_roulette.setOnClickListener(new View.OnClickListener() {
             @Override
