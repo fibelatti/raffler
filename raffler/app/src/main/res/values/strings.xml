@@ -6,6 +6,7 @@
     <string name="label_group_form_activity">GroupFormActivity</string>
     <string name="label_roulette_activity">RouletteActivity</string>
     <string name="label_nwinners_activity">NWinnersActivity</string>
+    <string name="label_subgroups_activity">SubGroupsActivity</string>
 
     <!-- Generics -->
     <string name="hint_ok">Ok</string>
@@ -29,7 +30,7 @@
 
     <string name="group_label_fab_roulette">Roulette</string>
     <string name="group_label_fab_list">N Winners</string>
-    <string name="group_label_fab_groups">Smaller Groups</string>
+    <string name="group_label_fab_groups">Sub Groups</string>
 
     <string name="group_action_check_all">Check All</string>
     <string name="group_action_uncheck_all">Uncheck All</string>
@@ -47,7 +48,7 @@
         \n\nExplore all methods:
         \n\n<b>Roulette</b> will choose one random result with an animation.
         \n\n<b>N Winners</b> will ask you how many options you want to choose from the raffle and display them right away.
-        \n\n<b>Smaller Groups</b> will form randomly arranged smaller groups among your options.</string>
+        \n\n<b>Sub Groups</b> will form randomly arranged sub groups among your options.</string>
 
     <!-- GroupFormActivity -->
     <string name="group_form_title_new">New</string>
@@ -79,4 +80,11 @@
     <string name="nwinners_hint_quantity">Quantity of winners</string>
     <string name="nwinners_action_raffle">Raffle</string>
     <string name="nwinners_msg_validate_quantity">Quantity should be less than %d</string>
+
+    <!-- NWinnersActivity -->
+    <string name="subgroups_title">Sub Groups!</string>
+    <string name="subgroups_hint_quantity">Quantity of subgroups</string>
+    <string name="subgroups_hint_quantity_formatted">Quantity of subgroups (from 2 to %d)</string>
+    <string name="subgroups_action_raffle">Raffle</string>
+    <string name="subgroups_msg_validate_quantity">Quantity should be less than %d</string>
 </resources>
