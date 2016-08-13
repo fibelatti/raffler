@@ -16,8 +16,8 @@ import android.widget.ImageButton;
 
 import com.fibelatti.raffler.R;
 import com.fibelatti.raffler.models.Group;
+import com.fibelatti.raffler.models.GroupItem;
 import com.fibelatti.raffler.views.adapters.SubGroupsAdapter;
-import com.fibelatti.raffler.views.extensions.DividerItemDecoration;
 import com.fibelatti.raffler.views.utils.Constants;
 import com.fibelatti.raffler.views.utils.RandomizeHelper;
 
@@ -31,7 +31,7 @@ public class SubGroupsActivity extends BaseActivity {
     private Context context;
     private Group group;
     private SubGroupsAdapter adapter;
-    private ArrayList<String> subgroups = new ArrayList<>();
+    private ArrayList<Group> subgroups = new ArrayList<>();
 
     @BindView(R.id.coordinator_layout)
     CoordinatorLayout layout;
@@ -83,7 +83,6 @@ public class SubGroupsActivity extends BaseActivity {
     private void setUpRecyclerView() {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
-        recyclerView.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
         recyclerView.setAdapter(adapter);
     }
 
@@ -111,14 +110,25 @@ public class SubGroupsActivity extends BaseActivity {
             int subgroupIndex = 0;
             List<Integer> randomizedIndex = RandomizeHelper.getRandomIndexesInRange(group.getItemCount(), group.getItemCount());
 
-            for (int index : randomizedIndex) {
-                String newValue = group.getItems().get(index).getName() + "\n";
+            subgroups.clear();
 
-                subgroups.add(subgroupIndex, newValue);
+            for (int i = 0; i < quantity; i++) {
+                Group newGroup = new Group();
+
+                newGroup.setName(getString(R.string.subgroups_hint_group_name, i + 1));
+                subgroups.add(newGroup);
+            }
+
+            while (!randomizedIndex.isEmpty()) {
+                String currentItem = group.getItems().get(randomizedIndex.get(0)).getName();
+
+                subgroups.get(subgroupIndex).getItems().add(new GroupItem(currentItem));
 
                 subgroupIndex++;
                 if (subgroupIndex == quantity)
                     subgroupIndex = 0;
+
+                randomizedIndex.remove(0);
             }
 
             adapter.notifyDataSetChanged();
@@ -128,7 +138,7 @@ public class SubGroupsActivity extends BaseActivity {
     private boolean validateQuantity() {
         int quantity = Integer.valueOf(subgroupsQuantity.getText().toString());
 
-        if (quantity <= getMaximumQuantity()) {
+        if (quantity > getMaximumQuantity()) {
             subgroupsQuantityLayout.setError(getString(R.string.nwinners_msg_validate_quantity, group.getItemCount()));
             requestFocus(subgroupsQuantity);
             return false;

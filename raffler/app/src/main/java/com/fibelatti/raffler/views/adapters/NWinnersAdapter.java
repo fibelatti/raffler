@@ -50,7 +50,7 @@ public class NWinnersAdapter extends RecyclerView.Adapter<NWinnersAdapter.GroupV
     public void onBindViewHolder(GroupViewHolder holder, int position) {
         String winner = winnersList.get(position);
 
-        holder.name.setText(winner);
+        holder.name.setText(context.getString(R.string.nwinners_msg_result, winner));
     }
 
     @Override
