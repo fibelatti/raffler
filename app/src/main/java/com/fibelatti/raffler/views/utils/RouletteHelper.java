@@ -15,6 +15,7 @@ import android.widget.TextView;
 import android.widget.ViewSwitcher;
 
 import com.fibelatti.raffler.R;
+import com.fibelatti.raffler.db.Database;
 import com.fibelatti.raffler.models.Group;
 import com.github.clans.fab.FloatingActionButton;
 
@@ -86,7 +87,7 @@ public class RouletteHelper {
         currentSpeed = minimumSpeed;
 
         isPlaying = true;
-        mediaVolume = 1;
+        mediaVolume = Database.settingsDao.getRouletteMusicEnabled() ? 1 : 0;
         mediaPlayer.setVolume(mediaVolume, mediaVolume);
 
         mediaPlayer.start();
@@ -167,7 +168,7 @@ public class RouletteHelper {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                if (mediaVolume < 0) {
+                if (shouldStop()) {
                     mediaPlayer.pause();
                     mediaPlayer.seekTo(0);
                     fab.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_play_arrow_white));
