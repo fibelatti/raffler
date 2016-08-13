@@ -12,12 +12,13 @@ import android.util.Log;
 public class Database {
     private static final String TAG = Database.class.getSimpleName();
     private static final String DATABASE_NAME = "com.fibelatti.raffler.db";
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 2;
     private DatabaseHelper dbHelper;
     private final Context context;
 
     public static GroupDao groupDao;
     public static GroupItemDao groupItemDao;
+    public static SettingsDao settingsDao;
 
     public Database open() throws SQLException {
         dbHelper = new DatabaseHelper(context);
@@ -25,6 +26,7 @@ public class Database {
 
         groupDao = new GroupDao(mDb);
         groupItemDao = new GroupItemDao(mDb);
+        settingsDao = new SettingsDao(mDb);
 
         return this;
     }
@@ -47,6 +49,9 @@ public class Database {
         public void onCreate(SQLiteDatabase db) {
             db.execSQL(IGroupSchema.GROUP_TABLE_CREATE);
             db.execSQL(IGroupItemSchema.GROUP_ITEMS_TABLE_CREATE);
+            db.execSQL(ISettingsSchema.SETTINGS_TABLE_CREATE);
+
+            db.execSQL(ISettingsSchema.SETTINGS_TABLE_INITIAL_SETUP);
         }
 
         @Override
@@ -54,10 +59,12 @@ public class Database {
                               int newVersion) {
             Log.w(TAG, "Upgrading database from version "
                     + oldVersion + " to "
-                    + newVersion + " which destroys all old data");
+                    + newVersion);
 
-            db.execSQL(IGroupItemSchema.GROUP_ITEMS_TABLE_DROP);
-            db.execSQL(IGroupSchema.GROUPS_TABLE_DROP);
+            // Should only destroy old data if really necessary
+            //db.execSQL(IGroupItemSchema.GROUP_ITEMS_TABLE_DROP);
+            //db.execSQL(IGroupSchema.GROUPS_TABLE_DROP);
+            //db.execSQL(ISettingsSchema.SETTINGS_TABLE_DROP);
 
             onCreate(db);
         }
