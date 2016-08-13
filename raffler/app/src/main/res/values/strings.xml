@@ -1,12 +1,12 @@
 <resources>
-    <string name="app_name">Raffler!</string>
+    <string name="app_name" translatable="false">Raffler!</string>
 
     <!-- Labels -->
-    <string name="label_group_activity">GroupActivity</string>
-    <string name="label_group_form_activity">GroupFormActivity</string>
-    <string name="label_roulette_activity">RouletteActivity</string>
-    <string name="label_nwinners_activity">NWinnersActivity</string>
-    <string name="label_subgroups_activity">SubGroupsActivity</string>
+    <string name="label_group_activity" translatable="false">GroupActivity</string>
+    <string name="label_group_form_activity" translatable="false">GroupFormActivity</string>
+    <string name="label_roulette_activity" translatable="false">RouletteActivity</string>
+    <string name="label_nwinners_activity" translatable="false">NWinnersActivity</string>
+    <string name="label_subgroups_activity" translatable="false">SubGroupsActivity</string>
 
     <!-- Generics -->
     <string name="hint_ok">Ok</string>
@@ -16,8 +16,6 @@
     <string name="generic_msg_error">Oops! Something went wrong. Please try again.</string>
 
     <!-- MainActivity -->
-    <string name="main_menu_settings">Settings</string>
-
     <string name="main_hint_placeholder">Do you need help deciding which option to choose?
         \n\nUse Raffler! to create groups of options to help you pick one (or many!) randomly. You can also use it to form smaller groups among your options.</string>
     <plurals name="main_hint_group_items_quantity">
@@ -82,10 +80,9 @@
     <string name="nwinners_msg_validate_quantity">Quantity should be less than %d</string>
     <string name="nwinners_msg_result">%s was raffled!</string>
 
-    <!-- NWinnersActivity -->
+    <!-- SubGroupsActivity -->
     <string name="subgroups_title">Sub Groups!</string>
     <string name="subgroups_hint_quantity">Quantity of subgroups</string>
-    <string name="subgroups_hint_quantity_formatted">Quantity of subgroups (from 2 to %d)</string>
     <string name="subgroups_action_raffle">Raffle</string>
     <string name="subgroups_msg_validate_quantity">Quantity should be less than %d</string>
     <string name="subgroups_hint_group_name">Group #%s</string>

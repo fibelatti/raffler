@@ -99,6 +99,9 @@ public class MainActivity extends BaseActivity {
         if (groupList.size() > 0) {
             placeholder.setVisibility(View.GONE);
             recyclerView.setVisibility(View.VISIBLE);
+        } else {
+            placeholder.setVisibility(View.VISIBLE);
+            recyclerView.setVisibility(View.GONE);
         }
     }
 
