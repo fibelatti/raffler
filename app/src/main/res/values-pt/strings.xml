@@ -7,6 +7,8 @@
     <string name="generic_msg_error">Opa! Algo deu errado. Tente de novo.</string>
 
     <!-- MainActivity -->
+    <string name="main_action_settings">Configurações</string>
+
     <string name="main_hint_placeholder">Precisa de ajuda para escolher entre tantas opções?
         \n\nUse o Raffler! para criar grupos de opções e fazer suas escolhas de forma aleatória. .</string>
     <plurals name="main_hint_group_items_quantity">
@@ -79,4 +81,11 @@
     <string name="subgroups_msg_validate_quantity">A quantidade deve ser menor que %d</string>
     <string name="subgroups_msg_validate_quantity_empty">A quantidade não pode estar em branco</string>
     <string name="subgroups_hint_group_name">Grupo #%s</string>
+
+    <!-- SettingsActivity -->
+    <string name="settings_title">Configurações</string>
+
+    <string name="settings_msg_save">Alterações salvas</string>
+
+    <string name="settings_hint_roulette_music">Habilitar música da roleta</string>
 </resources>
