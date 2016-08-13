@@ -73,6 +73,7 @@ public class GroupActivity extends BaseActivity implements OkOnlyDialogListener,
     public void onResume() {
         super.onResume();
         fetchDataFromDb();
+        adapter.checkAllItems();
     }
 
     @Override

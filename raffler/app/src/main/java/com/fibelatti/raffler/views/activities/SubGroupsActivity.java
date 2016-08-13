@@ -97,7 +97,6 @@ public class SubGroupsActivity extends BaseActivity {
 
     private void setValues() {
         this.setTitle(getResources().getString(R.string.subgroups_title));
-        subgroupsQuantity.setHint(getString(R.string.subgroups_hint_quantity_formatted, getMaximumQuantity()));
     }
 
     private Group fetchDataFromIntent() {
@@ -139,7 +138,7 @@ public class SubGroupsActivity extends BaseActivity {
         int quantity = Integer.valueOf(subgroupsQuantity.getText().toString());
 
         if (quantity > getMaximumQuantity()) {
-            subgroupsQuantityLayout.setError(getString(R.string.nwinners_msg_validate_quantity, group.getItemCount()));
+            subgroupsQuantityLayout.setError(getString(R.string.nwinners_msg_validate_quantity, getMaximumQuantity()));
             requestFocus(subgroupsQuantity);
             return false;
         }
@@ -148,7 +147,7 @@ public class SubGroupsActivity extends BaseActivity {
     }
 
     private int getMaximumQuantity() {
-        Double value = Math.floor(group.getItemCount() / 2);
+        Double value = Math.ceil((double) group.getItemCount() / 2);
 
         return value.intValue();
     }
