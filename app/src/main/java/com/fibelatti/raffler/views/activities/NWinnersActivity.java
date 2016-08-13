@@ -20,6 +20,7 @@ import com.fibelatti.raffler.views.adapters.NWinnersAdapter;
 import com.fibelatti.raffler.views.extensions.DividerItemDecoration;
 import com.fibelatti.raffler.views.utils.Constants;
 import com.fibelatti.raffler.views.utils.RandomizeHelper;
+import com.fibelatti.raffler.views.utils.StringHelper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -120,6 +121,12 @@ public class NWinnersActivity extends BaseActivity {
     }
 
     private boolean validateQuantity() {
+        if (StringHelper.isNullOrEmpty(winnersQuantity.getText().toString())) {
+            winnersQuantityLayout.setError(getString(R.string.subgroups_msg_validate_quantity_empty));
+            requestFocus(winnersQuantity);
+            return false;
+        }
+
         int quantity = Integer.valueOf(winnersQuantity.getText().toString());
 
         if (quantity >= group.getItemCount()) {
