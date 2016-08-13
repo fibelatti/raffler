@@ -14,11 +14,3 @@ android:
 
     # Emulator for the tests
     - sys-img-armeabi-v7a-android-19
-
-cache:
-  directories:
-    - $HOME/.gradle/caches/2.10
-    - $HOME/.gradle/caches/jars-1
-    - $HOME/.gradle/daemon
-    - $HOME/.gradle/native
-    - $HOME/.gradle/wrapper
