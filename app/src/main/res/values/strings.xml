@@ -1,0 +1,89 @@
+<resources>
+    <string name="app_name" translatable="false">Raffler!</string>
+
+    <!-- Labels -->
+    <string name="label_group_activity" translatable="false">GroupActivity</string>
+    <string name="label_group_form_activity" translatable="false">GroupFormActivity</string>
+    <string name="label_roulette_activity" translatable="false">RouletteActivity</string>
+    <string name="label_nwinners_activity" translatable="false">NWinnersActivity</string>
+    <string name="label_subgroups_activity" translatable="false">SubGroupsActivity</string>
+
+    <!-- Generics -->
+    <string name="hint_ok">Ok</string>
+    <string name="hint_yes">Yes</string>
+    <string name="hint_no">No</string>
+
+    <string name="generic_msg_error">Oops! Something went wrong. Please try again.</string>
+
+    <!-- MainActivity -->
+    <string name="main_hint_placeholder">Do you need help deciding which option to choose?
+        \n\nUse Raffler! to create groups of options to help you pick one (or many!) randomly. You can also use it to form smaller groups among your options.</string>
+    <plurals name="main_hint_group_items_quantity">
+        <item quantity="one">1 item</item>
+        <item quantity="other">%d items</item>
+    </plurals>
+
+    <!-- GroupActivity -->
+    <string name="group_hint_header">Choose which items to include in this raffle by toggling their checkboxes. Bulk edit using the menu.</string>
+
+    <string name="group_label_fab_roulette">Roulette</string>
+    <string name="group_label_fab_list">N Winners</string>
+    <string name="group_label_fab_groups">Sub Groups</string>
+
+    <string name="group_action_check_all">Check All</string>
+    <string name="group_action_uncheck_all">Uncheck All</string>
+    <string name="group_action_edit">Edit</string>
+    <string name="group_action_delete">Delete</string>
+
+    <string name="group_msg_delete_scs">Group deleted!</string>
+    <string name="group_msg_validate_selection">Select at least 2 options to raffle</string>
+
+    <string name="group_dialog_title_delete">Deleting group</string>
+    <string name="group_dialog_msg_delete">Are you sure you want to delete this group?</string>
+
+    <string name="group_dialog_title_help">Help</string>
+    <string name="group_dialog_msg_help">Do you need help deciding which option to choose?
+        \n\nExplore all methods:
+        \n\n<b>Roulette</b> will choose one random result with an animation.
+        \n\n<b>N Winners</b> will ask you how many options you want to choose from the raffle and display them right away.
+        \n\n<b>Sub Groups</b> will form randomly arranged sub groups among your options.</string>
+
+    <!-- GroupFormActivity -->
+    <string name="group_form_title_new">New</string>
+    <string name="group_form_title_edit">Edit</string>
+
+    <string name="group_form_hint_name">Group name</string>
+    <string name="group_form_hint_item_name">Item name</string>
+
+    <string name="group_form_action_help">Help</string>
+    <string name="group_form_action_save">Save</string>
+    <string name="group_form_action_delete_items">Delete Items</string>
+    <string name="group_form_action_add">Add</string>
+
+    <string name="group_form_msg_save">Group saved!</string>
+    <string name="group_form_msg_validate_name">Group must have a name</string>
+    <string name="group_form_msg_validate_item_name">Item must not be empty</string>
+    <string name="group_form_msg_validate_items">Group must have at least 1 item</string>
+    <string name="group_form_msg_delete_items">No items selected to delete!</string>
+
+    <string name="group_form_dialog_title_delete_items">Deleting group items</string>
+    <string name="group_form_dialog_msg_delete_items">Are you sure you want to delete the selected items?</string>
+
+    <!-- RouletteActivity -->
+    <string name="roulette_title">Roulette!</string>
+    <string name="roulette_msg_stopping">Stopping&#8230;</string>
+
+    <!-- NWinnersActivity -->
+    <string name="nwinners_title">N Winners!</string>
+    <string name="nwinners_hint_quantity">Quantity of winners</string>
+    <string name="nwinners_action_raffle">Raffle</string>
+    <string name="nwinners_msg_validate_quantity">Quantity should be less than %d</string>
+    <string name="nwinners_msg_result">%s was raffled!</string>
+
+    <!-- SubGroupsActivity -->
+    <string name="subgroups_title">Sub Groups!</string>
+    <string name="subgroups_hint_quantity">Quantity of subgroups</string>
+    <string name="subgroups_action_raffle">Raffle</string>
+    <string name="subgroups_msg_validate_quantity">Quantity should be less than %d</string>
+    <string name="subgroups_hint_group_name">Group #%s</string>
+</resources>
