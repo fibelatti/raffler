@@ -8,6 +8,8 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.fibelatti.raffler.R;
+import com.fibelatti.raffler.models.Group;
+import com.fibelatti.raffler.models.GroupItem;
 
 import java.util.List;
 
@@ -17,11 +19,13 @@ import butterknife.ButterKnife;
 public class SubGroupsAdapter extends RecyclerView.Adapter<SubGroupsAdapter.GroupViewHolder> {
 
     private Context context;
-    private List<String> subgroupsList;
+    private List<Group> subgroupsList;
 
     public class GroupViewHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.name)
         public TextView name;
+        @BindView(R.id.items)
+        public TextView items;
 
         public GroupViewHolder(View view) {
             super(view);
@@ -29,7 +33,7 @@ public class SubGroupsAdapter extends RecyclerView.Adapter<SubGroupsAdapter.Grou
         }
     }
 
-    public SubGroupsAdapter(Context context, List<String> subgroupsList) {
+    public SubGroupsAdapter(Context context, List<Group> subgroupsList) {
         this.context = context;
         this.subgroupsList = subgroupsList;
     }
@@ -48,9 +52,16 @@ public class SubGroupsAdapter extends RecyclerView.Adapter<SubGroupsAdapter.Grou
 
     @Override
     public void onBindViewHolder(GroupViewHolder holder, int position) {
-        String subgroup = subgroupsList.get(position);
+        Group group = subgroupsList.get(position);
+        StringBuilder sb = new StringBuilder();
 
-        holder.name.setText(subgroup);
+        for (GroupItem item : group.getItems()) {
+            sb.append("\n");
+            sb.append(item.getName());
+        }
+
+        holder.name.setText(group.getName());
+        holder.items.setText(sb.toString());
     }
 
     @Override

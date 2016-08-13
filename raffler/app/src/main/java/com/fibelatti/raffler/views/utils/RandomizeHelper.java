@@ -11,7 +11,7 @@ public class RandomizeHelper {
     public static List<Integer> getRandomIndexesInRange(int quantity, int limit) {
         List<Integer> list = new ArrayList<>();
 
-        for (int i = 0; i <= limit; i++) {
+        for (int i = 0; i < limit; i++) {
             list.add(i);
         }
 

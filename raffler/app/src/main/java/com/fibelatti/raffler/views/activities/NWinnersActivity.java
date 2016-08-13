@@ -107,9 +107,11 @@ public class NWinnersActivity extends BaseActivity {
     private void raffleWinners() {
         if (validateQuantity()) {
             int quantity = Integer.valueOf(winnersQuantity.getText().toString());
-            List<Integer> winnnersIndex = RandomizeHelper.getRandomIndexesInRange(quantity, group.getItemCount());
+            List<Integer> winnersIndex = RandomizeHelper.getRandomIndexesInRange(quantity, group.getItemCount());
 
-            for (int index : winnnersIndex) {
+            winners.clear();
+
+            for (int index : winnersIndex) {
                 winners.add(group.getItems().get(index).getName());
             }
 

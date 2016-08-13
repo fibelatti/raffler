@@ -80,6 +80,7 @@
     <string name="nwinners_hint_quantity">Quantity of winners</string>
     <string name="nwinners_action_raffle">Raffle</string>
     <string name="nwinners_msg_validate_quantity">Quantity should be less than %d</string>
+    <string name="nwinners_msg_result">%s was raffled!</string>
 
     <!-- NWinnersActivity -->
     <string name="subgroups_title">Sub Groups!</string>
@@ -87,4 +88,5 @@
     <string name="subgroups_hint_quantity_formatted">Quantity of subgroups (from 2 to %d)</string>
     <string name="subgroups_action_raffle">Raffle</string>
     <string name="subgroups_msg_validate_quantity">Quantity should be less than %d</string>
+    <string name="subgroups_hint_group_name">Group #%s</string>
 </resources>
