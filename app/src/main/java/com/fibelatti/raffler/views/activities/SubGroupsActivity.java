@@ -20,6 +20,7 @@ import com.fibelatti.raffler.models.GroupItem;
 import com.fibelatti.raffler.views.adapters.SubGroupsAdapter;
 import com.fibelatti.raffler.views.utils.Constants;
 import com.fibelatti.raffler.views.utils.RandomizeHelper;
+import com.fibelatti.raffler.views.utils.StringHelper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -135,10 +136,16 @@ public class SubGroupsActivity extends BaseActivity {
     }
 
     private boolean validateQuantity() {
+        if (StringHelper.isNullOrEmpty(subgroupsQuantity.getText().toString())) {
+            subgroupsQuantityLayout.setError(getString(R.string.subgroups_msg_validate_quantity_empty));
+            requestFocus(subgroupsQuantity);
+            return false;
+        }
+
         int quantity = Integer.valueOf(subgroupsQuantity.getText().toString());
 
         if (quantity > getMaximumQuantity()) {
-            subgroupsQuantityLayout.setError(getString(R.string.nwinners_msg_validate_quantity, getMaximumQuantity()));
+            subgroupsQuantityLayout.setError(getString(R.string.subgroups_msg_validate_quantity, getMaximumQuantity()));
             requestFocus(subgroupsQuantity);
             return false;
         }
