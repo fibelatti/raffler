@@ -249,7 +249,7 @@ public class GroupActivity extends BaseActivity implements OkOnlyDialogListener,
     @Override
     public void yesCallback(DialogInterface dialog, int id) {
         if (Database.groupDao.deleteGroup(group)) {
-            Snackbar.make(layout, getString(R.string.group_msg_delete_scs), Snackbar.LENGTH_LONG).show();
+            setResult(Constants.ACTIVITY_RESULT_GROUP_DELETED);
             finish();
         } else {
             Snackbar.make(layout, getString(R.string.generic_msg_error), Snackbar.LENGTH_LONG).show();
