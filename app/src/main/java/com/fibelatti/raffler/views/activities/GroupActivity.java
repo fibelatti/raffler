@@ -192,6 +192,7 @@ public class GroupActivity extends BaseActivity implements OkOnlyDialogListener,
 
     private void fetchDataFromDb() {
         group.refresh();
+        adapter.refreshSelectedItems();
         adapter.notifyDataSetChanged();
         setValues();
     }

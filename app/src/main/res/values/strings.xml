@@ -88,7 +88,7 @@
     <string name="subgroups_title">Sub Groups!</string>
     <string name="subgroups_hint_quantity">Quantity of subgroups</string>
     <string name="subgroups_action_raffle">Raffle</string>
-    <string name="subgroups_msg_validate_quantity">Quantity should be less than %d</string>
+    <string name="subgroups_msg_validate_quantity">Quantity should be equal or less than %d</string>
     <string name="subgroups_msg_validate_quantity_empty">Quantity should not be empty</string>
     <string name="subgroups_hint_group_name">Group #%s</string>
 
