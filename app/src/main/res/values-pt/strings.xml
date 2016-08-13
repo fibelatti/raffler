@@ -78,7 +78,7 @@
     <string name="subgroups_title">Sub Grupos!</string>
     <string name="subgroups_hint_quantity">Quantidade de subgrupos</string>
     <string name="subgroups_action_raffle">Sortear</string>
-    <string name="subgroups_msg_validate_quantity">A quantidade deve ser menor que %d</string>
+    <string name="subgroups_msg_validate_quantity">A quantidade deve ser igual ou menor que %d</string>
     <string name="subgroups_msg_validate_quantity_empty">A quantidade não pode estar em branco</string>
     <string name="subgroups_hint_group_name">Grupo #%s</string>
 

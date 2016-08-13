@@ -109,6 +109,11 @@ public class GroupAdapter extends RecyclerView.Adapter<GroupAdapter.GroupItemVie
         return selectedItems.size();
     }
 
+    public void refreshSelectedItems() {
+        selectedItems.clear();
+        selectedItems.addAll(groupItems);
+    }
+
     public void checkAllItems() {
         selectedItems.addAll(groupItems);
         notifyDataSetChanged();
