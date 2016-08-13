@@ -16,6 +16,7 @@ import android.widget.ViewSwitcher;
 
 import com.fibelatti.raffler.R;
 import com.fibelatti.raffler.models.Group;
+import com.github.clans.fab.FloatingActionButton;
 
 import java.util.Random;
 
@@ -26,6 +27,7 @@ public class RouletteHelper {
     private Context context;
     private Group group;
     private TextSwitcher textSwitcher;
+    private FloatingActionButton fab;
 
     private MediaPlayer mediaPlayer;
     private float mediaVolume = 1;
@@ -38,14 +40,17 @@ public class RouletteHelper {
     private final int maximumSpeed = 350;
     private int currentSpeed;
 
-    private boolean isStopping = false;
+    private boolean isPlaying = true;
 
-    public RouletteHelper(Context context, Group group, TextSwitcher textSwitcher) {
+    public RouletteHelper(Context context, Group group, TextSwitcher textSwitcher, FloatingActionButton fab) {
         this.context = context;
         this.group = group;
         this.textSwitcher = textSwitcher;
+        this.fab = fab;
+        this.optionsCount = group.getItemCount();
         this.mediaPlayer = MediaPlayer.create(context, R.raw.easter_egg_soundtrack);
-        this.randomIndex = new Random().nextInt(group.getItemCount());
+
+        mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
 
         setUpAnimations();
         setUpFactory();
@@ -76,18 +81,28 @@ public class RouletteHelper {
     }
 
     public void startRoulette() {
-        optionsCount = this.group.getItemCount();
+        randomIndex = new Random().nextInt(group.getItemCount());
+
         currentSpeed = minimumSpeed;
 
-        mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
+        isPlaying = true;
+        mediaVolume = 1;
+        mediaPlayer.setVolume(mediaVolume, mediaVolume);
+
         mediaPlayer.start();
+
+        fab.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_stop_white));
 
         animate();
     }
 
     public void stopRoulette() {
-        isStopping = true;
+        isPlaying = false;
         fadeOutMusic();
+    }
+
+    public boolean isPlaying() {
+        return isPlaying;
     }
 
     private void animate() {
@@ -116,7 +131,7 @@ public class RouletteHelper {
     }
 
     private int getCurrentSpeed() {
-        if (isStopping) {
+        if (!isPlaying) {
             decreaseSpeed();
         } else {
             increaseSpeed();
@@ -136,7 +151,7 @@ public class RouletteHelper {
     }
 
     private boolean shouldStop() {
-        return isStopping
+        return !isPlaying
                 && currentIndex == randomIndex
                 && currentSpeed == minimumSpeed;
     }
@@ -152,12 +167,14 @@ public class RouletteHelper {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                if (mediaVolume == 0) {
-                    mediaPlayer.stop();
+                if (mediaVolume < 0) {
+                    mediaPlayer.pause();
+                    mediaPlayer.seekTo(0);
+                    fab.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_play_arrow_white));
                 } else {
                     fadeOutMusic();
                 }
             }
-        }, 750);
+        }, 600);
     }
 }

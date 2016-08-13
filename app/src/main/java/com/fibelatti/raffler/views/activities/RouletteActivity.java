@@ -42,7 +42,7 @@ public class RouletteActivity extends BaseActivity {
         setUpLayout();
         setValues();
 
-        rouletteHelper = new RouletteHelper(this, group, textSwitcher);
+        rouletteHelper = new RouletteHelper(this, group, textSwitcher, fab);
         rouletteHelper.startRoulette();
     }
 
@@ -79,8 +79,12 @@ public class RouletteActivity extends BaseActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                rouletteHelper.stopRoulette();
-                Snackbar.make(layout, getString(R.string.roulette_msg_stopping), Snackbar.LENGTH_LONG).show();
+                if (rouletteHelper.isPlaying()) {
+                    rouletteHelper.stopRoulette();
+                    Snackbar.make(layout, getString(R.string.roulette_msg_stopping), Snackbar.LENGTH_LONG).show();
+                } else {
+                    rouletteHelper.startRoulette();
+                }
             }
         });
     }
