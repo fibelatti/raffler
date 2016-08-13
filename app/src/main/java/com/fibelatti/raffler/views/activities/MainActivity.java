@@ -3,6 +3,8 @@ package com.fibelatti.raffler.views.activities;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.CoordinatorLayout;
+import android.support.design.widget.Snackbar;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -33,6 +35,8 @@ public class MainActivity extends BaseActivity {
     private List<Group> groupList;
     private MainAdapter adapter;
 
+    @BindView(R.id.coordinator_layout)
+    CoordinatorLayout layout;
     @BindView(R.id.toolbar)
     Toolbar toolbar;
     @BindView(R.id.placeholder)
@@ -58,6 +62,20 @@ public class MainActivity extends BaseActivity {
         super.onResume();
         fetchData();
         setUpValues();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == Constants.REQUEST_CODE_GROUP_ACTION) {
+            switch (resultCode) {
+                case Constants.ACTIVITY_RESULT_GROUP_SAVED:
+                    Snackbar.make(layout, getString(R.string.group_form_msg_save), Snackbar.LENGTH_LONG).show();
+                    break;
+                case Constants.ACTIVITY_RESULT_GROUP_DELETED:
+                    Snackbar.make(layout, getString(R.string.group_msg_delete_scs), Snackbar.LENGTH_LONG).show();
+                    break;
+            }
+        }
     }
 
     @Override
@@ -133,13 +151,13 @@ public class MainActivity extends BaseActivity {
     private void startGroupActivity(Group group) {
         Intent intent = new Intent(this, GroupActivity.class);
         intent.putExtra(Constants.INTENT_EXTRA_GROUP, group);
-        startActivity(intent);
+        startActivityForResult(intent, Constants.REQUEST_CODE_GROUP_ACTION);
     }
 
     private void startGroupFormActivity() {
         Intent intent = new Intent(this, GroupFormActivity.class);
         intent.putExtra(Constants.INTENT_EXTRA_GROUP, new Group());
-        startActivity(intent);
+        startActivityForResult(intent, Constants.REQUEST_CODE_GROUP_ACTION);
     }
 
     private void startSettingsActivity() {

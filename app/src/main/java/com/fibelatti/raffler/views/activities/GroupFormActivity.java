@@ -158,7 +158,7 @@ public class GroupFormActivity extends BaseActivity implements AlertDialogHelper
     private void saveGroup() {
         if (validateForm()) {
             if (Database.groupDao.saveGroup(group)) {
-                Snackbar.make(layout, getString(R.string.group_form_msg_save), Snackbar.LENGTH_LONG).show();
+                setResult(Constants.ACTIVITY_RESULT_GROUP_SAVED);
                 finish();
             } else {
                 Snackbar.make(layout, getString(R.string.generic_msg_error), Snackbar.LENGTH_LONG).show();
