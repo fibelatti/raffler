@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="colorWhite">#FFFFFF</color>
+    <color name="colorWhiteOpaque">#EEEEEE</color>
     <color name="colorBlack">#000000</color>
     <color name="colorBlackWithTransparency">#B2000000</color>
 
@@ -9,9 +10,9 @@
     <color name="colorGray">#757575</color>
     <color name="colorGrayDark">#424242</color>
 
-    <color name="colorPrimary">#616161</color>
-    <color name="colorPrimaryDark">#424242</color>
-    <color name="colorAccent">#FF5722</color>
+    <color name="colorPrimary">#03A9F4</color>
+    <color name="colorPrimaryDark">#0288D1</color>
+    <color name="colorAccent">#FF4081</color>
 
     <color name="textPrimary">#424242</color>
     <color name="textSecondary">#757575</color>
