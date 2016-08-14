@@ -33,7 +33,7 @@ import com.fibelatti.raffler.views.utils.StringHelper;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class GroupFormActivity extends BaseActivity implements AlertDialogHelper.YesNoDialogListener {
+public class GroupFormActivity extends BaseActivity {
     private Context context;
     private Group group;
     private GroupAdapter adapter;
@@ -215,21 +215,19 @@ public class GroupFormActivity extends BaseActivity implements AlertDialogHelper
     private void deleteItems() {
         if (adapter.getSelectedItemsCount() > 0) {
             AlertDialogHelper dialogHelper = new AlertDialogHelper(this);
-            dialogHelper.createYesNoDialog(this,
+            dialogHelper.createYesNoDialog(
                     getString(R.string.group_form_dialog_title_delete_items),
-                    getString(R.string.group_form_dialog_msg_delete_items)).show();
+                    getString(R.string.group_form_dialog_msg_delete_items),
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            adapter.deleteCheckedItems();
+                        }
+                    },
+                    null).show();
         } else {
             Snackbar.make(layout, getString(R.string.group_form_msg_delete_items), Snackbar.LENGTH_LONG).show();
         }
     }
-
-    @Override
-    public void yesCallback(DialogInterface dialog, int id) {
-        adapter.deleteCheckedItems();
-    }
-
-    @Override
-    public void noCallback(DialogInterface dialog, int id) {
 
     }
 }
