@@ -37,6 +37,7 @@ public class GroupFormActivity extends BaseActivity {
     private Context context;
     private Group group;
     private GroupAdapter adapter;
+    private int initialItemCount;
 
     @BindView(R.id.coordinator_layout)
     CoordinatorLayout layout;
@@ -79,7 +80,7 @@ public class GroupFormActivity extends BaseActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
-                finish();
+                confirmFinish();
                 return true;
             case R.id.action_save:
                 saveGroup();
@@ -141,6 +142,7 @@ public class GroupFormActivity extends BaseActivity {
 
     private void setValues() {
         groupName.setText(group.getName());
+        initialItemCount = group.getItemCount();
     }
 
     private Group fetchDataFromIntent() {
@@ -229,5 +231,22 @@ public class GroupFormActivity extends BaseActivity {
         }
     }
 
+    private void confirmFinish() {
+        boolean countHasChanged = group.getItemCount() != 0 && group.getItemCount() != initialItemCount;
+
+        if (countHasChanged) {
+            AlertDialogHelper dialogHelper = new AlertDialogHelper(this);
+            dialogHelper.createYesNoDialog(
+                    getString(R.string.group_form_dialog_title_unsaved_changes),
+                    getString(R.string.group_form_dialog_msg_unsaved_changes),
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            finish();
+                        }
+                    },
+                    null).show();
+        } else {
+            finish();
+        }
     }
 }
