@@ -140,6 +140,9 @@ public class SubGroupsActivity extends BaseActivity {
             subgroupsQuantityLayout.setError(getString(R.string.subgroups_msg_validate_quantity_empty));
             requestFocus(subgroupsQuantity);
             return false;
+        } else {
+            subgroupsQuantityLayout.setError(null);
+            subgroupsQuantityLayout.setErrorEnabled(false);
         }
 
         int quantity = Integer.valueOf(subgroupsQuantity.getText().toString());
@@ -148,6 +151,9 @@ public class SubGroupsActivity extends BaseActivity {
             subgroupsQuantityLayout.setError(getString(R.string.subgroups_msg_validate_quantity, getMaximumQuantity()));
             requestFocus(subgroupsQuantity);
             return false;
+        } else {
+            subgroupsQuantityLayout.setError(null);
+            subgroupsQuantityLayout.setErrorEnabled(false);
         }
 
         return true;

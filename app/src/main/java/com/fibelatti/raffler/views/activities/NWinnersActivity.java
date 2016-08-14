@@ -125,6 +125,9 @@ public class NWinnersActivity extends BaseActivity {
             winnersQuantityLayout.setError(getString(R.string.subgroups_msg_validate_quantity_empty));
             requestFocus(winnersQuantity);
             return false;
+        } else {
+            winnersQuantityLayout.setError(null);
+            winnersQuantityLayout.setErrorEnabled(false);
         }
 
         int quantity = Integer.valueOf(winnersQuantity.getText().toString());
@@ -133,6 +136,9 @@ public class NWinnersActivity extends BaseActivity {
             winnersQuantityLayout.setError(getString(R.string.nwinners_msg_validate_quantity, group.getItemCount()));
             requestFocus(winnersQuantity);
             return false;
+        } else {
+            winnersQuantityLayout.setError(null);
+            winnersQuantityLayout.setErrorEnabled(false);
         }
 
         return true;
