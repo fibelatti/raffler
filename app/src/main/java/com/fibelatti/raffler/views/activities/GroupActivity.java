@@ -23,8 +23,6 @@ import com.fibelatti.raffler.views.adapters.GroupAdapter;
 import com.fibelatti.raffler.views.extensions.DividerItemDecoration;
 import com.fibelatti.raffler.views.extensions.RecyclerTouchListener;
 import com.fibelatti.raffler.views.utils.AlertDialogHelper;
-import com.fibelatti.raffler.views.utils.AlertDialogHelper.OkOnlyDialogListener;
-import com.fibelatti.raffler.views.utils.AlertDialogHelper.YesNoDialogListener;
 import com.fibelatti.raffler.views.utils.BusHelper;
 import com.fibelatti.raffler.views.utils.Constants;
 import com.fibelatti.raffler.views.utils.GroupItemCheckStateChangedEvent;
@@ -34,7 +32,7 @@ import com.github.clans.fab.FloatingActionMenu;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class GroupActivity extends BaseActivity implements OkOnlyDialogListener, YesNoDialogListener {
+public class GroupActivity extends BaseActivity {
     private Context context;
     private Group group;
     private GroupAdapter adapter;
@@ -198,9 +196,9 @@ public class GroupActivity extends BaseActivity implements OkOnlyDialogListener,
     }
 
     private void showHelp() {
-        dialogHelper.createOkOnlyDialog(this,
-                getString(R.string.group_dialog_title_help),
-                getText(R.string.group_dialog_msg_help)).show();
+        dialogHelper.createOkOnlyDialog(getString(R.string.group_dialog_title_help),
+                getText(R.string.group_dialog_msg_help),
+                null).show();
     }
 
     private void editGroup() {
@@ -210,9 +208,20 @@ public class GroupActivity extends BaseActivity implements OkOnlyDialogListener,
     }
 
     private void deleteGroup() {
-        dialogHelper.createYesNoDialog(this,
-                getString(R.string.group_dialog_title_delete),
-                getString(R.string.group_dialog_msg_delete)).show();
+        dialogHelper.createYesNoDialog(getString(R.string.group_dialog_title_delete),
+                getString(R.string.group_dialog_msg_delete),
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        if (Database.groupDao.deleteGroup(group)) {
+                            setResult(Constants.ACTIVITY_RESULT_GROUP_DELETED);
+                            finish();
+                        } else {
+                            Snackbar.make(layout, getString(R.string.generic_msg_error), Snackbar.LENGTH_LONG).show();
+                            finish();
+                        }
+                    }
+                },
+                null).show();
     }
 
     private boolean validateSelection() {
@@ -240,26 +249,5 @@ public class GroupActivity extends BaseActivity implements OkOnlyDialogListener,
         Intent intent = new Intent(this, SubGroupsActivity.class);
         intent.putExtra(Constants.INTENT_EXTRA_GROUP, group);
         startActivity(intent);
-    }
-
-    @Override
-    public void okCallback(DialogInterface dialog, int id) {
-
-    }
-
-    @Override
-    public void yesCallback(DialogInterface dialog, int id) {
-        if (Database.groupDao.deleteGroup(group)) {
-            setResult(Constants.ACTIVITY_RESULT_GROUP_DELETED);
-            finish();
-        } else {
-            Snackbar.make(layout, getString(R.string.generic_msg_error), Snackbar.LENGTH_LONG).show();
-            finish();
-        }
-    }
-
-    @Override
-    public void noCallback(DialogInterface dialog, int id) {
-
     }
 }
