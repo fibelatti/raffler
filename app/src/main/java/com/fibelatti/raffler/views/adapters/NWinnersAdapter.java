@@ -20,6 +20,8 @@ public class NWinnersAdapter extends RecyclerView.Adapter<NWinnersAdapter.GroupV
     private List<String> winnersList;
 
     public class GroupViewHolder extends RecyclerView.ViewHolder {
+        @BindView(R.id.number)
+        public TextView number;
         @BindView(R.id.name)
         public TextView name;
 
@@ -50,7 +52,8 @@ public class NWinnersAdapter extends RecyclerView.Adapter<NWinnersAdapter.GroupV
     public void onBindViewHolder(GroupViewHolder holder, int position) {
         String winner = winnersList.get(position);
 
-        holder.name.setText(context.getString(R.string.nwinners_msg_result, winner));
+        holder.number.setText(context.getString(R.string.nwinners_msg_result, position + 1));
+        holder.name.setText(winner);
     }
 
     @Override
