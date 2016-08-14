@@ -202,7 +202,7 @@ public class GroupFormActivity extends BaseActivity {
     }
 
     private boolean validateItems() {
-        if (group.getItems().size() == 0) {
+        if (group.getItems().size() < 2) {
             Snackbar.make(layout, getString(R.string.group_form_msg_validate_items), Snackbar.LENGTH_LONG).show();
             return false;
         }
