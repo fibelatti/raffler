@@ -62,6 +62,9 @@
     <string name="group_form_dialog_title_delete_items">Deletando itens</string>
     <string name="group_form_dialog_msg_delete_items">Tem certeza que deseja apagar os itens selecionados?</string>
 
+    <string name="group_form_dialog_title_unsaved_changes">Alterações pendentes</string>
+    <string name="group_form_dialog_msg_unsaved_changes">Suas alterações ainda não foram salvas, tem certeza que quer voltar?</string>
+
     <!-- RouletteActivity -->
     <string name="roulette_title">Roda a roda!</string>
     <string name="roulette_msg_stopping">Parando&#8230;</string>

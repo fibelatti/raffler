@@ -72,6 +72,9 @@
     <string name="group_form_dialog_title_delete_items">Deleting group items</string>
     <string name="group_form_dialog_msg_delete_items">Are you sure you want to delete the selected items?</string>
 
+    <string name="group_form_dialog_title_unsaved_changes">Unsaved changes</string>
+    <string name="group_form_dialog_msg_unsaved_changes">You have unsaved changes, are you sure you want to go back?</string>
+
     <!-- RouletteActivity -->
     <string name="roulette_title">Roulette!</string>
     <string name="roulette_msg_stopping">Stopping&#8230;</string>
