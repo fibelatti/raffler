@@ -6,7 +6,6 @@
     android:id="@+id/coordinator_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorGrayLighter"
     android:fitsSystemWindows="true"
     tools:context=".views.activities.GroupActivity">
 
@@ -42,7 +41,7 @@
         android:layout_gravity="bottom|end"
         android:layout_marginBottom="@dimen/fab_margin"
         android:layout_marginEnd="@dimen/fab_margin"
-        app:layout_behavior="com.fibelatti.raffler.views.extensions.ClansFloatingActionBehavior"
+        app:layout_behavior=".views.extensions.ClansFloatingActionBehavior"
         app:menu_colorNormal="@color/colorAccent"
         app:menu_colorPressed="@color/colorAccent"
         fab:menu_icon="@drawable/ic_play_arrow_white"

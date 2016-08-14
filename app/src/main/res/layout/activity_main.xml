@@ -6,9 +6,8 @@
     android:id="@+id/coordinator_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorGrayLighter"
     android:fitsSystemWindows="true"
-    tools:context="com.fibelatti.raffler.views.activities.MainActivity">
+    tools:context=".views.activities.MainActivity">
 
     <include layout="@layout/toolbar_default" />
 
@@ -42,6 +41,6 @@
         android:src="@drawable/ic_add_white"
         fab:fab_colorNormal="@color/colorAccent"
         fab:fab_colorPressed="@color/colorAccent"
-        fab:layout_behavior="com.fibelatti.raffler.views.extensions.ClansFloatingActionBehavior" />
+        fab:layout_behavior=".views.extensions.ClansFloatingActionBehavior" />
 
 </android.support.design.widget.CoordinatorLayout>
