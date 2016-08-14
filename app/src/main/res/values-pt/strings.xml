@@ -10,7 +10,7 @@
     <string name="main_action_settings">Configurações</string>
 
     <string name="main_hint_placeholder">Precisa de ajuda para escolher entre tantas opções?
-        \n\nUse o Raffler! para criar grupos de opções e fazer suas escolhas de forma aleatória. .</string>
+        \n\nUse o Raffler! para criar grupos de opções e fazer suas escolhas de forma aleatória.</string>
     <plurals name="main_hint_group_items_quantity">
         <item quantity="one">%d item</item>
         <item quantity="other">%d itens</item>
