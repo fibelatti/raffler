@@ -66,7 +66,7 @@
     <string name="group_form_msg_save">Group saved!</string>
     <string name="group_form_msg_validate_name">Group must have a name</string>
     <string name="group_form_msg_validate_item_name">Item must not be empty</string>
-    <string name="group_form_msg_validate_items">Group must have at least 1 item</string>
+    <string name="group_form_msg_validate_items">Group must have at least 2 items</string>
     <string name="group_form_msg_delete_items">No items selected to delete!</string>
 
     <string name="group_form_dialog_title_delete_items">Deleting group items</string>
