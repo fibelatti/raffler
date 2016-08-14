@@ -100,5 +100,7 @@
 
     <string name="settings_msg_save">Changes saved</string>
 
+    <string name="settings_title_sound">Sound Effects</string>
+
     <string name="settings_hint_roulette_music">Enable roulette music</string>
 </resources>

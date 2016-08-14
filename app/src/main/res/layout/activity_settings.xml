@@ -17,9 +17,30 @@
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <LinearLayout
+            android:id="@+id/title_settings_sound"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="@dimen/padding_small">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/settings_title_sound"
+                android:textColor="@color/colorPrimary"
+                android:textSize="@dimen/text_size_regular" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/colorPrimary" />
+        </LinearLayout>
+
+        <LinearLayout
             android:id="@+id/layout_roulette_music"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_below="@id/title_settings_sound"
             android:orientation="horizontal"
             android:padding="@dimen/padding_small">
 
