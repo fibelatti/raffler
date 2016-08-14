@@ -75,7 +75,7 @@
     <string name="nwinners_action_raffle">Sortear</string>
     <string name="nwinners_msg_validate_quantity">A quantidade deve ser menor que %d</string>
     <string name="nwinners_msg_validate_quantity_empty">A quantidade não pode estar em branco</string>
-    <string name="nwinners_msg_result">%s foi sorteado!</string>
+    <string name="nwinners_msg_result">Sorteado #%d</string>
 
     <!-- SubGroupsActivity -->
     <string name="subgroups_title">Sub Grupos!</string>

@@ -28,8 +28,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/name"
-            android:textColor="@color/textSecondary" />
+            android:textColor="@color/textSecondary"
+            android:textSize="@dimen/text_size_large" />
     </RelativeLayout>
-
 
 </android.support.v7.widget.CardView>

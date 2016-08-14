@@ -85,7 +85,7 @@
     <string name="nwinners_action_raffle">Raffle</string>
     <string name="nwinners_msg_validate_quantity">Quantity should be less than %d</string>
     <string name="nwinners_msg_validate_quantity_empty">Quantity should not be empty</string>
-    <string name="nwinners_msg_result">%s was raffled!</string>
+    <string name="nwinners_msg_result">Winner #%d</string>
 
     <!-- SubGroupsActivity -->
     <string name="subgroups_title">Sub Groups!</string>

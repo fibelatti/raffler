@@ -17,7 +17,6 @@ import android.widget.ImageButton;
 import com.fibelatti.raffler.R;
 import com.fibelatti.raffler.models.Group;
 import com.fibelatti.raffler.views.adapters.NWinnersAdapter;
-import com.fibelatti.raffler.views.extensions.DividerItemDecoration;
 import com.fibelatti.raffler.views.utils.Constants;
 import com.fibelatti.raffler.views.utils.RandomizeHelper;
 import com.fibelatti.raffler.views.utils.StringHelper;
@@ -84,7 +83,6 @@ public class NWinnersActivity extends BaseActivity {
     private void setUpRecyclerView() {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
-        recyclerView.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
         recyclerView.setAdapter(adapter);
     }
 
