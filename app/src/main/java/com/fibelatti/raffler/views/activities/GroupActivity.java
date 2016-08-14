@@ -198,7 +198,7 @@ public class GroupActivity extends BaseActivity {
     private void showHelp() {
         dialogHelper.createOkOnlyDialog(getString(R.string.group_dialog_title_help),
                 getText(R.string.group_dialog_msg_help),
-                null).show();
+                null);
     }
 
     private void editGroup() {
@@ -221,7 +221,7 @@ public class GroupActivity extends BaseActivity {
                         }
                     }
                 },
-                null).show();
+                null);
     }
 
     private boolean validateSelection() {

@@ -1,9 +1,10 @@
 package com.fibelatti.raffler.views.utils;
 
-import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
+import android.widget.Button;
 
 import com.fibelatti.raffler.R;
 
@@ -17,7 +18,7 @@ public class AlertDialogHelper {
         this.context = context;
     }
 
-    public Dialog createOkOnlyDialog(CharSequence dialogTitle, CharSequence dialogMessage,
+    public void createOkOnlyDialog(CharSequence dialogTitle, CharSequence dialogMessage,
                                      DialogInterface.OnClickListener okListener) {
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
         builder.setTitle(dialogTitle);
@@ -25,10 +26,16 @@ public class AlertDialogHelper {
 
         builder.setPositiveButton(context.getResources().getString(R.string.hint_ok), okListener);
 
-        return builder.create();
+        AlertDialog dialog = builder.create();
+
+        dialog.show();
+
+        Button buttonPositive = dialog.getButton(DialogInterface.BUTTON_POSITIVE);
+        if (buttonPositive != null)
+            buttonPositive.setTextColor(ContextCompat.getColor(context, R.color.colorAccent));
     }
 
-    public Dialog createYesNoDialog(CharSequence dialogTitle, CharSequence dialogMessage,
+    public void createYesNoDialog(CharSequence dialogTitle, CharSequence dialogMessage,
                                     DialogInterface.OnClickListener yesListener,
                                     DialogInterface.OnClickListener noListener) {
 
@@ -40,6 +47,16 @@ public class AlertDialogHelper {
 
         builder.setNegativeButton(context.getResources().getString(R.string.hint_no), noListener);
 
-        return builder.create();
+        AlertDialog dialog = builder.create();
+
+        dialog.show();
+
+        Button buttonPositive = dialog.getButton(DialogInterface.BUTTON_POSITIVE);
+        if (buttonPositive != null)
+            buttonPositive.setTextColor(ContextCompat.getColor(context, R.color.colorGray));
+
+        Button buttonNegative = dialog.getButton(DialogInterface.BUTTON_NEGATIVE);
+        if (buttonNegative != null)
+            buttonNegative.setTextColor(ContextCompat.getColor(context, R.color.colorAccent));
     }
 }

@@ -227,7 +227,7 @@ public class GroupFormActivity extends BaseActivity {
                             adapter.deleteCheckedItems();
                         }
                     },
-                    null).show();
+                    null);
         } else {
             Snackbar.make(layout, getString(R.string.group_form_msg_delete_items), Snackbar.LENGTH_LONG).show();
         }
@@ -246,7 +246,7 @@ public class GroupFormActivity extends BaseActivity {
                             finish();
                         }
                     },
-                    null).show();
+                    null);
         } else {
             finish();
         }
