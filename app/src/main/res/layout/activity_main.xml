@@ -27,6 +27,7 @@
         android:id="@+id/recycler_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/colorGrayLighter"
         android:scrollbars="vertical"
         android:visibility="gone"
         app:layout_behavior="@string/appbar_scrolling_view_behavior" />
@@ -39,8 +40,8 @@
         android:layout_marginBottom="@dimen/fab_margin"
         android:layout_marginEnd="@dimen/fab_margin"
         android:src="@drawable/ic_add_white"
-        app:fab_colorNormal="@color/colorAccent"
-        app:fab_colorPressed="@color/colorAccent"
-        app:layout_behavior="com.fibelatti.raffler.views.extensions.ClansFloatingActionBehavior" />
+        fab:fab_colorNormal="@color/colorAccent"
+        fab:fab_colorPressed="@color/colorAccent"
+        fab:layout_behavior="com.fibelatti.raffler.views.extensions.ClansFloatingActionBehavior" />
 
 </android.support.design.widget.CoordinatorLayout>
