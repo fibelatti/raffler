@@ -22,7 +22,7 @@
             android:layout_height="wrap_content"
             android:padding="@dimen/padding_small"
             android:text="@string/group_hint_header"
-            android:textColor="@color/textPrimary"
+            android:textColor="@color/textSecondary"
             android:textSize="@dimen/text_size_small" />
 
         <android.support.v7.widget.RecyclerView
@@ -42,8 +42,8 @@
         android:layout_marginBottom="@dimen/fab_margin"
         android:layout_marginEnd="@dimen/fab_margin"
         app:layout_behavior="com.fibelatti.raffler.views.extensions.ClansFloatingActionBehavior"
-        fab:menu_colorNormal="@color/colorCallToAction"
-        fab:menu_colorPressed="@color/colorCallToAction"
+        app:menu_colorNormal="@color/colorAccent"
+        app:menu_colorPressed="@color/colorAccent"
         fab:menu_icon="@drawable/ic_play_arrow_white"
         fab:menu_labels_position="left"
         fab:menu_labels_style="@style/menu_labels_style">
@@ -53,8 +53,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_roulette_white"
-            fab:fab_colorNormal="@color/colorCallToAction"
-            fab:fab_colorPressed="@color/colorCallToAction"
+            app:fab_colorNormal="@color/colorAccent"
+            app:fab_colorPressed="@color/colorAccent"
             fab:fab_label="@string/group_label_fab_roulette"
             fab:fab_size="mini" />
 
@@ -63,8 +63,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_list_white"
-            fab:fab_colorNormal="@color/colorCallToAction"
-            fab:fab_colorPressed="@color/colorCallToAction"
+            app:fab_colorNormal="@color/colorAccent"
+            app:fab_colorPressed="@color/colorAccent"
             fab:fab_label="@string/group_label_fab_list"
             fab:fab_size="mini" />
 
@@ -73,8 +73,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_groups_white"
-            fab:fab_colorNormal="@color/colorCallToAction"
-            fab:fab_colorPressed="@color/colorCallToAction"
+            app:fab_colorNormal="@color/colorAccent"
+            app:fab_colorPressed="@color/colorAccent"
             fab:fab_label="@string/group_label_fab_groups"
             fab:fab_size="mini" />
 

@@ -19,7 +19,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
-            android:textColor="@color/textPrimaryDark"
+            android:textColor="@color/textPrimary"
             android:textSize="@dimen/text_size_regular"
             android:textStyle="bold" />
 
@@ -28,7 +28,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/name"
-            android:textColor="@color/textPrimary" />
+            android:textColor="@color/textSecondary" />
     </RelativeLayout>
 
 
