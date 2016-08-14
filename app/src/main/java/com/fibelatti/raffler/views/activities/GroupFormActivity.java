@@ -181,6 +181,7 @@ public class GroupFormActivity extends BaseActivity {
             return false;
         } else {
             group.setName(newGroupName);
+            groupNameLayout.setError(null);
             groupNameLayout.setErrorEnabled(false);
         }
 
@@ -193,6 +194,7 @@ public class GroupFormActivity extends BaseActivity {
             requestFocus(groupItemName);
             return false;
         } else {
+            groupItemNameLayout.setError(null);
             groupItemNameLayout.setErrorEnabled(false);
         }
 
