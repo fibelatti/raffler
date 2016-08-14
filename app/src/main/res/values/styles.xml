@@ -5,7 +5,7 @@
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorCallToAction</item>
+        <item name="colorAccent">@color/colorAccent</item>
     </style>
 
     <style name="AppTheme.NoActionBar">
@@ -21,13 +21,5 @@
         <item name="android:background">@drawable/fab_label_background</item>
         <item name="android:textColor">@color/colorWhite</item>
     </style>
-
-    <!--<style name="FloatingLabel" parent="TextAppearance.AppCompat">-->
-        <!--<item name="android:textColorHint">@color/colorPrimary</item>-->
-        <!--<item name="android:textSize">@dimen/text_size_large</item>-->
-        <!--<item name="colorAccent">@color/colorCallToAction</item>-->
-        <!--<item name="colorControlNormal">@color/colorPrimary</item>-->
-        <!--<item name="colorControlActivated">@color/colorPrimaryDark</item>-->
-    <!--</style>-->
 
 </resources>

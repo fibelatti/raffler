@@ -74,7 +74,7 @@ public class RouletteHelper {
                 newText.setLayoutParams(new FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.MATCH_PARENT));
                 newText.setGravity(Gravity.CENTER);
                 newText.setTextSize(context.getResources().getDimension(R.dimen.text_size_regular));
-                newText.setTextColor(ContextCompat.getColor(context, R.color.colorCallToAction));
+                newText.setTextColor(ContextCompat.getColor(context, R.color.colorAccent));
                 return newText;
             }
         });

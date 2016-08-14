@@ -25,8 +25,8 @@
         android:layout_marginBottom="@dimen/fab_margin"
         android:layout_marginEnd="@dimen/fab_margin"
         android:src="@drawable/ic_stop_white"
-        app:layout_behavior="com.fibelatti.raffler.views.extensions.ClansFloatingActionBehavior"
-        fab:fab_colorNormal="@color/colorCallToAction"
-        fab:fab_colorPressed="@color/colorCallToAction" />
+        app:fab_colorNormal="@color/colorAccent"
+        app:fab_colorPressed="@color/colorAccent"
+        app:layout_behavior="com.fibelatti.raffler.views.extensions.ClansFloatingActionBehavior" />
 
 </android.support.design.widget.CoordinatorLayout>

@@ -22,6 +22,6 @@
         android:layout_alignParentTop="true"
         android:layout_centerVertical="true"
         android:layout_toEndOf="@id/chk_selected"
-        android:textColor="@color/textPrimaryDark"
+        android:textColor="@color/textPrimary"
         android:textSize="@dimen/text_size_regular" />
 </RelativeLayout>
