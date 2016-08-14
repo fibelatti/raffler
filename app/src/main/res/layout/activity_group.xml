@@ -22,8 +22,8 @@
             android:layout_height="wrap_content"
             android:padding="@dimen/padding_small"
             android:text="@string/group_hint_header"
-            android:textColor="@color/textSecondary"
-            android:textSize="@dimen/text_size_small" />
+            android:textColor="@color/textPrimary"
+            android:textSize="@dimen/text_size_regular" />
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/recycler_view"
