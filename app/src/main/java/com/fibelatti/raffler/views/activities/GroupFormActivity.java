@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TextInputLayout;
+import android.support.v4.app.DialogFragment;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -25,6 +26,7 @@ import com.fibelatti.raffler.views.adapters.GroupAdapter;
 import com.fibelatti.raffler.views.extensions.DividerItemDecoration;
 import com.fibelatti.raffler.views.extensions.GroupItemCheckStateChangedEvent;
 import com.fibelatti.raffler.views.extensions.RecyclerTouchListener;
+import com.fibelatti.raffler.views.fragments.IncludeRangeDialogFragment;
 import com.fibelatti.raffler.views.utils.AlertDialogHelper;
 import com.fibelatti.raffler.views.utils.BusHelper;
 import com.fibelatti.raffler.views.utils.Constants;
@@ -33,7 +35,8 @@ import com.fibelatti.raffler.views.utils.StringHelper;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class GroupFormActivity extends BaseActivity {
+public class GroupFormActivity extends BaseActivity
+        implements IncludeRangeDialogFragment.IncludeRangeListener {
     private Context context;
     private Group group;
     private GroupAdapter adapter;
@@ -85,8 +88,14 @@ public class GroupFormActivity extends BaseActivity {
             case R.id.action_save:
                 saveGroup();
                 return true;
+            case R.id.action_include_range:
+                showIncludeRangeDialog();
+                return true;
             case R.id.action_delete_items:
                 deleteItems();
+                return true;
+            case R.id.action_delete_all_items:
+                deleteAllItems();
                 return true;
         }
 
@@ -250,5 +259,35 @@ public class GroupFormActivity extends BaseActivity {
         } else {
             finish();
         }
+    }
+
+    private void showIncludeRangeDialog() {
+        DialogFragment includeRangeDialogFragment = new IncludeRangeDialogFragment();
+        includeRangeDialogFragment.show(getSupportFragmentManager(), "dialog");
+    }
+
+    private void deleteAllItems() {
+        if (adapter.getItemCount() > 0) {
+            AlertDialogHelper dialogHelper = new AlertDialogHelper(this);
+            dialogHelper.createYesNoDialog(
+                    getString(R.string.group_form_dialog_title_delete_all_items),
+                    getString(R.string.group_form_dialog_msg_delete_all_items),
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            adapter.deleteAllItems();
+                        }
+                    },
+                    null);
+        } else {
+            Snackbar.make(layout, getString(R.string.group_form_msg_delete_items), Snackbar.LENGTH_LONG).show();
+        }
+    }
+
+    @Override
+    public void includeRangeCallback(int initialValue, int finalValue) {
+        for (int i = initialValue; i <= finalValue; i++) {
+            group.getItems().add(new GroupItem(String.valueOf(i)));
+        }
+        adapter.notifyDataSetChanged();
     }
 }

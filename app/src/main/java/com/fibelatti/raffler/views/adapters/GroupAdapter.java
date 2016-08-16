@@ -131,4 +131,10 @@ public class GroupAdapter extends RecyclerView.Adapter<GroupAdapter.GroupItemVie
         selectedItems.clear();
         notifyDataSetChanged();
     }
+
+    public void deleteAllItems() {
+        groupItems.clear();
+        selectedItems.clear();
+        notifyDataSetChanged();
+    }
 }
