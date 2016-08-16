@@ -26,7 +26,8 @@
                 android:id="@+id/input_layout_winners_quantity"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1">
+                android:layout_weight="1"
+                android:theme="@style/InputLayout">
 
                 <EditText
                     android:id="@+id/input_winners_quantity"
