@@ -12,6 +12,7 @@
         android:id="@+id/chk_selected"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_centerVertical="true" />
 
@@ -21,6 +22,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerVertical="true"
+        android:layout_toRightOf="@id/chk_selected"
         android:layout_toEndOf="@id/chk_selected"
         android:textColor="@color/textPrimary"
         android:textSize="@dimen/text_size_regular" />
