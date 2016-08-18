@@ -2,6 +2,7 @@ package com.fibelatti.raffler.views.utils;
 
 import android.content.ContentResolver;
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.util.Log;
 
@@ -32,6 +33,17 @@ public class FileHelper {
 
     public String getGroupFilePath() {
         return context.getFilesDir() + File.separator + Constants.FILE_PATH_EXPORTED_GROUP;
+    }
+
+    public Intent createFileShareIntent(Uri uri) {
+        Intent shareIntent = new Intent();
+
+        shareIntent.setAction(Intent.ACTION_SEND);
+        shareIntent.setDataAndType(uri, "*/*");
+        shareIntent.putExtra(Intent.EXTRA_STREAM, uri);
+        shareIntent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+
+        return shareIntent;
     }
 
     public boolean createFileFromGroup(Group group) {

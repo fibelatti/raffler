@@ -261,19 +261,13 @@ public class GroupActivity extends BaseActivity {
 
     private void shareGroup(Group group) {
         FileHelper fileHelper = new FileHelper(context);
-        Intent shareIntent = new Intent();
 
         if (fileHelper.createFileFromGroup(group)) {
             Uri uri = FileProvider.getUriForFile(context,
                     getString(R.string.file_provider_authority),
                     new File(fileHelper.getGroupFilePath()));
 
-            shareIntent.setAction(Intent.ACTION_SEND);
-            shareIntent.setDataAndType(uri, "*/*");
-            shareIntent.putExtra(Intent.EXTRA_STREAM, uri);
-            shareIntent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-
-            startActivity(Intent.createChooser(shareIntent, getResources().getText(R.string.group_action_share)));
+            startActivity(Intent.createChooser(fileHelper.createFileShareIntent(uri), getResources().getText(R.string.group_action_share)));
         }
     }
 }
