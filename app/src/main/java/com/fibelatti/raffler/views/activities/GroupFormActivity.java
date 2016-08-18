@@ -2,6 +2,7 @@ package com.fibelatti.raffler.views.activities;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
@@ -30,6 +31,7 @@ import com.fibelatti.raffler.views.fragments.IncludeRangeDialogFragment;
 import com.fibelatti.raffler.views.utils.AlertDialogHelper;
 import com.fibelatti.raffler.views.utils.BusHelper;
 import com.fibelatti.raffler.views.utils.Constants;
+import com.fibelatti.raffler.views.utils.FileHelper;
 import com.fibelatti.raffler.views.utils.StringHelper;
 
 import butterknife.BindView;
@@ -155,7 +157,14 @@ public class GroupFormActivity extends BaseActivity
     }
 
     private Group fetchDataFromIntent() {
-        return (Group) getIntent().getSerializableExtra(Constants.INTENT_EXTRA_GROUP);
+        Intent intent = getIntent();
+        String action = intent.getAction();
+
+        if (Intent.ACTION_VIEW.equals(action)) {
+            return new FileHelper(context).readFromFile(intent.getData());
+        }
+
+        return (Group) intent.getSerializableExtra(Constants.INTENT_EXTRA_GROUP);
     }
 
     private void addItem() {
