@@ -133,7 +133,7 @@ public class GroupFormActivity extends BaseActivity
         recyclerView.addOnItemTouchListener(new RecyclerTouchListener(this, new RecyclerTouchListener.OnItemClickListener() {
             @Override
             public void onItemTouch(View view, int position) {
-                GroupItem item = group.getItems().get(position);
+                GroupItem item = group.getItem(position);
                 boolean isChecked = adapter.getSelectedItems().contains(item);
 
                 BusHelper.getInstance().getBus().post(new GroupItemCheckStateChangedEvent(item, !isChecked));
@@ -153,7 +153,7 @@ public class GroupFormActivity extends BaseActivity
 
     private void setValues() {
         groupName.setText(group.getName());
-        initialItemCount = group.getItemCount();
+        initialItemCount = group.getItemsCount();
     }
 
     private Group fetchDataFromIntent() {
@@ -169,7 +169,7 @@ public class GroupFormActivity extends BaseActivity
 
     private void addItem() {
         if (validateItemName()) {
-            group.getItems().add(new GroupItem(groupItemName.getText().toString()));
+            group.addItem(new GroupItem(groupItemName.getText().toString()));
             groupItemName.setText(null);
             adapter.notifyDataSetChanged();
         }
@@ -220,7 +220,7 @@ public class GroupFormActivity extends BaseActivity
     }
 
     private boolean validateItems() {
-        if (group.getItems().size() < 2) {
+        if (group.getItemsCount() < 2) {
             Snackbar.make(layout, getString(R.string.group_form_msg_validate_items), Snackbar.LENGTH_LONG).show();
             return false;
         }
@@ -252,7 +252,7 @@ public class GroupFormActivity extends BaseActivity
     }
 
     private void confirmFinish() {
-        boolean countHasChanged = group.getItemCount() != 0 && group.getItemCount() != initialItemCount;
+        boolean countHasChanged = group.getItemsCount() != 0 && group.getItemsCount() != initialItemCount;
 
         if (countHasChanged) {
             AlertDialogHelper dialogHelper = new AlertDialogHelper(this);

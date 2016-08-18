@@ -137,7 +137,7 @@ public class GroupActivity extends BaseActivity {
         recyclerView.addOnItemTouchListener(new RecyclerTouchListener(this, new RecyclerTouchListener.OnItemClickListener() {
             @Override
             public void onItemTouch(View view, int position) {
-                GroupItem item = group.getItems().get(position);
+                GroupItem item = group.getItem(position);
                 boolean isChecked = adapter.getSelectedItems().contains(item);
 
                 BusHelper.getInstance().getBus().post(new GroupItemCheckStateChangedEvent(item, !isChecked));
