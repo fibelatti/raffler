@@ -8,4 +8,6 @@ public interface Constants {
 
     int ACTIVITY_RESULT_GROUP_SAVED = 11;
     int ACTIVITY_RESULT_GROUP_DELETED = 12;
+
+    String FILE_PATH_EXPORTED_GROUP = "raffler_group.rflr";
 }
