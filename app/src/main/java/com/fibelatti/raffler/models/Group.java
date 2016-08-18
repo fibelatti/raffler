@@ -58,6 +58,14 @@ public class Group implements Serializable {
         return this.items.size();
     }
 
+    public List<String> getItemNames() {
+        ArrayList<String> list = new ArrayList<>();
+
+        for (int i = 0; i < items.size(); i++) list.add(items.get(i).getName());
+
+        return list;
+    }
+
     public void refresh() {
         Group g = Database.groupDao.fetchGroupById(this.id);
 
