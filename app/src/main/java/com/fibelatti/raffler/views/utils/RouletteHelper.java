@@ -48,7 +48,7 @@ public class RouletteHelper {
         this.group = group;
         this.textSwitcher = textSwitcher;
         this.fab = fab;
-        this.optionsCount = group.getItemCount();
+        this.optionsCount = group.getItemsCount();
         this.mediaPlayer = MediaPlayer.create(context, R.raw.easter_egg_soundtrack);
 
         mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
@@ -82,7 +82,7 @@ public class RouletteHelper {
     }
 
     public void startRoulette() {
-        randomIndex = new Random().nextInt(group.getItemCount());
+        randomIndex = new Random().nextInt(group.getItemsCount());
 
         currentSpeed = minimumSpeed;
 
@@ -122,7 +122,7 @@ public class RouletteHelper {
     }
 
     private String getCurrentText() {
-        return group.getItems().get(currentIndex).getName();
+        return group.getItemName(currentIndex);
     }
 
     private void increaseIndex() {

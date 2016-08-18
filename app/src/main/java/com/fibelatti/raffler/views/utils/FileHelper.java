@@ -113,7 +113,7 @@ public class FileHelper {
             group.setName(groupJson.getString(jsonPropertyGroupName));
 
             for (int i = 0; i < groupItemsJson.length(); i++) {
-                group.getItems().add(new GroupItem(groupItemsJson.get(i).toString()));
+                group.addItem(new GroupItem(groupItemsJson.get(i).toString()));
             }
 
         } catch (JSONException e) {

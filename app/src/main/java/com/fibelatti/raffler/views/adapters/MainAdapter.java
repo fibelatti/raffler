@@ -55,7 +55,7 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.GroupViewHolde
 
         holder.name.setText(group.getName());
         holder.itemCount.setText(getContext().getResources().getQuantityString(R.plurals.main_hint_group_items_quantity,
-                group.getItemCount(), group.getItemCount()));
+                group.getItemsCount(), group.getItemsCount()));
     }
 
     @Override

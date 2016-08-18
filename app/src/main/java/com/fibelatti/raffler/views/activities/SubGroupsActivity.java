@@ -108,7 +108,7 @@ public class SubGroupsActivity extends BaseActivity {
         if (validateQuantity()) {
             int quantity = Integer.valueOf(subgroupsQuantity.getText().toString());
             int subgroupIndex = 0;
-            List<Integer> randomizedIndex = RandomizeHelper.getRandomIndexesInRange(group.getItemCount(), group.getItemCount());
+            List<Integer> randomizedIndex = RandomizeHelper.getRandomIndexesInRange(group.getItemsCount(), group.getItemsCount());
 
             subgroups.clear();
 
@@ -120,9 +120,9 @@ public class SubGroupsActivity extends BaseActivity {
             }
 
             while (!randomizedIndex.isEmpty()) {
-                String currentItem = group.getItems().get(randomizedIndex.get(0)).getName();
+                String currentItem = group.getItemName(randomizedIndex.get(0));
 
-                subgroups.get(subgroupIndex).getItems().add(new GroupItem(currentItem));
+                subgroups.get(subgroupIndex).addItem(new GroupItem(currentItem));
 
                 subgroupIndex++;
                 if (subgroupIndex == quantity)
@@ -160,7 +160,7 @@ public class SubGroupsActivity extends BaseActivity {
     }
 
     private int getMaximumQuantity() {
-        Double value = Math.ceil((double) group.getItemCount() / 2);
+        Double value = Math.ceil((double) group.getItemsCount() / 2);
 
         return value.intValue();
     }
