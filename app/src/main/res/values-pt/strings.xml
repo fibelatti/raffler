@@ -23,6 +23,8 @@
     <string name="group_label_fab_list">N Sorteados</string>
     <string name="group_label_fab_groups">Sub Grupos</string>
 
+    <string name="group_action_share">Compartilhar</string>
+    <string name="group_action_help">Ajuda</string>
     <string name="group_action_check_all">Marcar todos</string>
     <string name="group_action_uncheck_all">Desmarcar todos</string>
     <string name="group_action_edit">Editar</string>
@@ -48,7 +50,6 @@
     <string name="group_form_hint_name">Nome do grupo</string>
     <string name="group_form_hint_item_name">Nome do item</string>
 
-    <string name="group_form_action_help">Ajuda</string>
     <string name="group_form_action_save">Salvar</string>
     <string name="group_form_action_include_range">Incluir Intervalo de Números</string>
     <string name="group_form_action_delete_items">Apagar Itens Selecionados</string>
