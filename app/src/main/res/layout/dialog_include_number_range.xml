@@ -28,7 +28,7 @@
             android:hint="@string/group_form_dialog_initial_number"
             android:imeOptions="actionNext"
             android:inputType="number"
-            android:maxLength="3"
+            android:maxLength="@integer/text_max_length_3"
             android:singleLine="true"
             android:textColor="@color/textPrimary"
             android:textSize="@dimen/text_size_regular" />
@@ -49,7 +49,7 @@
             android:hint="@string/group_form_dialog_final_number"
             android:imeOptions="actionNext"
             android:inputType="number"
-            android:maxLength="3"
+            android:maxLength="@integer/text_max_length_3"
             android:singleLine="true"
             android:textColor="@color/textPrimary"
             android:textSize="@dimen/text_size_regular" />
