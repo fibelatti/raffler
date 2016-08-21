@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="@dimen/padding_regular">
+
+    <TextView
+        android:id="@+id/header_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/padding_small"
+        android:text="@string/group_form_dialog_msg_include_number_range"
+        android:textColor="@color/textPrimary"
+        android:textSize="@dimen/text_size_regular" />
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/input_layout_initial_number"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/header_text"
+        android:padding="@dimen/padding_small"
+        android:theme="@style/InputLayout">
+
+        <EditText
+            android:id="@+id/input_initial_number"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/group_form_dialog_initial_number"
+            android:imeOptions="actionNext"
+            android:inputType="number"
+            android:maxLength="@integer/text_max_length_3"
+            android:singleLine="true"
+            android:textColor="@color/textPrimary"
+            android:textSize="@dimen/text_size_regular" />
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/input_layout_final_number"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/input_layout_initial_number"
+        android:padding="@dimen/padding_small"
+        android:theme="@style/InputLayout">
+
+        <EditText
+            android:id="@+id/input_final_number"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/group_form_dialog_final_number"
+            android:imeOptions="actionNext"
+            android:inputType="number"
+            android:maxLength="@integer/text_max_length_3"
+            android:singleLine="true"
+            android:textColor="@color/textPrimary"
+            android:textSize="@dimen/text_size_regular" />
+    </android.support.design.widget.TextInputLayout>
+
+</RelativeLayout>
