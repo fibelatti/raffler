@@ -30,3 +30,11 @@ before_script:
 script:
   - android list target
   - ./gradlew connectedAndroidTest -PdisablePreDex
+
+branches:
+  only:
+  - master
+  - develop
+
+notifications:
+  email: false
