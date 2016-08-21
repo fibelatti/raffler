@@ -60,7 +60,9 @@
 
     <string name="group_form_action_help">Help</string>
     <string name="group_form_action_save">Save</string>
-    <string name="group_form_action_delete_items">Delete Items</string>
+    <string name="group_form_action_include_range">Include Number Range</string>
+    <string name="group_form_action_delete_items">Delete Selected Items</string>
+    <string name="group_form_action_delete_all_items">Delete All Items</string>
     <string name="group_form_action_add">Add</string>
 
     <string name="group_form_msg_save">Group saved!</string>
@@ -68,12 +70,27 @@
     <string name="group_form_msg_validate_item_name">Item must not be empty</string>
     <string name="group_form_msg_validate_items">Group must have at least 2 items</string>
     <string name="group_form_msg_delete_items">No items selected to delete!</string>
+    <string name="group_form_msg_delete_all_items">No items to delete!</string>
 
     <string name="group_form_dialog_title_delete_items">Deleting group items</string>
     <string name="group_form_dialog_msg_delete_items">Are you sure you want to delete the selected items?</string>
 
+    <string name="group_form_dialog_title_delete_all_items">Deleting group items</string>
+    <string name="group_form_dialog_msg_delete_all_items">Are you sure you want to delete all items?</string>
+
     <string name="group_form_dialog_title_unsaved_changes">Unsaved changes</string>
     <string name="group_form_dialog_msg_unsaved_changes">You have unsaved changes, are you sure you want to go back?</string>
+
+    <string name="group_form_dialog_title_include_number_range">Include number range</string>
+    <string name="group_form_dialog_msg_include_number_range">Select a number range to create group items automatically</string>
+    <string name="group_form_dialog_initial_number">Initial number</string>
+    <string name="group_form_dialog_final_number">Final number</string>
+    <string name="group_form_dialog_hint_include">Include</string>
+    <string name="group_form_dialog_hint_cancel">Cancel</string>
+
+    <string name="group_form_msg_validate_initial_number">Initial number must not be empty</string>
+    <string name="group_form_msg_validate_final_number_empty">Final number must not be empty</string>
+    <string name="group_form_msg_validate_final_number_greater">Final number must be greater than initial number</string>
 
     <!-- RouletteActivity -->
     <string name="roulette_title">Roulette!</string>

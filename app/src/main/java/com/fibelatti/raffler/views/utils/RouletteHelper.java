@@ -130,6 +130,9 @@ public class RouletteHelper {
 
         if (currentIndex == optionsCount)
             currentIndex = 0;
+
+        if (currentSpeed == minimumSpeed)
+            currentIndex = randomIndex;
     }
 
     private int getCurrentSpeed() {
