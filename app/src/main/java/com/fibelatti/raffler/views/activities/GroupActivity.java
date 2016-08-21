@@ -21,11 +21,11 @@ import com.fibelatti.raffler.models.Group;
 import com.fibelatti.raffler.models.GroupItem;
 import com.fibelatti.raffler.views.adapters.GroupAdapter;
 import com.fibelatti.raffler.views.extensions.DividerItemDecoration;
+import com.fibelatti.raffler.views.extensions.GroupItemCheckStateChangedEvent;
 import com.fibelatti.raffler.views.extensions.RecyclerTouchListener;
 import com.fibelatti.raffler.views.utils.AlertDialogHelper;
 import com.fibelatti.raffler.views.utils.BusHelper;
 import com.fibelatti.raffler.views.utils.Constants;
-import com.fibelatti.raffler.views.utils.GroupItemCheckStateChangedEvent;
 import com.github.clans.fab.FloatingActionButton;
 import com.github.clans.fab.FloatingActionMenu;
 
