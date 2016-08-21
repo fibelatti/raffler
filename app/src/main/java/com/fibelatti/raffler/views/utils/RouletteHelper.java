@@ -98,6 +98,7 @@ public class RouletteHelper {
     }
 
     public void stopRoulette() {
+        fab.hide(true);
         isPlaying = false;
         fadeOutMusic();
     }
@@ -172,6 +173,7 @@ public class RouletteHelper {
                     mediaPlayer.pause();
                     mediaPlayer.seekTo(0);
                     fab.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_play_arrow_white));
+                    fab.show(true);
                 } else {
                     fadeOutMusic();
                 }
