@@ -3,9 +3,11 @@ package com.fibelatti.raffler.views.activities;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
+import android.support.v4.content.FileProvider;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -21,13 +23,16 @@ import com.fibelatti.raffler.models.Group;
 import com.fibelatti.raffler.models.GroupItem;
 import com.fibelatti.raffler.views.adapters.GroupAdapter;
 import com.fibelatti.raffler.views.extensions.DividerItemDecoration;
+import com.fibelatti.raffler.views.extensions.GroupItemCheckStateChangedEvent;
 import com.fibelatti.raffler.views.extensions.RecyclerTouchListener;
 import com.fibelatti.raffler.views.utils.AlertDialogHelper;
 import com.fibelatti.raffler.views.utils.BusHelper;
 import com.fibelatti.raffler.views.utils.Constants;
-import com.fibelatti.raffler.views.utils.GroupItemCheckStateChangedEvent;
+import com.fibelatti.raffler.views.utils.FileHelper;
 import com.github.clans.fab.FloatingActionButton;
 import com.github.clans.fab.FloatingActionMenu;
+
+import java.io.File;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -89,6 +94,9 @@ public class GroupActivity extends BaseActivity {
             case android.R.id.home:
                 finish();
                 return true;
+            case R.id.action_share:
+                shareGroup(group);
+                return true;
             case R.id.action_help:
                 showHelp();
                 return true;
@@ -129,7 +137,7 @@ public class GroupActivity extends BaseActivity {
         recyclerView.addOnItemTouchListener(new RecyclerTouchListener(this, new RecyclerTouchListener.OnItemClickListener() {
             @Override
             public void onItemTouch(View view, int position) {
-                GroupItem item = group.getItems().get(position);
+                GroupItem item = group.getItem(position);
                 boolean isChecked = adapter.getSelectedItems().contains(item);
 
                 BusHelper.getInstance().getBus().post(new GroupItemCheckStateChangedEvent(item, !isChecked));
@@ -249,5 +257,17 @@ public class GroupActivity extends BaseActivity {
         Intent intent = new Intent(this, SubGroupsActivity.class);
         intent.putExtra(Constants.INTENT_EXTRA_GROUP, group);
         startActivity(intent);
+    }
+
+    private void shareGroup(Group group) {
+        FileHelper fileHelper = new FileHelper(context);
+
+        if (fileHelper.createFileFromGroup(group)) {
+            Uri uri = FileProvider.getUriForFile(context,
+                    getString(R.string.file_provider_authority),
+                    new File(fileHelper.getGroupFilePath()));
+
+            startActivity(Intent.createChooser(fileHelper.createFileShareIntent(uri), getResources().getText(R.string.group_action_share)));
+        }
     }
 }

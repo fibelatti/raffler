@@ -53,12 +53,12 @@ public class SettingsDao extends DbContentProvider
     }
 
     protected Boolean cursorToEntity(Cursor cursor) {
-        int rouletteMusicEnabaledIndex;
+        int rouletteMusicEnabledIndex;
 
         if (cursor != null) {
             if (cursor.getColumnIndex(SETTINGS_COLUMN_ROULETTE_MUSIC_ENABLED) != -1) {
-                rouletteMusicEnabaledIndex = cursor.getColumnIndexOrThrow(SETTINGS_COLUMN_ROULETTE_MUSIC_ENABLED);
-                return cursor.getInt(rouletteMusicEnabaledIndex) != 0;
+                rouletteMusicEnabledIndex = cursor.getColumnIndexOrThrow(SETTINGS_COLUMN_ROULETTE_MUSIC_ENABLED);
+                return cursor.getInt(rouletteMusicEnabledIndex) != 0;
             }
         }
         return false;

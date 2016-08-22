@@ -6,6 +6,7 @@ build/
 
 # User-specific configurations
 .idea/libraries/
+.idea/dictionaries/
 .idea/workspace.xml
 .idea/tasks.xml
 .idea/.name
@@ -16,6 +17,8 @@ build/
 .idea/modules.xml
 .idea/scopes/scope_settings.xml
 .idea/vcs.xml
+.idea/gradle.xml
+.idea/runConfigurations.xml
 *.iml
 
 # Local configuration file (sdk path, etc)
@@ -29,4 +32,3 @@ local.properties
 .Trashes
 ehthumbs.db
 Thumbs.db
-

@@ -42,6 +42,10 @@ public class Group implements Serializable {
         this.name = name;
     }
 
+    public GroupItem getItem(int index) {
+        return this.items.get(index);
+    }
+
     public List<GroupItem> getItems() {
         return items;
     }
@@ -54,8 +58,24 @@ public class Group implements Serializable {
         this.items.addAll(items);
     }
 
-    public Integer getItemCount() {
+    public void addItem(GroupItem item) {
+        this.items.add(item);
+    }
+
+    public Integer getItemsCount() {
         return this.items.size();
+    }
+
+    public String getItemName(int index) {
+        return this.items.get(index) != null ? this.items.get(index).getName() : null;
+    }
+
+    public List<String> getItemNames() {
+        ArrayList<String> list = new ArrayList<>();
+
+        for (int i = 0; i < items.size(); i++) list.add(items.get(i).getName());
+
+        return list;
     }
 
     public void refresh() {

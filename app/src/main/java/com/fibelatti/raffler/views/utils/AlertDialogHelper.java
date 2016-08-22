@@ -19,12 +19,12 @@ public class AlertDialogHelper {
     }
 
     public void createOkOnlyDialog(CharSequence dialogTitle, CharSequence dialogMessage,
-                                     DialogInterface.OnClickListener okListener) {
+                                     DialogInterface.OnClickListener positiveListener) {
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
         builder.setTitle(dialogTitle);
         builder.setMessage(dialogMessage);
 
-        builder.setPositiveButton(context.getResources().getString(R.string.hint_ok), okListener);
+        builder.setPositiveButton(context.getResources().getString(R.string.hint_ok), positiveListener);
 
         AlertDialog dialog = builder.create();
 
@@ -36,16 +36,16 @@ public class AlertDialogHelper {
     }
 
     public void createYesNoDialog(CharSequence dialogTitle, CharSequence dialogMessage,
-                                    DialogInterface.OnClickListener yesListener,
-                                    DialogInterface.OnClickListener noListener) {
+                                    DialogInterface.OnClickListener positiveListener,
+                                    DialogInterface.OnClickListener negativeListener) {
 
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
         builder.setTitle(dialogTitle);
         builder.setMessage(dialogMessage);
 
-        builder.setPositiveButton(context.getResources().getString(R.string.hint_yes), yesListener);
+        builder.setPositiveButton(context.getResources().getString(R.string.hint_yes), positiveListener);
 
-        builder.setNegativeButton(context.getResources().getString(R.string.hint_no), noListener);
+        builder.setNegativeButton(context.getResources().getString(R.string.hint_no), negativeListener);
 
         AlertDialog dialog = builder.create();
 

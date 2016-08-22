@@ -11,8 +11,8 @@ import android.widget.TextView;
 
 import com.fibelatti.raffler.R;
 import com.fibelatti.raffler.models.GroupItem;
+import com.fibelatti.raffler.views.extensions.GroupItemCheckStateChangedEvent;
 import com.fibelatti.raffler.views.utils.BusHelper;
-import com.fibelatti.raffler.views.utils.GroupItemCheckStateChangedEvent;
 import com.squareup.otto.Subscribe;
 
 import java.util.HashSet;
@@ -128,6 +128,12 @@ public class GroupAdapter extends RecyclerView.Adapter<GroupAdapter.GroupItemVie
         for (GroupItem groupItem : selectedItems) {
             groupItems.remove(groupItem);
         }
+        selectedItems.clear();
+        notifyDataSetChanged();
+    }
+
+    public void deleteAllItems() {
+        groupItems.clear();
         selectedItems.clear();
         notifyDataSetChanged();
     }
