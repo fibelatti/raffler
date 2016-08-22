@@ -4,33 +4,40 @@
     tools:context=".views.activities.GroupActivity">
 
     <item
+        android:id="@+id/action_share"
+        android:icon="@drawable/ic_share_white"
+        android:orderInCategory="1"
+        android:title="@string/group_action_share"
+        app:showAsAction="ifRoom" />
+
+    <item
         android:id="@+id/action_help"
         android:icon="@drawable/ic_help_white"
-        android:orderInCategory="1"
-        android:title="@string/group_form_action_help"
+        android:orderInCategory="2"
+        android:title="@string/group_action_help"
         app:showAsAction="ifRoom" />
 
     <item
         android:id="@+id/action_check_all"
-        android:orderInCategory="2"
+        android:orderInCategory="3"
         android:title="@string/group_action_check_all"
         app:showAsAction="never" />
 
     <item
         android:id="@+id/action_uncheck_all"
-        android:orderInCategory="3"
+        android:orderInCategory="4"
         android:title="@string/group_action_uncheck_all"
         app:showAsAction="never" />
 
     <item
         android:id="@+id/action_edit"
-        android:orderInCategory="4"
+        android:orderInCategory="5"
         android:title="@string/group_action_edit"
         app:showAsAction="never" />
 
     <item
         android:id="@+id/action_delete"
-        android:orderInCategory="5"
+        android:orderInCategory="6"
         android:title="@string/group_action_delete"
         app:showAsAction="never" />
 </menu>

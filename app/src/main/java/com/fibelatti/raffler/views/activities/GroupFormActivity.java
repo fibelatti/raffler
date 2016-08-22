@@ -2,6 +2,7 @@ package com.fibelatti.raffler.views.activities;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
@@ -30,6 +31,7 @@ import com.fibelatti.raffler.views.fragments.IncludeRangeDialogFragment;
 import com.fibelatti.raffler.views.utils.AlertDialogHelper;
 import com.fibelatti.raffler.views.utils.BusHelper;
 import com.fibelatti.raffler.views.utils.Constants;
+import com.fibelatti.raffler.views.utils.FileHelper;
 import com.fibelatti.raffler.views.utils.StringHelper;
 
 import butterknife.BindView;
@@ -131,7 +133,7 @@ public class GroupFormActivity extends BaseActivity
         recyclerView.addOnItemTouchListener(new RecyclerTouchListener(this, new RecyclerTouchListener.OnItemClickListener() {
             @Override
             public void onItemTouch(View view, int position) {
-                GroupItem item = group.getItems().get(position);
+                GroupItem item = group.getItem(position);
                 boolean isChecked = adapter.getSelectedItems().contains(item);
 
                 BusHelper.getInstance().getBus().post(new GroupItemCheckStateChangedEvent(item, !isChecked));
@@ -151,16 +153,23 @@ public class GroupFormActivity extends BaseActivity
 
     private void setValues() {
         groupName.setText(group.getName());
-        initialItemCount = group.getItemCount();
+        initialItemCount = group.getItemsCount();
     }
 
     private Group fetchDataFromIntent() {
-        return (Group) getIntent().getSerializableExtra(Constants.INTENT_EXTRA_GROUP);
+        Intent intent = getIntent();
+        String action = intent.getAction();
+
+        if (Intent.ACTION_VIEW.equals(action)) {
+            return new FileHelper(context).readFromFile(intent.getData());
+        }
+
+        return (Group) intent.getSerializableExtra(Constants.INTENT_EXTRA_GROUP);
     }
 
     private void addItem() {
         if (validateItemName()) {
-            group.getItems().add(new GroupItem(groupItemName.getText().toString()));
+            group.addItem(new GroupItem(groupItemName.getText().toString()));
             groupItemName.setText(null);
             adapter.notifyDataSetChanged();
         }
@@ -211,7 +220,7 @@ public class GroupFormActivity extends BaseActivity
     }
 
     private boolean validateItems() {
-        if (group.getItems().size() < 2) {
+        if (group.getItemsCount() < 2) {
             Snackbar.make(layout, getString(R.string.group_form_msg_validate_items), Snackbar.LENGTH_LONG).show();
             return false;
         }
@@ -243,7 +252,7 @@ public class GroupFormActivity extends BaseActivity
     }
 
     private void confirmFinish() {
-        boolean countHasChanged = group.getItemCount() != 0 && group.getItemCount() != initialItemCount;
+        boolean countHasChanged = group.getItemsCount() != 0 && group.getItemsCount() != initialItemCount;
 
         if (countHasChanged) {
             AlertDialogHelper dialogHelper = new AlertDialogHelper(this);
