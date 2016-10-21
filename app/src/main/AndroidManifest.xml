@@ -18,7 +18,9 @@
 
         <activity
             android:name=".views.activities.MainActivity"
+            android:configChanges="orientation"
             android:label="@string/app_name"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -29,8 +31,10 @@
 
         <activity
             android:name=".views.activities.GroupActivity"
+            android:configChanges="orientation"
             android:label="@string/label_group_activity"
             android:parentActivityName="com.fibelatti.raffler.views.activities.MainActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -39,8 +43,10 @@
 
         <activity
             android:name=".views.activities.GroupFormActivity"
+            android:configChanges="orientation"
             android:label="@string/label_group_form_activity"
             android:parentActivityName=".views.activities.GroupActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -74,8 +80,10 @@
 
         <activity
             android:name=".views.activities.RouletteActivity"
+            android:configChanges="orientation"
             android:label="@string/label_roulette_activity"
             android:parentActivityName=".views.activities.GroupActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -84,8 +92,10 @@
 
         <activity
             android:name=".views.activities.NWinnersActivity"
+            android:configChanges="orientation"
             android:label="@string/label_nwinners_activity"
             android:parentActivityName=".views.activities.GroupActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -94,8 +104,10 @@
 
         <activity
             android:name=".views.activities.SubGroupsActivity"
+            android:configChanges="orientation"
             android:label="@string/label_subgroups_activity"
             android:parentActivityName=".views.activities.GroupActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -104,8 +116,10 @@
 
         <activity
             android:name=".views.activities.SettingsActivity"
+            android:configChanges="orientation"
             android:label="@string/label_settings_activity"
             android:parentActivityName=".views.activities.MainActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
