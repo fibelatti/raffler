@@ -17,19 +17,15 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.AnimationUtils;
 
+import com.fibelatti.raffler.Constants;
 import com.fibelatti.raffler.R;
 import com.fibelatti.raffler.db.Database;
+import com.fibelatti.raffler.helpers.AlertDialogHelper;
+import com.fibelatti.raffler.helpers.FileHelper;
 import com.fibelatti.raffler.models.Group;
-import com.fibelatti.raffler.models.GroupItem;
 import com.fibelatti.raffler.views.Navigator;
 import com.fibelatti.raffler.views.adapters.GroupAdapter;
 import com.fibelatti.raffler.views.extensions.DividerItemDecoration;
-import com.fibelatti.raffler.views.extensions.GroupItemCheckStateChangedEvent;
-import com.fibelatti.raffler.views.extensions.RecyclerTouchListener;
-import com.fibelatti.raffler.helpers.AlertDialogHelper;
-import com.fibelatti.raffler.helpers.BusHelper;
-import com.fibelatti.raffler.Constants;
-import com.fibelatti.raffler.helpers.FileHelper;
 import com.github.clans.fab.FloatingActionButton;
 import com.github.clans.fab.FloatingActionMenu;
 
@@ -74,8 +70,6 @@ public class GroupActivity
         adapter = new GroupAdapter(this, group.getItems());
 
         dialogHelper = new AlertDialogHelper(this);
-
-        BusHelper.getInstance().getBus().register(adapter);
 
         setUpLayout();
         setValues();
@@ -139,17 +133,6 @@ public class GroupActivity
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
         recyclerView.setAdapter(adapter);
-
-        recyclerView.addOnItemTouchListener(new RecyclerTouchListener(this, new RecyclerTouchListener.OnItemClickListener() {
-            @Override
-            public void onItemTouch(View view, int position) {
-                GroupItem item = group.getItem(position);
-                boolean isChecked = adapter.getSelectedItems().contains(item);
-
-                BusHelper.getInstance().getBus().post(new GroupItemCheckStateChangedEvent(item, !isChecked));
-                adapter.notifyDataSetChanged();
-            }
-        }));
     }
 
     private void setUpFab() {

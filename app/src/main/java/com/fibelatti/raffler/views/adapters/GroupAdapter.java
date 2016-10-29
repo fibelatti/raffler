@@ -6,14 +6,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.TextView;
 
 import com.fibelatti.raffler.R;
 import com.fibelatti.raffler.models.GroupItem;
-import com.fibelatti.raffler.views.extensions.GroupItemCheckStateChangedEvent;
-import com.fibelatti.raffler.helpers.BusHelper;
-import com.squareup.otto.Subscribe;
+import com.fibelatti.raffler.views.extensions.RecyclerTouchListener;
 
 import java.util.HashSet;
 import java.util.List;
@@ -28,37 +25,6 @@ public class GroupAdapter
     private Context context;
     private List<GroupItem> groupItems;
     private Set<GroupItem> selectedItems = new HashSet<>();
-
-    public class GroupItemViewHolder
-            extends RecyclerView.ViewHolder {
-        @BindView(R.id.name)
-        public TextView itemName;
-        @BindView(R.id.chk_selected)
-        public CheckBox isSelected;
-
-        private GroupItem groupItem;
-
-        public GroupItemViewHolder(View view) {
-            super(view);
-            ButterKnife.bind(this, view);
-
-            isSelected.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-                @Override
-                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                    BusHelper.getInstance().getBus().post(new GroupItemCheckStateChangedEvent(groupItem, isChecked));
-                }
-            });
-        }
-
-        public void setGroupItem(GroupItem groupItem) {
-            this.groupItem = groupItem;
-            itemName.setText(groupItem.getName());
-        }
-
-        public void setIsSelected(boolean checked) {
-            isSelected.setChecked(checked);
-        }
-    }
 
     public GroupAdapter(Context context, List<GroupItem> groupItems) {
         this.context = context;
@@ -88,15 +54,6 @@ public class GroupAdapter
     @Override
     public int getItemCount() {
         return groupItems.size();
-    }
-
-    @Subscribe
-    public void onGroupItemCheckStateChangedEvent(GroupItemCheckStateChangedEvent event) {
-        if (event.isChecked) {
-            selectedItems.add(event.groupItem);
-        } else {
-            selectedItems.remove(event.groupItem);
-        }
     }
 
     public void clearSelectedItems() {
@@ -138,5 +95,44 @@ public class GroupAdapter
         groupItems.clear();
         selectedItems.clear();
         notifyDataSetChanged();
+    }
+
+    public class GroupItemViewHolder
+            extends RecyclerView.ViewHolder
+            implements RecyclerTouchListener.OnItemClickListener {
+        @BindView(R.id.name)
+        public TextView itemName;
+        @BindView(R.id.chk_selected)
+        public CheckBox isSelected;
+
+        private GroupItem groupItem;
+
+        public GroupItemViewHolder(View view) {
+            super(view);
+            ButterKnife.bind(this, view);
+        }
+
+        public void setGroupItem(GroupItem groupItem) {
+            this.groupItem = groupItem;
+            itemName.setText(groupItem.getName());
+        }
+
+        public void setIsSelected(boolean checked) {
+            isSelected.setChecked(checked);
+        }
+
+        @Override
+        public void onItemTouch(View view, int position) {
+            GroupItem item = groupItems.get(position);
+            boolean isChecked = getSelectedItems().contains(item);
+
+            if (isChecked) {
+                selectedItems.add(item);
+            } else {
+                selectedItems.remove(item);
+            }
+
+            notifyItemChanged(position);
+        }
     }
 }

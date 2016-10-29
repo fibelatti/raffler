@@ -19,27 +19,25 @@ import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.ImageButton;
 
+import com.fibelatti.raffler.Constants;
 import com.fibelatti.raffler.R;
 import com.fibelatti.raffler.db.Database;
+import com.fibelatti.raffler.helpers.AlertDialogHelper;
+import com.fibelatti.raffler.helpers.FileHelper;
 import com.fibelatti.raffler.models.Group;
 import com.fibelatti.raffler.models.GroupItem;
+import com.fibelatti.raffler.utils.StringUtils;
 import com.fibelatti.raffler.views.adapters.GroupAdapter;
 import com.fibelatti.raffler.views.extensions.DividerItemDecoration;
-import com.fibelatti.raffler.views.extensions.GroupItemCheckStateChangedEvent;
-import com.fibelatti.raffler.views.extensions.RecyclerTouchListener;
+import com.fibelatti.raffler.views.fragments.IIncludeRangeListener;
 import com.fibelatti.raffler.views.fragments.IncludeRangeDialogFragment;
-import com.fibelatti.raffler.helpers.AlertDialogHelper;
-import com.fibelatti.raffler.helpers.BusHelper;
-import com.fibelatti.raffler.Constants;
-import com.fibelatti.raffler.helpers.FileHelper;
-import com.fibelatti.raffler.utils.StringUtils;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class GroupFormActivity
         extends BaseActivity
-        implements IncludeRangeDialogFragment.IIncludeRangeListener {
+        implements IIncludeRangeListener {
     private Context context;
     private Group group;
     private GroupAdapter adapter;
@@ -69,8 +67,6 @@ public class GroupFormActivity
         context = getApplicationContext();
         group = fetchDataFromIntent();
         adapter = new GroupAdapter(this, group.getItems());
-
-        BusHelper.getInstance().getBus().register(adapter);
 
         setUpLayout();
         setValues();
@@ -130,17 +126,6 @@ public class GroupFormActivity
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
         recyclerView.setAdapter(adapter);
-
-        recyclerView.addOnItemTouchListener(new RecyclerTouchListener(this, new RecyclerTouchListener.OnItemClickListener() {
-            @Override
-            public void onItemTouch(View view, int position) {
-                GroupItem item = group.getItem(position);
-                boolean isChecked = adapter.getSelectedItems().contains(item);
-
-                BusHelper.getInstance().getBus().post(new GroupItemCheckStateChangedEvent(item, !isChecked));
-                adapter.notifyDataSetChanged();
-            }
-        }));
     }
 
     private void setUpAddButton() {
