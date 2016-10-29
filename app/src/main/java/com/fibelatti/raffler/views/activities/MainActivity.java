@@ -13,6 +13,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.AnimationUtils;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.fibelatti.raffler.R;
@@ -44,6 +45,8 @@ public class MainActivity
     Toolbar toolbar;
     @BindView(R.id.placeholder)
     TextView placeholder;
+    @BindView(R.id.layout_content)
+    RelativeLayout layoutContent;
     @BindView(R.id.recycler_view)
     RecyclerView recyclerView;
     @BindView(R.id.fab)
@@ -138,10 +141,10 @@ public class MainActivity
     private void setUpValues() {
         if (groupList.size() > 0) {
             placeholder.setVisibility(View.GONE);
-            recyclerView.setVisibility(View.VISIBLE);
+            layoutContent.setVisibility(View.VISIBLE);
         } else {
             placeholder.setVisibility(View.VISIBLE);
-            recyclerView.setVisibility(View.GONE);
+            layoutContent.setVisibility(View.GONE);
         }
     }
 
