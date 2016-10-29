@@ -31,4 +31,10 @@
         <item name="colorControlActivated">@color/colorAccent</item>
     </style>
 
+    <style name="QuickDecisionButton" parent="Theme.AppCompat.Light">
+        <item name="colorControlHighlight">@color/colorPrimary</item>
+        <item name="colorButtonNormal">@color/colorPrimaryDark</item>
+        <item name="android:textColor">@color/colorWhite</item>
+    </style>
+
 </resources>

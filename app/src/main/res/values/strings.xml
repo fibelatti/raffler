@@ -31,6 +31,9 @@
     <string name="main_section_title_quick_decisions">Quick decisions</string>
     <string name="main_section_title_my_groups">My groups</string>
 
+    <string name="main_button_yes_or_no">Yes or No</string>
+    <string name="main_button_throw_coin">Throw a coin</string>
+
     <!-- GroupActivity -->
     <string name="group_hint_header">Choose which items to include in this raffle by toggling their checkboxes. Bulk edit using the menu.</string>
 
