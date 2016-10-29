@@ -21,7 +21,7 @@ import com.fibelatti.raffler.models.Group;
 import com.fibelatti.raffler.views.adapters.MainAdapter;
 import com.fibelatti.raffler.views.extensions.RecyclerTouchListener;
 import com.fibelatti.raffler.views.extensions.RecyclerTouchListener.OnItemClickListener;
-import com.fibelatti.raffler.views.utils.Constants;
+import com.fibelatti.raffler.Constants;
 import com.github.clans.fab.FloatingActionButton;
 
 import java.util.List;

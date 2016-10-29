@@ -12,7 +12,7 @@ import android.widget.TextView;
 import com.fibelatti.raffler.R;
 import com.fibelatti.raffler.models.GroupItem;
 import com.fibelatti.raffler.views.extensions.GroupItemCheckStateChangedEvent;
-import com.fibelatti.raffler.views.utils.BusHelper;
+import com.fibelatti.raffler.helpers.BusHelper;
 import com.squareup.otto.Subscribe;
 
 import java.util.HashSet;

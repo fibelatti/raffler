@@ -14,7 +14,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.fibelatti.raffler.R;
-import com.fibelatti.raffler.views.utils.StringHelper;
+import com.fibelatti.raffler.utils.StringUtils;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -99,7 +99,7 @@ public class IncludeRangeDialogFragment extends DialogFragment {
     }
 
     private boolean validateInitialNumber() {
-        if (StringHelper.isNullOrEmpty(initialNumber.getText().toString())) {
+        if (StringUtils.isNullOrEmpty(initialNumber.getText().toString())) {
             initialNumberLayout.setError(getString(R.string.group_form_msg_validate_initial_number));
             requestFocus(initialNumber);
             return false;
@@ -115,7 +115,7 @@ public class IncludeRangeDialogFragment extends DialogFragment {
         String initialNumberValue = initialNumber.getText().toString();
         String finalNumberValue = finalNumber.getText().toString();
 
-        if (StringHelper.isNullOrEmpty(finalNumberValue)) {
+        if (StringUtils.isNullOrEmpty(finalNumberValue)) {
             finalNumberLayout.setError(getString(R.string.group_form_msg_validate_final_number_empty));
             requestFocus(finalNumber);
             return false;

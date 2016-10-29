@@ -1,4 +1,4 @@
-package com.fibelatti.raffler.views.utils;
+package com.fibelatti.raffler.helpers;
 
 import android.content.ContentResolver;
 import android.content.Context;
@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.util.Log;
 
+import com.fibelatti.raffler.Constants;
 import com.fibelatti.raffler.models.Group;
 import com.fibelatti.raffler.models.GroupItem;
 

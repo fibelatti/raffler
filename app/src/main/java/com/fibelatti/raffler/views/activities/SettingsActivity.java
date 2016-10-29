@@ -13,7 +13,7 @@ import android.widget.TextView;
 
 import com.fibelatti.raffler.R;
 import com.fibelatti.raffler.db.Database;
-import com.fibelatti.raffler.views.utils.AlertDialogHelper;
+import com.fibelatti.raffler.helpers.AlertDialogHelper;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;

@@ -28,11 +28,11 @@ import com.fibelatti.raffler.views.extensions.DividerItemDecoration;
 import com.fibelatti.raffler.views.extensions.GroupItemCheckStateChangedEvent;
 import com.fibelatti.raffler.views.extensions.RecyclerTouchListener;
 import com.fibelatti.raffler.views.fragments.IncludeRangeDialogFragment;
-import com.fibelatti.raffler.views.utils.AlertDialogHelper;
-import com.fibelatti.raffler.views.utils.BusHelper;
-import com.fibelatti.raffler.views.utils.Constants;
-import com.fibelatti.raffler.views.utils.FileHelper;
-import com.fibelatti.raffler.views.utils.StringHelper;
+import com.fibelatti.raffler.helpers.AlertDialogHelper;
+import com.fibelatti.raffler.helpers.BusHelper;
+import com.fibelatti.raffler.Constants;
+import com.fibelatti.raffler.helpers.FileHelper;
+import com.fibelatti.raffler.utils.StringUtils;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -193,7 +193,7 @@ public class GroupFormActivity extends BaseActivity
     private boolean validateName() {
         String newGroupName = groupName.getText().toString();
 
-        if (StringHelper.isNullOrEmpty(newGroupName)) {
+        if (StringUtils.isNullOrEmpty(newGroupName)) {
             groupNameLayout.setError(getString(R.string.group_form_msg_validate_name));
             requestFocus(groupName);
             return false;
@@ -207,7 +207,7 @@ public class GroupFormActivity extends BaseActivity
     }
 
     private boolean validateItemName() {
-        if (StringHelper.isNullOrEmpty(groupItemName.getText().toString())) {
+        if (StringUtils.isNullOrEmpty(groupItemName.getText().toString())) {
             groupItemNameLayout.setError(getString(R.string.group_form_msg_validate_item_name));
             requestFocus(groupItemName);
             return false;
