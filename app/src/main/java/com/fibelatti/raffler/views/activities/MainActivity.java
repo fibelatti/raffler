@@ -141,10 +141,10 @@ public class MainActivity
     private void setUpValues() {
         if (groupList.size() > 0) {
             placeholder.setVisibility(View.GONE);
-            layoutContent.setVisibility(View.VISIBLE);
+            recyclerView.setVisibility(View.VISIBLE);
         } else {
             placeholder.setVisibility(View.VISIBLE);
-            layoutContent.setVisibility(View.GONE);
+            recyclerView.setVisibility(View.GONE);
         }
     }
 

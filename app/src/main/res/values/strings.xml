@@ -21,8 +21,9 @@
     <!-- MainActivity -->
     <string name="main_action_settings">Settings</string>
 
-    <string name="main_hint_placeholder">Do you need help deciding which option to choose?
-        \n\nUse Raffler! to create groups of options to help you pick one (or many!) randomly. You can also use it to form smaller groups among your options.</string>
+    <string name="main_hint_placeholder">
+        No groups yet :(
+        \n\nIf you\'re ever in doubt of which option to choose, use Raffler! to create groups and help you deciding randomly, from a single option to smaller groups.</string>
     <plurals name="main_hint_group_items_quantity">
         <item quantity="one">1 item</item>
         <item quantity="other">%d items</item>

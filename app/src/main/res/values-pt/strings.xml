@@ -9,8 +9,9 @@
     <!-- MainActivity -->
     <string name="main_action_settings">Configurações</string>
 
-    <string name="main_hint_placeholder">Precisa de ajuda para escolher entre tantas opções?
-        \n\nUse o Raffler! para criar grupos de opções e fazer suas escolhas de forma aleatória.</string>
+    <string name="main_hint_placeholder">
+        Nenhum grupo :(
+        \n\nSe você tem dúvidas de que opção escolher, use o Raffler! para criar grupos e te ajudar na decisão de forma aleatória, seja escolhendo uma, várias ou formar pequenos grupos com as opções.</string>
     <plurals name="main_hint_group_items_quantity">
         <item quantity="one">%d item</item>
         <item quantity="other">%d itens</item>
