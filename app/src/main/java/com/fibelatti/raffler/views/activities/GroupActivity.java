@@ -248,7 +248,7 @@ public class GroupActivity extends BaseActivity {
     }
 
     private void startNWinnersActivity(Group group) {
-        Intent intent = new Intent(this, NWinnersActivity.class);
+        Intent intent = new Intent(this, RandomWinnersActivity.class);
         intent.putExtra(Constants.INTENT_EXTRA_GROUP, group);
         startActivity(intent);
     }

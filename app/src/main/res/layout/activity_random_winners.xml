@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context=".views.activities.NWinnersActivity">
+    tools:context=".views.activities.RandomWinnersActivity">
 
     <include layout="@layout/toolbar_default" />
 
@@ -33,7 +33,7 @@
                     android:id="@+id/input_winners_quantity"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/nwinners_hint_quantity"
+                    android:hint="@string/random_winners_hint_quantity"
                     android:imeOptions="actionNext"
                     android:inputType="number"
                     android:maxLength="@integer/text_max_length_3"
@@ -47,10 +47,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@null"
-                android:contentDescription="@string/nwinners_action_raffle"
+                android:contentDescription="@string/random_winners_action_raffle"
                 android:padding="@dimen/padding_small"
                 android:src="@drawable/ic_play_circle_white"
-                android:text="@string/nwinners_action_raffle"
+                android:text="@string/random_winners_action_raffle"
                 android:tint="@color/colorAccent" />
         </LinearLayout>
 

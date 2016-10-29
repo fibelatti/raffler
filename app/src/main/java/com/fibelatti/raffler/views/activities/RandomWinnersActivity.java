@@ -16,7 +16,7 @@ import android.widget.ImageButton;
 
 import com.fibelatti.raffler.R;
 import com.fibelatti.raffler.models.Group;
-import com.fibelatti.raffler.views.adapters.NWinnersAdapter;
+import com.fibelatti.raffler.views.adapters.RandomWinnersAdapter;
 import com.fibelatti.raffler.views.utils.Constants;
 import com.fibelatti.raffler.views.utils.RandomizeHelper;
 import com.fibelatti.raffler.views.utils.StringHelper;
@@ -27,10 +27,10 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class NWinnersActivity extends BaseActivity {
+public class RandomWinnersActivity extends BaseActivity {
     private Context context;
     private Group group;
-    private NWinnersAdapter adapter;
+    private RandomWinnersAdapter adapter;
     private ArrayList<String> winners = new ArrayList<>();
 
     @BindView(R.id.coordinator_layout)
@@ -52,7 +52,7 @@ public class NWinnersActivity extends BaseActivity {
 
         context = getApplicationContext();
         group = fetchDataFromIntent();
-        adapter = new NWinnersAdapter(this, winners);
+        adapter = new RandomWinnersAdapter(this, winners);
 
         setUpLayout();
         setValues();
@@ -70,7 +70,7 @@ public class NWinnersActivity extends BaseActivity {
     }
 
     private void setUpLayout() {
-        setContentView(R.layout.activity_nwinners);
+        setContentView(R.layout.activity_random_winners);
         ButterKnife.bind(this);
 
         setSupportActionBar(toolbar);
@@ -96,7 +96,7 @@ public class NWinnersActivity extends BaseActivity {
     }
 
     private void setValues() {
-        this.setTitle(getResources().getString(R.string.nwinners_title));
+        this.setTitle(getResources().getString(R.string.random_winners_title));
     }
 
     private Group fetchDataFromIntent() {
@@ -131,7 +131,7 @@ public class NWinnersActivity extends BaseActivity {
         int quantity = Integer.valueOf(winnersQuantity.getText().toString());
 
         if (quantity >= group.getItemsCount()) {
-            winnersQuantityLayout.setError(getString(R.string.nwinners_msg_validate_quantity, group.getItemsCount()));
+            winnersQuantityLayout.setError(getString(R.string.random_winners_msg_validate_quantity, group.getItemsCount()));
             requestFocus(winnersQuantity);
             return false;
         } else {

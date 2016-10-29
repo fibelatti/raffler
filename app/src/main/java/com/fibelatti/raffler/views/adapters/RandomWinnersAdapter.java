@@ -14,7 +14,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class NWinnersAdapter extends RecyclerView.Adapter<NWinnersAdapter.GroupViewHolder> {
+public class RandomWinnersAdapter extends RecyclerView.Adapter<RandomWinnersAdapter.GroupViewHolder> {
 
     private Context context;
     private List<String> winnersList;
@@ -31,7 +31,7 @@ public class NWinnersAdapter extends RecyclerView.Adapter<NWinnersAdapter.GroupV
         }
     }
 
-    public NWinnersAdapter(Context context, List<String> winnersList) {
+    public RandomWinnersAdapter(Context context, List<String> winnersList) {
         this.context = context;
         this.winnersList = winnersList;
     }
@@ -52,7 +52,7 @@ public class NWinnersAdapter extends RecyclerView.Adapter<NWinnersAdapter.GroupV
     public void onBindViewHolder(GroupViewHolder holder, int position) {
         String winner = winnersList.get(position);
 
-        holder.number.setText(context.getString(R.string.nwinners_msg_result, position + 1));
+        holder.number.setText(context.getString(R.string.random_winners_msg_result, position + 1));
         holder.name.setText(winner);
     }
 
