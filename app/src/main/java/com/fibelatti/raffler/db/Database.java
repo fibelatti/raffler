@@ -10,15 +10,16 @@ import android.util.Log;
  * Created by fibelatti on 01/08/16.
  */
 public class Database {
-    private static final String TAG = Database.class.getSimpleName();
+    public static final String TAG = Database.class.getSimpleName();
+
     private static final String DATABASE_NAME = "com.fibelatti.raffler.db";
     private static final int DATABASE_VERSION = 2;
     private DatabaseHelper dbHelper;
     private final Context context;
 
-    public static GroupDao groupDao;
-    public static GroupItemDao groupItemDao;
-    public static SettingsDao settingsDao;
+    public static IGroupDao groupDao;
+    public static IGroupItemDao groupItemDao;
+    public static ISettingsDao settingsDao;
 
     public Database open() throws SQLException {
         dbHelper = new DatabaseHelper(context);
@@ -38,7 +39,6 @@ public class Database {
     public Database(Context context) {
         this.context = context;
     }
-
 
     private static class DatabaseHelper extends SQLiteOpenHelper {
         DatabaseHelper(Context context) {
