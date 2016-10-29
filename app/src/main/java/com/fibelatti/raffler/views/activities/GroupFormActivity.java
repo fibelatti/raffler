@@ -43,6 +43,7 @@ public class GroupFormActivity
     private GroupAdapter adapter;
     private int initialItemCount;
 
+    //region layout bindings
     @BindView(R.id.coordinator_layout)
     CoordinatorLayout layout;
     @BindView(R.id.toolbar)
@@ -59,6 +60,7 @@ public class GroupFormActivity
     TextInputLayout groupItemNameLayout;
     @BindView(R.id.btn_add_item)
     ImageButton buttonAddItem;
+    //endregion
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,6 +71,9 @@ public class GroupFormActivity
         adapter = new GroupAdapter(this, group.getItems());
 
         setUpLayout();
+        setUpTitle();
+        setUpRecyclerView();
+        setUpAddButton();
         setValues();
     }
 
@@ -107,10 +112,6 @@ public class GroupFormActivity
 
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
-        setUpTitle();
-        setUpRecyclerView();
-        setUpAddButton();
     }
 
     private void setUpTitle() {

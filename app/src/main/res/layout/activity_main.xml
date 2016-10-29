@@ -48,6 +48,7 @@
             android:weightSum="2">
 
             <Button
+                android:id="@+id/button_quick_decision_one"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -55,6 +56,7 @@
                 android:theme="@style/QuickDecisionButton" />
 
             <Button
+                android:id="@+id/button_quick_decision_two"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"

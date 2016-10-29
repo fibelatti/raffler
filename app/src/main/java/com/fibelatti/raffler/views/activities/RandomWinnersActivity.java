@@ -34,6 +34,7 @@ public class RandomWinnersActivity
     private RandomWinnersAdapter adapter;
     private ArrayList<String> winners = new ArrayList<>();
 
+    //region layout bindings
     @BindView(R.id.coordinator_layout)
     CoordinatorLayout layout;
     @BindView(R.id.toolbar)
@@ -46,6 +47,7 @@ public class RandomWinnersActivity
     TextInputLayout winnersQuantityLayout;
     @BindView(R.id.btn_raffle_winners)
     ImageButton buttonRaffleWinners;
+    //endregion
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +58,8 @@ public class RandomWinnersActivity
         adapter = new RandomWinnersAdapter(this, winners);
 
         setUpLayout();
+        setUpRecyclerView();
+        setUpRaffleButton();
         setValues();
     }
 
@@ -76,9 +80,6 @@ public class RandomWinnersActivity
 
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
-        setUpRecyclerView();
-        setUpRaffleButton();
     }
 
     private void setUpRecyclerView() {

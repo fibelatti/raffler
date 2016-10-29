@@ -24,6 +24,7 @@ public class RouletteActivity
     private Group group;
     private RouletteHelper rouletteHelper;
 
+    //region layout bindings
     @BindView(R.id.coordinator_layout)
     CoordinatorLayout layout;
     @BindView(R.id.toolbar)
@@ -32,6 +33,7 @@ public class RouletteActivity
     TextSwitcher textSwitcher;
     @BindView(R.id.fab)
     FloatingActionButton fab;
+    //endregion
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +43,7 @@ public class RouletteActivity
         group = fetchDataFromIntent();
 
         setUpLayout();
+        setUpFab();
         setValues();
 
         rouletteHelper = new RouletteHelper(this, group, textSwitcher, fab);
@@ -50,7 +53,6 @@ public class RouletteActivity
     @Override
     protected void onStop() {
         super.onStop();
-
         rouletteHelper.stopMusic();
     }
 
@@ -71,8 +73,6 @@ public class RouletteActivity
 
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
-        setUpFab();
     }
 
 
