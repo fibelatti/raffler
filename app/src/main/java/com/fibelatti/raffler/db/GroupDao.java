@@ -14,7 +14,8 @@ import java.util.List;
 /**
  * Created by fibelatti on 01/08/16.
  */
-public class GroupDao extends DbContentProvider
+public class GroupDao
+        extends DbContentProvider
         implements IGroupSchema, IGroupDao {
 
     private Cursor cursor;
@@ -98,7 +99,7 @@ public class GroupDao extends DbContentProvider
 
     @Override
     public boolean deleteGroup(Group group) {
-        final String selectionArgs[] = { String.valueOf(group.getId()) };
+        final String selectionArgs[] = {String.valueOf(group.getId())};
         final String selection = GROUPS_COLUMN_ID + " = ?";
 
         return super.delete(GROUPS_TABLE, selection, selectionArgs) > 0;

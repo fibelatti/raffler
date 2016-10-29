@@ -7,7 +7,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-public class Group implements Serializable {
+public class Group
+        implements Serializable {
     private Long id;
     private String name;
     private List<GroupItem> items;

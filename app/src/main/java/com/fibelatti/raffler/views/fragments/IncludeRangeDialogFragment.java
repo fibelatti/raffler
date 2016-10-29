@@ -14,7 +14,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.fibelatti.raffler.R;
-import com.fibelatti.raffler.views.utils.StringHelper;
+import com.fibelatti.raffler.utils.StringUtils;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -22,13 +22,11 @@ import butterknife.ButterKnife;
 /**
  * Created by fibelatti on 16/08/16.
  */
-public class IncludeRangeDialogFragment extends DialogFragment {
-    public interface IncludeRangeListener {
-        void includeRangeCallback(int initialValue, int finalValue);
-    }
+public class IncludeRangeDialogFragment
+        extends DialogFragment {
 
     private Context context;
-    private IncludeRangeListener listener;
+    private IIncludeRangeListener listener;
 
     @BindView(R.id.input_initial_number)
     EditText initialNumber;
@@ -88,7 +86,7 @@ public class IncludeRangeDialogFragment extends DialogFragment {
     public void onAttach(Context context) {
         super.onAttach(context);
         try {
-            listener = (IncludeRangeListener) context;
+            listener = (IIncludeRangeListener) context;
         } catch (ClassCastException castException) {
             /** The activity does not implement the listener. */
         }
@@ -99,7 +97,7 @@ public class IncludeRangeDialogFragment extends DialogFragment {
     }
 
     private boolean validateInitialNumber() {
-        if (StringHelper.isNullOrEmpty(initialNumber.getText().toString())) {
+        if (StringUtils.isNullOrEmpty(initialNumber.getText().toString())) {
             initialNumberLayout.setError(getString(R.string.group_form_msg_validate_initial_number));
             requestFocus(initialNumber);
             return false;
@@ -115,7 +113,7 @@ public class IncludeRangeDialogFragment extends DialogFragment {
         String initialNumberValue = initialNumber.getText().toString();
         String finalNumberValue = finalNumber.getText().toString();
 
-        if (StringHelper.isNullOrEmpty(finalNumberValue)) {
+        if (StringUtils.isNullOrEmpty(finalNumberValue)) {
             finalNumberLayout.setError(getString(R.string.group_form_msg_validate_final_number_empty));
             requestFocus(finalNumber);
             return false;

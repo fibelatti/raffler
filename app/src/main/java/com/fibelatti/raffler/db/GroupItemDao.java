@@ -15,7 +15,8 @@ import java.util.List;
 /**
  * Created by fibelatti on 01/08/16.
  */
-public class GroupItemDao extends DbContentProvider
+public class GroupItemDao
+        extends DbContentProvider
         implements IGroupItemSchema, IGroupItemDao {
 
     private Cursor cursor;

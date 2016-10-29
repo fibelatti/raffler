@@ -11,14 +11,15 @@ import android.widget.TextSwitcher;
 
 import com.fibelatti.raffler.R;
 import com.fibelatti.raffler.models.Group;
-import com.fibelatti.raffler.views.utils.Constants;
-import com.fibelatti.raffler.views.utils.RouletteHelper;
+import com.fibelatti.raffler.Constants;
+import com.fibelatti.raffler.helpers.RouletteHelper;
 import com.github.clans.fab.FloatingActionButton;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class RouletteActivity extends BaseActivity {
+public class RouletteActivity
+        extends BaseActivity {
     private Context context;
     private Group group;
     private RouletteHelper rouletteHelper;

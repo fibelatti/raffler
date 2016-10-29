@@ -18,9 +18,9 @@ import com.fibelatti.raffler.R;
 import com.fibelatti.raffler.models.Group;
 import com.fibelatti.raffler.models.GroupItem;
 import com.fibelatti.raffler.views.adapters.SubGroupsAdapter;
-import com.fibelatti.raffler.views.utils.Constants;
-import com.fibelatti.raffler.views.utils.RandomizeHelper;
-import com.fibelatti.raffler.views.utils.StringHelper;
+import com.fibelatti.raffler.Constants;
+import com.fibelatti.raffler.utils.RandomizeUtils;
+import com.fibelatti.raffler.utils.StringUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,7 +28,8 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class SubGroupsActivity extends BaseActivity {
+public class SubGroupsActivity
+        extends BaseActivity {
     private Context context;
     private Group group;
     private SubGroupsAdapter adapter;
@@ -108,7 +109,7 @@ public class SubGroupsActivity extends BaseActivity {
         if (validateQuantity()) {
             int quantity = Integer.valueOf(subgroupsQuantity.getText().toString());
             int subgroupIndex = 0;
-            List<Integer> randomizedIndex = RandomizeHelper.getRandomIndexesInRange(group.getItemsCount(), group.getItemsCount());
+            List<Integer> randomizedIndex = RandomizeUtils.getRandomIndexesInRange(group.getItemsCount(), group.getItemsCount());
 
             subgroups.clear();
 
@@ -136,7 +137,7 @@ public class SubGroupsActivity extends BaseActivity {
     }
 
     private boolean validateQuantity() {
-        if (StringHelper.isNullOrEmpty(subgroupsQuantity.getText().toString())) {
+        if (StringUtils.isNullOrEmpty(subgroupsQuantity.getText().toString())) {
             subgroupsQuantityLayout.setError(getString(R.string.subgroups_msg_validate_quantity_empty));
             requestFocus(subgroupsQuantity);
             return false;

@@ -1,4 +1,4 @@
-package com.fibelatti.raffler.views.utils;
+package com.fibelatti.raffler;
 
 public interface Constants {
 

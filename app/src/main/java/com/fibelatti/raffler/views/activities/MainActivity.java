@@ -18,10 +18,11 @@ import android.widget.TextView;
 import com.fibelatti.raffler.R;
 import com.fibelatti.raffler.db.Database;
 import com.fibelatti.raffler.models.Group;
+import com.fibelatti.raffler.views.Navigator;
 import com.fibelatti.raffler.views.adapters.MainAdapter;
 import com.fibelatti.raffler.views.extensions.RecyclerTouchListener;
 import com.fibelatti.raffler.views.extensions.RecyclerTouchListener.OnItemClickListener;
-import com.fibelatti.raffler.views.utils.Constants;
+import com.fibelatti.raffler.Constants;
 import com.github.clans.fab.FloatingActionButton;
 
 import java.util.List;
@@ -29,8 +30,11 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class MainActivity extends BaseActivity {
+public class MainActivity
+        extends BaseActivity {
     private Context context;
+    private Navigator navigator;
+
     private List<Group> groupList;
     private MainAdapter adapter;
 
@@ -50,6 +54,7 @@ public class MainActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
 
         context = getApplicationContext();
+        navigator = new Navigator(this);
         groupList = Database.groupDao.fetchAllGroups();
         adapter = new MainAdapter(this, groupList);
 
@@ -87,7 +92,7 @@ public class MainActivity extends BaseActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_settings:
-                startSettingsActivity();
+                navigator.startSettingsActivity();
                 return true;
         }
 
@@ -113,7 +118,7 @@ public class MainActivity extends BaseActivity {
             @Override
             public void onItemTouch(View view, int position) {
                 Group group = groupList.get(position);
-                startGroupActivity(group);
+                navigator.startGroupActivity(group);
             }
         }));
     }
@@ -122,7 +127,7 @@ public class MainActivity extends BaseActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startGroupFormActivity();
+                navigator.startGroupFormActivity();
             }
         });
 
@@ -144,22 +149,5 @@ public class MainActivity extends BaseActivity {
         groupList.clear();
         groupList.addAll(Database.groupDao.fetchAllGroups());
         adapter.notifyDataSetChanged();
-    }
-
-    private void startGroupActivity(Group group) {
-        Intent intent = new Intent(this, GroupActivity.class);
-        intent.putExtra(Constants.INTENT_EXTRA_GROUP, group);
-        startActivityForResult(intent, Constants.REQUEST_CODE_GROUP_ACTION);
-    }
-
-    private void startGroupFormActivity() {
-        Intent intent = new Intent(this, GroupFormActivity.class);
-        intent.putExtra(Constants.INTENT_EXTRA_GROUP, new Group());
-        startActivityForResult(intent, Constants.REQUEST_CODE_GROUP_ACTION);
-    }
-
-    private void startSettingsActivity() {
-        Intent intent = new Intent(this, SettingsActivity.class);
-        startActivity(intent);
     }
 }

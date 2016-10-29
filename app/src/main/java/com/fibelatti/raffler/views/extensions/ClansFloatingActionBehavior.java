@@ -14,19 +14,20 @@ import java.util.List;
 
 /**
  * Created by fibelatti on 12/08/2016.
- *
+ * <p/>
  * Inspired by the work of Matteo (https://gist.github.com/mmazzarolo/7cf95a345bd8a59c0722)
- *
+ * <p/>
  * Floating Action Menu Behavior for Clans.FloatingActionButton
  * https://github.com/Clans/FloatingActionButton/
- *
+ * <p/>
  * Use this behavior as your app:layout_behavior attribute in your Floating Action Button or
  * Floating Action Menu to use the them in a Coordinator Layout.
- *
+ * <p/>
  * Remember to use the correct namespace for the fab:
  * xmlns:fab="http://schemas.android.com/apk/res-auto"
  */
-public class ClansFloatingActionBehavior extends CoordinatorLayout.Behavior {
+public class ClansFloatingActionBehavior
+        extends CoordinatorLayout.Behavior {
     private float mTranslationY;
 
     public ClansFloatingActionBehavior(Context context, AttributeSet attrs) {

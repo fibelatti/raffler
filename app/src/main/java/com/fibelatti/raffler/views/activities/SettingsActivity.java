@@ -13,12 +13,13 @@ import android.widget.TextView;
 
 import com.fibelatti.raffler.R;
 import com.fibelatti.raffler.db.Database;
-import com.fibelatti.raffler.views.utils.AlertDialogHelper;
+import com.fibelatti.raffler.helpers.AlertDialogHelper;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class SettingsActivity extends BaseActivity {
+public class SettingsActivity
+        extends BaseActivity {
     private Context context;
 
     private AlertDialogHelper dialogHelper;

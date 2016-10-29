@@ -17,9 +17,9 @@ import android.widget.ImageButton;
 import com.fibelatti.raffler.R;
 import com.fibelatti.raffler.models.Group;
 import com.fibelatti.raffler.views.adapters.RandomWinnersAdapter;
-import com.fibelatti.raffler.views.utils.Constants;
-import com.fibelatti.raffler.views.utils.RandomizeHelper;
-import com.fibelatti.raffler.views.utils.StringHelper;
+import com.fibelatti.raffler.Constants;
+import com.fibelatti.raffler.utils.RandomizeUtils;
+import com.fibelatti.raffler.utils.StringUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,7 +27,8 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class RandomWinnersActivity extends BaseActivity {
+public class RandomWinnersActivity
+        extends BaseActivity {
     private Context context;
     private Group group;
     private RandomWinnersAdapter adapter;
@@ -106,7 +107,7 @@ public class RandomWinnersActivity extends BaseActivity {
     private void raffleWinners() {
         if (validateQuantity()) {
             int quantity = Integer.valueOf(winnersQuantity.getText().toString());
-            List<Integer> winnersIndex = RandomizeHelper.getRandomIndexesInRange(quantity, group.getItemsCount());
+            List<Integer> winnersIndex = RandomizeUtils.getRandomIndexesInRange(quantity, group.getItemsCount());
 
             winners.clear();
 
@@ -119,7 +120,7 @@ public class RandomWinnersActivity extends BaseActivity {
     }
 
     private boolean validateQuantity() {
-        if (StringHelper.isNullOrEmpty(winnersQuantity.getText().toString())) {
+        if (StringUtils.isNullOrEmpty(winnersQuantity.getText().toString())) {
             winnersQuantityLayout.setError(getString(R.string.subgroups_msg_validate_quantity_empty));
             requestFocus(winnersQuantity);
             return false;

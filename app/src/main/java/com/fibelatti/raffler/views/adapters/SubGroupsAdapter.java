@@ -16,12 +16,14 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class SubGroupsAdapter extends RecyclerView.Adapter<SubGroupsAdapter.GroupViewHolder> {
+public class SubGroupsAdapter
+        extends RecyclerView.Adapter<SubGroupsAdapter.GroupViewHolder> {
 
     private Context context;
     private List<Group> subgroupsList;
 
-    public class GroupViewHolder extends RecyclerView.ViewHolder {
+    public class GroupViewHolder
+            extends RecyclerView.ViewHolder {
         @BindView(R.id.name)
         public TextView name;
         @BindView(R.id.items)
