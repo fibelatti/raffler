@@ -164,7 +164,11 @@ public class GroupFormActivity extends BaseActivity
             return new FileHelper(context).readFromFile(intent.getData());
         }
 
-        return (Group) intent.getSerializableExtra(Constants.INTENT_EXTRA_GROUP);
+        if (intent.hasExtra(Constants.INTENT_EXTRA_GROUP)) {
+            return (Group) intent.getSerializableExtra(Constants.INTENT_EXTRA_GROUP);
+        } else {
+            return new Group();
+        }
     }
 
     private void addItem() {

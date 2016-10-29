@@ -21,6 +21,7 @@ import com.fibelatti.raffler.R;
 import com.fibelatti.raffler.db.Database;
 import com.fibelatti.raffler.models.Group;
 import com.fibelatti.raffler.models.GroupItem;
+import com.fibelatti.raffler.views.Navigator;
 import com.fibelatti.raffler.views.adapters.GroupAdapter;
 import com.fibelatti.raffler.views.extensions.DividerItemDecoration;
 import com.fibelatti.raffler.views.extensions.GroupItemCheckStateChangedEvent;
@@ -39,6 +40,8 @@ import butterknife.ButterKnife;
 
 public class GroupActivity extends BaseActivity {
     private Context context;
+    private Navigator navigator;
+
     private Group group;
     private GroupAdapter adapter;
 
@@ -64,6 +67,8 @@ public class GroupActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
 
         context = getApplicationContext();
+        navigator = new Navigator(this);
+
         group = fetchDataFromIntent();
         adapter = new GroupAdapter(this, group.getItems());
 
@@ -107,7 +112,7 @@ public class GroupActivity extends BaseActivity {
                 adapter.uncheckAllItems();
                 return true;
             case R.id.action_edit:
-                editGroup();
+                navigator.startGroupFormActivity(group);
                 return true;
             case R.id.action_delete:
                 deleteGroup();
@@ -158,7 +163,7 @@ public class GroupActivity extends BaseActivity {
                     Group newGroup = new Group();
                     newGroup.setItems(adapter.getSelectedItems());
                     adapter.clearSelectedItems();
-                    startRouletteActivity(newGroup);
+                    navigator.startRouletteActivity(newGroup);
                 }
             }
         });
@@ -170,7 +175,7 @@ public class GroupActivity extends BaseActivity {
                     Group newGroup = new Group();
                     newGroup.setItems(adapter.getSelectedItems());
                     adapter.clearSelectedItems();
-                    startNWinnersActivity(newGroup);
+                    navigator.startRandomWinnersActivity(newGroup);
                 }
             }
         });
@@ -182,7 +187,7 @@ public class GroupActivity extends BaseActivity {
                     Group newGroup = new Group();
                     newGroup.setItems(adapter.getSelectedItems());
                     adapter.clearSelectedItems();
-                    startSubGroupsActivity(newGroup);
+                    navigator.startSubGroupsActivity(newGroup);
                 }
             }
         });
@@ -209,12 +214,6 @@ public class GroupActivity extends BaseActivity {
                 null);
     }
 
-    private void editGroup() {
-        Intent intent = new Intent(this, GroupFormActivity.class);
-        intent.putExtra(Constants.INTENT_EXTRA_GROUP, group);
-        startActivity(intent);
-    }
-
     private void deleteGroup() {
         dialogHelper.createYesNoDialog(getString(R.string.group_dialog_title_delete),
                 getString(R.string.group_dialog_msg_delete),
@@ -239,24 +238,6 @@ public class GroupActivity extends BaseActivity {
         }
 
         return true;
-    }
-
-    private void startRouletteActivity(Group group) {
-        Intent intent = new Intent(this, RouletteActivity.class);
-        intent.putExtra(Constants.INTENT_EXTRA_GROUP, group);
-        startActivity(intent);
-    }
-
-    private void startNWinnersActivity(Group group) {
-        Intent intent = new Intent(this, RandomWinnersActivity.class);
-        intent.putExtra(Constants.INTENT_EXTRA_GROUP, group);
-        startActivity(intent);
-    }
-
-    private void startSubGroupsActivity(Group group) {
-        Intent intent = new Intent(this, SubGroupsActivity.class);
-        intent.putExtra(Constants.INTENT_EXTRA_GROUP, group);
-        startActivity(intent);
     }
 
     private void shareGroup(Group group) {
