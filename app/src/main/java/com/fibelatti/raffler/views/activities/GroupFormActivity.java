@@ -39,7 +39,7 @@ import butterknife.ButterKnife;
 
 public class GroupFormActivity
         extends BaseActivity
-        implements IncludeRangeDialogFragment.IncludeRangeListener {
+        implements IncludeRangeDialogFragment.IIncludeRangeListener {
     private Context context;
     private Group group;
     private GroupAdapter adapter;

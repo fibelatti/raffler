@@ -25,12 +25,8 @@ import butterknife.ButterKnife;
 public class IncludeRangeDialogFragment
         extends DialogFragment {
 
-    public interface IncludeRangeListener {
-        void includeRangeCallback(int initialValue, int finalValue);
-    }
-
     private Context context;
-    private IncludeRangeListener listener;
+    private IIncludeRangeListener listener;
 
     @BindView(R.id.input_initial_number)
     EditText initialNumber;
@@ -90,7 +86,7 @@ public class IncludeRangeDialogFragment
     public void onAttach(Context context) {
         super.onAttach(context);
         try {
-            listener = (IncludeRangeListener) context;
+            listener = (IIncludeRangeListener) context;
         } catch (ClassCastException castException) {
             /** The activity does not implement the listener. */
         }
