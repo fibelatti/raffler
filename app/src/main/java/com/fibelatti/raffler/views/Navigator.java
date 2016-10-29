@@ -26,7 +26,7 @@ public class Navigator {
     }
 
     public void startGroupFormActivity() {
-        startGroupActivity(null);
+        startGroupFormActivity(null);
     }
 
     public void startGroupFormActivity(Group group) {
