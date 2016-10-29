@@ -9,7 +9,8 @@ import android.util.Log;
 /**
  * Created by fibelatti on 13/08/16.
  */
-public class SettingsDao extends DbContentProvider
+public class SettingsDao
+        extends DbContentProvider
         implements ISettingsSchema, ISettingsDao {
 
     private Cursor cursor;

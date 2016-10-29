@@ -22,7 +22,9 @@ import butterknife.ButterKnife;
 /**
  * Created by fibelatti on 16/08/16.
  */
-public class IncludeRangeDialogFragment extends DialogFragment {
+public class IncludeRangeDialogFragment
+        extends DialogFragment {
+
     public interface IncludeRangeListener {
         void includeRangeCallback(int initialValue, int finalValue);
     }

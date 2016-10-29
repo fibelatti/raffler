@@ -38,7 +38,8 @@ import java.io.File;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class GroupActivity extends BaseActivity {
+public class GroupActivity
+        extends BaseActivity {
     private Context context;
     private Navigator navigator;
 

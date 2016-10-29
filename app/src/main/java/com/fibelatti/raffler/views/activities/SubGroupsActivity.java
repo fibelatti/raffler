@@ -28,7 +28,8 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class SubGroupsActivity extends BaseActivity {
+public class SubGroupsActivity
+        extends BaseActivity {
     private Context context;
     private Group group;
     private SubGroupsAdapter adapter;

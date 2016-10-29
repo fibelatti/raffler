@@ -37,7 +37,8 @@ import com.fibelatti.raffler.utils.StringUtils;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class GroupFormActivity extends BaseActivity
+public class GroupFormActivity
+        extends BaseActivity
         implements IncludeRangeDialogFragment.IncludeRangeListener {
     private Context context;
     private Group group;

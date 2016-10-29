@@ -18,7 +18,8 @@ import com.fibelatti.raffler.helpers.AlertDialogHelper;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class SettingsActivity extends BaseActivity {
+public class SettingsActivity
+        extends BaseActivity {
     private Context context;
 
     private AlertDialogHelper dialogHelper;

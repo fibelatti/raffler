@@ -14,12 +14,14 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class RandomWinnersAdapter extends RecyclerView.Adapter<RandomWinnersAdapter.GroupViewHolder> {
+public class RandomWinnersAdapter
+        extends RecyclerView.Adapter<RandomWinnersAdapter.GroupViewHolder> {
 
     private Context context;
     private List<String> winnersList;
 
-    public class GroupViewHolder extends RecyclerView.ViewHolder {
+    public class GroupViewHolder
+            extends RecyclerView.ViewHolder {
         @BindView(R.id.number)
         public TextView number;
         @BindView(R.id.name)

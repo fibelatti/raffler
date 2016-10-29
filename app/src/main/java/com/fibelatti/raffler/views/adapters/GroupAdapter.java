@@ -22,13 +22,15 @@ import java.util.Set;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class GroupAdapter extends RecyclerView.Adapter<GroupAdapter.GroupItemViewHolder> {
+public class GroupAdapter
+        extends RecyclerView.Adapter<GroupAdapter.GroupItemViewHolder> {
 
     private Context context;
     private List<GroupItem> groupItems;
     private Set<GroupItem> selectedItems = new HashSet<>();
 
-    public class GroupItemViewHolder extends RecyclerView.ViewHolder {
+    public class GroupItemViewHolder
+            extends RecyclerView.ViewHolder {
         @BindView(R.id.name)
         public TextView itemName;
         @BindView(R.id.chk_selected)
@@ -89,7 +91,7 @@ public class GroupAdapter extends RecyclerView.Adapter<GroupAdapter.GroupItemVie
     }
 
     @Subscribe
-    public void onGroupItemCheckStateChangedEvent(GroupItemCheckStateChangedEvent event){
+    public void onGroupItemCheckStateChangedEvent(GroupItemCheckStateChangedEvent event) {
         if (event.isChecked) {
             selectedItems.add(event.groupItem);
         } else {

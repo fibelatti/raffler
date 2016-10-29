@@ -8,7 +8,8 @@ import com.fibelatti.raffler.db.Database;
 
 import io.fabric.sdk.android.Fabric;
 
-public class RafflerApplication extends Application {
+public class RafflerApplication
+        extends Application {
     public static final String TAG = RafflerApplication.class.getSimpleName();
     public static RafflerApplication app;
     public static Database db;

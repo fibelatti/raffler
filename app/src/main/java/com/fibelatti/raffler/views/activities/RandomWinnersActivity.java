@@ -27,7 +27,8 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class RandomWinnersActivity extends BaseActivity {
+public class RandomWinnersActivity
+        extends BaseActivity {
     private Context context;
     private Group group;
     private RandomWinnersAdapter adapter;

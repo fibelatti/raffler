@@ -18,7 +18,8 @@ import com.github.clans.fab.FloatingActionButton;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class RouletteActivity extends BaseActivity {
+public class RouletteActivity
+        extends BaseActivity {
     private Context context;
     private Group group;
     private RouletteHelper rouletteHelper;

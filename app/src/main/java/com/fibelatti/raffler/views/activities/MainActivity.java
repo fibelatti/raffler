@@ -30,7 +30,8 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class MainActivity extends BaseActivity {
+public class MainActivity
+        extends BaseActivity {
     private Context context;
     private Navigator navigator;
 

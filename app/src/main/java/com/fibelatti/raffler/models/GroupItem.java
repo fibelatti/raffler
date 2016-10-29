@@ -2,7 +2,8 @@ package com.fibelatti.raffler.models;
 
 import java.io.Serializable;
 
-public class GroupItem implements Serializable {
+public class GroupItem
+        implements Serializable {
     private Long id;
     private Long groupId;
     private String name;
