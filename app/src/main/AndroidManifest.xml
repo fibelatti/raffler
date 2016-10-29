@@ -91,9 +91,9 @@
         </activity>
 
         <activity
-            android:name=".views.activities.NWinnersActivity"
+            android:name=".views.activities.RandomWinnersActivity"
             android:configChanges="orientation"
-            android:label="@string/label_nwinners_activity"
+            android:label="@string/label_random_winners_activity"
             android:parentActivityName=".views.activities.GroupActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
