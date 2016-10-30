@@ -8,9 +8,6 @@ import android.util.Log;
 
 import com.fibelatti.raffler.db.DbContentProvider;
 
-/**
- * Created by fibelatti on 13/08/16.
- */
 public class SettingsDao
         extends DbContentProvider
         implements ISettingsSchema, ISettingsDao {

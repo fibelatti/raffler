@@ -16,9 +16,6 @@ import com.fibelatti.raffler.db.Settings.ISettingsDao;
 import com.fibelatti.raffler.db.Settings.ISettingsSchema;
 import com.fibelatti.raffler.db.Settings.SettingsDao;
 
-/**
- * Created by fibelatti on 01/08/16.
- */
 public class Database {
     public static final String TAG = Database.class.getSimpleName();
 

@@ -8,9 +8,6 @@ import android.widget.Button;
 
 import com.fibelatti.raffler.R;
 
-/**
- * Created by fibelatti on 03/08/16.
- */
 public class AlertDialogHelper {
     private Context context;
 

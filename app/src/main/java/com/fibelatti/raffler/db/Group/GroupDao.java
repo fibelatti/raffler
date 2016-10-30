@@ -13,9 +13,6 @@ import com.fibelatti.raffler.models.Group;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by fibelatti on 01/08/16.
- */
 public class GroupDao
         extends DbContentProvider
         implements IGroupSchema, IGroupDao {

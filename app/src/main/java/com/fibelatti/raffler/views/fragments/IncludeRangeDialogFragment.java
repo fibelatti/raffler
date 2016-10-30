@@ -19,9 +19,6 @@ import com.fibelatti.raffler.utils.StringUtils;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-/**
- * Created by fibelatti on 16/08/16.
- */
 public class IncludeRangeDialogFragment
         extends DialogFragment {
 

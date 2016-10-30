@@ -1,8 +1,5 @@
 package com.fibelatti.raffler.db.Settings;
 
-/**
- * Created by fibelatti on 13/08/16.
- */
 public interface ISettingsSchema {
     String SETTINGS_TABLE = "settings";
     String SETTINGS_COLUMN_ROULETTE_MUSIC_ENABLED = "roulette_music_enabled";

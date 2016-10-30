@@ -21,9 +21,6 @@ import com.github.clans.fab.FloatingActionButton;
 
 import java.util.Random;
 
-/**
- * Created by fibelatti on 10/08/16.
- */
 public class RouletteHelper {
     private Context context;
     private Group group;
