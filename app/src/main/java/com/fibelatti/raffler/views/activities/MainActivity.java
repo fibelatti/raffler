@@ -13,17 +13,16 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.AnimationUtils;
-import android.widget.RelativeLayout;
+import android.widget.Button;
 import android.widget.TextView;
 
+import com.fibelatti.raffler.Constants;
 import com.fibelatti.raffler.R;
 import com.fibelatti.raffler.db.Database;
 import com.fibelatti.raffler.models.Group;
 import com.fibelatti.raffler.views.Navigator;
 import com.fibelatti.raffler.views.adapters.MainAdapter;
 import com.fibelatti.raffler.views.extensions.RecyclerTouchListener;
-import com.fibelatti.raffler.views.extensions.RecyclerTouchListener.OnItemClickListener;
-import com.fibelatti.raffler.Constants;
 import com.github.clans.fab.FloatingActionButton;
 
 import java.util.List;
@@ -39,18 +38,22 @@ public class MainActivity
     private List<Group> groupList;
     private MainAdapter adapter;
 
+    //region layout bindings
     @BindView(R.id.coordinator_layout)
     CoordinatorLayout layout;
     @BindView(R.id.toolbar)
     Toolbar toolbar;
+    @BindView(R.id.button_quick_decision_one)
+    Button quickDecisionOne;
+    @BindView(R.id.button_quick_decision_two)
+    Button quickDecisionTwo;
     @BindView(R.id.placeholder)
     TextView placeholder;
-    @BindView(R.id.layout_content)
-    RelativeLayout layoutContent;
     @BindView(R.id.recycler_view)
     RecyclerView recyclerView;
     @BindView(R.id.fab)
     FloatingActionButton fab;
+    //endregion
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,6 +65,8 @@ public class MainActivity
         adapter = new MainAdapter(this, groupList);
 
         setUpLayout();
+        setUpRecyclerView();
+        setUpFab();
     }
 
     @Override
@@ -105,19 +110,14 @@ public class MainActivity
     private void setUpLayout() {
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
-
         setSupportActionBar(toolbar);
-
-        setUpRecyclerView();
-        setUpFab();
     }
 
     private void setUpRecyclerView() {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(adapter);
-
-        recyclerView.addOnItemTouchListener(new RecyclerTouchListener(this, new OnItemClickListener() {
+        recyclerView.addOnItemTouchListener(new RecyclerTouchListener(this, new RecyclerTouchListener.OnItemTouchListener() {
             @Override
             public void onItemTouch(View view, int position) {
                 Group group = groupList.get(position);
@@ -133,7 +133,6 @@ public class MainActivity
                 navigator.startGroupFormActivity();
             }
         });
-
         fab.setShowAnimation(AnimationUtils.loadAnimation(this, R.anim.show_from_bottom));
         fab.setHideAnimation(AnimationUtils.loadAnimation(this, R.anim.hide_to_bottom));
     }

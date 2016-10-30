@@ -31,6 +31,7 @@ import com.fibelatti.raffler.models.Group;
 import com.fibelatti.raffler.views.Navigator;
 import com.fibelatti.raffler.views.adapters.GroupAdapter;
 import com.fibelatti.raffler.views.extensions.DividerItemDecoration;
+import com.fibelatti.raffler.views.extensions.RecyclerTouchListener;
 import com.github.clans.fab.FloatingActionButton;
 import com.github.clans.fab.FloatingActionMenu;
 
@@ -139,6 +140,12 @@ public class GroupActivity
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
         recyclerView.setAdapter(adapter);
+        recyclerView.addOnItemTouchListener(new RecyclerTouchListener(this, new RecyclerTouchListener.OnItemTouchListener() {
+            @Override
+            public void onItemTouch(View view, int position) {
+                adapter.toggleSelected(position);
+            }
+        }));
     }
 
     private void setUpFab() {

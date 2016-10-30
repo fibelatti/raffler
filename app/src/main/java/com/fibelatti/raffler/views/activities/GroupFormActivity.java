@@ -29,6 +29,7 @@ import com.fibelatti.raffler.models.GroupItem;
 import com.fibelatti.raffler.utils.StringUtils;
 import com.fibelatti.raffler.views.adapters.GroupAdapter;
 import com.fibelatti.raffler.views.extensions.DividerItemDecoration;
+import com.fibelatti.raffler.views.extensions.RecyclerTouchListener;
 import com.fibelatti.raffler.views.fragments.IIncludeRangeListener;
 import com.fibelatti.raffler.views.fragments.IncludeRangeDialogFragment;
 
@@ -127,6 +128,12 @@ public class GroupFormActivity
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
         recyclerView.setAdapter(adapter);
+        recyclerView.addOnItemTouchListener(new RecyclerTouchListener(this, new RecyclerTouchListener.OnItemTouchListener() {
+            @Override
+            public void onItemTouch(View view, int position) {
+                adapter.toggleSelected(position);
+            }
+        }));
     }
 
     private void setUpAddButton() {

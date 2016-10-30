@@ -9,13 +9,13 @@ import android.view.View;
 public class RecyclerTouchListener
         implements RecyclerView.OnItemTouchListener {
     private GestureDetector gestureDetector;
-    private OnItemClickListener listener;
+    private OnItemTouchListener listener;
 
-    public interface OnItemClickListener {
+    public interface OnItemTouchListener {
         void onItemTouch(View view, int position);
     }
 
-    public RecyclerTouchListener(Context context, OnItemClickListener listener) {
+    public RecyclerTouchListener(Context context, OnItemTouchListener listener) {
         this.listener = listener;
         gestureDetector = new GestureDetector(context, new GestureDetector.SimpleOnGestureListener() {
             @Override
@@ -27,7 +27,6 @@ public class RecyclerTouchListener
 
     @Override
     public boolean onInterceptTouchEvent(RecyclerView rv, MotionEvent e) {
-
         View childView = rv.findChildViewUnder(e.getX(), e.getY());
         if (childView != null && listener != null && gestureDetector.onTouchEvent(e)) {
             listener.onItemTouch(childView, rv.getChildAdapterPosition(childView));
@@ -41,6 +40,5 @@ public class RecyclerTouchListener
 
     @Override
     public void onRequestDisallowInterceptTouchEvent(boolean disallowIntercept) {
-
     }
 }
