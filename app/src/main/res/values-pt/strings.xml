@@ -9,12 +9,19 @@
     <!-- MainActivity -->
     <string name="main_action_settings">Configurações</string>
 
-    <string name="main_hint_placeholder">Precisa de ajuda para escolher entre tantas opções?
-        \n\nUse o Raffler! para criar grupos de opções e fazer suas escolhas de forma aleatória.</string>
+    <string name="main_hint_placeholder">
+        Nenhum grupo :(
+        \n\nSe você tem dúvidas de que opção escolher, use o Raffler! para criar grupos e te ajudar na decisão de forma aleatória, seja escolhendo uma, várias ou formar pequenos grupos com as opções.</string>
     <plurals name="main_hint_group_items_quantity">
         <item quantity="one">%d item</item>
         <item quantity="other">%d itens</item>
     </plurals>
+
+    <string name="main_section_title_quick_decisions">Decisões rápidas</string>
+    <string name="main_section_title_my_groups">Meus grupos</string>
+
+    <string name="main_button_yes_or_no">Sim ou Não</string>
+    <string name="main_button_throw_coin">Jogar uma moeda</string>
 
     <!-- GroupActivity -->
     <string name="group_hint_header">Escolha quais itens incluir nesse sorteio marcando suas caixas de seleção. Use as opções do menu para seleção em massa.</string>

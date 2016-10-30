@@ -4,6 +4,7 @@
     <string name="file_provider_authority" translatable="false">com.fibelatti.raffler.fileprovider</string>
 
     <!-- Labels -->
+    <string name="label_quick_decision_result_activity" translatable="false">QuickDecisionResultActivity</string>
     <string name="label_group_activity" translatable="false">GroupActivity</string>
     <string name="label_group_form_activity" translatable="false">GroupFormActivity</string>
     <string name="label_roulette_activity" translatable="false">RouletteActivity</string>
@@ -21,12 +22,19 @@
     <!-- MainActivity -->
     <string name="main_action_settings">Settings</string>
 
-    <string name="main_hint_placeholder">Do you need help deciding which option to choose?
-        \n\nUse Raffler! to create groups of options to help you pick one (or many!) randomly. You can also use it to form smaller groups among your options.</string>
+    <string name="main_hint_placeholder">
+        No groups yet :(
+        \n\nIf you\'re ever in doubt of which option to choose, use Raffler! to create groups and help you deciding randomly, from a single option to smaller groups.</string>
     <plurals name="main_hint_group_items_quantity">
         <item quantity="one">1 item</item>
         <item quantity="other">%d items</item>
     </plurals>
+
+    <string name="main_section_title_quick_decisions">Quick decisions</string>
+    <string name="main_section_title_my_groups">My groups</string>
+
+    <string name="main_button_yes_or_no">Yes or No</string>
+    <string name="main_button_throw_coin">Throw a coin</string>
 
     <!-- GroupActivity -->
     <string name="group_hint_header">Choose which items to include in this raffle by toggling their checkboxes. Bulk edit using the menu.</string>

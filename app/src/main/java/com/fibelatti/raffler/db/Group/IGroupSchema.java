@@ -1,8 +1,5 @@
-package com.fibelatti.raffler.db;
+package com.fibelatti.raffler.db.Group;
 
-/**
- * Created by fibelatti on 01/08/16.
- */
 public interface IGroupSchema {
     String GROUPS_TABLE = "groups";
     String GROUPS_COLUMN_ID = "_id";

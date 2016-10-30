@@ -1,8 +1,5 @@
-package com.fibelatti.raffler.db;
+package com.fibelatti.raffler.db.GroupItem;
 
-/**
- * Created by fibelatti on 01/08/16.
- */
 public interface IGroupItemSchema {
     String GROUP_ITEMS_TABLE = "group_items";
     String GROUP_ITEMS_COLUMN_ID = "_id";

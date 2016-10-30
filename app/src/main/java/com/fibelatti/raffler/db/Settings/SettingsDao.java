@@ -1,4 +1,4 @@
-package com.fibelatti.raffler.db;
+package com.fibelatti.raffler.db.Settings;
 
 import android.content.ContentValues;
 import android.database.Cursor;
@@ -6,9 +6,8 @@ import android.database.sqlite.SQLiteConstraintException;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
-/**
- * Created by fibelatti on 13/08/16.
- */
+import com.fibelatti.raffler.db.DbContentProvider;
+
 public class SettingsDao
         extends DbContentProvider
         implements ISettingsSchema, ISettingsDao {

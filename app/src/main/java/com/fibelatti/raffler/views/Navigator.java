@@ -5,8 +5,10 @@ import android.content.Intent;
 
 import com.fibelatti.raffler.Constants;
 import com.fibelatti.raffler.models.Group;
+import com.fibelatti.raffler.models.QuickDecision;
 import com.fibelatti.raffler.views.activities.GroupActivity;
 import com.fibelatti.raffler.views.activities.GroupFormActivity;
+import com.fibelatti.raffler.views.activities.QuickDecisionResultActivity;
 import com.fibelatti.raffler.views.activities.RandomWinnersActivity;
 import com.fibelatti.raffler.views.activities.RouletteActivity;
 import com.fibelatti.raffler.views.activities.SettingsActivity;
@@ -17,6 +19,12 @@ public class Navigator {
 
     public Navigator(Activity activity) {
         this.activity = activity;
+    }
+
+    public void startQuickDecisionResultActivity(QuickDecision quickDecision) {
+        Intent intent = new Intent(activity, QuickDecisionResultActivity.class);
+        intent.putExtra(Constants.INTENT_EXTRA_QUICK_DECISION, quickDecision);
+        activity.startActivity(intent);
     }
 
     public void startGroupActivity(Group group) {

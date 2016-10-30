@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:fab="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/coordinator_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    tools:context=".views.activities.MainActivity">
+
+    <TextView
+        android:id="@+id/text_result"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:padding="@dimen/padding_large"
+        android:textColor="@color/colorWhiteOpaque"
+        android:textSize="@dimen/quick_decision_result"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
+    <com.github.clans.fab.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|center"
+        android:layout_marginBottom="@dimen/fab_margin"
+        android:src="@drawable/ic_close_white_36dp"
+        fab:fab_colorNormal="@color/colorWhite"
+        fab:fab_colorPressed="@color/colorWhite"
+        fab:layout_behavior=".views.extensions.ClansFloatingActionBehavior" />
+
+</android.support.design.widget.CoordinatorLayout>

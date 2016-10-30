@@ -1,20 +1,18 @@
-package com.fibelatti.raffler.db;
+package com.fibelatti.raffler.db.GroupItem;
 
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteConstraintException;
 import android.database.sqlite.SQLiteDatabase;
-import android.util.Log;
 
+import com.crashlytics.android.Crashlytics;
+import com.fibelatti.raffler.db.DbContentProvider;
 import com.fibelatti.raffler.models.Group;
 import com.fibelatti.raffler.models.GroupItem;
 
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by fibelatti on 01/08/16.
- */
 public class GroupItemDao
         extends DbContentProvider
         implements IGroupItemSchema, IGroupItemDao {
@@ -80,8 +78,8 @@ public class GroupItemDao
         setContentValue(groupItem);
         try {
             return super.insert(GROUP_ITEMS_TABLE, getContentValue()) > 0;
-        } catch (SQLiteConstraintException ex) {
-            Log.w("Database", ex.getMessage());
+        } catch (SQLiteConstraintException e) {
+            Crashlytics.logException(e);
             return false;
         }
     }
@@ -93,8 +91,8 @@ public class GroupItemDao
 
         try {
             return super.update(GROUP_ITEMS_TABLE, getContentValue(), selection, selectionArgs) > 0;
-        } catch (SQLiteConstraintException ex) {
-            Log.w("Database", ex.getMessage());
+        } catch (SQLiteConstraintException e) {
+            Crashlytics.logException(e);
             return false;
         }
     }

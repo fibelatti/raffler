@@ -19,9 +19,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStreamWriter;
 
-/**
- * Created by fibelatti on 03/08/16.
- */
 public class FileHelper {
     private Context context;
 

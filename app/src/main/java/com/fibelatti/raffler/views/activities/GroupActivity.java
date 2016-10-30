@@ -31,6 +31,7 @@ import com.fibelatti.raffler.models.Group;
 import com.fibelatti.raffler.views.Navigator;
 import com.fibelatti.raffler.views.adapters.GroupAdapter;
 import com.fibelatti.raffler.views.extensions.DividerItemDecoration;
+import com.fibelatti.raffler.views.extensions.RecyclerTouchListener;
 import com.github.clans.fab.FloatingActionButton;
 import com.github.clans.fab.FloatingActionMenu;
 
@@ -49,6 +50,7 @@ public class GroupActivity
 
     private AlertDialogHelper dialogHelper;
 
+    //region layout bindings
     @BindView(R.id.coordinator_layout)
     CoordinatorLayout layout;
     @BindView(R.id.toolbar)
@@ -63,6 +65,7 @@ public class GroupActivity
     FloatingActionButton fab_list;
     @BindView(R.id.fab_group)
     FloatingActionButton fab_group;
+    //endregion
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,7 +80,9 @@ public class GroupActivity
         dialogHelper = new AlertDialogHelper(this);
 
         setUpLayout();
-        setValues();
+        setUpRecyclerView();
+        setUpFab();
+        setUpTitle();
     }
 
     @Override
@@ -128,9 +133,6 @@ public class GroupActivity
 
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
-        setUpRecyclerView();
-        setUpFab();
     }
 
     private void setUpRecyclerView() {
@@ -138,6 +140,12 @@ public class GroupActivity
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
         recyclerView.setAdapter(adapter);
+        recyclerView.addOnItemTouchListener(new RecyclerTouchListener(this, new RecyclerTouchListener.OnItemTouchListener() {
+            @Override
+            public void onItemTouch(View view, int position) {
+                adapter.toggleSelected(position);
+            }
+        }));
     }
 
     private void setUpFab() {
@@ -213,7 +221,7 @@ public class GroupActivity
         fam.setIconToggleAnimatorSet(set);
     }
 
-    private void setValues() {
+    private void setUpTitle() {
         this.setTitle(group.getName());
     }
 
@@ -225,7 +233,7 @@ public class GroupActivity
         group.refresh();
         adapter.refreshSelectedItems();
         adapter.notifyDataSetChanged();
-        setValues();
+        setUpTitle();
     }
 
     private void showHelp() {

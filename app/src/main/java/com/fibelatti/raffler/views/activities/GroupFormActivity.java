@@ -29,6 +29,7 @@ import com.fibelatti.raffler.models.GroupItem;
 import com.fibelatti.raffler.utils.StringUtils;
 import com.fibelatti.raffler.views.adapters.GroupAdapter;
 import com.fibelatti.raffler.views.extensions.DividerItemDecoration;
+import com.fibelatti.raffler.views.extensions.RecyclerTouchListener;
 import com.fibelatti.raffler.views.fragments.IIncludeRangeListener;
 import com.fibelatti.raffler.views.fragments.IncludeRangeDialogFragment;
 
@@ -43,6 +44,7 @@ public class GroupFormActivity
     private GroupAdapter adapter;
     private int initialItemCount;
 
+    //region layout bindings
     @BindView(R.id.coordinator_layout)
     CoordinatorLayout layout;
     @BindView(R.id.toolbar)
@@ -59,6 +61,7 @@ public class GroupFormActivity
     TextInputLayout groupItemNameLayout;
     @BindView(R.id.btn_add_item)
     ImageButton buttonAddItem;
+    //endregion
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,6 +72,9 @@ public class GroupFormActivity
         adapter = new GroupAdapter(this, group.getItems());
 
         setUpLayout();
+        setUpTitle();
+        setUpRecyclerView();
+        setUpAddButton();
         setValues();
     }
 
@@ -107,10 +113,6 @@ public class GroupFormActivity
 
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
-        setUpTitle();
-        setUpRecyclerView();
-        setUpAddButton();
     }
 
     private void setUpTitle() {
@@ -126,6 +128,12 @@ public class GroupFormActivity
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
         recyclerView.setAdapter(adapter);
+        recyclerView.addOnItemTouchListener(new RecyclerTouchListener(this, new RecyclerTouchListener.OnItemTouchListener() {
+            @Override
+            public void onItemTouch(View view, int position) {
+                adapter.toggleSelected(position);
+            }
+        }));
     }
 
     private void setUpAddButton() {

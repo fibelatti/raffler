@@ -35,6 +35,7 @@ public class SubGroupsActivity
     private SubGroupsAdapter adapter;
     private ArrayList<Group> subgroups = new ArrayList<>();
 
+    //region layout bindings
     @BindView(R.id.coordinator_layout)
     CoordinatorLayout layout;
     @BindView(R.id.toolbar)
@@ -47,6 +48,7 @@ public class SubGroupsActivity
     TextInputLayout subgroupsQuantityLayout;
     @BindView(R.id.btn_raffle_subgroups)
     ImageButton buttonRaffleSubgroups;
+    //endregion
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +59,8 @@ public class SubGroupsActivity
         adapter = new SubGroupsAdapter(this, subgroups);
 
         setUpLayout();
+        setUpRecyclerView();
+        setUpRaffleButton();
         setValues();
     }
 
@@ -77,9 +81,6 @@ public class SubGroupsActivity
 
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
-        setUpRecyclerView();
-        setUpRaffleButton();
     }
 
     private void setUpRecyclerView() {

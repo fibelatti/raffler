@@ -10,7 +10,6 @@ import android.widget.TextView;
 
 import com.fibelatti.raffler.R;
 import com.fibelatti.raffler.models.GroupItem;
-import com.fibelatti.raffler.views.extensions.RecyclerTouchListener;
 
 import java.util.HashSet;
 import java.util.List;
@@ -25,6 +24,19 @@ public class GroupAdapter
     private Context context;
     private List<GroupItem> groupItems;
     private Set<GroupItem> selectedItems = new HashSet<>();
+
+    public class GroupItemViewHolder
+            extends RecyclerView.ViewHolder {
+        @BindView(R.id.name)
+        public TextView itemName;
+        @BindView(R.id.chk_selected)
+        public CheckBox isSelected;
+
+        public GroupItemViewHolder(View view) {
+            super(view);
+            ButterKnife.bind(this, view);
+        }
+    }
 
     public GroupAdapter(Context context, List<GroupItem> groupItems) {
         this.context = context;
@@ -47,13 +59,26 @@ public class GroupAdapter
     public void onBindViewHolder(GroupItemViewHolder holder, int position) {
         GroupItem groupItem = groupItems.get(position);
 
-        holder.setGroupItem(groupItem);
-        holder.setIsSelected(selectedItems.contains(groupItem));
+        holder.itemName.setText(groupItem.getName());
+        holder.isSelected.setChecked(selectedItems.contains(groupItem));
     }
 
     @Override
     public int getItemCount() {
         return groupItems.size();
+    }
+
+    public void toggleSelected(int position) {
+        GroupItem item = groupItems.get(position);
+        boolean isChecked = getSelectedItems().contains(item);
+
+        if (isChecked) {
+            selectedItems.remove(item);
+        } else {
+            selectedItems.add(item);
+        }
+
+        notifyDataSetChanged();
     }
 
     public void clearSelectedItems() {
@@ -95,44 +120,5 @@ public class GroupAdapter
         groupItems.clear();
         selectedItems.clear();
         notifyDataSetChanged();
-    }
-
-    public class GroupItemViewHolder
-            extends RecyclerView.ViewHolder
-            implements RecyclerTouchListener.OnItemClickListener {
-        @BindView(R.id.name)
-        public TextView itemName;
-        @BindView(R.id.chk_selected)
-        public CheckBox isSelected;
-
-        private GroupItem groupItem;
-
-        public GroupItemViewHolder(View view) {
-            super(view);
-            ButterKnife.bind(this, view);
-        }
-
-        public void setGroupItem(GroupItem groupItem) {
-            this.groupItem = groupItem;
-            itemName.setText(groupItem.getName());
-        }
-
-        public void setIsSelected(boolean checked) {
-            isSelected.setChecked(checked);
-        }
-
-        @Override
-        public void onItemTouch(View view, int position) {
-            GroupItem item = groupItems.get(position);
-            boolean isChecked = getSelectedItems().contains(item);
-
-            if (isChecked) {
-                selectedItems.add(item);
-            } else {
-                selectedItems.remove(item);
-            }
-
-            notifyItemChanged(position);
-        }
     }
 }
