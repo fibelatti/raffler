@@ -14,12 +14,14 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.fibelatti.raffler.Constants;
 import com.fibelatti.raffler.R;
 import com.fibelatti.raffler.db.Database;
 import com.fibelatti.raffler.models.Group;
+import com.fibelatti.raffler.models.QuickDecision;
 import com.fibelatti.raffler.views.Navigator;
 import com.fibelatti.raffler.views.adapters.MainAdapter;
 import com.fibelatti.raffler.views.extensions.RecyclerTouchListener;
@@ -38,11 +40,15 @@ public class MainActivity
     private List<Group> groupList;
     private MainAdapter adapter;
 
+    private List<QuickDecision> quickDecisionList;
+
     //region layout bindings
     @BindView(R.id.coordinator_layout)
     CoordinatorLayout layout;
     @BindView(R.id.toolbar)
     Toolbar toolbar;
+    @BindView(R.id.layout_quick_decision)
+    LinearLayout quickDecisionLayout;
     @BindView(R.id.button_quick_decision_one)
     Button quickDecisionOne;
     @BindView(R.id.button_quick_decision_two)
@@ -63,6 +69,8 @@ public class MainActivity
         navigator = new Navigator(this);
         groupList = Database.groupDao.fetchAllGroups();
         adapter = new MainAdapter(this, groupList);
+
+        quickDecisionList = Database.quickDecisionDao.fetchEnabledQuickDecisions();
 
         setUpLayout();
         setUpRecyclerView();
@@ -145,11 +153,25 @@ public class MainActivity
             placeholder.setVisibility(View.VISIBLE);
             recyclerView.setVisibility(View.GONE);
         }
+
+        if (quickDecisionList.size() == 2) {
+            quickDecisionLayout.setVisibility(View.VISIBLE);
+
+            quickDecisionOne.setText(quickDecisionList.get(0).getName());
+            quickDecisionTwo.setText(quickDecisionList.get(1).getName());
+        } else {
+            quickDecisionLayout.setVisibility(View.GONE);
+        }
+
+        quickDecisionOne.setText(quickDecisionList.get(0).getName());
     }
 
     private void fetchData() {
         groupList.clear();
         groupList.addAll(Database.groupDao.fetchAllGroups());
         adapter.notifyDataSetChanged();
+
+        quickDecisionList.clear();
+        quickDecisionList.addAll(Database.quickDecisionDao.fetchEnabledQuickDecisions());
     }
 }

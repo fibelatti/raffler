@@ -7,9 +7,9 @@ import java.util.List;
 public interface IQuickDecisionDao {
     QuickDecision fetchQuickDecisionById(long quickDecisionId);
 
-    List<QuickDecision> getQuickDecisions();
+    List<QuickDecision> fetchAllQuickDecisions();
 
-    List<QuickDecision> getEnabledQuickDecisions();
+    List<QuickDecision> fetchEnabledQuickDecisions();
 
     boolean toggleQuickDecisionEnabled(QuickDecision quickDecision);
 }

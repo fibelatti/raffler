@@ -18,57 +18,61 @@
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <LinearLayout
-            android:id="@+id/title_section_quick_decisions"
+            android:id="@+id/layout_quick_decision"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="@dimen/padding_small">
+            android:orientation="vertical">
 
-            <TextView
+            <LinearLayout
+                android:id="@+id/title_section_quick_decisions"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/main_section_title_quick_decisions"
-                android:textColor="@color/colorAccent"
-                android:textSize="@dimen/text_size_regular" />
+                android:orientation="vertical"
+                android:padding="@dimen/padding_small">
 
-            <View
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/main_section_title_quick_decisions"
+                    android:textColor="@color/colorAccent"
+                    android:textSize="@dimen/text_size_regular" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/colorAccent" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/layout_quick_decision_buttons"
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/colorAccent" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/layout_quick_decision_buttons"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/title_section_quick_decisions"
-            android:orientation="horizontal"
-            android:paddingLeft="@dimen/padding_small"
-            android:paddingRight="@dimen/padding_small"
-            android:weightSum="2">
-
-            <Button
-                android:id="@+id/button_quick_decision_one"
-                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/main_button_yes_or_no"
-                android:theme="@style/QuickDecisionButton" />
+                android:orientation="horizontal"
+                android:paddingLeft="@dimen/padding_small"
+                android:paddingRight="@dimen/padding_small"
+                android:weightSum="2">
 
-            <Button
-                android:id="@+id/button_quick_decision_two"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/main_button_throw_coin"
-                android:theme="@style/QuickDecisionButton" />
+                <Button
+                    android:id="@+id/button_quick_decision_one"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:theme="@style/QuickDecisionButton" />
+
+                <Button
+                    android:id="@+id/button_quick_decision_two"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:theme="@style/QuickDecisionButton" />
+            </LinearLayout>
         </LinearLayout>
 
         <LinearLayout
             android:id="@+id/title_section_my_groups"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/layout_quick_decision_buttons"
+            android:layout_below="@id/layout_quick_decision"
             android:orientation="vertical"
             android:padding="@dimen/padding_small">
 

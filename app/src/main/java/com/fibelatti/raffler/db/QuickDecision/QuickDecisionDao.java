@@ -43,7 +43,7 @@ public class QuickDecisionDao
     }
 
     @Override
-    public List<QuickDecision> getQuickDecisions() {
+    public List<QuickDecision> fetchAllQuickDecisions() {
         List<QuickDecision> quickDecisionList = new ArrayList<>();
         cursor = super.query(QUICK_DECISION_TABLE, QUICK_DECISION_COLUMNS, null,
                 null, QUICK_DECISION_COLUMN_ID);
@@ -62,7 +62,7 @@ public class QuickDecisionDao
     }
 
     @Override
-    public List<QuickDecision> getEnabledQuickDecisions() {
+    public List<QuickDecision> fetchEnabledQuickDecisions() {
         List<QuickDecision> quickDecisionList = new ArrayList<>();
 
         final String selectionArgs[] = {String.valueOf(1)};
