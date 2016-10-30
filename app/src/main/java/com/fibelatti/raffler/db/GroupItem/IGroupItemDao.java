@@ -1,4 +1,4 @@
-package com.fibelatti.raffler.db;
+package com.fibelatti.raffler.db.GroupItem;
 
 import com.fibelatti.raffler.models.Group;
 import com.fibelatti.raffler.models.GroupItem;

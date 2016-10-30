@@ -1,4 +1,4 @@
-package com.fibelatti.raffler.db;
+package com.fibelatti.raffler.db.Group;
 
 /**
  * Created by fibelatti on 01/08/16.

@@ -1,4 +1,4 @@
-package com.fibelatti.raffler.db;
+package com.fibelatti.raffler.db.Settings;
 
 /**
  * Created by fibelatti on 13/08/16.

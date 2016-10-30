@@ -6,6 +6,16 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
+import com.fibelatti.raffler.db.Group.GroupDao;
+import com.fibelatti.raffler.db.Group.IGroupDao;
+import com.fibelatti.raffler.db.Group.IGroupSchema;
+import com.fibelatti.raffler.db.GroupItem.GroupItemDao;
+import com.fibelatti.raffler.db.GroupItem.IGroupItemDao;
+import com.fibelatti.raffler.db.GroupItem.IGroupItemSchema;
+import com.fibelatti.raffler.db.Settings.ISettingsDao;
+import com.fibelatti.raffler.db.Settings.ISettingsSchema;
+import com.fibelatti.raffler.db.Settings.SettingsDao;
+
 /**
  * Created by fibelatti on 01/08/16.
  */

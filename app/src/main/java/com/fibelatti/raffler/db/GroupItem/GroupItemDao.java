@@ -1,4 +1,4 @@
-package com.fibelatti.raffler.db;
+package com.fibelatti.raffler.db.GroupItem;
 
 import android.content.ContentValues;
 import android.database.Cursor;
@@ -6,6 +6,7 @@ import android.database.sqlite.SQLiteConstraintException;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
+import com.fibelatti.raffler.db.DbContentProvider;
 import com.fibelatti.raffler.models.Group;
 import com.fibelatti.raffler.models.GroupItem;
 
