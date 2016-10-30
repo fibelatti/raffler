@@ -4,8 +4,8 @@ import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteConstraintException;
 import android.database.sqlite.SQLiteDatabase;
-import android.util.Log;
 
+import com.crashlytics.android.Crashlytics;
 import com.fibelatti.raffler.db.Database;
 import com.fibelatti.raffler.db.DbContentProvider;
 import com.fibelatti.raffler.models.Group;
@@ -76,8 +76,8 @@ public class GroupDao
             group.setId(newId);
 
             return newId > 0 && Database.groupItemDao.saveGroupItems(group);
-        } catch (SQLiteConstraintException ex) {
-            Log.w("Database", ex.getMessage());
+        } catch (SQLiteConstraintException e) {
+            Crashlytics.logException(e);
             return false;
         }
     }
@@ -90,8 +90,8 @@ public class GroupDao
         try {
             return super.update(GROUPS_TABLE, getContentValue(), selection, selectionArgs) > 0
                     && Database.groupItemDao.saveGroupItems(group);
-        } catch (SQLiteConstraintException ex) {
-            Log.w("Database", ex.getMessage());
+        } catch (SQLiteConstraintException e) {
+            Crashlytics.logException(e);
             return false;
         }
     }
