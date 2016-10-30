@@ -4,6 +4,7 @@
     <color name="colorWhiteOpaque">#F5F5F5</color>
     <color name="colorBlack">#000000</color>
     <color name="colorBlackWithTransparency">#B2000000</color>
+    <color name="colorTransparent">#00000000</color>
 
     <color name="colorGrayLighter">#EEEEEE</color>
     <color name="colorGrayLight">#C2C2C2</color>

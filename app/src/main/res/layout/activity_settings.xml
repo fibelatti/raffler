@@ -41,7 +41,8 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/title_settings_sound"
             android:orientation="horizontal"
-            android:padding="@dimen/padding_small">
+            android:paddingLeft="@dimen/padding_small"
+            android:paddingRight="@dimen/padding_small">
 
             <CheckBox
                 android:id="@+id/chk_roulette_music"

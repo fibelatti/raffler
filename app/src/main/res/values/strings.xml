@@ -4,6 +4,7 @@
     <string name="file_provider_authority" translatable="false">com.fibelatti.raffler.fileprovider</string>
 
     <!-- Labels -->
+    <string name="label_quick_decision_result_activity" translatable="false">QuickDecisionResultActivity</string>
     <string name="label_group_activity" translatable="false">GroupActivity</string>
     <string name="label_group_form_activity" translatable="false">GroupFormActivity</string>
     <string name="label_roulette_activity" translatable="false">RouletteActivity</string>

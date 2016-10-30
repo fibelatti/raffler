@@ -27,6 +27,7 @@ import com.fibelatti.raffler.views.adapters.MainAdapter;
 import com.fibelatti.raffler.views.extensions.RecyclerTouchListener;
 import com.github.clans.fab.FloatingActionButton;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -67,10 +68,9 @@ public class MainActivity
 
         context = getApplicationContext();
         navigator = new Navigator(this);
-        groupList = Database.groupDao.fetchAllGroups();
+        groupList = new ArrayList<>();
         adapter = new MainAdapter(this, groupList);
-
-        quickDecisionList = Database.quickDecisionDao.fetchEnabledQuickDecisions();
+        quickDecisionList = new ArrayList<>();
 
         setUpLayout();
         setUpRecyclerView();
@@ -158,20 +158,31 @@ public class MainActivity
             quickDecisionLayout.setVisibility(View.VISIBLE);
 
             quickDecisionOne.setText(quickDecisionList.get(0).getName());
+            quickDecisionOne.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    navigator.startQuickDecisionResultActivity(quickDecisionList.get(0));
+                }
+            });
+
             quickDecisionTwo.setText(quickDecisionList.get(1).getName());
+            quickDecisionTwo.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    navigator.startQuickDecisionResultActivity(quickDecisionList.get(1));
+                }
+            });
         } else {
             quickDecisionLayout.setVisibility(View.GONE);
         }
-
-        quickDecisionOne.setText(quickDecisionList.get(0).getName());
     }
 
     private void fetchData() {
-        groupList.clear();
+        if (groupList != null) groupList.clear();
         groupList.addAll(Database.groupDao.fetchAllGroups());
         adapter.notifyDataSetChanged();
 
-        quickDecisionList.clear();
+        if (quickDecisionList != null) quickDecisionList.clear();
         quickDecisionList.addAll(Database.quickDecisionDao.fetchEnabledQuickDecisions());
     }
 }

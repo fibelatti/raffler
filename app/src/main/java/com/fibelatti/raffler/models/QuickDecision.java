@@ -44,8 +44,16 @@ public class QuickDecision
         return values;
     }
 
+    public Integer getValuesCount() {
+        return values != null ? values.size() : 0;
+    }
+
     public String getValuesString() {
         return android.text.TextUtils.join(",", values);
+    }
+
+    public String getValueAt(Integer index) {
+        return values != null ? values.get(index) : "";
     }
 
     public void setValues(ArrayList<String> values) {

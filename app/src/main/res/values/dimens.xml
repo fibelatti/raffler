@@ -30,4 +30,6 @@
 
     <dimen name="card_margin">4dp</dimen>
     <dimen name="card_radius">2dp</dimen>
+
+    <dimen name="quick_decision_result">48sp</dimen>
 </resources>
