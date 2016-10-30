@@ -59,7 +59,8 @@
             android:label="@string/label_group_form_activity"
             android:parentActivityName=".views.activities.GroupActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="stateHidden">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".views.activities.GroupActivity" />
