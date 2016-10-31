@@ -14,6 +14,8 @@ import com.fibelatti.raffler.views.activities.RouletteActivity;
 import com.fibelatti.raffler.views.activities.SettingsActivity;
 import com.fibelatti.raffler.views.activities.SubGroupsActivity;
 
+import org.parceler.Parcels;
+
 public class Navigator {
     Activity activity;
 
@@ -23,13 +25,13 @@ public class Navigator {
 
     public void startQuickDecisionResultActivity(QuickDecision quickDecision) {
         Intent intent = new Intent(activity, QuickDecisionResultActivity.class);
-        intent.putExtra(Constants.INTENT_EXTRA_QUICK_DECISION, quickDecision);
+        intent.putExtra(Constants.INTENT_EXTRA_QUICK_DECISION, Parcels.wrap(quickDecision));
         activity.startActivity(intent);
     }
 
     public void startGroupActivity(Group group) {
         Intent intent = new Intent(activity, GroupActivity.class);
-        intent.putExtra(Constants.INTENT_EXTRA_GROUP, group);
+        intent.putExtra(Constants.INTENT_EXTRA_GROUP, Parcels.wrap(group));
         activity.startActivityForResult(intent, Constants.REQUEST_CODE_GROUP_ACTION);
     }
 
@@ -39,25 +41,25 @@ public class Navigator {
 
     public void startGroupFormActivity(Group group) {
         Intent intent = new Intent(activity, GroupFormActivity.class);
-        if (group != null) intent.putExtra(Constants.INTENT_EXTRA_GROUP, group);
+        if (group != null) intent.putExtra(Constants.INTENT_EXTRA_GROUP, Parcels.wrap(group));
         activity.startActivity(intent);
     }
 
     public void startRandomWinnersActivity(Group group) {
         Intent intent = new Intent(activity, RandomWinnersActivity.class);
-        intent.putExtra(Constants.INTENT_EXTRA_GROUP, group);
+        intent.putExtra(Constants.INTENT_EXTRA_GROUP, Parcels.wrap(group));
         activity.startActivity(intent);
     }
 
     public void startRouletteActivity(Group group) {
         Intent intent = new Intent(activity, RouletteActivity.class);
-        intent.putExtra(Constants.INTENT_EXTRA_GROUP, group);
+        intent.putExtra(Constants.INTENT_EXTRA_GROUP, Parcels.wrap(group));
         activity.startActivity(intent);
     }
 
     public void startSubGroupsActivity(Group group) {
         Intent intent = new Intent(activity, SubGroupsActivity.class);
-        intent.putExtra(Constants.INTENT_EXTRA_GROUP, group);
+        intent.putExtra(Constants.INTENT_EXTRA_GROUP, Parcels.wrap(group));
         activity.startActivity(intent);
     }
 

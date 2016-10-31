@@ -1,12 +1,13 @@
 package com.fibelatti.raffler.models;
 
-import java.io.Serializable;
+import org.parceler.Parcel;
 
-public class GroupItem
-        implements Serializable {
-    private Long id;
-    private Long groupId;
-    private String name;
+@Parcel
+public class GroupItem {
+    Long id;
+    Long groupId;
+    String name;
+    Boolean isSelected;
 
     public GroupItem() {
     }
@@ -47,5 +48,13 @@ public class GroupItem
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Boolean getSelected() {
+        return isSelected;
+    }
+
+    public void setSelected(Boolean selected) {
+        isSelected = selected;
     }
 }

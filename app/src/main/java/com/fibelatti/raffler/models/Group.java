@@ -2,16 +2,17 @@ package com.fibelatti.raffler.models;
 
 import com.fibelatti.raffler.db.Database;
 
-import java.io.Serializable;
+import org.parceler.Parcel;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-public class Group
-        implements Serializable {
-    private Long id;
-    private String name;
-    private List<GroupItem> items;
+@Parcel
+public class Group {
+    Long id;
+    String name;
+    List<GroupItem> items;
 
     public Group() {
         this(null, null, new ArrayList<GroupItem>());
