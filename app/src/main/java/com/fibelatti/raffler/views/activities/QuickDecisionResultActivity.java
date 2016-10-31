@@ -10,6 +10,8 @@ import android.support.v4.content.ContextCompat;
 import android.view.View;
 import android.widget.TextView;
 
+import com.crashlytics.android.answers.Answers;
+import com.crashlytics.android.answers.CustomEvent;
 import com.fibelatti.raffler.Constants;
 import com.fibelatti.raffler.R;
 import com.fibelatti.raffler.models.QuickDecision;
@@ -86,5 +88,9 @@ public class QuickDecisionResultActivity
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             getWindow().setStatusBarColor(color);
         }
+
+        Answers.getInstance().logCustom(new CustomEvent(Constants.ANALYTICS_KEY_QUICK_DECISION_RESULT)
+                .putCustomAttribute(Constants.ANALYTICS_PARAM_QUICK_DECISION_NAME, quickDecision.getName())
+                .putCustomAttribute(Constants.ANALYTICS_PARAM_QUICK_DECISION_VALUE, quickDecision.getValueAt(randomIndex)));
     }
 }
