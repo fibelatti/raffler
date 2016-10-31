@@ -20,4 +20,8 @@ public class BaseActivity
     public void onPause() {
         super.onPause();
     }
+
+    public String getTag() {
+        return this.getClass().getSimpleName();
+    }
 }

@@ -93,6 +93,7 @@
     <!-- RouletteActivity -->
     <string name="roulette_title">Roda a roda!</string>
     <string name="roulette_msg_stopping">Parando&#8230;</string>
+    <string name="roulette_button_back">Voltar para o grupo</string>
 
     <!-- RandomWinnersActivity -->
     <string name="random_winners_title">Sorteio Aleatório</string>

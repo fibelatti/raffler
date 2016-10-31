@@ -106,6 +106,7 @@
     <!-- RouletteActivity -->
     <string name="roulette_title">Roulette!</string>
     <string name="roulette_msg_stopping">Stopping&#8230;</string>
+    <string name="roulette_button_back">Back to group</string>
 
     <!-- RandomWinnersActivity -->
     <string name="random_winners_title">Random Winners!</string>

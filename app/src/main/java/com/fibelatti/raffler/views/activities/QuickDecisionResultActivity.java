@@ -27,7 +27,6 @@ import butterknife.ButterKnife;
 
 public class QuickDecisionResultActivity
         extends BaseActivity {
-
     private Context context;
     private QuickDecision quickDecision;
 
@@ -74,7 +73,7 @@ public class QuickDecisionResultActivity
     }
 
     private void setUpValues() {
-        quickDecision = (QuickDecision) Parcels.unwrap(getIntent().getParcelableExtra(Constants.INTENT_EXTRA_QUICK_DECISION));
+        quickDecision = Parcels.unwrap(getIntent().getParcelableExtra(Constants.INTENT_EXTRA_QUICK_DECISION));
 
         int randomIndex = new Random().nextInt(quickDecision.getValuesCount());
         boolean isOdd = (randomIndex & 0x01) != 0;
