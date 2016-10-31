@@ -27,7 +27,6 @@ import butterknife.ButterKnife;
 
 public class QuickDecisionResultActivity
         extends BaseActivity {
-
     private Context context;
     private QuickDecision quickDecision;
 
