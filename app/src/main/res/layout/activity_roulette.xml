@@ -19,7 +19,7 @@
         android:background="?attr/selectableItemBackgroundBorderless"
         android:contentDescription="@string/roulette_button_back"
         android:padding="@dimen/padding_small"
-        android:src="@drawable/ic_arrow_back_white_36dp"
+        android:src="@drawable/ic_arrow_back_white_24dp"
         android:text="@string/roulette_button_back"
         android:tint="@color/colorAccent" />
 
