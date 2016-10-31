@@ -4,8 +4,8 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
-import android.util.Log;
 
+import com.crashlytics.android.Crashlytics;
 import com.fibelatti.raffler.Constants;
 import com.fibelatti.raffler.models.Group;
 import com.fibelatti.raffler.models.GroupItem;
@@ -66,7 +66,7 @@ public class FileHelper {
             outputStreamWriter.write(data);
             outputStreamWriter.close();
         } catch (IOException e) {
-            Log.e(context.getClass().getSimpleName(), "File write failed: " + e.toString());
+            Crashlytics.log("File write failed: " + e.toString());
         }
     }
 
