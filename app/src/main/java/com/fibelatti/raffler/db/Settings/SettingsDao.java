@@ -4,8 +4,10 @@ import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteConstraintException;
 import android.database.sqlite.SQLiteDatabase;
-import android.util.Log;
 
+import com.crashlytics.android.answers.Answers;
+import com.crashlytics.android.answers.CustomEvent;
+import com.fibelatti.raffler.Constants;
 import com.fibelatti.raffler.db.DbContentProvider;
 
 public class SettingsDao
@@ -45,9 +47,11 @@ public class SettingsDao
     public boolean setRouletteMusicEnabled(boolean value) {
         setContentValue(value);
         try {
+            Answers.getInstance().logCustom(new CustomEvent(Constants.ANALYTICS_KEY_TOGGLED_SONG)
+                    .putCustomAttribute(Constants.ANALYTICS_PARAM_TOGGLED_SONG, String.valueOf(value)));
+
             return super.update(SETTINGS_TABLE, getContentValue(), null, null) > 0;
         } catch (SQLiteConstraintException ex) {
-            Log.w("Database", ex.getMessage());
             return false;
         }
     }
