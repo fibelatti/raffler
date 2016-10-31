@@ -22,6 +22,8 @@ import butterknife.ButterKnife;
 public class IncludeRangeDialogFragment
         extends DialogFragment {
 
+    public static final String TAG = IncludeRangeDialogFragment.class.getSimpleName();
+
     private Context context;
     private IIncludeRangeListener listener;
 

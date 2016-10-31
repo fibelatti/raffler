@@ -22,6 +22,8 @@ import com.fibelatti.raffler.Constants;
 import com.fibelatti.raffler.utils.RandomizeUtils;
 import com.fibelatti.raffler.utils.StringUtils;
 
+import org.parceler.Parcels;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -103,7 +105,7 @@ public class SubGroupsActivity
     }
 
     private Group fetchDataFromIntent() {
-        return (Group) getIntent().getSerializableExtra(Constants.INTENT_EXTRA_GROUP);
+        return (Group) Parcels.unwrap(getIntent().getParcelableExtra(Constants.INTENT_EXTRA_GROUP));
     }
 
     private void raffleSubgroups() {

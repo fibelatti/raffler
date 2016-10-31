@@ -15,6 +15,8 @@ import com.fibelatti.raffler.Constants;
 import com.fibelatti.raffler.helpers.RouletteHelper;
 import com.github.clans.fab.FloatingActionButton;
 
+import org.parceler.Parcels;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -95,6 +97,6 @@ public class RouletteActivity
     }
 
     private Group fetchDataFromIntent() {
-        return (Group) getIntent().getSerializableExtra(Constants.INTENT_EXTRA_GROUP);
+        return (Group) Parcels.unwrap(getIntent().getParcelableExtra(Constants.INTENT_EXTRA_GROUP));
     }
 }

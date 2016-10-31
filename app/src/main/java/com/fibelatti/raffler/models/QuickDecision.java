@@ -2,17 +2,18 @@ package com.fibelatti.raffler.models;
 
 import com.fibelatti.raffler.db.Database;
 
-import java.io.Serializable;
+import org.parceler.Parcel;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class QuickDecision
-        implements Serializable {
-    private Long id;
-    private String name;
-    private List<String> values;
-    private Boolean enabled;
+@Parcel
+public class QuickDecision {
+    Long id;
+    String name;
+    List<String> values;
+    Boolean enabled;
 
     public QuickDecision() {
     }

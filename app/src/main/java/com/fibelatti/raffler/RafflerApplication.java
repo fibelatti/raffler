@@ -1,7 +1,6 @@
 package com.fibelatti.raffler;
 
 import android.app.Application;
-import android.util.Log;
 
 import com.crashlytics.android.Crashlytics;
 import com.fibelatti.raffler.db.Database;
@@ -28,8 +27,6 @@ public class RafflerApplication
         db.open();
 
         Fabric.with(this, new Crashlytics());
-
-        Log.d(TAG, "method:onCreate");
     }
 
     @Override
