@@ -17,15 +17,14 @@ import android.widget.ViewSwitcher;
 import com.fibelatti.raffler.R;
 import com.fibelatti.raffler.db.Database;
 import com.fibelatti.raffler.models.Group;
-import com.github.clans.fab.FloatingActionButton;
 
 import java.util.Random;
 
 public class RouletteHelper {
     private Context context;
+    private IRouletteListener listener;
     private Group group;
     private TextSwitcher textSwitcher;
-    private FloatingActionButton fab;
 
     private MediaPlayer mediaPlayer;
     private float mediaVolume = 1;
@@ -40,11 +39,11 @@ public class RouletteHelper {
 
     private boolean isPlaying = true;
 
-    public RouletteHelper(Context context, Group group, TextSwitcher textSwitcher, FloatingActionButton fab) {
+    public RouletteHelper(Context context, IRouletteListener listener, Group group, TextSwitcher textSwitcher) {
         this.context = context;
+        this.listener = listener;
         this.group = group;
         this.textSwitcher = textSwitcher;
-        this.fab = fab;
         this.optionsCount = group.getItemsCount();
         this.mediaPlayer = MediaPlayer.create(context, R.raw.easter_egg_soundtrack);
 
@@ -89,13 +88,13 @@ public class RouletteHelper {
 
         mediaPlayer.start();
 
-        fab.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_stop_white));
+        listener.onRouletteStarted();
 
         animate();
     }
 
     public void stopRoulette() {
-        fab.hide(true);
+        listener.onStopCommand();
         isPlaying = false;
         fadeOutMusic();
     }
@@ -172,8 +171,7 @@ public class RouletteHelper {
                 if (shouldStop()) {
                     mediaPlayer.pause();
                     mediaPlayer.seekTo(0);
-                    fab.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_play_arrow_white));
-                    fab.show(true);
+                    listener.onRouletteStopped();
                 } else {
                     fadeOutMusic();
                 }
