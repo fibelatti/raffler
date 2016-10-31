@@ -21,11 +21,13 @@ import android.widget.ImageButton;
 
 import com.fibelatti.raffler.Constants;
 import com.fibelatti.raffler.R;
-import com.fibelatti.raffler.db.Database;
 import com.fibelatti.raffler.helpers.AlertDialogHelper;
 import com.fibelatti.raffler.helpers.FileHelper;
 import com.fibelatti.raffler.models.Group;
 import com.fibelatti.raffler.models.GroupItem;
+import com.fibelatti.raffler.presenters.BaseGroupPresenter;
+import com.fibelatti.raffler.presenters.IBaseGroupPresenter;
+import com.fibelatti.raffler.presenters.IBaseGroupPresenterView;
 import com.fibelatti.raffler.utils.StringUtils;
 import com.fibelatti.raffler.views.adapters.GroupAdapter;
 import com.fibelatti.raffler.views.extensions.DividerItemDecoration;
@@ -33,15 +35,19 @@ import com.fibelatti.raffler.views.extensions.RecyclerTouchListener;
 import com.fibelatti.raffler.views.fragments.IIncludeRangeListener;
 import com.fibelatti.raffler.views.fragments.IncludeRangeDialogFragment;
 
+import org.parceler.Parcels;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class GroupFormActivity
         extends BaseActivity
-        implements IIncludeRangeListener {
+        implements IBaseGroupPresenterView, IIncludeRangeListener {
     private Context context;
-    private Group group;
+    private IBaseGroupPresenter presenter;
     private GroupAdapter adapter;
+
+    private Group group;
     private int initialItemCount;
 
     //region layout bindings
@@ -68,14 +74,28 @@ public class GroupFormActivity
         super.onCreate(savedInstanceState);
 
         context = getApplicationContext();
-        group = fetchDataFromIntent();
-        adapter = new GroupAdapter(this, group.getItems());
+        presenter = BaseGroupPresenter.createPresenter(context, this);
+        adapter = new GroupAdapter(this);
+
+        if (savedInstanceState != null) {
+            presenter.restoreGroup((Group) Parcels.unwrap(savedInstanceState.getParcelable(Constants.INTENT_EXTRA_GROUP)));
+        } else {
+            presenter.restoreGroup(fetchDataFromIntent());
+        }
+
+        presenter.unselectAllItems();
 
         setUpLayout();
         setUpTitle();
         setUpRecyclerView();
         setUpAddButton();
         setValues();
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putParcelable(Constants.INTENT_EXTRA_GROUP, Parcels.wrap(group));
     }
 
     @Override
@@ -131,7 +151,7 @@ public class GroupFormActivity
         recyclerView.addOnItemTouchListener(new RecyclerTouchListener(this, new RecyclerTouchListener.OnItemTouchListener() {
             @Override
             public void onItemTouch(View view, int position) {
-                adapter.toggleSelected(position);
+                presenter.toggleItemSelected(position);
             }
         }));
     }
@@ -159,7 +179,7 @@ public class GroupFormActivity
         }
 
         if (intent.hasExtra(Constants.INTENT_EXTRA_GROUP)) {
-            return (Group) intent.getSerializableExtra(Constants.INTENT_EXTRA_GROUP);
+            return (Group) Parcels.unwrap(intent.getParcelableExtra(Constants.INTENT_EXTRA_GROUP));
         } else {
             return new Group();
         }
@@ -167,15 +187,14 @@ public class GroupFormActivity
 
     private void addItem() {
         if (validateItemName()) {
-            group.addItem(new GroupItem(groupItemName.getText().toString()));
+            presenter.addItemToGroup(new GroupItem(groupItemName.getText().toString()));
             groupItemName.setText(null);
-            adapter.notifyDataSetChanged();
         }
     }
 
     private void saveGroup() {
         if (validateForm()) {
-            if (Database.groupDao.saveGroup(group)) {
+            if (presenter.saveGroup()) {
                 setResult(Constants.ACTIVITY_RESULT_GROUP_SAVED);
                 finish();
             } else {
@@ -196,7 +215,7 @@ public class GroupFormActivity
             requestFocus(groupName);
             return false;
         } else {
-            group.setName(newGroupName);
+            presenter.setGroupName(newGroupName);
             groupNameLayout.setError(null);
             groupNameLayout.setErrorEnabled(false);
         }
@@ -233,14 +252,14 @@ public class GroupFormActivity
     }
 
     private void deleteItems() {
-        if (adapter.getSelectedItemsCount() > 0) {
+        if (group.getSelectedItems().size() > 0) {
             AlertDialogHelper dialogHelper = new AlertDialogHelper(this);
             dialogHelper.createYesNoDialog(
                     getString(R.string.group_form_dialog_title_delete_items),
                     getString(R.string.group_form_dialog_msg_delete_items),
                     new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int id) {
-                            adapter.deleteCheckedItems();
+                            presenter.deleteSelectedItems();
                         }
                     },
                     null);
@@ -270,18 +289,18 @@ public class GroupFormActivity
 
     private void showIncludeRangeDialog() {
         DialogFragment includeRangeDialogFragment = new IncludeRangeDialogFragment();
-        includeRangeDialogFragment.show(getSupportFragmentManager(), "dialog");
+        includeRangeDialogFragment.show(getSupportFragmentManager(), IncludeRangeDialogFragment.TAG);
     }
 
     private void deleteAllItems() {
-        if (adapter.getItemCount() > 0) {
+        if (group.getItems().size() > 0) {
             AlertDialogHelper dialogHelper = new AlertDialogHelper(this);
             dialogHelper.createYesNoDialog(
                     getString(R.string.group_form_dialog_title_delete_all_items),
                     getString(R.string.group_form_dialog_msg_delete_all_items),
                     new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int id) {
-                            adapter.deleteAllItems();
+                            presenter.deleteAllItems();
                         }
                     },
                     null);
@@ -291,10 +310,15 @@ public class GroupFormActivity
     }
 
     @Override
+    public void onGroupChanged(Group group) {
+        this.group = group;
+        if (adapter != null) adapter.setGroupItems(group.getItems());
+    }
+
+    @Override
     public void includeRangeCallback(int initialValue, int finalValue) {
         for (int i = initialValue; i <= finalValue; i++) {
-            group.getItems().add(new GroupItem(String.valueOf(i)));
+            presenter.addItemToGroup(new GroupItem(String.valueOf(i)));
         }
-        adapter.notifyDataSetChanged();
     }
 }

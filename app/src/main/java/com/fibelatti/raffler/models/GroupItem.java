@@ -24,6 +24,7 @@ public class GroupItem {
         this.id = id;
         this.groupId = groupId;
         this.name = name;
+        this.isSelected = true;
     }
 
     public Long getId() {
@@ -51,6 +52,8 @@ public class GroupItem {
     }
 
     public Boolean getSelected() {
+        if (isSelected == null) isSelected = false;
+
         return isSelected;
     }
 

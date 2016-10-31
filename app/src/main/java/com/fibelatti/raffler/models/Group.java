@@ -80,6 +80,26 @@ public class Group {
         return list;
     }
 
+    public List<GroupItem> getSelectedItems() {
+        ArrayList<GroupItem> selectedItems = new ArrayList<>();
+        for (GroupItem item : items) {
+            if (item.getSelected()) selectedItems.add(item);
+        }
+        return selectedItems;
+    }
+
+    public void removeAllItems() {
+        this.items.clear();
+    }
+
+    public void removeItems(List<GroupItem> items) {
+        this.items.removeAll(items);
+    }
+
+    public void removeItemAt(int index) {
+        this.items.remove(index);
+    }
+
     public void refresh() {
         Group g = Database.groupDao.fetchGroupById(this.id);
 

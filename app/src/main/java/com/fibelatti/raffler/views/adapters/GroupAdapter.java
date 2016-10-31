@@ -11,9 +11,8 @@ import android.widget.TextView;
 import com.fibelatti.raffler.R;
 import com.fibelatti.raffler.models.GroupItem;
 
-import java.util.HashSet;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -23,7 +22,6 @@ public class GroupAdapter
 
     private Context context;
     private List<GroupItem> groupItems;
-    private Set<GroupItem> selectedItems = new HashSet<>();
 
     public class GroupItemViewHolder
             extends RecyclerView.ViewHolder {
@@ -38,9 +36,16 @@ public class GroupAdapter
         }
     }
 
-    public GroupAdapter(Context context, List<GroupItem> groupItems) {
+    public GroupAdapter(Context context) {
         this.context = context;
-        this.groupItems = groupItems;
+        this.groupItems = new ArrayList<>();
+    }
+
+    public void setGroupItems(List<GroupItem> groupItems) {
+        this.groupItems.clear();
+        this.groupItems.addAll(groupItems);
+
+        notifyDataSetChanged();
     }
 
     private Context getContext() {
@@ -60,65 +65,11 @@ public class GroupAdapter
         GroupItem groupItem = groupItems.get(position);
 
         holder.itemName.setText(groupItem.getName());
-        holder.isSelected.setChecked(selectedItems.contains(groupItem));
+        holder.isSelected.setChecked(groupItem.getSelected());
     }
 
     @Override
     public int getItemCount() {
         return groupItems.size();
-    }
-
-    public void toggleSelected(int position) {
-        GroupItem item = groupItems.get(position);
-        boolean isChecked = getSelectedItems().contains(item);
-
-        if (isChecked) {
-            selectedItems.remove(item);
-        } else {
-            selectedItems.add(item);
-        }
-
-        notifyDataSetChanged();
-    }
-
-    public void clearSelectedItems() {
-        selectedItems.clear();
-    }
-
-    public Set<GroupItem> getSelectedItems() {
-        return selectedItems;
-    }
-
-    public int getSelectedItemsCount() {
-        return selectedItems.size();
-    }
-
-    public void refreshSelectedItems() {
-        selectedItems.clear();
-        selectedItems.addAll(groupItems);
-    }
-
-    public void checkAllItems() {
-        selectedItems.addAll(groupItems);
-        notifyDataSetChanged();
-    }
-
-    public void uncheckAllItems() {
-        selectedItems.clear();
-        notifyDataSetChanged();
-    }
-
-    public void deleteCheckedItems() {
-        for (GroupItem groupItem : selectedItems) {
-            groupItems.remove(groupItem);
-        }
-        selectedItems.clear();
-        notifyDataSetChanged();
-    }
-
-    public void deleteAllItems() {
-        groupItems.clear();
-        selectedItems.clear();
-        notifyDataSetChanged();
     }
 }
