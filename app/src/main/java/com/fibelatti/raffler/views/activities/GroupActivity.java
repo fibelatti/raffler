@@ -22,8 +22,6 @@ import android.view.View;
 import android.view.animation.AnimationUtils;
 import android.view.animation.OvershootInterpolator;
 
-import com.crashlytics.android.answers.Answers;
-import com.crashlytics.android.answers.CustomEvent;
 import com.fibelatti.raffler.Constants;
 import com.fibelatti.raffler.R;
 import com.fibelatti.raffler.helpers.AlertDialogHelper;
@@ -182,7 +180,7 @@ public class GroupActivity
             @Override
             public void onClick(View view) {
                 if (validateSelection()) {
-                    Answers.getInstance().logCustom(new CustomEvent(Constants.ANALYTICS_KEY_MODE_ROULETTE));
+//                    Answers.getInstance().logCustom(new CustomEvent(Constants.ANALYTICS_KEY_MODE_ROULETTE));
 
                     Group newGroup = new Group();
                     newGroup.setItems(group.getSelectedItems());
@@ -195,7 +193,7 @@ public class GroupActivity
             @Override
             public void onClick(View view) {
                 if (validateSelection()) {
-                    Answers.getInstance().logCustom(new CustomEvent(Constants.ANALYTICS_KEY_MODE_RANDOM_WINNERS));
+//                    Answers.getInstance().logCustom(new CustomEvent(Constants.ANALYTICS_KEY_MODE_RANDOM_WINNERS));
 
                     Group newGroup = new Group();
                     newGroup.setItems(group.getSelectedItems());
@@ -207,7 +205,7 @@ public class GroupActivity
         fab_group.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Answers.getInstance().logCustom(new CustomEvent(Constants.ANALYTICS_KEY_MODE_SUB_GROUPS));
+//                Answers.getInstance().logCustom(new CustomEvent(Constants.ANALYTICS_KEY_MODE_SUB_GROUPS));
 
                 if (validateSelection()) {
                     Group newGroup = new Group();
@@ -300,7 +298,7 @@ public class GroupActivity
             startActivity(Intent.createChooser(fileHelper.createFileShareIntent(uri), getResources().getText(R.string.group_action_share)));
         }
 
-        Answers.getInstance().logCustom(new CustomEvent(Constants.ANALYTICS_KEY_GROUP_SHARED));
+//        Answers.getInstance().logCustom(new CustomEvent(Constants.ANALYTICS_KEY_GROUP_SHARED));
     }
 
     @Override

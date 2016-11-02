@@ -2,10 +2,7 @@ package com.fibelatti.raffler;
 
 import android.app.Application;
 
-import com.crashlytics.android.Crashlytics;
 import com.fibelatti.raffler.db.Database;
-
-import io.fabric.sdk.android.Fabric;
 
 public class RafflerApplication
         extends Application {
@@ -26,7 +23,7 @@ public class RafflerApplication
         db = new Database(this);
         db.open();
 
-        Fabric.with(this, new Crashlytics());
+//        Fabric.with(this, new Crashlytics());
     }
 
     @Override

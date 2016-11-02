@@ -5,9 +5,6 @@ import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import com.crashlytics.android.answers.Answers;
-import com.crashlytics.android.answers.CustomEvent;
-import com.fibelatti.raffler.Constants;
 import com.fibelatti.raffler.db.Group.GroupDao;
 import com.fibelatti.raffler.db.Group.IGroupDao;
 import com.fibelatti.raffler.db.Group.IGroupSchema;
@@ -74,9 +71,9 @@ public class Database {
         @Override
         public void onUpgrade(SQLiteDatabase db, int oldVersion,
                               int newVersion) {
-            Answers.getInstance().logCustom(new CustomEvent(Constants.ANALYTICS_KEY_UPGRADED_DATABASE)
-                    .putCustomAttribute(Constants.ANALYTICS_PARAM_OLD_VERSION, oldVersion)
-                    .putCustomAttribute(Constants.ANALYTICS_PARAM_NEW_VERSION, newVersion));
+//            Answers.getInstance().logCustom(new CustomEvent(Constants.ANALYTICS_KEY_UPGRADED_DATABASE)
+//                    .putCustomAttribute(Constants.ANALYTICS_PARAM_OLD_VERSION, oldVersion)
+//                    .putCustomAttribute(Constants.ANALYTICS_PARAM_NEW_VERSION, newVersion));
 
             // Should only destroy old data if really necessary
             //db.execSQL(IGroupItemSchema.GROUP_ITEMS_TABLE_DROP);
