@@ -9,6 +9,12 @@
     android:fitsSystemWindows="true"
     tools:context=".views.activities.RouletteActivity">
 
+    <TextSwitcher
+        android:id="@+id/text_switcher"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
     <ImageButton
         android:id="@+id/button_back"
         android:layout_width="@dimen/clickable_area"
@@ -22,12 +28,6 @@
         android:src="@drawable/ic_arrow_back_white_24dp"
         android:text="@string/roulette_button_back"
         android:tint="@color/colorAccent" />
-
-    <TextSwitcher
-        android:id="@+id/text_switcher"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
     <com.github.clans.fab.FloatingActionButton
         android:id="@+id/fab"
