@@ -20,9 +20,6 @@
     <string name="main_section_title_quick_decisions">Decisões rápidas</string>
     <string name="main_section_title_my_groups">Meus grupos</string>
 
-    <string name="main_button_yes_or_no">Sim ou Não</string>
-    <string name="main_button_throw_coin">Jogar uma moeda</string>
-
     <!-- GroupActivity -->
     <string name="group_hint_header">Escolha quais itens incluir nesse sorteio marcando suas caixas de seleção. Use as opções do menu para seleção em massa.</string>
 

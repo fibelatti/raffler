@@ -10,6 +10,7 @@ import com.fibelatti.raffler.models.QuickDecision;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class QuickDecisionDao
         extends DbContentProvider
@@ -24,8 +25,8 @@ public class QuickDecisionDao
 
     @Override
     public QuickDecision fetchQuickDecisionById(long quickDecisionId) {
-        final String selectionArgs[] = {String.valueOf(quickDecisionId)};
-        final String selection = QUICK_DECISION_COLUMN_ID + " = ?";
+        final String selectionArgs[] = {String.valueOf(quickDecisionId), Locale.getDefault().getLanguage()};
+        final String selection = QUICK_DECISION_COLUMN_ID + " = ?" + " AND " + QUICK_DECISION_COLUMN_LOCALE + " = ?";
         QuickDecision quickDecision = new QuickDecision();
         cursor = super.query(QUICK_DECISION_TABLE, QUICK_DECISION_COLUMNS, selection,
                 selectionArgs, QUICK_DECISION_COLUMN_ID);
@@ -43,9 +44,12 @@ public class QuickDecisionDao
 
     @Override
     public List<QuickDecision> fetchAllQuickDecisions() {
+        final String selectionArgs[] = {Locale.getDefault().getLanguage()};
+        final String selection = QUICK_DECISION_COLUMN_LOCALE + " = ?";
+
         List<QuickDecision> quickDecisionList = new ArrayList<>();
-        cursor = super.query(QUICK_DECISION_TABLE, QUICK_DECISION_COLUMNS, null,
-                null, QUICK_DECISION_COLUMN_ID);
+        cursor = super.query(QUICK_DECISION_TABLE, QUICK_DECISION_COLUMNS, selection,
+                selectionArgs, QUICK_DECISION_COLUMN_ID);
 
         if (cursor != null) {
             cursor.moveToFirst();
@@ -64,8 +68,8 @@ public class QuickDecisionDao
     public List<QuickDecision> fetchEnabledQuickDecisions() {
         List<QuickDecision> quickDecisionList = new ArrayList<>();
 
-        final String selectionArgs[] = {String.valueOf(1)};
-        final String selection = QUICK_DECISION_COLUMN_ENABLED + " = ?";
+        final String selectionArgs[] = {String.valueOf(1), Locale.getDefault().getLanguage()};
+        final String selection = QUICK_DECISION_COLUMN_ENABLED + " = ?" + " AND " + QUICK_DECISION_COLUMN_LOCALE + " = ?";
 
         cursor = super.query(QUICK_DECISION_TABLE, QUICK_DECISION_COLUMNS, selection,
                 selectionArgs, QUICK_DECISION_COLUMN_ID);
@@ -86,8 +90,11 @@ public class QuickDecisionDao
     @Override
     public boolean toggleQuickDecisionEnabled(QuickDecision quickDecision) {
         setContentValue(quickDecision);
+        final String selectionArgs[] = {String.valueOf(quickDecision.getId())};
+        final String selection = QUICK_DECISION_COLUMN_ID + " = ?";
+
         try {
-            return super.insert(QUICK_DECISION_TABLE, getContentValue()) > 0;
+            return super.update(QUICK_DECISION_TABLE, getContentValue(), selection, selectionArgs) > 0;
         } catch (SQLiteConstraintException e) {
 //            Crashlytics.logException(e);
             return false;
@@ -129,8 +136,6 @@ public class QuickDecisionDao
 
     private void setContentValue(QuickDecision quickDecision) {
         initialValues = new ContentValues();
-        initialValues.put(QUICK_DECISION_COLUMN_NAME, quickDecision.getName());
-        initialValues.put(QUICK_DECISION_COLUMN_VALUES, quickDecision.getValuesString());
         initialValues.put(QUICK_DECISION_COLUMN_ENABLED, quickDecision.getEnabled() ? 1 : 0);
     }
 
