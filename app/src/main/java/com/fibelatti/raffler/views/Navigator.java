@@ -42,7 +42,7 @@ public class Navigator {
     public void startGroupFormActivity(Group group) {
         Intent intent = new Intent(activity, GroupFormActivity.class);
         if (group != null) intent.putExtra(Constants.INTENT_EXTRA_GROUP, Parcels.wrap(group));
-        activity.startActivity(intent);
+        activity.startActivityForResult(intent, Constants.REQUEST_CODE_GROUP_EDIT);
     }
 
     public void startRandomWinnersActivity(Group group) {
