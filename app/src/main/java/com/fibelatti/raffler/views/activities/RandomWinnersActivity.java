@@ -14,12 +14,12 @@ import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.ImageButton;
 
+import com.fibelatti.raffler.Constants;
 import com.fibelatti.raffler.R;
 import com.fibelatti.raffler.models.Group;
-import com.fibelatti.raffler.views.adapters.RandomWinnersAdapter;
-import com.fibelatti.raffler.Constants;
 import com.fibelatti.raffler.utils.RandomizeUtils;
 import com.fibelatti.raffler.utils.StringUtils;
+import com.fibelatti.raffler.views.adapters.RandomWinnersAdapter;
 
 import org.parceler.Parcels;
 
