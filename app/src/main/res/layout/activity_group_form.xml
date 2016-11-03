@@ -10,6 +10,12 @@
 
     <include layout="@layout/toolbar_default" />
 
+    <View
+        android:id="@+id/fake_tutorial_view"
+        android:layout_width="@dimen/clickable_area"
+        android:layout_height="@dimen/clickable_area"
+        android:layout_gravity="top|end" />
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"

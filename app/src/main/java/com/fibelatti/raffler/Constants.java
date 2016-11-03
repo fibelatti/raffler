@@ -18,6 +18,10 @@ public interface Constants {
 
     List<String> SUPPORTED_LOCALES = Arrays.asList("en", "pt", "es");
 
+    String TUTORIAL_KEY_MAIN = "com.fibelatti.raffler.TUTORIAL_MAIN";
+    String TUTORIAL_KEY_GROUP = "com.fibelatti.raffler.TUTORIAL_GROUP";
+    String TUTORIAL_KEY_GROUP_FORM = "com.fibelatti.raffler.TUTORIAL_GROUP_FORM";
+
     String ANALYTICS_KEY_UPGRADED_DATABASE = "Upgraded database";
     String ANALYTICS_PARAM_OLD_VERSION = "Old version";
     String ANALYTICS_PARAM_NEW_VERSION = "New version";
