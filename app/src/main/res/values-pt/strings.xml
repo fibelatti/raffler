@@ -9,18 +9,22 @@
     <!-- MainActivity -->
     <string name="main_action_settings">Configurações</string>
 
-    <string name="main_hint_placeholder">Precisa de ajuda para escolher entre tantas opções?
-        \n\nUse o Raffler! para criar grupos de opções e fazer suas escolhas de forma aleatória.</string>
+    <string name="main_hint_placeholder">
+        Nenhum grupo :(
+        \n\nSe você tem dúvidas de que opção escolher, use o Raffler! para criar grupos e te ajudar na decisão de forma aleatória, seja escolhendo uma, várias ou formar pequenos grupos com as opções.</string>
     <plurals name="main_hint_group_items_quantity">
         <item quantity="one">%d item</item>
         <item quantity="other">%d itens</item>
     </plurals>
 
+    <string name="main_section_title_quick_decisions">Decisões rápidas</string>
+    <string name="main_section_title_my_groups">Meus grupos</string>
+
     <!-- GroupActivity -->
     <string name="group_hint_header">Escolha quais itens incluir nesse sorteio marcando suas caixas de seleção. Use as opções do menu para seleção em massa.</string>
 
     <string name="group_label_fab_roulette">Roleta</string>
-    <string name="group_label_fab_list">N Sorteados</string>
+    <string name="group_label_fab_list">Ganhadores Aleatórios</string>
     <string name="group_label_fab_groups">Sub Grupos</string>
 
     <string name="group_action_share">Compartilhar</string>
@@ -40,7 +44,7 @@
     <string name="group_dialog_msg_help">Precisa de ajuda para escolher entre tantas opções?
         \n\nExplore todos os métodos:
         \n\n<b>Roleta</b> escolherá um item aleatoriamente com uma animação clássica.
-        \n\n<b>N Sorteados</b> perguntará quantos itens você quer sortear dentre as opções e mostrará o resultado.
+        \n\n<b>Ganhadores Aleatórios</b> perguntará quantos itens você quer sortear dentre as opções e mostrará o resultado.
         \n\n<b>Sub Grupos</b> formará grupos aleatoriamente entre os itens.</string>
 
     <!-- GroupFormActivity -->
@@ -86,14 +90,15 @@
     <!-- RouletteActivity -->
     <string name="roulette_title">Roda a roda!</string>
     <string name="roulette_msg_stopping">Parando&#8230;</string>
+    <string name="roulette_button_back">Voltar para o grupo</string>
 
-    <!-- NWinnersActivity -->
-    <string name="nwinners_title">N Sorteados!</string>
-    <string name="nwinners_hint_quantity">Quantidade de sorteados</string>
-    <string name="nwinners_action_raffle">Sortear</string>
-    <string name="nwinners_msg_validate_quantity">A quantidade deve ser menor que %d</string>
-    <string name="nwinners_msg_validate_quantity_empty">A quantidade não pode estar em branco</string>
-    <string name="nwinners_msg_result">Sorteado #%d</string>
+    <!-- RandomWinnersActivity -->
+    <string name="random_winners_title">Ganhadores Aleatórios</string>
+    <string name="random_winners_hint_quantity">Quantidade de sorteados</string>
+    <string name="random_winners_action_raffle">Sortear</string>
+    <string name="random_winners_msg_validate_quantity">A quantidade deve ser menor que %d</string>
+    <string name="random_winners_msg_validate_quantity_empty">A quantidade não pode estar em branco</string>
+    <string name="random_winners_msg_result">Sorteado #%d</string>
 
     <!-- SubGroupsActivity -->
     <string name="subgroups_title">Sub Grupos!</string>

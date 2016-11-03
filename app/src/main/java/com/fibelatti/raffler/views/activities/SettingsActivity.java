@@ -13,16 +13,15 @@ import android.widget.TextView;
 
 import com.fibelatti.raffler.R;
 import com.fibelatti.raffler.db.Database;
-import com.fibelatti.raffler.views.utils.AlertDialogHelper;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class SettingsActivity extends BaseActivity {
+public class SettingsActivity
+        extends BaseActivity {
     private Context context;
 
-    private AlertDialogHelper dialogHelper;
-
+    //region layout bindings
     @BindView(R.id.coordinator_layout)
     CoordinatorLayout layout;
     @BindView(R.id.toolbar)
@@ -34,6 +33,7 @@ public class SettingsActivity extends BaseActivity {
     CheckBox rouletteMusicCheckBox;
     @BindView(R.id.txt_roulette_music)
     TextView rouletteMusicText;
+    //endregion
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

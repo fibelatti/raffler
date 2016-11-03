@@ -1,5 +1,9 @@
 package com.fibelatti.raffler.views.activities;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
+import android.animation.AnimatorSet;
+import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -16,34 +20,43 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.AnimationUtils;
+import android.view.animation.OvershootInterpolator;
 
+import com.fibelatti.raffler.Constants;
 import com.fibelatti.raffler.R;
-import com.fibelatti.raffler.db.Database;
+import com.fibelatti.raffler.helpers.AlertDialogHelper;
+import com.fibelatti.raffler.helpers.FileHelper;
 import com.fibelatti.raffler.models.Group;
-import com.fibelatti.raffler.models.GroupItem;
+import com.fibelatti.raffler.presenters.BaseGroupPresenter;
+import com.fibelatti.raffler.presenters.IBaseGroupPresenter;
+import com.fibelatti.raffler.presenters.IBaseGroupPresenterView;
+import com.fibelatti.raffler.views.Navigator;
 import com.fibelatti.raffler.views.adapters.GroupAdapter;
 import com.fibelatti.raffler.views.extensions.DividerItemDecoration;
-import com.fibelatti.raffler.views.extensions.GroupItemCheckStateChangedEvent;
 import com.fibelatti.raffler.views.extensions.RecyclerTouchListener;
-import com.fibelatti.raffler.views.utils.AlertDialogHelper;
-import com.fibelatti.raffler.views.utils.BusHelper;
-import com.fibelatti.raffler.views.utils.Constants;
-import com.fibelatti.raffler.views.utils.FileHelper;
 import com.github.clans.fab.FloatingActionButton;
 import com.github.clans.fab.FloatingActionMenu;
+
+import org.parceler.Parcels;
 
 import java.io.File;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class GroupActivity extends BaseActivity {
+public class GroupActivity
+        extends BaseActivity
+        implements IBaseGroupPresenterView {
     private Context context;
-    private Group group;
+    private Navigator navigator;
+    private IBaseGroupPresenter presenter;
     private GroupAdapter adapter;
-
     private AlertDialogHelper dialogHelper;
 
+    private Group group;
+    private boolean instanceRestored;
+
+    //region layout bindings
     @BindView(R.id.coordinator_layout)
     CoordinatorLayout layout;
     @BindView(R.id.toolbar)
@@ -58,34 +71,60 @@ public class GroupActivity extends BaseActivity {
     FloatingActionButton fab_list;
     @BindView(R.id.fab_group)
     FloatingActionButton fab_group;
+    //endregion
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         context = getApplicationContext();
-        group = fetchDataFromIntent();
-        adapter = new GroupAdapter(this, group.getItems());
-
+        navigator = new Navigator(this);
+        presenter = BaseGroupPresenter.createPresenter(context, this);
+        adapter = new GroupAdapter(this);
         dialogHelper = new AlertDialogHelper(this);
 
-        BusHelper.getInstance().getBus().register(adapter);
+        presenter.onCreate();
+
+        if (savedInstanceState != null) {
+            presenter.restoreGroup((Group) Parcels.unwrap(savedInstanceState.getParcelable(Constants.INTENT_EXTRA_GROUP)));
+        } else if (getIntent().hasExtra(Constants.INTENT_EXTRA_GROUP)) {
+            presenter.restoreGroup(fetchDataFromIntent());
+        }
 
         setUpLayout();
-        setValues();
+        setUpRecyclerView();
+        setUpFab();
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        fetchDataFromDb();
-        adapter.checkAllItems();
+        presenter.onResume();
+        if (instanceRestored) {
+            instanceRestored = false;
+        } else {
+            fetchDataFromDb();
+        }
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        instanceRestored = true;
+        outState.putParcelable(Constants.INTENT_EXTRA_GROUP, Parcels.wrap(group));
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_group, menu);
         return true;
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == Constants.REQUEST_CODE_GROUP_EDIT) {
+            instanceRestored = false;
+        }
     }
 
     @Override
@@ -101,13 +140,13 @@ public class GroupActivity extends BaseActivity {
                 showHelp();
                 return true;
             case R.id.action_check_all:
-                adapter.checkAllItems();
+                presenter.selectAllItems();
                 return true;
             case R.id.action_uncheck_all:
-                adapter.uncheckAllItems();
+                presenter.unselectAllItems();
                 return true;
             case R.id.action_edit:
-                editGroup();
+                navigator.startGroupFormActivity(group);
                 return true;
             case R.id.action_delete:
                 deleteGroup();
@@ -123,9 +162,6 @@ public class GroupActivity extends BaseActivity {
 
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
-        setUpRecyclerView();
-        setUpFab();
     }
 
     private void setUpRecyclerView() {
@@ -133,15 +169,10 @@ public class GroupActivity extends BaseActivity {
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
         recyclerView.setAdapter(adapter);
-
-        recyclerView.addOnItemTouchListener(new RecyclerTouchListener(this, new RecyclerTouchListener.OnItemClickListener() {
+        recyclerView.addOnItemTouchListener(new RecyclerTouchListener(this, new RecyclerTouchListener.OnItemTouchListener() {
             @Override
             public void onItemTouch(View view, int position) {
-                GroupItem item = group.getItem(position);
-                boolean isChecked = adapter.getSelectedItems().contains(item);
-
-                BusHelper.getInstance().getBus().post(new GroupItemCheckStateChangedEvent(item, !isChecked));
-                adapter.notifyDataSetChanged();
+                presenter.toggleItemSelected(position);
             }
         }));
     }
@@ -150,15 +181,17 @@ public class GroupActivity extends BaseActivity {
         fam.setMenuButtonShowAnimation(AnimationUtils.loadAnimation(this, R.anim.show_from_bottom));
         fam.setMenuButtonHideAnimation(AnimationUtils.loadAnimation(this, R.anim.hide_to_bottom));
         fam.setClosedOnTouchOutside(true);
+        createCustomAnimation();
 
         fab_roulette.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (validateSelection()) {
+//                    Answers.getInstance().logCustom(new CustomEvent(Constants.ANALYTICS_KEY_MODE_ROULETTE));
+
                     Group newGroup = new Group();
-                    newGroup.setItems(adapter.getSelectedItems());
-                    adapter.clearSelectedItems();
-                    startRouletteActivity(newGroup);
+                    newGroup.setItems(group.getSelectedItems());
+                    navigator.startRouletteActivity(newGroup);
                 }
             }
         });
@@ -167,10 +200,11 @@ public class GroupActivity extends BaseActivity {
             @Override
             public void onClick(View view) {
                 if (validateSelection()) {
+//                    Answers.getInstance().logCustom(new CustomEvent(Constants.ANALYTICS_KEY_MODE_RANDOM_WINNERS));
+
                     Group newGroup = new Group();
-                    newGroup.setItems(adapter.getSelectedItems());
-                    adapter.clearSelectedItems();
-                    startNWinnersActivity(newGroup);
+                    newGroup.setItems(group.getSelectedItems());
+                    navigator.startRandomWinnersActivity(newGroup);
                 }
             }
         });
@@ -178,29 +212,54 @@ public class GroupActivity extends BaseActivity {
         fab_group.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+//                Answers.getInstance().logCustom(new CustomEvent(Constants.ANALYTICS_KEY_MODE_SUB_GROUPS));
+
                 if (validateSelection()) {
                     Group newGroup = new Group();
-                    newGroup.setItems(adapter.getSelectedItems());
-                    adapter.clearSelectedItems();
-                    startSubGroupsActivity(newGroup);
+                    newGroup.setItems(group.getSelectedItems());
+                    navigator.startSubGroupsActivity(newGroup);
                 }
             }
         });
     }
 
-    private void setValues() {
-        this.setTitle(group.getName());
+    private void createCustomAnimation() {
+        AnimatorSet set = new AnimatorSet();
+
+        ObjectAnimator scaleOutX = ObjectAnimator.ofFloat(fam.getMenuIconView(), "scaleX", 1.0f, 0.2f);
+        ObjectAnimator scaleOutY = ObjectAnimator.ofFloat(fam.getMenuIconView(), "scaleY", 1.0f, 0.2f);
+
+        ObjectAnimator scaleInX = ObjectAnimator.ofFloat(fam.getMenuIconView(), "scaleX", 0.2f, 1.0f);
+        ObjectAnimator scaleInY = ObjectAnimator.ofFloat(fam.getMenuIconView(), "scaleY", 0.2f, 1.0f);
+
+        scaleOutX.setDuration(50);
+        scaleOutY.setDuration(50);
+
+        scaleInX.setDuration(150);
+        scaleInY.setDuration(150);
+
+        scaleInX.addListener(new AnimatorListenerAdapter() {
+            @Override
+            public void onAnimationStart(Animator animation) {
+                fam.getMenuIconView().setImageResource(fam.isOpened()
+                        ? R.drawable.ic_play_arrow_white : R.drawable.ic_close_white_36dp);
+            }
+        });
+
+        set.play(scaleOutX).with(scaleOutY);
+        set.play(scaleInX).with(scaleInY).after(scaleOutX);
+        set.setInterpolator(new OvershootInterpolator(2));
+
+        fam.setIconToggleAnimatorSet(set);
     }
 
     private Group fetchDataFromIntent() {
-        return (Group) getIntent().getSerializableExtra(Constants.INTENT_EXTRA_GROUP);
+        return (Group) Parcels.unwrap(getIntent().getParcelableExtra(Constants.INTENT_EXTRA_GROUP));
     }
 
     private void fetchDataFromDb() {
-        group.refresh();
-        adapter.refreshSelectedItems();
-        adapter.notifyDataSetChanged();
-        setValues();
+        presenter.refreshGroup();
+        presenter.selectAllItems();
     }
 
     private void showHelp() {
@@ -209,18 +268,12 @@ public class GroupActivity extends BaseActivity {
                 null);
     }
 
-    private void editGroup() {
-        Intent intent = new Intent(this, GroupFormActivity.class);
-        intent.putExtra(Constants.INTENT_EXTRA_GROUP, group);
-        startActivity(intent);
-    }
-
     private void deleteGroup() {
         dialogHelper.createYesNoDialog(getString(R.string.group_dialog_title_delete),
                 getString(R.string.group_dialog_msg_delete),
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-                        if (Database.groupDao.deleteGroup(group)) {
+                        if (presenter.deleteGroup()) {
                             setResult(Constants.ACTIVITY_RESULT_GROUP_DELETED);
                             finish();
                         } else {
@@ -233,30 +286,12 @@ public class GroupActivity extends BaseActivity {
     }
 
     private boolean validateSelection() {
-        if (adapter.getSelectedItems().size() < 2) {
+        if (group.getSelectedItems().size() < 2) {
             Snackbar.make(layout, getString(R.string.group_msg_validate_selection), Snackbar.LENGTH_LONG).show();
             return false;
         }
 
         return true;
-    }
-
-    private void startRouletteActivity(Group group) {
-        Intent intent = new Intent(this, RouletteActivity.class);
-        intent.putExtra(Constants.INTENT_EXTRA_GROUP, group);
-        startActivity(intent);
-    }
-
-    private void startNWinnersActivity(Group group) {
-        Intent intent = new Intent(this, NWinnersActivity.class);
-        intent.putExtra(Constants.INTENT_EXTRA_GROUP, group);
-        startActivity(intent);
-    }
-
-    private void startSubGroupsActivity(Group group) {
-        Intent intent = new Intent(this, SubGroupsActivity.class);
-        intent.putExtra(Constants.INTENT_EXTRA_GROUP, group);
-        startActivity(intent);
     }
 
     private void shareGroup(Group group) {
@@ -269,5 +304,14 @@ public class GroupActivity extends BaseActivity {
 
             startActivity(Intent.createChooser(fileHelper.createFileShareIntent(uri), getResources().getText(R.string.group_action_share)));
         }
+
+//        Answers.getInstance().logCustom(new CustomEvent(Constants.ANALYTICS_KEY_GROUP_SHARED));
+    }
+
+    @Override
+    public void onGroupChanged(Group group) {
+        this.group = group;
+        if (adapter != null) adapter.setGroupItems(group.getItems());
+        this.setTitle(group.getName());
     }
 }

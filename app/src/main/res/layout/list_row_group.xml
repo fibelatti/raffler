@@ -22,8 +22,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:textColor="@color/textPrimary"
-            android:textSize="@dimen/text_size_extra_large"
-            android:textStyle="bold" />
+            android:textSize="@dimen/text_size_extra_large" />
 
         <TextView
             android:id="@+id/item_count"

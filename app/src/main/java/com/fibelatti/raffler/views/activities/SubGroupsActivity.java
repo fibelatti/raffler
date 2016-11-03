@@ -14,13 +14,15 @@ import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.ImageButton;
 
+import com.fibelatti.raffler.Constants;
 import com.fibelatti.raffler.R;
 import com.fibelatti.raffler.models.Group;
 import com.fibelatti.raffler.models.GroupItem;
+import com.fibelatti.raffler.utils.RandomizeUtils;
+import com.fibelatti.raffler.utils.StringUtils;
 import com.fibelatti.raffler.views.adapters.SubGroupsAdapter;
-import com.fibelatti.raffler.views.utils.Constants;
-import com.fibelatti.raffler.views.utils.RandomizeHelper;
-import com.fibelatti.raffler.views.utils.StringHelper;
+
+import org.parceler.Parcels;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,12 +30,14 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class SubGroupsActivity extends BaseActivity {
+public class SubGroupsActivity
+        extends BaseActivity {
     private Context context;
     private Group group;
     private SubGroupsAdapter adapter;
     private ArrayList<Group> subgroups = new ArrayList<>();
 
+    //region layout bindings
     @BindView(R.id.coordinator_layout)
     CoordinatorLayout layout;
     @BindView(R.id.toolbar)
@@ -46,6 +50,7 @@ public class SubGroupsActivity extends BaseActivity {
     TextInputLayout subgroupsQuantityLayout;
     @BindView(R.id.btn_raffle_subgroups)
     ImageButton buttonRaffleSubgroups;
+    //endregion
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +61,8 @@ public class SubGroupsActivity extends BaseActivity {
         adapter = new SubGroupsAdapter(this, subgroups);
 
         setUpLayout();
+        setUpRecyclerView();
+        setUpRaffleButton();
         setValues();
     }
 
@@ -76,9 +83,6 @@ public class SubGroupsActivity extends BaseActivity {
 
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
-        setUpRecyclerView();
-        setUpRaffleButton();
     }
 
     private void setUpRecyclerView() {
@@ -101,14 +105,14 @@ public class SubGroupsActivity extends BaseActivity {
     }
 
     private Group fetchDataFromIntent() {
-        return (Group) getIntent().getSerializableExtra(Constants.INTENT_EXTRA_GROUP);
+        return (Group) Parcels.unwrap(getIntent().getParcelableExtra(Constants.INTENT_EXTRA_GROUP));
     }
 
     private void raffleSubgroups() {
         if (validateQuantity()) {
             int quantity = Integer.valueOf(subgroupsQuantity.getText().toString());
             int subgroupIndex = 0;
-            List<Integer> randomizedIndex = RandomizeHelper.getRandomIndexesInRange(group.getItemsCount(), group.getItemsCount());
+            List<Integer> randomizedIndex = RandomizeUtils.getRandomIndexesInRange(group.getItemsCount(), group.getItemsCount());
 
             subgroups.clear();
 
@@ -136,7 +140,7 @@ public class SubGroupsActivity extends BaseActivity {
     }
 
     private boolean validateQuantity() {
-        if (StringHelper.isNullOrEmpty(subgroupsQuantity.getText().toString())) {
+        if (StringUtils.isNullOrEmpty(subgroupsQuantity.getText().toString())) {
             subgroupsQuantityLayout.setError(getString(R.string.subgroups_msg_validate_quantity_empty));
             requestFocus(subgroupsQuantity);
             return false;

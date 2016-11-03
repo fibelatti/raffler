@@ -2,15 +2,17 @@ package com.fibelatti.raffler.models;
 
 import com.fibelatti.raffler.db.Database;
 
-import java.io.Serializable;
+import org.parceler.Parcel;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-public class Group implements Serializable {
-    private Long id;
-    private String name;
-    private List<GroupItem> items;
+@Parcel
+public class Group {
+    Long id;
+    String name;
+    List<GroupItem> items;
 
     public Group() {
         this(null, null, new ArrayList<GroupItem>());
@@ -76,6 +78,26 @@ public class Group implements Serializable {
         for (int i = 0; i < items.size(); i++) list.add(items.get(i).getName());
 
         return list;
+    }
+
+    public List<GroupItem> getSelectedItems() {
+        ArrayList<GroupItem> selectedItems = new ArrayList<>();
+        for (GroupItem item : items) {
+            if (item.getSelected()) selectedItems.add(item);
+        }
+        return selectedItems;
+    }
+
+    public void removeAllItems() {
+        this.items.clear();
+    }
+
+    public void removeItems(List<GroupItem> items) {
+        this.items.removeAll(items);
+    }
+
+    public void removeItemAt(int index) {
+        this.items.remove(index);
     }
 
     public void refresh() {

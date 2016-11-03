@@ -11,26 +11,105 @@
 
     <include layout="@layout/toolbar_default" />
 
-    <TextView
-        android:id="@+id/placeholder"
-        android:layout_width="match_parent"
+    <RelativeLayout
+        android:id="@+id/layout_content"
+        android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:gravity="center_vertical"
-        android:padding="@dimen/padding_large"
-        android:text="@string/main_hint_placeholder"
-        android:textAlignment="center"
-        android:textColor="@color/textSecondary"
-        android:textSize="@dimen/text_size_regular"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recycler_view"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:paddingLeft="@dimen/padding_smaller"
-        android:paddingRight="@dimen/padding_smaller"
-        android:visibility="gone"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+        <LinearLayout
+            android:id="@+id/layout_quick_decision"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/title_section_quick_decisions"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="@dimen/padding_small">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/main_section_title_quick_decisions"
+                    android:textColor="@color/colorAccent"
+                    android:textSize="@dimen/text_size_regular" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/colorAccent" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/layout_quick_decision_buttons"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingLeft="@dimen/padding_small"
+                android:paddingRight="@dimen/padding_small"
+                android:weightSum="2">
+
+                <Button
+                    android:id="@+id/button_quick_decision_one"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:theme="@style/QuickDecisionButton" />
+
+                <Button
+                    android:id="@+id/button_quick_decision_two"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:theme="@style/QuickDecisionButton" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/title_section_my_groups"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/layout_quick_decision"
+            android:orientation="vertical"
+            android:padding="@dimen/padding_small">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/main_section_title_my_groups"
+                android:textColor="@color/colorAccent"
+                android:textSize="@dimen/text_size_regular" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/colorAccent" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/placeholder"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/title_section_my_groups"
+            android:gravity="center|top"
+            android:padding="@dimen/padding_large"
+            android:text="@string/main_hint_placeholder"
+            android:textColor="@color/textSecondary"
+            android:textSize="@dimen/text_size_regular"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/title_section_my_groups"
+            android:paddingLeft="@dimen/padding_smaller"
+            android:paddingRight="@dimen/padding_smaller"
+            android:visibility="gone" />
+    </RelativeLayout>
 
     <com.github.clans.fab.FloatingActionButton
         android:id="@+id/fab"

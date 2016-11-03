@@ -9,13 +9,25 @@
     android:fitsSystemWindows="true"
     tools:context=".views.activities.RouletteActivity">
 
-    <include layout="@layout/toolbar_default" />
-
     <TextSwitcher
         android:id="@+id/text_switcher"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
+    <ImageButton
+        android:id="@+id/button_back"
+        android:layout_width="@dimen/clickable_area"
+        android:layout_height="@dimen/clickable_area"
+        android:layout_marginLeft="@dimen/margin_small"
+        android:layout_marginStart="@dimen/margin_small"
+        android:layout_marginTop="@dimen/margin_small"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:contentDescription="@string/roulette_button_back"
+        android:padding="@dimen/padding_small"
+        android:src="@drawable/ic_arrow_back_white_24dp"
+        android:text="@string/roulette_button_back"
+        android:tint="@color/colorAccent" />
 
     <com.github.clans.fab.FloatingActionButton
         android:id="@+id/fab"
@@ -23,7 +35,6 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|center"
         android:layout_marginBottom="@dimen/fab_margin"
-        android:layout_marginEnd="@dimen/fab_margin"
         android:src="@drawable/ic_stop_white"
         fab:fab_colorNormal="@color/colorAccent"
         fab:fab_colorPressed="@color/colorAccent"
