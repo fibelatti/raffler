@@ -24,7 +24,7 @@
     <string name="group_hint_header">Escolha quais itens incluir nesse sorteio marcando suas caixas de seleção. Use as opções do menu para seleção em massa.</string>
 
     <string name="group_label_fab_roulette">Roleta</string>
-    <string name="group_label_fab_list">Sorteio Aleatório</string>
+    <string name="group_label_fab_list">Ganhadores Aleatórios</string>
     <string name="group_label_fab_groups">Sub Grupos</string>
 
     <string name="group_action_share">Compartilhar</string>
@@ -44,7 +44,7 @@
     <string name="group_dialog_msg_help">Precisa de ajuda para escolher entre tantas opções?
         \n\nExplore todos os métodos:
         \n\n<b>Roleta</b> escolherá um item aleatoriamente com uma animação clássica.
-        \n\n<b>N Sorteados</b> perguntará quantos itens você quer sortear dentre as opções e mostrará o resultado.
+        \n\n<b>Ganhadores Aleatórios</b> perguntará quantos itens você quer sortear dentre as opções e mostrará o resultado.
         \n\n<b>Sub Grupos</b> formará grupos aleatoriamente entre os itens.</string>
 
     <!-- GroupFormActivity -->
@@ -93,7 +93,7 @@
     <string name="roulette_button_back">Voltar para o grupo</string>
 
     <!-- RandomWinnersActivity -->
-    <string name="random_winners_title">Sorteio Aleatório</string>
+    <string name="random_winners_title">Ganhadores Aleatórios</string>
     <string name="random_winners_hint_quantity">Quantidade de sorteados</string>
     <string name="random_winners_action_raffle">Sortear</string>
     <string name="random_winners_msg_validate_quantity">A quantidade deve ser menor que %d</string>
