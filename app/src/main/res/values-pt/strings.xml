@@ -129,4 +129,11 @@
     <string name="settings_title_sound">Efeitos Sonoros</string>
 
     <string name="settings_hint_roulette_music">Habilitar música da roleta</string>
+
+    <string name="settings_share">Compartilhe!</string>
+    <string name="settings_share_title">Compartilhando Raffler!</string>
+    <string name="settings_share_text">Baixe o Raffler! Tomar decisões nunca foi tão fácil. Baixe em %s</string>
+    <string name="settings_rate">Dê sua avaliação!</string>
+    <string name="settings_about">Desenvolvido com ❤ por Filipe Belatti.</string>
+    <string name="settings_app_version">Versão: 1.2.0</string>
 </resources>
