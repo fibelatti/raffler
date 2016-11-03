@@ -148,7 +148,7 @@
     <string name="settings_share_text">Check out Raffler! Making decisions never been so easy. Download at %s</string>
     <string name="settings_rate">Rate this app!</string>
     <string name="settings_about">Developed with ❤ by Filipe Belatti.</string>
-    <string name="settings_app_version">Version: 1.2.0</string>
+    <string name="settings_app_version">Version: 1.3.0</string>
 
     <!-- DialogRate -->
     <string name="dialog_rate_title">Rate this app!</string>
