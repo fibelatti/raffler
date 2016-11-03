@@ -129,4 +129,22 @@
     <string name="settings_title_sound">Efectos sonoros</string>
 
     <string name="settings_hint_roulette_music">Habilitar la música de la ruleta</string>
+
+    <string name="settings_share">¡Compartir!</string>
+    <string name="settings_share_title">¡Compartiendo Raffler!</string>
+    <string name="settings_share_text">¡Descarga Raffler! Tomar decisiones nunca fue tan fácil. Descargar en %s</string>
+    <string name="settings_rate">¡Valorar!</string>
+    <string name="settings_about">Desarrollado con ❤ por Filipe Belatti.</string>
+    <string name="settings_app_version">Versión: 1.2.0</string>
+
+    <!-- DialogRate -->
+    <string name="dialog_rate_title">¡Valorar!</string>
+    <string name="dialog_rate_cancel">Cancelar</string>
+    <string name="dialog_rate_header">Si estás disfrutando de Raffler! ¡Me encantaría recibir su opinión!</string>
+    <string name="dialog_rate_feedback_positive">¡Me alegra que lo disfrutes! ¿Qué hay de mostrar tu amor en Play Store?</string>
+    <string name="dialog_rate_play_store">Play Store</string>
+    <string name="dialog_rate_feedback_negative">¿Puedes enviarme un correo electrónico que sugiera qué puedo hacer para mejorar tu experiencia con la aplicación?</string>
+    <string name="dialog_rate_send_email">Enviar correo</string>
+    <string name="dialog_rate_send_email_subject">Raffler! - Sugerencias</string>
+    <string name="dialog_rate_send_email_title">Elegir aplicación de correo electrónico</string>
 </resources>

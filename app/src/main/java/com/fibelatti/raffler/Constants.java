@@ -5,6 +5,8 @@ import java.util.List;
 
 public interface Constants {
 
+    String PLAY_STORE_BASE_URL = "http://play.google.com/store/apps/details";
+
     String INTENT_EXTRA_GROUP = "com.fibelatti.raffler.GROUP";
     String INTENT_EXTRA_QUICK_DECISION = "com.fibelatti.raffler.QUICK_DECISION";
 
