@@ -6,6 +6,7 @@ public interface Constants {
     String INTENT_EXTRA_QUICK_DECISION = "com.fibelatti.raffler.QUICK_DECISION";
 
     int REQUEST_CODE_GROUP_ACTION = 1;
+    int REQUEST_CODE_GROUP_EDIT = 2;
 
     int ACTIVITY_RESULT_GROUP_SAVED = 11;
     int ACTIVITY_RESULT_GROUP_DELETED = 12;

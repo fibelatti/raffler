@@ -121,6 +121,13 @@ public class GroupActivity
     }
 
     @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == Constants.REQUEST_CODE_GROUP_EDIT) {
+            instanceRestored = false;
+        }
+    }
+
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:

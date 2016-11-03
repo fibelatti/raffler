@@ -187,7 +187,10 @@ public class GroupFormActivity
 
     private void addItem() {
         if (validateItemName()) {
-            presenter.addItemToGroup(new GroupItem(groupItemName.getText().toString()));
+            GroupItem groupItem = new GroupItem(groupItemName.getText().toString());
+            groupItem.setSelected(false);
+
+            presenter.addItemToGroup(groupItem);
             groupItemName.setText(null);
         }
     }
@@ -317,8 +320,13 @@ public class GroupFormActivity
 
     @Override
     public void includeRangeCallback(int initialValue, int finalValue) {
+        GroupItem groupItem;
+
         for (int i = initialValue; i <= finalValue; i++) {
-            presenter.addItemToGroup(new GroupItem(String.valueOf(i)));
+            groupItem = new GroupItem(String.valueOf(i));
+            groupItem.setSelected(false);
+
+            presenter.addItemToGroup(groupItem);
         }
     }
 }
