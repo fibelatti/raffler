@@ -5,6 +5,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteConstraintException;
 import android.database.sqlite.SQLiteDatabase;
 
+import com.fibelatti.raffler.Constants;
 import com.fibelatti.raffler.db.DbContentProvider;
 import com.fibelatti.raffler.models.QuickDecision;
 
@@ -19,13 +20,18 @@ public class QuickDecisionDao
     private Cursor cursor;
     private ContentValues initialValues;
 
+    String locale = Constants.SUPPORTED_LOCALES.contains(Locale.getDefault().getLanguage()) ?
+            Locale.getDefault().getLanguage() : "en";
+
     public QuickDecisionDao(SQLiteDatabase db) {
         super(db);
     }
 
     @Override
     public QuickDecision fetchQuickDecisionById(long quickDecisionId) {
-        final String selectionArgs[] = {String.valueOf(quickDecisionId), Locale.getDefault().getLanguage()};
+
+
+        final String selectionArgs[] = {String.valueOf(quickDecisionId), locale};
         final String selection = QUICK_DECISION_COLUMN_ID + " = ?" + " AND " + QUICK_DECISION_COLUMN_LOCALE + " = ?";
         QuickDecision quickDecision = new QuickDecision();
         cursor = super.query(QUICK_DECISION_TABLE, QUICK_DECISION_COLUMNS, selection,
@@ -44,7 +50,7 @@ public class QuickDecisionDao
 
     @Override
     public List<QuickDecision> fetchAllQuickDecisions() {
-        final String selectionArgs[] = {Locale.getDefault().getLanguage()};
+        final String selectionArgs[] = {locale};
         final String selection = QUICK_DECISION_COLUMN_LOCALE + " = ?";
 
         List<QuickDecision> quickDecisionList = new ArrayList<>();
@@ -68,7 +74,7 @@ public class QuickDecisionDao
     public List<QuickDecision> fetchEnabledQuickDecisions() {
         List<QuickDecision> quickDecisionList = new ArrayList<>();
 
-        final String selectionArgs[] = {String.valueOf(1), Locale.getDefault().getLanguage()};
+        final String selectionArgs[] = {String.valueOf(1), locale};
         final String selection = QUICK_DECISION_COLUMN_ENABLED + " = ?" + " AND " + QUICK_DECISION_COLUMN_LOCALE + " = ?";
 
         cursor = super.query(QUICK_DECISION_TABLE, QUICK_DECISION_COLUMNS, selection,

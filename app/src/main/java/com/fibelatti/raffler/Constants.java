@@ -1,5 +1,8 @@
 package com.fibelatti.raffler;
 
+import java.util.Arrays;
+import java.util.List;
+
 public interface Constants {
 
     String INTENT_EXTRA_GROUP = "com.fibelatti.raffler.GROUP";
@@ -12,6 +15,8 @@ public interface Constants {
     int ACTIVITY_RESULT_GROUP_DELETED = 12;
 
     String FILE_PATH_EXPORTED_GROUP = "raffler_group.rflr";
+
+    List<String> SUPPORTED_LOCALES = Arrays.asList("en", "pt", "es");
 
     String ANALYTICS_KEY_UPGRADED_DATABASE = "Upgraded database";
     String ANALYTICS_PARAM_OLD_VERSION = "Old version";
