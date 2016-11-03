@@ -52,6 +52,9 @@ dependencies {
     // Custom FAB
     compile 'com.github.clans:fab:1.6.4'
 
+    // Tutorials
+    compile 'com.github.deano2390:MaterialShowcaseView:1.1.0'
+
     // Crashlytics - Currently disabled while the app has no privacy policy
 //    compile('com.crashlytics.sdk.android:crashlytics:2.6.1@aar') {
 //        transitive = true;

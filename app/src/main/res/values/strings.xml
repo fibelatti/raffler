@@ -16,6 +16,7 @@
     <string name="hint_ok">Ok</string>
     <string name="hint_yes">Yes</string>
     <string name="hint_no">No</string>
+    <string name="hint_got_it">GOT IT</string>
 
     <string name="generic_msg_error">Oops! Something went wrong. Please try again.</string>
 
@@ -24,7 +25,7 @@
 
     <string name="main_hint_placeholder">
         No groups yet :(
-        \n\nIf you\'re ever in doubt of which option to choose, use Raffler! to create groups and help you deciding randomly, from a single option to smaller groups.</string>
+        \n\nIf you\'re ever in doubt of which option to choose, tap the button below to create groups and help you deciding randomly, from a single option to smaller groups.</string>
     <plurals name="main_hint_group_items_quantity">
         <item quantity="one">1 item</item>
         <item quantity="other">%d items</item>
@@ -33,9 +34,11 @@
     <string name="main_section_title_quick_decisions">Quick decisions</string>
     <string name="main_section_title_my_groups">My groups</string>
 
-    <!-- GroupActivity -->
-    <string name="group_hint_header">Choose which items to include in this raffle by toggling their checkboxes. Bulk edit using the menu.</string>
+    <string name="main_tutorial_intro">Welcome to Raffler! It seems that you\'re new around here, so I\'ll explain how to get things going&#8230;</string>
+    <string name="main_tutorial_quick_decision">These are the quick decision buttons: tap them and get an immediate result!</string>
+    <string name="main_tutorial_add_group">The real fun begins when you create your first group. Whenever you think you\'re ready tap this button over here&#8230;</string>
 
+    <!-- GroupActivity -->
     <string name="group_label_fab_roulette">Roulette</string>
     <string name="group_label_fab_list">Random Winners</string>
     <string name="group_label_fab_groups">Sub Groups</string>
@@ -59,6 +62,11 @@
         \n\n<b>Roulette</b> will choose one random result with an animation.
         \n\n<b>Random Winners</b> will ask you how many options you want to choose from the raffle and display them right away.
         \n\n<b>Sub Groups</b> will form randomly arranged sub groups among your options.</string>
+
+    <string name="group_tutorial_check_items">Each raffle is different, choose which items to include in this round by toggling their checkboxes&#8230;</string>
+    <string name="group_tutorial_menu">Use the menu for more options&#8230;</string>
+    <string name="group_tutorial_play">When you\'re done selecting, click the play button to select the mode&#8230;</string>
+    <string name="group_tutorial_help">Understand more about each mode by selecting the help icon&#8230;</string>
 
     <!-- GroupFormActivity -->
     <string name="group_form_title_new">New</string>
@@ -99,6 +107,11 @@
     <string name="group_form_msg_validate_initial_number">Initial number must not be empty</string>
     <string name="group_form_msg_validate_final_number_empty">Final number must not be empty</string>
     <string name="group_form_msg_validate_final_number_greater">Final number must be greater than initial number</string>
+
+    <string name="group_form_tutorial_group_name">Creating a group is easy: first you should choose the group name&#8230;</string>
+    <string name="group_form_tutorial_item_name">Then you should type one item at a time in this field&#8230;</string>
+    <string name="group_form_tutorial_add_item">And click this button to insert the item&#8230;</string>
+    <string name="group_form_tutorial_toolbar">When you\'re done click on the &#x2713; icon to save your group! Explore the menu to see what else you can do&#8230;</string>
 
     <!-- RouletteActivity -->
     <string name="roulette_title">Roulette!</string>

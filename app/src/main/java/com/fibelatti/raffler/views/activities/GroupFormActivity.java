@@ -8,6 +8,7 @@ import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.DialogFragment;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -39,6 +40,8 @@ import org.parceler.Parcels;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import uk.co.deanwild.materialshowcaseview.MaterialShowcaseSequence;
+import uk.co.deanwild.materialshowcaseview.MaterialShowcaseView;
 
 public class GroupFormActivity
         extends BaseActivity
@@ -55,6 +58,8 @@ public class GroupFormActivity
     CoordinatorLayout layout;
     @BindView(R.id.toolbar)
     Toolbar toolbar;
+    @BindView(R.id.fake_tutorial_view)
+    View fakeTutorialView;
     @BindView(R.id.recycler_view)
     RecyclerView recyclerView;
     @BindView(R.id.input_group_name)
@@ -90,6 +95,8 @@ public class GroupFormActivity
         setUpRecyclerView();
         setUpAddButton();
         setValues();
+
+        showTutorial();
     }
 
     @Override
@@ -310,6 +317,55 @@ public class GroupFormActivity
         } else {
             Snackbar.make(layout, getString(R.string.group_form_msg_delete_items), Snackbar.LENGTH_LONG).show();
         }
+    }
+
+    private void showTutorial() {
+        MaterialShowcaseSequence sequence = new MaterialShowcaseSequence(this, Constants.TUTORIAL_KEY_GROUP_FORM);
+
+        sequence.addSequenceItem(
+                new MaterialShowcaseView.Builder(this)
+                        .setTarget(groupNameLayout)
+                        .setDismissText(getString(R.string.hint_got_it))
+                        .setContentText(getString(R.string.group_form_tutorial_group_name))
+                        .setMaskColour(ContextCompat.getColor(context, R.color.colorPrimaryWithTransparency))
+                        .withRectangleShape(true)
+                        .build()
+        );
+
+        sequence.addSequenceItem(
+                new MaterialShowcaseView.Builder(this)
+                        .setTarget(groupItemNameLayout)
+                        .setDismissText(getString(R.string.hint_got_it))
+                        .setContentText(getString(R.string.group_form_tutorial_item_name))
+                        .setMaskColour(ContextCompat.getColor(context, R.color.colorPrimaryWithTransparency))
+                        .withRectangleShape(true)
+                        .setDelay(200)
+                        .build()
+        );
+
+        sequence.addSequenceItem(
+                new MaterialShowcaseView.Builder(this)
+                        .setTarget(buttonAddItem)
+                        .setDismissText(getString(R.string.hint_got_it))
+                        .setContentText(getString(R.string.group_form_tutorial_add_item))
+                        .setMaskColour(ContextCompat.getColor(context, R.color.colorPrimaryWithTransparency))
+                        .setDelay(200)
+                        .build()
+        );
+
+
+        sequence.addSequenceItem(
+                new MaterialShowcaseView.Builder(this)
+                        .setTarget(fakeTutorialView)
+                        .setDismissText(getString(R.string.hint_got_it))
+                        .setContentText(getString(R.string.group_form_tutorial_toolbar))
+                        .setShapePadding(150)
+                        .setMaskColour(ContextCompat.getColor(context, R.color.colorPrimaryWithTransparency))
+                        .setDelay(200)
+                        .build()
+        );
+
+        sequence.start();
     }
 
     @Override
