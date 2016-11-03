@@ -1,6 +1,11 @@
 package com.fibelatti.raffler;
 
+import java.util.Arrays;
+import java.util.List;
+
 public interface Constants {
+
+    String PLAY_STORE_BASE_URL = "http://play.google.com/store/apps/details";
 
     String INTENT_EXTRA_GROUP = "com.fibelatti.raffler.GROUP";
     String INTENT_EXTRA_QUICK_DECISION = "com.fibelatti.raffler.QUICK_DECISION";
@@ -12,6 +17,12 @@ public interface Constants {
     int ACTIVITY_RESULT_GROUP_DELETED = 12;
 
     String FILE_PATH_EXPORTED_GROUP = "raffler_group.rflr";
+
+    List<String> SUPPORTED_LOCALES = Arrays.asList("en", "pt", "es");
+
+    String TUTORIAL_KEY_MAIN = "com.fibelatti.raffler.TUTORIAL_MAIN";
+    String TUTORIAL_KEY_GROUP = "com.fibelatti.raffler.TUTORIAL_GROUP";
+    String TUTORIAL_KEY_GROUP_FORM = "com.fibelatti.raffler.TUTORIAL_GROUP_FORM";
 
     String ANALYTICS_KEY_UPGRADED_DATABASE = "Upgraded database";
     String ANALYTICS_PARAM_OLD_VERSION = "Old version";

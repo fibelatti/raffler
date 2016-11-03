@@ -12,6 +12,7 @@
     <color name="colorGrayDark">#424242</color>
 
     <color name="colorPrimary">#03A9F4</color>
+    <color name="colorPrimaryWithTransparency">#CC03A9F4</color>
     <color name="colorPrimaryDark">#0288D1</color>
     <color name="colorAccent">#FF4081</color>
 

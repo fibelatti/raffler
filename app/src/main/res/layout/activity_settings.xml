@@ -57,6 +57,55 @@
                 android:textColor="@color/textPrimary"
                 android:textSize="@dimen/text_size_regular" />
         </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/layout_quick_decision_buttons"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/settings_about"
+            android:orientation="horizontal"
+            android:paddingLeft="@dimen/padding_large"
+            android:paddingRight="@dimen/padding_large"
+            android:weightSum="2">
+
+            <Button
+                android:id="@+id/button_share"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/settings_share"
+                android:theme="@style/AboutButton" />
+
+            <Button
+                android:id="@+id/button_rate"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/settings_rate"
+                android:theme="@style/AboutButton" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/settings_about"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/settings_version"
+            android:layout_margin="@dimen/margin_smaller"
+            android:gravity="center_horizontal"
+            android:text="@string/settings_about"
+            android:textColor="@color/textPrimary"
+            android:textSize="@dimen/text_size_small" />
+
+        <TextView
+            android:id="@+id/settings_version"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_margin="@dimen/margin_smaller"
+            android:gravity="center_horizontal"
+            android:text="@string/settings_app_version"
+            android:textColor="@color/textPrimary"
+            android:textSize="@dimen/text_size_small" />
     </RelativeLayout>
 
 </android.support.design.widget.CoordinatorLayout>

@@ -11,27 +11,38 @@
 
     <include layout="@layout/toolbar_default" />
 
+    <View
+        android:id="@+id/fake_tutorial_view_menu"
+        android:layout_width="@dimen/clickable_area"
+        android:layout_height="@dimen/clickable_area"
+        android:layout_gravity="top|end" />
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-        <TextView
-            android:id="@+id/header_text"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="@dimen/padding_small"
-            android:text="@string/group_hint_header"
-            android:textColor="@color/textPrimary"
-            android:textSize="@dimen/text_size_regular" />
+        <View
+            android:id="@+id/fake_tutorial_view_check_box"
+            android:layout_width="@dimen/clickable_area"
+            android:layout_height="@dimen/clickable_area"
+            android:layout_gravity="center|start" />
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/recycler_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@id/header_text"
             android:scrollbars="vertical" />
     </RelativeLayout>
+
+    <View
+        android:id="@+id/fake_tutorial_view_fam"
+        android:layout_width="@dimen/clickable_area"
+        android:layout_height="@dimen/clickable_area"
+        android:layout_gravity="bottom|end"
+        android:layout_marginBottom="@dimen/margin_large"
+        android:layout_marginEnd="@dimen/margin_large"
+        android:layout_marginRight="@dimen/margin_large" />
 
     <com.github.clans.fab.FloatingActionMenu
         android:id="@+id/fam"

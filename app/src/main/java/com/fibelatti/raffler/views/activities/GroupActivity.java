@@ -11,6 +11,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.content.FileProvider;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
@@ -43,6 +44,8 @@ import java.io.File;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import uk.co.deanwild.materialshowcaseview.MaterialShowcaseSequence;
+import uk.co.deanwild.materialshowcaseview.MaterialShowcaseView;
 
 public class GroupActivity
         extends BaseActivity
@@ -61,6 +64,12 @@ public class GroupActivity
     CoordinatorLayout layout;
     @BindView(R.id.toolbar)
     Toolbar toolbar;
+    @BindView(R.id.fake_tutorial_view_menu)
+    View fakeTutorialViewMenu;
+    @BindView(R.id.fake_tutorial_view_check_box)
+    View fakeTutorialViewCheckBox;
+    @BindView(R.id.fake_tutorial_view_fam)
+    View fakeTutorialViewFam;
     @BindView(R.id.recycler_view)
     RecyclerView recyclerView;
     @BindView(R.id.fam)
@@ -94,6 +103,8 @@ public class GroupActivity
         setUpLayout();
         setUpRecyclerView();
         setUpFab();
+
+        showTutorial();
     }
 
     @Override
@@ -306,6 +317,56 @@ public class GroupActivity
         }
 
 //        Answers.getInstance().logCustom(new CustomEvent(Constants.ANALYTICS_KEY_GROUP_SHARED));
+    }
+
+    private void showTutorial() {
+        MaterialShowcaseSequence sequence = new MaterialShowcaseSequence(this, Constants.TUTORIAL_KEY_GROUP);
+
+        sequence.addSequenceItem(
+                new MaterialShowcaseView.Builder(this)
+                        .setTarget(fakeTutorialViewCheckBox)
+                        .setDismissText(getString(R.string.hint_got_it))
+                        .setContentText(getString(R.string.group_tutorial_check_items))
+                        .setShapePadding(100)
+                        .setMaskColour(ContextCompat.getColor(context, R.color.colorPrimaryWithTransparency))
+                        .build()
+        );
+
+        sequence.addSequenceItem(
+                new MaterialShowcaseView.Builder(this)
+                        .setTarget(fakeTutorialViewMenu)
+                        .setDismissText(getString(R.string.hint_got_it))
+                        .setContentText(getString(R.string.group_tutorial_menu))
+                        .setShapePadding(100)
+                        .setMaskColour(ContextCompat.getColor(context, R.color.colorPrimaryWithTransparency))
+                        .setDelay(200)
+                        .build()
+        );
+
+        sequence.addSequenceItem(
+                new MaterialShowcaseView.Builder(this)
+                        .setTarget(fakeTutorialViewFam)
+                        .setDismissText(getString(R.string.hint_got_it))
+                        .setContentText(getString(R.string.group_tutorial_play))
+                        .setShapePadding(50)
+                        .setMaskColour(ContextCompat.getColor(context, R.color.colorPrimaryWithTransparency))
+                        .setDelay(200)
+                        .build()
+        );
+
+
+        sequence.addSequenceItem(
+                new MaterialShowcaseView.Builder(this)
+                        .setTarget(fakeTutorialViewMenu)
+                        .setDismissText(getString(R.string.hint_got_it))
+                        .setContentText(getString(R.string.group_tutorial_help))
+                        .setShapePadding(150)
+                        .setMaskColour(ContextCompat.getColor(context, R.color.colorPrimaryWithTransparency))
+                        .setDelay(200)
+                        .build()
+        );
+
+        sequence.start();
     }
 
     @Override
