@@ -149,4 +149,15 @@
     <string name="settings_rate">Rate this app!</string>
     <string name="settings_about">Developed with ❤ by Filipe Belatti.</string>
     <string name="settings_app_version">Version: 1.2.0</string>
+
+    <!-- DialogRate -->
+    <string name="dialog_rate_title">Rate this app!</string>
+    <string name="dialog_rate_cancel">Cancel</string>
+    <string name="dialog_rate_header">If you\'re enjoying Raffler! I would love to receive your review!</string>
+    <string name="dialog_rate_feedback_positive">I\'m glad you\'re enjoying it! What about showing your love at the Play Store?</string>
+    <string name="dialog_rate_play_store">Play Store</string>
+    <string name="dialog_rate_feedback_negative">Would you mind sending me an e-mail suggesting what can I do to improve your experience with the app?</string>
+    <string name="dialog_rate_send_email">Send e-mail</string>
+    <string name="dialog_rate_send_email_subject">Raffler! - Feedback</string>
+    <string name="dialog_rate_send_email_title">Choose e-mail app</string>
 </resources>

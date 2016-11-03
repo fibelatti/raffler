@@ -1,12 +1,11 @@
 package com.fibelatti.raffler.views.activities;
 
-import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.DialogFragment;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
@@ -19,6 +18,7 @@ import android.widget.TextView;
 import com.fibelatti.raffler.Constants;
 import com.fibelatti.raffler.R;
 import com.fibelatti.raffler.db.Database;
+import com.fibelatti.raffler.views.fragments.RateAppDialogFragment;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -99,7 +99,7 @@ public class SettingsActivity
         buttonShare.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String message = getString(R.string.settings_share_text, createAppUrl(Constants.PLAY_STORE_BASE_URL));
+                String message = getString(R.string.settings_share_text, String.format("%s?id=%s", Constants.PLAY_STORE_BASE_URL, getPackageName()));
                 Intent share = new Intent(Intent.ACTION_SEND);
                 share.setType("text/plain");
                 share.putExtra(Intent.EXTRA_TEXT, message);
@@ -111,26 +111,13 @@ public class SettingsActivity
         buttonRate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                rateApp();
+                DialogFragment rateFragment = new RateAppDialogFragment();
+                rateFragment.show(getSupportFragmentManager(), RateAppDialogFragment.TAG);
             }
         });
     }
 
     private void fetchDataFromDb() {
         rouletteMusicCheckBox.setChecked(Database.settingsDao.getRouletteMusicEnabled());
-    }
-
-    public void rateApp() {
-        try {
-            Intent rateIntent = createAppUrl("market://details");
-            startActivity(rateIntent);
-        } catch (ActivityNotFoundException e) {
-            Intent rateIntent = createAppUrl(Constants.PLAY_STORE_BASE_URL);
-            startActivity(rateIntent);
-        }
-    }
-
-    private Intent createAppUrl(String url) {
-        return new Intent(Intent.ACTION_VIEW, Uri.parse(String.format("%s?id=%s", url, getPackageName())));
     }
 }

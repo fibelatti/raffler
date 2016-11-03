@@ -136,4 +136,15 @@
     <string name="settings_rate">Dê sua avaliação!</string>
     <string name="settings_about">Desenvolvido com ❤ por Filipe Belatti.</string>
     <string name="settings_app_version">Versão: 1.2.0</string>
+
+    <!-- DialogRate -->
+    <string name="dialog_rate_title">Avaliando</string>
+    <string name="dialog_rate_cancel">Cancelar</string>
+    <string name="dialog_rate_header">Se está gostando do Raffler! eu adoraria receber sua avaliação!</string>
+    <string name="dialog_rate_feedback_positive">Que bom que está gostando! Que tal mostrar seu amor na Play Store?</string>
+    <string name="dialog_rate_play_store">Play Store</string>
+    <string name="dialog_rate_feedback_negative">Gostaria de me enviar um e-mail sugerindo o que posso fazer para melhorar sua experiência com o app?</string>
+    <string name="dialog_rate_send_email">Enviar e-mail</string>
+    <string name="dialog_rate_send_email_subject">Raffler! - Sugestões</string>
+    <string name="dialog_rate_send_email_title">Escolher aplicativo de e-mail</string>
 </resources>
