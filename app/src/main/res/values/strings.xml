@@ -17,6 +17,7 @@
     <string name="hint_yes">Yes</string>
     <string name="hint_no">No</string>
     <string name="hint_got_it">GOT IT</string>
+    <string name="hint_skip_tutorial">SKIP TUTORIAL</string>
 
     <string name="generic_msg_error">Oops! Something went wrong. Please try again.</string>
 

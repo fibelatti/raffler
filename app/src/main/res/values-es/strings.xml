@@ -4,6 +4,7 @@
     <string name="hint_yes">Sí</string>
     <string name="hint_no">No</string>
     <string name="hint_got_it">¡VALE!</string>
+    <string name="hint_skip_tutorial">SALTAR TUTORIAL</string>
 
     <string name="generic_msg_error">Ups! Algo salió mal. Inténtelo de nuevo.</string>
 
