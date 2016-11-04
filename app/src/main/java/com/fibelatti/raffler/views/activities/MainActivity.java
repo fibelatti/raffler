@@ -198,10 +198,10 @@ public class MainActivity
                 new MaterialShowcaseView.Builder(this)
                         .setTarget(toolbar)
                         .setDismissText(getString(R.string.hint_got_it))
+                        .setSkipText(getString(R.string.hint_skip_tutorial))
                         .setContentText(getString(R.string.main_tutorial_intro))
                         .setMaskColour(ContextCompat.getColor(context, R.color.colorPrimaryWithTransparency))
-                        .withRectangleShape(true)
-                        .setShapePadding(-10)
+                        .withoutShape()
                         .build()
         );
 
@@ -209,6 +209,7 @@ public class MainActivity
                 new MaterialShowcaseView.Builder(this)
                         .setTarget(quickDecisionLayout)
                         .setDismissText(getString(R.string.hint_got_it))
+                        .setSkipText(getString(R.string.hint_skip_tutorial))
                         .setContentText(getString(R.string.main_tutorial_quick_decision))
                         .setMaskColour(ContextCompat.getColor(context, R.color.colorPrimaryWithTransparency))
                         .withRectangleShape(true)
