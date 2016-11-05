@@ -4,7 +4,6 @@ import com.fibelatti.raffler.db.Database;
 
 import org.parceler.Parcel;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -16,13 +15,6 @@ public class QuickDecision {
     Boolean enabled;
 
     public QuickDecision() {
-    }
-
-    public QuickDecision(Long id, String name, ArrayList<String> values, Boolean enabled) {
-        this.id = id;
-        this.name = name;
-        this.values = values;
-        this.enabled = enabled;
     }
 
     public Long getId() {
@@ -57,7 +49,7 @@ public class QuickDecision {
         return values != null ? values.get(index) : "";
     }
 
-    public void setValues(ArrayList<String> values) {
+    public void setValues(List<String> values) {
         this.values = values;
     }
 
@@ -79,5 +71,37 @@ public class QuickDecision {
         this.name = qd.getName();
         this.values = qd.getValues();
         this.enabled = qd.getEnabled();
+    }
+
+    public static class Builder {
+        final QuickDecision quickDecision;
+
+        public Builder() {
+            quickDecision = new QuickDecision();
+        }
+
+        public Builder setId(Long id) {
+            quickDecision.setId(id);
+            return this;
+        }
+
+        public Builder setName(String name) {
+            quickDecision.setName(name);
+            return this;
+        }
+
+        public Builder setValues(List<String> values) {
+            quickDecision.setValues(values);
+            return this;
+        }
+
+        public Builder setEnabled(Boolean enabled) {
+            quickDecision.setEnabled(enabled);
+            return this;
+        }
+
+        public QuickDecision build() {
+            return quickDecision;
+        }
     }
 }

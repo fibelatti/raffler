@@ -200,8 +200,9 @@ public class GroupActivity
                 if (validateSelection()) {
 //                    Answers.getInstance().logCustom(new CustomEvent(Constants.ANALYTICS_KEY_MODE_ROULETTE));
 
-                    Group newGroup = new Group();
-                    newGroup.setItems(group.getSelectedItems());
+                    Group newGroup = new Group.Builder()
+                            .setItems(group.getSelectedItems())
+                            .build();
                     navigator.startRouletteActivity(newGroup);
                 }
             }
@@ -213,8 +214,9 @@ public class GroupActivity
                 if (validateSelection()) {
 //                    Answers.getInstance().logCustom(new CustomEvent(Constants.ANALYTICS_KEY_MODE_RANDOM_WINNERS));
 
-                    Group newGroup = new Group();
-                    newGroup.setItems(group.getSelectedItems());
+                    Group newGroup = new Group.Builder()
+                            .setItems(group.getSelectedItems())
+                            .build();
                     navigator.startRandomWinnersActivity(newGroup);
                 }
             }
@@ -226,8 +228,9 @@ public class GroupActivity
 //                Answers.getInstance().logCustom(new CustomEvent(Constants.ANALYTICS_KEY_MODE_SUB_GROUPS));
 
                 if (validateSelection()) {
-                    Group newGroup = new Group();
-                    newGroup.setItems(group.getSelectedItems());
+                    Group newGroup = new Group.Builder()
+                            .setItems(group.getSelectedItems())
+                            .build();
                     navigator.startSubGroupsActivity(newGroup);
                 }
             }

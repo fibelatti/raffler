@@ -14,18 +14,7 @@ public class Group {
     String name;
     List<GroupItem> items;
 
-    public Group() {
-        this(null, null, new ArrayList<GroupItem>());
-    }
-
-    public Group(String name) {
-        this(null, name, new ArrayList<GroupItem>());
-    }
-
-    public Group(Long id, String name, ArrayList<GroupItem> items) {
-        this.id = id;
-        this.name = name;
-        this.items = items;
+    private Group() {
     }
 
     public Long getId() {
@@ -106,5 +95,41 @@ public class Group {
         this.name = g.getName();
         this.items.clear();
         this.items.addAll(g.getItems());
+    }
+
+    public static class Builder {
+        final Group group;
+
+        public Builder() {
+            group = new Group();
+        }
+
+        public Builder setId(Long id) {
+            group.setId(id);
+            return this;
+        }
+
+        public Builder setName(String name) {
+            group.setName(name);
+            return this;
+        }
+
+        public Builder setItems(List<GroupItem> groupItems) {
+            group.setItems(groupItems);
+            return this;
+        }
+
+        public Builder addItem(GroupItem groupItem) {
+            if (group.getItems() == null) group.setItems(new ArrayList<GroupItem>());
+            group.addItem(groupItem);
+
+            return this;
+        }
+
+        public Group build() {
+            if (group.getItems() == null) group.setItems(new ArrayList<GroupItem>());
+
+            return group;
+        }
     }
 }
