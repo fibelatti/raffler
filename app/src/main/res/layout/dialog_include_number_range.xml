@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="@dimen/padding_regular">
@@ -11,7 +12,7 @@
         android:padding="@dimen/padding_small"
         android:text="@string/group_form_dialog_msg_include_number_range"
         android:textColor="@color/textPrimary"
-        android:textSize="@dimen/text_size_regular" />
+        android:textSize="@dimen/text_size_regular"/>
 
     <android.support.design.widget.TextInputLayout
         android:id="@+id/input_layout_initial_number"
@@ -31,7 +32,7 @@
             android:maxLength="@integer/text_max_length_3"
             android:singleLine="true"
             android:textColor="@color/textPrimary"
-            android:textSize="@dimen/text_size_regular" />
+            android:textSize="@dimen/text_size_regular"/>
     </android.support.design.widget.TextInputLayout>
 
     <android.support.design.widget.TextInputLayout
@@ -52,7 +53,7 @@
             android:maxLength="@integer/text_max_length_3"
             android:singleLine="true"
             android:textColor="@color/textPrimary"
-            android:textSize="@dimen/text_size_regular" />
+            android:textSize="@dimen/text_size_regular"/>
     </android.support.design.widget.TextInputLayout>
 
 </RelativeLayout>

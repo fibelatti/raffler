@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:fab="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -9,7 +10,7 @@
     android:fitsSystemWindows="true"
     tools:context=".views.activities.MainActivity">
 
-    <include layout="@layout/toolbar_default" />
+    <include layout="@layout/toolbar_default"/>
 
     <RelativeLayout
         android:id="@+id/layout_content"
@@ -35,12 +36,12 @@
                     android:layout_height="wrap_content"
                     android:text="@string/main_section_title_quick_decisions"
                     android:textColor="@color/colorAccent"
-                    android:textSize="@dimen/text_size_regular" />
+                    android:textSize="@dimen/text_size_regular"/>
 
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
-                    android:background="@color/colorAccent" />
+                    android:background="@color/colorAccent"/>
             </LinearLayout>
 
             <LinearLayout
@@ -57,14 +58,14 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:theme="@style/QuickDecisionButton" />
+                    android:theme="@style/QuickDecisionButton"/>
 
                 <Button
                     android:id="@+id/button_quick_decision_two"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:theme="@style/QuickDecisionButton" />
+                    android:theme="@style/QuickDecisionButton"/>
             </LinearLayout>
         </LinearLayout>
 
@@ -81,12 +82,12 @@
                 android:layout_height="wrap_content"
                 android:text="@string/main_section_title_my_groups"
                 android:textColor="@color/colorAccent"
-                android:textSize="@dimen/text_size_regular" />
+                android:textSize="@dimen/text_size_regular"/>
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="@color/colorAccent" />
+                android:background="@color/colorAccent"/>
         </LinearLayout>
 
         <TextView
@@ -99,7 +100,7 @@
             android:text="@string/main_hint_placeholder"
             android:textColor="@color/textSecondary"
             android:textSize="@dimen/text_size_regular"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/recycler_view"
@@ -108,7 +109,7 @@
             android:layout_below="@id/title_section_my_groups"
             android:paddingLeft="@dimen/padding_smaller"
             android:paddingRight="@dimen/padding_smaller"
-            android:visibility="gone" />
+            android:visibility="gone"/>
     </RelativeLayout>
 
     <com.github.clans.fab.FloatingActionButton
@@ -122,6 +123,6 @@
         android:src="@drawable/ic_add_white"
         fab:fab_colorNormal="@color/colorAccent"
         fab:fab_colorPressed="@color/colorAccent"
-        fab:layout_behavior=".views.extensions.ClansFloatingActionBehavior" />
+        fab:layout_behavior=".views.extensions.ClansFloatingActionBehavior"/>
 
 </android.support.design.widget.CoordinatorLayout>

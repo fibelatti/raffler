@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/coordinator_layout"
@@ -8,7 +9,7 @@
     android:fitsSystemWindows="true"
     tools:context=".views.activities.RandomWinnersActivity">
 
-    <include layout="@layout/toolbar_default" />
+    <include layout="@layout/toolbar_default"/>
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -39,7 +40,7 @@
                     android:maxLength="@integer/text_max_length_3"
                     android:singleLine="true"
                     android:textColor="@color/textPrimary"
-                    android:textSize="@dimen/text_size_regular" />
+                    android:textSize="@dimen/text_size_regular"/>
             </android.support.design.widget.TextInputLayout>
 
             <ImageButton
@@ -51,7 +52,7 @@
                 android:padding="@dimen/padding_small"
                 android:src="@drawable/ic_play_circle_white"
                 android:text="@string/random_winners_action_raffle"
-                android:tint="@color/colorAccent" />
+                android:tint="@color/colorAccent"/>
         </LinearLayout>
 
         <android.support.v7.widget.RecyclerView
@@ -61,7 +62,7 @@
             android:layout_below="@id/layout_winners_quantity"
             android:paddingLeft="@dimen/padding_smaller"
             android:paddingRight="@dimen/padding_smaller"
-            android:scrollbars="vertical" />
+            android:scrollbars="vertical"/>
     </RelativeLayout>
 
 </android.support.design.widget.CoordinatorLayout>

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/coordinator_layout"
@@ -8,13 +9,13 @@
     android:fitsSystemWindows="true"
     tools:context=".views.activities.GroupFormActivity">
 
-    <include layout="@layout/toolbar_default" />
+    <include layout="@layout/toolbar_default"/>
 
     <View
         android:id="@+id/fake_tutorial_view"
         android:layout_width="@dimen/clickable_area"
         android:layout_height="@dimen/clickable_area"
-        android:layout_gravity="top|end" />
+        android:layout_gravity="top|end"/>
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -38,7 +39,7 @@
                 android:maxLength="@integer/text_max_length_25"
                 android:singleLine="true"
                 android:textColor="@color/textPrimary"
-                android:textSize="@dimen/text_size_regular" />
+                android:textSize="@dimen/text_size_regular"/>
         </android.support.design.widget.TextInputLayout>
 
         <LinearLayout
@@ -66,7 +67,7 @@
                     android:maxLength="@integer/text_max_length_25"
                     android:singleLine="true"
                     android:textColor="@color/textPrimary"
-                    android:textSize="@dimen/text_size_regular" />
+                    android:textSize="@dimen/text_size_regular"/>
             </android.support.design.widget.TextInputLayout>
 
             <ImageButton
@@ -78,7 +79,7 @@
                 android:padding="@dimen/padding_small"
                 android:src="@drawable/ic_add_circle_white"
                 android:text="@string/group_form_action_add"
-                android:tint="@color/colorAccent" />
+                android:tint="@color/colorAccent"/>
         </LinearLayout>
 
         <android.support.v7.widget.RecyclerView
@@ -88,7 +89,7 @@
             android:layout_below="@id/input_layout_group_item"
             android:paddingLeft="@dimen/padding_small"
             android:paddingRight="@dimen/padding_small"
-            android:scrollbars="vertical" />
+            android:scrollbars="vertical"/>
     </RelativeLayout>
 
 </android.support.design.widget.CoordinatorLayout>

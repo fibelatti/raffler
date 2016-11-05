@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                                                 xmlns:app="http://schemas.android.com/apk/res-auto"
-                                                 xmlns:tools="http://schemas.android.com/tools"
-                                                 android:id="@+id/coordinator_layout"
-                                                 android:layout_width="match_parent"
-                                                 android:layout_height="match_parent"
-                                                 android:fitsSystemWindows="true"
-                                                 tools:context=".views.activities.SettingsActivity">
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/coordinator_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    tools:context=".views.activities.SettingsActivity">
 
     <include layout="@layout/toolbar_default"/>
 
@@ -24,13 +25,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-                <!--
-            Each settings section should have at least:
-             - A RelativeLayout to hold the section
-             - A TextView with the section title
-             - A View to de used as divider
-             - Remaining needed views for that section
-            -->
                 <RelativeLayout
                     android:id="@+id/layout_roulette_music"
                     android:layout_width="match_parent"
@@ -98,6 +92,11 @@
                         android:layout_marginBottom="@dimen/margin_small"
                         android:background="@color/colorAccent"/>
 
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/recycler_view_quick_decision"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_below="@id/divider_settings_quick_decision"/>
                 </RelativeLayout>
             </RelativeLayout>
         </ScrollView>
