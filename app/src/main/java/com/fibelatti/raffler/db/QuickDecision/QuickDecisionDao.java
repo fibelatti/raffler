@@ -71,10 +71,10 @@ public class QuickDecisionDao
     }
 
     @Override
-    public List<QuickDecision> fetchEnabledQuickDecisions() {
+    public List<QuickDecision> fetchQuickDecisionsByStatus(Boolean enabled) {
         List<QuickDecision> quickDecisionList = new ArrayList<>();
 
-        final String selectionArgs[] = {String.valueOf(1), locale};
+        final String selectionArgs[] = {enabled ? "1" : "0", locale};
         final String selection = QUICK_DECISION_COLUMN_ENABLED + " = ?" + " AND " + QUICK_DECISION_COLUMN_LOCALE + " = ?";
 
         cursor = super.query(QUICK_DECISION_TABLE, QUICK_DECISION_COLUMNS, selection,

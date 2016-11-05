@@ -188,7 +188,7 @@ public class MainActivity
         adapter.notifyDataSetChanged();
 
         if (quickDecisionList != null) quickDecisionList.clear();
-        quickDecisionList.addAll(Database.quickDecisionDao.fetchEnabledQuickDecisions());
+        quickDecisionList.addAll(Database.quickDecisionDao.fetchQuickDecisionsByStatus(true));
     }
 
     private void showTutorial() {
