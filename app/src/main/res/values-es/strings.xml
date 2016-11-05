@@ -128,8 +128,9 @@
     <string name="settings_msg_save">Cambios guardados</string>
 
     <string name="settings_title_sound">Efectos sonoros</string>
-
     <string name="settings_hint_roulette_music">Habilitar la música de la ruleta</string>
+
+    <string name="settings_title_quick_decision">Decisiones Rápidas</string>
 
     <string name="settings_share">¡Compartir!</string>
     <string name="settings_share_title">¡Compartiendo Raffler!</string>

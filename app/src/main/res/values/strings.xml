@@ -141,8 +141,9 @@
     <string name="settings_msg_save">Changes saved</string>
 
     <string name="settings_title_sound">Sound Effects</string>
-
     <string name="settings_hint_roulette_music">Enable roulette music</string>
+
+    <string name="settings_title_quick_decision">Quick Decisions</string>
 
     <string name="settings_share">Tell your friends!</string>
     <string name="settings_share_title">Sharing Raffler!</string>
