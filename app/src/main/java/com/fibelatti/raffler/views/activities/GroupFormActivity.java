@@ -188,14 +188,16 @@ public class GroupFormActivity
         if (intent.hasExtra(Constants.INTENT_EXTRA_GROUP)) {
             return (Group) Parcels.unwrap(intent.getParcelableExtra(Constants.INTENT_EXTRA_GROUP));
         } else {
-            return new Group();
+            return new Group.Builder().build();
         }
     }
 
     private void addItem() {
         if (validateItemName()) {
-            GroupItem groupItem = new GroupItem(groupItemName.getText().toString());
-            groupItem.setSelected(false);
+            GroupItem groupItem = new GroupItem.Builder()
+                    .setName(groupItemName.getText().toString())
+                    .setSelected(false)
+                    .build();
 
             presenter.addItemToGroup(groupItem);
             groupItemName.setText(null);
@@ -382,8 +384,10 @@ public class GroupFormActivity
         GroupItem groupItem;
 
         for (int i = initialValue; i <= finalValue; i++) {
-            groupItem = new GroupItem(String.valueOf(i));
-            groupItem.setSelected(false);
+            groupItem = new GroupItem.Builder()
+                    .setName(String.valueOf(i))
+                    .setSelected(false)
+                    .build();
 
             presenter.addItemToGroup(groupItem);
         }

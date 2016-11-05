@@ -12,21 +12,6 @@ public class GroupItem {
     public GroupItem() {
     }
 
-    public GroupItem(String name) {
-        this(null, null, name);
-    }
-
-    public GroupItem(Long groupId, String name) {
-        this(null, groupId, name);
-    }
-
-    public GroupItem(Long id, Long groupId, String name) {
-        this.id = id;
-        this.groupId = groupId;
-        this.name = name;
-        this.isSelected = true;
-    }
-
     public Long getId() {
         return id;
     }
@@ -59,5 +44,37 @@ public class GroupItem {
 
     public void setSelected(Boolean selected) {
         isSelected = selected;
+    }
+
+    public static class Builder {
+        final GroupItem groupItem;
+
+        public Builder() {
+            groupItem = new GroupItem();
+        }
+
+        public Builder setId(Long id) {
+            groupItem.setId(id);
+            return this;
+        }
+
+        public Builder setGroupId(Long groupId) {
+            groupItem.setGroupId(groupId);
+            return this;
+        }
+
+        public Builder setName(String name) {
+            groupItem.setName(name);
+            return this;
+        }
+
+        public Builder setSelected(Boolean selected) {
+            groupItem.setSelected(selected);
+            return this;
+        }
+
+        public GroupItem build() {
+            return groupItem;
+        }
     }
 }

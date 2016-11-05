@@ -117,16 +117,17 @@ public class SubGroupsActivity
             subgroups.clear();
 
             for (int i = 0; i < quantity; i++) {
-                Group newGroup = new Group();
+                Group newGroup = new Group.Builder()
+                        .setName(getString(R.string.subgroups_hint_group_name, i + 1))
+                        .build();
 
-                newGroup.setName(getString(R.string.subgroups_hint_group_name, i + 1));
                 subgroups.add(newGroup);
             }
 
             while (!randomizedIndex.isEmpty()) {
                 String currentItem = group.getItemName(randomizedIndex.get(0));
 
-                subgroups.get(subgroupIndex).addItem(new GroupItem(currentItem));
+                subgroups.get(subgroupIndex).addItem(new GroupItem.Builder().setName(currentItem).build());
 
                 subgroupIndex++;
                 if (subgroupIndex == quantity)

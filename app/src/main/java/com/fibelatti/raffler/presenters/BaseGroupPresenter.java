@@ -20,7 +20,7 @@ public class BaseGroupPresenter
     private BaseGroupPresenter(Context context, IBaseGroupPresenterView view) {
         this.context = context;
         this.view = view;
-        this.group = new Group();
+        this.group = new Group.Builder().build();
     }
 
     public static BaseGroupPresenter createPresenter(Context context, IBaseGroupPresenterView view) {
