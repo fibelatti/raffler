@@ -12,7 +12,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.fibelatti.raffler.Constants;
@@ -33,8 +32,6 @@ public class SettingsActivity
     @BindView(R.id.toolbar)
     Toolbar toolbar;
 
-    @BindView(R.id.layout_roulette_music)
-    LinearLayout rouletteMusicLayout;
     @BindView(R.id.chk_roulette_music)
     CheckBox rouletteMusicCheckBox;
     @BindView(R.id.txt_roulette_music)
