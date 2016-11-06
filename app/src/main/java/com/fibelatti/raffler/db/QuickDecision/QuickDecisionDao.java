@@ -96,8 +96,8 @@ public class QuickDecisionDao
     @Override
     public boolean toggleQuickDecisionEnabled(QuickDecision quickDecision) {
         setContentValue(quickDecision);
-        final String selectionArgs[] = {String.valueOf(quickDecision.getId())};
-        final String selection = QUICK_DECISION_COLUMN_ID + " = ?";
+        final String selectionArgs[] = {String.valueOf(quickDecision.getKey()), locale};
+        final String selection = QUICK_DECISION_COLUMN_ID + " = ?" + " AND " + QUICK_DECISION_COLUMN_LOCALE + " = ?";
 
         try {
             return super.update(QUICK_DECISION_TABLE, getContentValue(), selection, selectionArgs) > 0;
@@ -118,7 +118,7 @@ public class QuickDecisionDao
         if (cursor != null) {
             if (cursor.getColumnIndex(QUICK_DECISION_COLUMN_ID) != -1) {
                 idIndex = cursor.getColumnIndexOrThrow(QUICK_DECISION_COLUMN_ID);
-                quickDecision.setId(cursor.getLong(idIndex));
+                quickDecision.setKey(cursor.getString(idIndex));
             }
             if (cursor.getColumnIndex(QUICK_DECISION_COLUMN_NAME) != -1) {
                 quickDecisionNameIndex = cursor.getColumnIndexOrThrow(

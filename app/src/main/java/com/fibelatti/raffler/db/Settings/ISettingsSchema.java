@@ -15,9 +15,9 @@ public interface ISettingsSchema {
     String[] SETTINGS_COLUMNS = new String[] {
             SETTINGS_COLUMN_ROULETTE_MUSIC_ENABLED};
 
-    String SETTINGS_TABLE_INITIAL_SETUP = "INSERT INTO "
+    String SETTINGS_TABLE_INITIAL_SETUP = "INSERT OR REPLACE INTO "
             + SETTINGS_TABLE
             + " VALUES ("
-            + "1" // SETTINGS_COLUMN_ROULETTE_MUSIC_ENABLED
+            + "COALESCE((SELECT " + SETTINGS_COLUMN_ROULETTE_MUSIC_ENABLED + " FROM " + SETTINGS_TABLE + "), 1)"
             + ")";
 }

@@ -22,7 +22,7 @@ public class Database {
     public static final String TAG = Database.class.getSimpleName();
 
     private static final String DATABASE_NAME = "com.fibelatti.raffler.db";
-    private static final int DATABASE_VERSION = 3;
+    private static final int DATABASE_VERSION = 4;
     private DatabaseHelper dbHelper;
     private final Context context;
 
