@@ -11,8 +11,10 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.RadioButton;
 
 import com.fibelatti.raffler.Constants;
 import com.fibelatti.raffler.R;
@@ -44,9 +46,13 @@ public class SubGroupsActivity
     Toolbar toolbar;
     @BindView(R.id.recycler_view)
     RecyclerView recyclerView;
-    @BindView(R.id.input_subgroups_quantity)
-    EditText subgroupsQuantity;
-    @BindView(R.id.input_layout_subgroups_quantity)
+    @BindView(R.id.radio_subgroups)
+    RadioButton radioSubGroups;
+    @BindView(R.id.radio_members)
+    RadioButton radioMembers;
+    @BindView(R.id.input_quantity)
+    EditText inputQuantity;
+    @BindView(R.id.input_layout_quantity)
     TextInputLayout subgroupsQuantityLayout;
     @BindView(R.id.btn_raffle_subgroups)
     ImageButton buttonRaffleSubgroups;
@@ -95,66 +101,81 @@ public class SubGroupsActivity
         buttonRaffleSubgroups.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                raffleSubgroups();
+                if (view != null) {
+                    InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                    imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+                }
+
+                raffle();
             }
         });
     }
 
     private void setValues() {
         this.setTitle(getResources().getString(R.string.subgroups_title));
+        radioSubGroups.setChecked(true);
     }
 
     private Group fetchDataFromIntent() {
         return (Group) Parcels.unwrap(getIntent().getParcelableExtra(Constants.INTENT_EXTRA_GROUP));
     }
 
-    private void raffleSubgroups() {
-        if (validateQuantity()) {
-            int quantity = Integer.valueOf(subgroupsQuantity.getText().toString());
-            int subgroupIndex = 0;
-            List<Integer> randomizedIndex = RandomizeUtils.getRandomIndexesInRange(group.getItemsCount(), group.getItemsCount());
+    private void raffle() {
+        if (radioSubGroups.isChecked()) {
+            if (validateQuantity())
+                raffleSubGroups(Integer.valueOf(inputQuantity.getText().toString()));
+        } else {
+            Double quantity = Math.ceil((double) group.getItemsCount() / Integer.valueOf(inputQuantity.getText().toString()));
 
-            subgroups.clear();
-
-            for (int i = 0; i < quantity; i++) {
-                Group newGroup = new Group.Builder()
-                        .setName(getString(R.string.subgroups_hint_group_name, i + 1))
-                        .build();
-
-                subgroups.add(newGroup);
-            }
-
-            while (!randomizedIndex.isEmpty()) {
-                String currentItem = group.getItemName(randomizedIndex.get(0));
-
-                subgroups.get(subgroupIndex).addItem(new GroupItem.Builder().setName(currentItem).build());
-
-                subgroupIndex++;
-                if (subgroupIndex == quantity)
-                    subgroupIndex = 0;
-
-                randomizedIndex.remove(0);
-            }
-
-            adapter.notifyDataSetChanged();
+            if (validateQuantityWithMinimum())
+                raffleSubGroups(quantity.intValue());
         }
     }
 
+    private void raffleSubGroups(int quantity) {
+        int subgroupIndex = 0;
+        List<Integer> randomizedIndex = RandomizeUtils.getRandomIndexesInRange(group.getItemsCount(), group.getItemsCount());
+
+        subgroups.clear();
+
+        for (int i = 0; i < quantity; i++) {
+            Group newGroup = new Group.Builder()
+                    .setName(getString(R.string.subgroups_hint_group_name, i + 1))
+                    .build();
+
+            subgroups.add(newGroup);
+        }
+
+        while (!randomizedIndex.isEmpty()) {
+            String currentItem = group.getItemName(randomizedIndex.get(0));
+
+            subgroups.get(subgroupIndex).addItem(new GroupItem.Builder().setName(currentItem).build());
+
+            subgroupIndex++;
+            if (subgroupIndex == quantity)
+                subgroupIndex = 0;
+
+            randomizedIndex.remove(0);
+        }
+
+        adapter.notifyDataSetChanged();
+    }
+
     private boolean validateQuantity() {
-        if (StringUtils.isNullOrEmpty(subgroupsQuantity.getText().toString())) {
+        if (StringUtils.isNullOrEmpty(inputQuantity.getText().toString())) {
             subgroupsQuantityLayout.setError(getString(R.string.subgroups_msg_validate_quantity_empty));
-            requestFocus(subgroupsQuantity);
+            requestFocus(inputQuantity);
             return false;
         } else {
             subgroupsQuantityLayout.setError(null);
             subgroupsQuantityLayout.setErrorEnabled(false);
         }
 
-        int quantity = Integer.valueOf(subgroupsQuantity.getText().toString());
+        int quantity = Integer.valueOf(inputQuantity.getText().toString());
 
         if (quantity > getMaximumQuantity()) {
-            subgroupsQuantityLayout.setError(getString(R.string.subgroups_msg_validate_quantity, getMaximumQuantity()));
-            requestFocus(subgroupsQuantity);
+            subgroupsQuantityLayout.setError(getString(R.string.subgroups_msg_validate_quantity_maximum, getMaximumQuantity()));
+            requestFocus(inputQuantity);
             return false;
         } else {
             subgroupsQuantityLayout.setError(null);
@@ -162,6 +183,23 @@ public class SubGroupsActivity
         }
 
         return true;
+    }
+
+    private boolean validateQuantityWithMinimum() {
+        boolean partialResult = validateQuantity();
+
+        int quantity = Integer.valueOf(inputQuantity.getText().toString());
+
+        if (quantity < 2) {
+            subgroupsQuantityLayout.setError(getString(R.string.subgroups_msg_validate_quantity_minimum, 2));
+            requestFocus(inputQuantity);
+            return false;
+        } else {
+            subgroupsQuantityLayout.setError(null);
+            subgroupsQuantityLayout.setErrorEnabled(false);
+        }
+
+        return partialResult;
     }
 
     private int getMaximumQuantity() {

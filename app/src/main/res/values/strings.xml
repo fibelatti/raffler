@@ -129,9 +129,13 @@
 
     <!-- SubGroupsActivity -->
     <string name="subgroups_title">Sub Groups!</string>
-    <string name="subgroups_hint_quantity">Quantity of subgroups</string>
+    <string name="subgroups_hint_radio_group_title">Type</string>
+    <string name="subgroups_hint_radio_subgroups">Sub Groups</string>
+    <string name="subgroups_hint_radio_members">Elements per group</string>
+    <string name="subgroups_hint_quantity">Quantity</string>
     <string name="subgroups_action_raffle">Raffle</string>
-    <string name="subgroups_msg_validate_quantity">Quantity should be equal or less than %d</string>
+    <string name="subgroups_msg_validate_quantity_maximum">Quantity should be equal or less than %d</string>
+    <string name="subgroups_msg_validate_quantity_minimum">Quantity should be equal or greater than %d</string>
     <string name="subgroups_msg_validate_quantity_empty">Quantity should not be empty</string>
     <string name="subgroups_hint_group_name">Group #%s</string>
 
