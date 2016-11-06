@@ -27,7 +27,7 @@ public class GroupItemDao
     public GroupItem fetchGroupItemById(long itemId) {
         final String selectionArgs[] = {String.valueOf(itemId)};
         final String selection = GROUP_ITEMS_COLUMN_ID + " = ?";
-        GroupItem item = new GroupItem();
+        GroupItem item = new GroupItem.Builder().build();
         cursor = super.query(GROUP_ITEMS_TABLE, GROUP_ITEMS_COLUMNS, selection,
                 selectionArgs, GROUP_ITEMS_COLUMN_ID);
         if (cursor != null) {
@@ -147,7 +147,7 @@ public class GroupItemDao
     }
 
     protected GroupItem cursorToEntity(Cursor cursor) {
-        GroupItem item = new GroupItem();
+        GroupItem item = new GroupItem.Builder().build();
 
         int idIndex;
         int groupIdIndex;

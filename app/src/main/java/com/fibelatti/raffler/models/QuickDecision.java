@@ -12,7 +12,7 @@ public class QuickDecision {
     List<String> values;
     Boolean enabled;
 
-    public QuickDecision() {
+    private QuickDecision() {
     }
 
     public String getKey() {

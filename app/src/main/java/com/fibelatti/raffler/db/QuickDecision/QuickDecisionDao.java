@@ -33,7 +33,7 @@ public class QuickDecisionDao
 
         final String selectionArgs[] = {String.valueOf(quickDecisionId), locale};
         final String selection = QUICK_DECISION_COLUMN_ID + " = ?" + " AND " + QUICK_DECISION_COLUMN_LOCALE + " = ?";
-        QuickDecision quickDecision = new QuickDecision();
+        QuickDecision quickDecision = new QuickDecision.Builder().build();
         cursor = super.query(QUICK_DECISION_TABLE, QUICK_DECISION_COLUMNS, selection,
                 selectionArgs, QUICK_DECISION_COLUMN_ID);
         if (cursor != null) {
@@ -108,7 +108,7 @@ public class QuickDecisionDao
     }
 
     protected QuickDecision cursorToEntity(Cursor cursor) {
-        QuickDecision quickDecision = new QuickDecision();
+        QuickDecision quickDecision = new QuickDecision.Builder().build();
 
         int idIndex;
         int quickDecisionNameIndex;

@@ -9,7 +9,7 @@ public class GroupItem {
     String name;
     Boolean isSelected;
 
-    public GroupItem() {
+    private GroupItem() {
     }
 
     public Long getId() {
