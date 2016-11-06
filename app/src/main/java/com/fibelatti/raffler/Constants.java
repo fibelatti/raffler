@@ -18,7 +18,11 @@ public interface Constants {
 
     String FILE_PATH_EXPORTED_GROUP = "raffler_group.rflr";
 
-    List<String> SUPPORTED_LOCALES = Arrays.asList("en", "pt", "es");
+    String LOCALE_EN = "en";
+    String LOCALE_PT = "pt";
+    String LOCALE_ES = "es";
+
+    List<String> SUPPORTED_LOCALES = Arrays.asList(LOCALE_EN, LOCALE_PT, LOCALE_ES);
 
     String TUTORIAL_KEY_MAIN = "com.fibelatti.raffler.TUTORIAL_MAIN";
     String TUTORIAL_KEY_GROUP = "com.fibelatti.raffler.TUTORIAL_GROUP";

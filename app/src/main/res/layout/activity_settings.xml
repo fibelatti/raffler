@@ -19,7 +19,7 @@
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_above="@+id/layout_quick_decision_buttons">
+            android:layout_above="@+id/divider_footer">
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -97,6 +97,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_below="@+id/divider_settings_quick_decision"
+                        android:paddingLeft="@dimen/padding_smaller"
+                        android:paddingRight="@dimen/padding_smaller"
                         android:text="@string/settings_text_quick_decision"
                         android:textColor="@color/textPrimary"
                         android:textSize="@dimen/text_size_regular"/>
@@ -126,6 +128,14 @@
                 </RelativeLayout>
             </RelativeLayout>
         </ScrollView>
+
+        <View
+            android:id="@+id/divider_footer"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_above="@+id/layout_share_and_rate"
+            android:layout_margin="@dimen/margin_small"
+            android:background="@color/colorAccent"/>
 
         <LinearLayout
             android:id="@+id/layout_share_and_rate"
