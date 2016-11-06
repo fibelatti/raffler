@@ -144,6 +144,7 @@
     <string name="settings_hint_roulette_music">Enable roulette music</string>
 
     <string name="settings_title_quick_decision">Quick Decisions</string>
+    <string name="settings_text_quick_decision">Click each button to set a quick decision:</string>
 
     <string name="settings_share">Tell your friends!</string>
     <string name="settings_share_title">Sharing Raffler!</string>
@@ -162,4 +163,8 @@
     <string name="dialog_rate_send_email">Send e-mail</string>
     <string name="dialog_rate_send_email_subject">Raffler! - Feedback</string>
     <string name="dialog_rate_send_email_title">Choose e-mail app</string>
+
+    <!-- DialogQuickDecision -->
+    <string name="dialog_quick_decision_title">Set Quick Decision</string>
+    <string name="dialog_quick_decision_header">Select a new value for this quick decision button:</string>
 </resources>

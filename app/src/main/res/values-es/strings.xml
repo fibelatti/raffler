@@ -131,6 +131,7 @@
     <string name="settings_hint_roulette_music">Habilitar la música de la ruleta</string>
 
     <string name="settings_title_quick_decision">Decisiones Rápidas</string>
+    <string name="settings_text_quick_decision">Haga clic en cada botón para establecer una decisión rápida:</string>
 
     <string name="settings_share">¡Compartir!</string>
     <string name="settings_share_title">¡Compartiendo Raffler!</string>
@@ -149,4 +150,8 @@
     <string name="dialog_rate_send_email">Enviar correo</string>
     <string name="dialog_rate_send_email_subject">Raffler! - Sugerencias</string>
     <string name="dialog_rate_send_email_title">Elegir aplicación de correo electrónico</string>
+
+    <!-- DialogQuickDecision -->
+    <string name="dialog_quick_decision_title">Seleccione la Decisión Rápida</string>
+    <string name="dialog_quick_decision_header">Seleccione un nuevo valor para este botón de decisión rápida:</string>
 </resources>
