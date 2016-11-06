@@ -1,7 +1,5 @@
 package com.fibelatti.raffler.models;
 
-import com.fibelatti.raffler.db.Database;
-
 import org.parceler.Parcel;
 
 import java.util.Arrays;
@@ -9,7 +7,7 @@ import java.util.List;
 
 @Parcel
 public class QuickDecision {
-    Long id;
+    String key;
     String name;
     List<String> values;
     Boolean enabled;
@@ -17,12 +15,12 @@ public class QuickDecision {
     public QuickDecision() {
     }
 
-    public Long getId() {
-        return id;
+    public String getKey() {
+        return key;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setKey(String key) {
+        this.key = key;
     }
 
     public String getName() {
@@ -65,14 +63,6 @@ public class QuickDecision {
         this.enabled = enabled;
     }
 
-    public void refresh() {
-        QuickDecision qd = Database.quickDecisionDao.fetchQuickDecisionById(this.id);
-
-        this.name = qd.getName();
-        this.values = qd.getValues();
-        this.enabled = qd.getEnabled();
-    }
-
     public static class Builder {
         final QuickDecision quickDecision;
 
@@ -80,8 +70,8 @@ public class QuickDecision {
             quickDecision = new QuickDecision();
         }
 
-        public Builder setId(Long id) {
-            quickDecision.setId(id);
+        public Builder setKey(String key) {
+            quickDecision.setKey(key);
             return this;
         }
 

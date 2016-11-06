@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="@dimen/padding_regular">
+
+    <TextView
+        android:id="@+id/header_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/padding_small"
+        android:text="@string/dialog_quick_decision_header"
+        android:textColor="@color/textPrimary"
+        android:textSize="@dimen/text_size_regular"/>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/quick_decision_list"
+        android:layout_below="@id/header_text"
+        android:paddingLeft="@dimen/padding_smaller"
+        android:paddingRight="@dimen/padding_smaller"/>
+</RelativeLayout>

@@ -92,17 +92,43 @@
                         android:layout_marginBottom="@dimen/margin_small"
                         android:background="@color/colorAccent"/>
 
-                    <android.support.v7.widget.RecyclerView
-                        android:id="@+id/recycler_view_quick_decision"
+                    <TextView
+                        android:id="@+id/txt_settings_quick_decision"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_below="@id/divider_settings_quick_decision"/>
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/divider_settings_quick_decision"
+                        android:text="@string/settings_text_quick_decision"
+                        android:textColor="@color/textPrimary"
+                        android:textSize="@dimen/text_size_regular"/>
+
+                    <LinearLayout
+                        android:id="@+id/layout_quick_decision_buttons"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/txt_settings_quick_decision"
+                        android:orientation="horizontal"
+                        android:weightSum="2">
+
+                        <Button
+                            android:id="@+id/button_quick_decision_one"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:theme="@style/AboutButton"/>
+
+                        <Button
+                            android:id="@+id/button_quick_decision_two"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:theme="@style/AboutButton"/>
+                    </LinearLayout>
                 </RelativeLayout>
             </RelativeLayout>
         </ScrollView>
 
         <LinearLayout
-            android:id="@+id/layout_quick_decision_buttons"
+            android:id="@+id/layout_share_and_rate"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_above="@+id/settings_about"
