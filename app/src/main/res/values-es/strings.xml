@@ -121,7 +121,8 @@
     <string name="subgroups_hint_radio_members">Elementos por grupo</string>
     <string name="subgroups_hint_quantity">Cantidad</string>
     <string name="subgroups_action_raffle">Rifar!</string>
-    <string name="subgroups_msg_validate_quantity">La cantidad debe ser igual o inferior a %d</string>
+    <string name="subgroups_msg_validate_quantity_maximum">La cantidad debe ser igual o inferior a %d</string>
+    <string name="subgroups_msg_validate_quantity_minimum">La cantidad debe ser igual o mayor a %d</string>
     <string name="subgroups_msg_validate_quantity_empty">La cantidad no puede estar en blanco</string>
     <string name="subgroups_hint_group_name">Grupo #%s</string>
 
