@@ -32,4 +32,6 @@
     <dimen name="card_radius">2dp</dimen>
 
     <dimen name="quick_decision_result">48sp</dimen>
+
+    <dimen name="quick_decision_list">300dp</dimen>
 </resources>

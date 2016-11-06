@@ -9,7 +9,7 @@ public interface IQuickDecisionDao {
 
     List<QuickDecision> fetchAllQuickDecisions();
 
-    List<QuickDecision> fetchEnabledQuickDecisions();
+    List<QuickDecision> fetchQuickDecisionsByStatus(Boolean enabled);
 
     boolean toggleQuickDecisionEnabled(QuickDecision quickDecision);
 }

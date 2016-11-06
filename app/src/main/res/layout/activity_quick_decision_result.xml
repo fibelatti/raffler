@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:fab="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -17,7 +18,7 @@
         android:padding="@dimen/padding_large"
         android:textColor="@color/colorWhiteOpaque"
         android:textSize="@dimen/quick_decision_result"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
 
     <com.github.clans.fab.FloatingActionButton
         android:id="@+id/fab"
@@ -28,6 +29,6 @@
         android:src="@drawable/ic_close_white_36dp"
         fab:fab_colorNormal="@color/colorWhite"
         fab:fab_colorPressed="@color/colorWhite"
-        fab:layout_behavior=".views.extensions.ClansFloatingActionBehavior" />
+        fab:layout_behavior=".views.extensions.ClansFloatingActionBehavior"/>
 
 </android.support.design.widget.CoordinatorLayout>

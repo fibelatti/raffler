@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/coordinator_layout"
@@ -8,58 +9,126 @@
     android:fitsSystemWindows="true"
     tools:context=".views.activities.SettingsActivity">
 
-    <include layout="@layout/toolbar_default" />
+    <include layout="@layout/toolbar_default"/>
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-        <LinearLayout
-            android:id="@+id/title_settings_sound"
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="@dimen/padding_small">
+            android:layout_height="match_parent"
+            android:layout_above="@+id/layout_quick_decision_buttons">
 
-            <TextView
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/settings_title_sound"
-                android:textColor="@color/colorAccent"
-                android:textSize="@dimen/text_size_regular" />
+                android:layout_height="wrap_content">
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/colorAccent" />
-        </LinearLayout>
+                <RelativeLayout
+                    android:id="@+id/layout_roulette_music"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/padding_small">
+
+                    <TextView
+                        android:id="@+id/title_settings_sound"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/settings_title_sound"
+                        android:textColor="@color/colorAccent"
+                        android:textSize="@dimen/text_size_regular"/>
+
+                    <View
+                        android:id="@+id/divider_settings_sound"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_below="@+id/title_settings_sound"
+                        android:layout_marginBottom="@dimen/margin_small"
+                        android:background="@color/colorAccent"/>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/divider_settings_sound"
+                        android:orientation="horizontal">
+
+                        <CheckBox
+                            android:id="@+id/chk_roulette_music"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"/>
+
+                        <TextView
+                            android:id="@+id/txt_roulette_music"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_vertical"
+                            android:text="@string/settings_hint_roulette_music"
+                            android:textColor="@color/textPrimary"
+                            android:textSize="@dimen/text_size_regular"/>
+                    </LinearLayout>
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/layout_quick_decision"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/layout_roulette_music"
+                    android:padding="@dimen/padding_small">
+
+                    <TextView
+                        android:id="@+id/title_settings_quick_decision"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/settings_title_quick_decision"
+                        android:textColor="@color/colorAccent"
+                        android:textSize="@dimen/text_size_regular"/>
+
+                    <View
+                        android:id="@+id/divider_settings_quick_decision"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_below="@+id/title_settings_quick_decision"
+                        android:layout_marginBottom="@dimen/margin_small"
+                        android:background="@color/colorAccent"/>
+
+                    <TextView
+                        android:id="@+id/txt_settings_quick_decision"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/divider_settings_quick_decision"
+                        android:text="@string/settings_text_quick_decision"
+                        android:textColor="@color/textPrimary"
+                        android:textSize="@dimen/text_size_regular"/>
+
+                    <LinearLayout
+                        android:id="@+id/layout_quick_decision_buttons"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/txt_settings_quick_decision"
+                        android:orientation="horizontal"
+                        android:weightSum="2">
+
+                        <Button
+                            android:id="@+id/button_quick_decision_one"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:theme="@style/AboutButton"/>
+
+                        <Button
+                            android:id="@+id/button_quick_decision_two"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:theme="@style/AboutButton"/>
+                    </LinearLayout>
+                </RelativeLayout>
+            </RelativeLayout>
+        </ScrollView>
 
         <LinearLayout
-            android:id="@+id/layout_roulette_music"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/title_settings_sound"
-            android:orientation="horizontal"
-            android:paddingLeft="@dimen/padding_small"
-            android:paddingRight="@dimen/padding_small">
-
-            <CheckBox
-                android:id="@+id/chk_roulette_music"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-
-            <TextView
-                android:id="@+id/txt_roulette_music"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/settings_hint_roulette_music"
-                android:textColor="@color/textPrimary"
-                android:textSize="@dimen/text_size_regular" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/layout_quick_decision_buttons"
+            android:id="@+id/layout_share_and_rate"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_above="@+id/settings_about"
@@ -74,7 +143,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="@string/settings_share"
-                android:theme="@style/AboutButton" />
+                android:theme="@style/AboutButton"/>
 
             <Button
                 android:id="@+id/button_rate"
@@ -82,7 +151,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="@string/settings_rate"
-                android:theme="@style/AboutButton" />
+                android:theme="@style/AboutButton"/>
         </LinearLayout>
 
         <TextView
@@ -90,22 +159,22 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_above="@+id/settings_version"
-            android:layout_margin="@dimen/margin_smaller"
+            android:layout_marginTop="@dimen/margin_smaller"
             android:gravity="center_horizontal"
             android:text="@string/settings_about"
             android:textColor="@color/textPrimary"
-            android:textSize="@dimen/text_size_small" />
+            android:textSize="@dimen/text_size_small"/>
 
         <TextView
             android:id="@+id/settings_version"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
-            android:layout_margin="@dimen/margin_smaller"
+            android:layout_marginBottom="@dimen/margin_smaller"
             android:gravity="center_horizontal"
             android:text="@string/settings_app_version"
             android:textColor="@color/textPrimary"
-            android:textSize="@dimen/text_size_small" />
+            android:textSize="@dimen/text_size_small"/>
     </RelativeLayout>
 
 </android.support.design.widget.CoordinatorLayout>
