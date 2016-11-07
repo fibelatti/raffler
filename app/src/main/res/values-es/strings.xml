@@ -110,7 +110,7 @@
     <string name="random_winners_title">Ganadores Aleatorios</string>
     <string name="random_winners_hint_quantity">Cantidad de ganadores</string>
     <string name="random_winners_action_raffle">Rifar</string>
-    <string name="random_winners_msg_validate_quantity">La cantidad debe ser inferior a d%</string>
+    <string name="random_winners_msg_validate_quantity">La cantidad debe ser inferior a %d</string>
     <string name="random_winners_msg_validate_quantity_empty">La cantidad no puede estar en blanco</string>
     <string name="random_winners_msg_result">Rifado #%d</string>
 
