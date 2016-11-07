@@ -38,8 +38,6 @@ import com.fibelatti.raffler.views.extensions.RecyclerTouchListener;
 import com.github.clans.fab.FloatingActionButton;
 import com.github.clans.fab.FloatingActionMenu;
 
-import org.parceler.Parcels;
-
 import java.io.File;
 
 import butterknife.BindView;
@@ -95,7 +93,7 @@ public class GroupActivity
         presenter.onCreate();
 
         if (savedInstanceState != null) {
-            presenter.restoreGroup((Group) Parcels.unwrap(savedInstanceState.getParcelable(Constants.INTENT_EXTRA_GROUP)));
+            presenter.restoreGroup((Group) savedInstanceState.getParcelable(Constants.INTENT_EXTRA_GROUP));
         } else if (getIntent().hasExtra(Constants.INTENT_EXTRA_GROUP)) {
             presenter.restoreGroup(fetchDataFromIntent());
         }
@@ -122,7 +120,7 @@ public class GroupActivity
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         instanceRestored = true;
-        outState.putParcelable(Constants.INTENT_EXTRA_GROUP, Parcels.wrap(group));
+        outState.putParcelable(Constants.INTENT_EXTRA_GROUP, group);
     }
 
     @Override
@@ -201,6 +199,7 @@ public class GroupActivity
 //                    Answers.getInstance().logCustom(new CustomEvent(Constants.ANALYTICS_KEY_MODE_ROULETTE));
 
                     Group newGroup = new Group.Builder()
+                            .fromGroup(group)
                             .setItems(group.getSelectedItems())
                             .build();
                     navigator.startRouletteActivity(newGroup);
@@ -215,6 +214,7 @@ public class GroupActivity
 //                    Answers.getInstance().logCustom(new CustomEvent(Constants.ANALYTICS_KEY_MODE_RANDOM_WINNERS));
 
                     Group newGroup = new Group.Builder()
+                            .fromGroup(group)
                             .setItems(group.getSelectedItems())
                             .build();
                     navigator.startRandomWinnersActivity(newGroup);
@@ -229,6 +229,7 @@ public class GroupActivity
 
                 if (validateSelection()) {
                     Group newGroup = new Group.Builder()
+                            .fromGroup(group)
                             .setItems(group.getSelectedItems())
                             .build();
                     navigator.startSubGroupsActivity(newGroup);
@@ -268,7 +269,7 @@ public class GroupActivity
     }
 
     private Group fetchDataFromIntent() {
-        return (Group) Parcels.unwrap(getIntent().getParcelableExtra(Constants.INTENT_EXTRA_GROUP));
+        return (Group) getIntent().getParcelableExtra(Constants.INTENT_EXTRA_GROUP);
     }
 
     private void fetchDataFromDb() {

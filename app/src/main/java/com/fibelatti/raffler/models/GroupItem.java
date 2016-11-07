@@ -1,9 +1,10 @@
 package com.fibelatti.raffler.models;
 
-import org.parceler.Parcel;
+import android.os.Parcel;
+import android.os.Parcelable;
 
-@Parcel
-public class GroupItem {
+public class GroupItem
+        implements Parcelable {
     Long id;
     Long groupId;
     String name;
@@ -44,6 +45,34 @@ public class GroupItem {
 
     public void setSelected(Boolean selected) {
         isSelected = selected;
+    }
+
+    public static final Parcelable.Creator<GroupItem> CREATOR = new Parcelable.Creator<GroupItem>() {
+        public GroupItem createFromParcel(Parcel in) {
+            return new GroupItem.Builder()
+                    .setId(in.readLong())
+                    .setGroupId(in.readLong())
+                    .setName(in.readString())
+                    .setSelected(in.readByte() != 0)
+                    .build();
+        }
+
+        public GroupItem[] newArray(int size) {
+            return new GroupItem[size];
+        }
+    };
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeLong(getId());
+        dest.writeLong(getGroupId());
+        dest.writeString(getName());
+        dest.writeByte((byte) (getSelected() ? 1 : 0));
     }
 
     public static class Builder {

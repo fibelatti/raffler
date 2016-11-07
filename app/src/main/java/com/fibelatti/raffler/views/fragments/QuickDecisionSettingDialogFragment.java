@@ -21,8 +21,6 @@ import com.fibelatti.raffler.views.adapters.QuickDecisionAdapter;
 import com.fibelatti.raffler.views.extensions.DividerItemDecoration;
 import com.fibelatti.raffler.views.extensions.RecyclerTouchListener;
 
-import org.parceler.Parcels;
-
 import java.util.List;
 
 import butterknife.BindView;
@@ -50,7 +48,7 @@ public class QuickDecisionSettingDialogFragment
         QuickDecisionSettingDialogFragment f = new QuickDecisionSettingDialogFragment();
 
         Bundle args = new Bundle();
-        args.putParcelable(Constants.INTENT_EXTRA_QUICK_DECISION, Parcels.wrap(quickDecision));
+        args.putParcelable(Constants.INTENT_EXTRA_QUICK_DECISION, quickDecision);
         f.setArguments(args);
 
         return f;
@@ -64,7 +62,7 @@ public class QuickDecisionSettingDialogFragment
 
         this.adapter.setQuickDecisions(this.quickDecisions);
 
-        this.quickDecisionCaller = Parcels.unwrap(getArguments().getParcelable(Constants.INTENT_EXTRA_QUICK_DECISION));
+        this.quickDecisionCaller = getArguments().getParcelable(Constants.INTENT_EXTRA_QUICK_DECISION);
 
         View view = View.inflate(getContext(), R.layout.dialog_set_quick_decision, null);
         ButterKnife.bind(this, view);

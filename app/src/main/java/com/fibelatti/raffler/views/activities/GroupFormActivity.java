@@ -36,8 +36,6 @@ import com.fibelatti.raffler.views.extensions.RecyclerTouchListener;
 import com.fibelatti.raffler.views.fragments.IIncludeRangeListener;
 import com.fibelatti.raffler.views.fragments.IncludeRangeDialogFragment;
 
-import org.parceler.Parcels;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import uk.co.deanwild.materialshowcaseview.MaterialShowcaseSequence;
@@ -83,7 +81,7 @@ public class GroupFormActivity
         adapter = new GroupAdapter(this);
 
         if (savedInstanceState != null) {
-            presenter.restoreGroup((Group) Parcels.unwrap(savedInstanceState.getParcelable(Constants.INTENT_EXTRA_GROUP)));
+            presenter.restoreGroup((Group) savedInstanceState.getParcelable(Constants.INTENT_EXTRA_GROUP));
         } else {
             presenter.restoreGroup(fetchDataFromIntent());
         }
@@ -102,7 +100,7 @@ public class GroupFormActivity
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putParcelable(Constants.INTENT_EXTRA_GROUP, Parcels.wrap(group));
+        outState.putParcelable(Constants.INTENT_EXTRA_GROUP, group);
     }
 
     @Override
@@ -186,7 +184,7 @@ public class GroupFormActivity
         }
 
         if (intent.hasExtra(Constants.INTENT_EXTRA_GROUP)) {
-            return (Group) Parcels.unwrap(intent.getParcelableExtra(Constants.INTENT_EXTRA_GROUP));
+            return (Group) intent.getParcelableExtra(Constants.INTENT_EXTRA_GROUP);
         } else {
             return new Group.Builder().build();
         }
