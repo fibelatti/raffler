@@ -50,10 +50,10 @@ public class GroupItem
     public static final Parcelable.Creator<GroupItem> CREATOR = new Parcelable.Creator<GroupItem>() {
         public GroupItem createFromParcel(Parcel in) {
             return new GroupItem.Builder()
-                    .setId(in.readLong())
-                    .setGroupId(in.readLong())
-                    .setName(in.readString())
-                    .setSelected(in.readByte() != 0)
+                    .setId((Long) in.readValue(Long.class.getClassLoader()))
+                    .setGroupId((Long) in.readValue(Long.class.getClassLoader()))
+                    .setName((String) in.readValue(String.class.getClassLoader()))
+                    .setSelected((Byte) in.readValue(Byte.class.getClassLoader()) != 0)
                     .build();
         }
 
@@ -69,10 +69,10 @@ public class GroupItem
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeLong(getId());
-        dest.writeLong(getGroupId());
-        dest.writeString(getName());
-        dest.writeByte((byte) (getSelected() ? 1 : 0));
+        dest.writeValue(getId());
+        dest.writeValue(getGroupId());
+        dest.writeValue(getName());
+        dest.writeValue((byte) (getSelected() ? 1 : 0));
     }
 
     public static class Builder {

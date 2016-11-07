@@ -3,7 +3,6 @@ package com.fibelatti.raffler.models;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -67,18 +66,12 @@ public class QuickDecision
 
     public static final Parcelable.Creator<QuickDecision> CREATOR = new Parcelable.Creator<QuickDecision>() {
         public QuickDecision createFromParcel(Parcel in) {
-            QuickDecision.Builder builder = new QuickDecision.Builder();
-
-            builder.setKey(in.readString())
-                    .setName(in.readString());
-
-            List<String> values = new ArrayList<>();
-            in.readStringList(values);
-
-            builder.setValues(values)
-                    .setEnabled(in.readByte() != 0);
-
-            return builder.build();
+            return new QuickDecision.Builder()
+                    .setKey((String) in.readValue(String.class.getClassLoader()))
+                    .setName((String) in.readValue(String.class.getClassLoader()))
+                    .setValues((List<String>) in.readValue(String.class.getClassLoader()))
+                    .setEnabled((Byte) in.readValue(Byte.class.getClassLoader()) != 0)
+                    .build();
         }
 
         public QuickDecision[] newArray(int size) {
@@ -93,10 +86,10 @@ public class QuickDecision
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(getKey());
-        dest.writeString(getName());
-        dest.writeStringList(getValues());
-        dest.writeByte((byte) (getEnabled() ? 1 : 0));
+        dest.writeValue(getKey());
+        dest.writeValue(getName());
+        dest.writeValue(getValues());
+        dest.writeValue((byte) (getEnabled() ? 1 : 0));
     }
 
     public static class Builder {

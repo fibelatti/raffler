@@ -100,17 +100,11 @@ public class Group
 
     public static final Parcelable.Creator<Group> CREATOR = new Parcelable.Creator<Group>() {
         public Group createFromParcel(Parcel in) {
-            Group.Builder builder = new Group.Builder();
-
-            builder.setId(in.readLong())
-                    .setName(in.readString());
-
-            List<GroupItem> groupItems = new ArrayList<>();
-            in.readList(groupItems, GroupItem.class.getClassLoader());
-
-            builder.setItems(groupItems);
-
-            return builder.build();
+            return new Group.Builder()
+                    .setId((Long) in.readValue(Long.class.getClassLoader()))
+                    .setName((String) in.readValue(String.class.getClassLoader()))
+                    .setItems((List<GroupItem>) in.readValue(GroupItem.class.getClassLoader()))
+                    .build();
         }
 
         public Group[] newArray(int size) {
@@ -125,9 +119,9 @@ public class Group
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeLong(getId());
-        dest.writeString(getName());
-        dest.writeList(getItems());
+        dest.writeValue(getId());
+        dest.writeValue(getName());
+        dest.writeValue(getItems());
     }
 
     public static class Builder {
