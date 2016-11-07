@@ -1,15 +1,16 @@
 package com.fibelatti.raffler.models;
 
-import com.fibelatti.raffler.db.Database;
+import android.os.Parcel;
+import android.os.Parcelable;
 
-import org.parceler.Parcel;
+import com.fibelatti.raffler.db.Database;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-@Parcel
-public class Group {
+public class Group
+        implements Parcelable {
     Long id;
     String name;
     List<GroupItem> items;
@@ -97,6 +98,38 @@ public class Group {
         this.items.addAll(g.getItems());
     }
 
+    public static final Parcelable.Creator<Group> CREATOR = new Parcelable.Creator<Group>() {
+        public Group createFromParcel(Parcel in) {
+            Group.Builder builder = new Group.Builder();
+
+            builder.setId(in.readLong())
+                    .setName(in.readString());
+
+            List<GroupItem> groupItems = new ArrayList<>();
+            in.readList(groupItems, GroupItem.class.getClassLoader());
+
+            builder.setItems(groupItems);
+
+            return builder.build();
+        }
+
+        public Group[] newArray(int size) {
+            return new Group[size];
+        }
+    };
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeLong(getId());
+        dest.writeString(getName());
+        dest.writeList(getItems());
+    }
+
     public static class Builder {
         final Group group;
 
@@ -122,6 +155,14 @@ public class Group {
         public Builder addItem(GroupItem groupItem) {
             if (group.getItems() == null) group.setItems(new ArrayList<GroupItem>());
             group.addItem(groupItem);
+
+            return this;
+        }
+
+        public Builder fromGroup(Group group) {
+            this.group.setId(group.getId());
+            this.group.setName(group.getName());
+            this.group.setItems(group.getItems());
 
             return this;
         }

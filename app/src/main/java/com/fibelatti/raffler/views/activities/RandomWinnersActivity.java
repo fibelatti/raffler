@@ -22,8 +22,6 @@ import com.fibelatti.raffler.utils.RandomizeUtils;
 import com.fibelatti.raffler.utils.StringUtils;
 import com.fibelatti.raffler.views.adapters.RandomWinnersAdapter;
 
-import org.parceler.Parcels;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -110,7 +108,7 @@ public class RandomWinnersActivity
     }
 
     private Group fetchDataFromIntent() {
-        return (Group) Parcels.unwrap(getIntent().getParcelableExtra(Constants.INTENT_EXTRA_GROUP));
+        return (Group) getIntent().getParcelableExtra(Constants.INTENT_EXTRA_GROUP);
     }
 
     private void raffleWinners() {

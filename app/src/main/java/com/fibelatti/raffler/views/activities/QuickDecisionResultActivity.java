@@ -16,8 +16,6 @@ import com.fibelatti.raffler.models.QuickDecision;
 import com.fibelatti.raffler.utils.ImageUtils;
 import com.github.clans.fab.FloatingActionButton;
 
-import org.parceler.Parcels;
-
 import java.util.Random;
 
 import butterknife.BindView;
@@ -71,7 +69,7 @@ public class QuickDecisionResultActivity
     }
 
     private void setUpValues() {
-        quickDecision = Parcels.unwrap(getIntent().getParcelableExtra(Constants.INTENT_EXTRA_QUICK_DECISION));
+        quickDecision = getIntent().getParcelableExtra(Constants.INTENT_EXTRA_QUICK_DECISION);
 
         int randomIndex = new Random().nextInt(quickDecision.getValuesCount());
         boolean isOdd = (randomIndex & 0x01) != 0;

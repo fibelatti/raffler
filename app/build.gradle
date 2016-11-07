@@ -45,10 +45,6 @@ dependencies {
     compile 'com.jakewharton:butterknife:8.2.1'
     apt 'com.jakewharton:butterknife-compiler:8.2.1'
 
-    // Parceler
-    compile 'org.parceler:parceler-api:1.1.1'
-    apt 'org.parceler:parceler:1.1.1'
-
     // Custom FAB
     compile 'com.github.clans:fab:1.6.4'
 
