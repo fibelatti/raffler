@@ -16,20 +16,22 @@
         android:id="@+id/layout_content"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
+        android:layout_marginLeft="@dimen/margin_small"
+        android:layout_marginRight="@dimen/margin_small"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <LinearLayout
             android:id="@+id/layout_quick_decision"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_small"
             android:orientation="vertical">
 
             <LinearLayout
                 android:id="@+id/title_section_quick_decisions"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="@dimen/padding_small">
+                android:orientation="vertical">
 
                 <TextView
                     android:layout_width="match_parent"
@@ -41,6 +43,7 @@
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
+                    android:layout_marginBottom="@dimen/margin_smaller"
                     android:background="@color/colorAccent"/>
             </LinearLayout>
 
@@ -49,8 +52,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:paddingLeft="@dimen/padding_small"
-                android:paddingRight="@dimen/padding_small"
                 android:weightSum="2">
 
                 <Button
@@ -74,8 +75,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/layout_quick_decision"
-            android:orientation="vertical"
-            android:padding="@dimen/padding_small">
+            android:layout_marginTop="@dimen/margin_small"
+            android:orientation="vertical">
 
             <TextView
                 android:layout_width="match_parent"
@@ -87,6 +88,7 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
+                android:layout_marginBottom="@dimen/margin_smaller"
                 android:background="@color/colorAccent"/>
         </LinearLayout>
 
@@ -107,8 +109,6 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_below="@id/title_section_my_groups"
-            android:paddingLeft="@dimen/padding_smaller"
-            android:paddingRight="@dimen/padding_smaller"
             android:visibility="gone"/>
     </RelativeLayout>
 
