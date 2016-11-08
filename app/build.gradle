@@ -22,6 +22,8 @@ android {
         targetSdkVersion 24
         versionCode 8
         versionName "1.3.0"
+
+        manifestPlaceholders = [fabricApiKey: FABRIC_API_KEY]
     }
     buildTypes {
         release {
