@@ -328,7 +328,7 @@ public class GroupFormActivity
                         .setDismissText(getString(R.string.hint_got_it))
                         .setSkipText(getString(R.string.hint_skip_tutorial))
                         .setContentText(getString(R.string.group_form_tutorial_group_name))
-                        .setMaskColour(ContextCompat.getColor(context, R.color.colorPrimaryWithTransparency))
+                        .setMaskColour(ContextCompat.getColor(context, R.color.colorPrimary))
                         .withRectangleShape(true)
                         .build()
         );
@@ -339,7 +339,7 @@ public class GroupFormActivity
                         .setDismissText(getString(R.string.hint_got_it))
                         .setSkipText(getString(R.string.hint_skip_tutorial))
                         .setContentText(getString(R.string.group_form_tutorial_item_name))
-                        .setMaskColour(ContextCompat.getColor(context, R.color.colorPrimaryWithTransparency))
+                        .setMaskColour(ContextCompat.getColor(context, R.color.colorPrimary))
                         .withRectangleShape(true)
                         .setDelay(200)
                         .build()
@@ -351,7 +351,7 @@ public class GroupFormActivity
                         .setDismissText(getString(R.string.hint_got_it))
                         .setSkipText(getString(R.string.hint_skip_tutorial))
                         .setContentText(getString(R.string.group_form_tutorial_add_item))
-                        .setMaskColour(ContextCompat.getColor(context, R.color.colorPrimaryWithTransparency))
+                        .setMaskColour(ContextCompat.getColor(context, R.color.colorPrimary))
                         .setDelay(200)
                         .build()
         );
@@ -363,7 +363,7 @@ public class GroupFormActivity
                         .setDismissText(getString(R.string.hint_got_it))
                         .setContentText(getString(R.string.group_form_tutorial_toolbar))
                         .setShapePadding(150)
-                        .setMaskColour(ContextCompat.getColor(context, R.color.colorPrimaryWithTransparency))
+                        .setMaskColour(ContextCompat.getColor(context, R.color.colorPrimary))
                         .setDelay(200)
                         .build()
         );

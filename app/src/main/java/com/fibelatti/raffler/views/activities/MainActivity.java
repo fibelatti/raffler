@@ -200,7 +200,7 @@ public class MainActivity
                         .setDismissText(getString(R.string.hint_got_it))
                         .setSkipText(getString(R.string.hint_skip_tutorial))
                         .setContentText(getString(R.string.main_tutorial_intro))
-                        .setMaskColour(ContextCompat.getColor(context, R.color.colorPrimaryWithTransparency))
+                        .setMaskColour(ContextCompat.getColor(context, R.color.colorPrimary))
                         .withoutShape()
                         .build()
         );
@@ -211,7 +211,7 @@ public class MainActivity
                         .setDismissText(getString(R.string.hint_got_it))
                         .setSkipText(getString(R.string.hint_skip_tutorial))
                         .setContentText(getString(R.string.main_tutorial_quick_decision))
-                        .setMaskColour(ContextCompat.getColor(context, R.color.colorPrimaryWithTransparency))
+                        .setMaskColour(ContextCompat.getColor(context, R.color.colorPrimary))
                         .withRectangleShape(true)
                         .setDelay(200)
                         .build()
@@ -222,7 +222,7 @@ public class MainActivity
                         .setTarget(fab)
                         .setDismissText(getString(R.string.hint_got_it))
                         .setContentText(getString(R.string.main_tutorial_add_group))
-                        .setMaskColour(ContextCompat.getColor(context, R.color.colorPrimaryWithTransparency))
+                        .setMaskColour(ContextCompat.getColor(context, R.color.colorPrimary))
                         .setDelay(200)
                         .build()
         );

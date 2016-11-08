@@ -333,7 +333,7 @@ public class GroupActivity
                         .setSkipText(getString(R.string.hint_skip_tutorial))
                         .setContentText(getString(R.string.group_tutorial_check_items))
                         .setShapePadding(100)
-                        .setMaskColour(ContextCompat.getColor(context, R.color.colorPrimaryWithTransparency))
+                        .setMaskColour(ContextCompat.getColor(context, R.color.colorPrimary))
                         .build()
         );
 
@@ -344,7 +344,7 @@ public class GroupActivity
                         .setSkipText(getString(R.string.hint_skip_tutorial))
                         .setContentText(getString(R.string.group_tutorial_menu))
                         .setShapePadding(100)
-                        .setMaskColour(ContextCompat.getColor(context, R.color.colorPrimaryWithTransparency))
+                        .setMaskColour(ContextCompat.getColor(context, R.color.colorPrimary))
                         .setDelay(200)
                         .build()
         );
@@ -356,7 +356,7 @@ public class GroupActivity
                         .setSkipText(getString(R.string.hint_skip_tutorial))
                         .setContentText(getString(R.string.group_tutorial_play))
                         .setShapePadding(50)
-                        .setMaskColour(ContextCompat.getColor(context, R.color.colorPrimaryWithTransparency))
+                        .setMaskColour(ContextCompat.getColor(context, R.color.colorPrimary))
                         .setDelay(200)
                         .build()
         );
@@ -368,7 +368,7 @@ public class GroupActivity
                         .setDismissText(getString(R.string.hint_got_it))
                         .setContentText(getString(R.string.group_tutorial_help))
                         .setShapePadding(150)
-                        .setMaskColour(ContextCompat.getColor(context, R.color.colorPrimaryWithTransparency))
+                        .setMaskColour(ContextCompat.getColor(context, R.color.colorPrimary))
                         .setDelay(200)
                         .build()
         );
