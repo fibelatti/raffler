@@ -45,7 +45,7 @@
                         android:id="@+id/divider_settings_sound"
                         layout="@layout/divider_default"
                         android:layout_width="match_parent"
-                        android:layout_height="1dp"
+                        android:layout_height="@dimen/divider_size"
                         android:layout_below="@+id/title_settings_sound"/>
 
                     <LinearLayout
@@ -89,7 +89,7 @@
                         android:id="@+id/divider_settings_quick_decision"
                         layout="@layout/divider_default"
                         android:layout_width="match_parent"
-                        android:layout_height="1dp"
+                        android:layout_height="@dimen/divider_size"
                         android:layout_below="@+id/title_settings_quick_decision"/>
 
                     <TextView
@@ -131,7 +131,7 @@
             android:id="@+id/divider_footer"
             layout="@layout/divider_default"
             android:layout_width="match_parent"
-            android:layout_height="1dp"
+            android:layout_height="@dimen/divider_size"
             android:layout_above="@+id/layout_share_and_rate"/>
 
         <LinearLayout
