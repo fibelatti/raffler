@@ -137,6 +137,11 @@
     <string name="settings_title_quick_decision">Decisiones Rápidas</string>
     <string name="settings_text_quick_decision">Haga clic en cada botón para establecer una decisión rápida:</string>
 
+    <string name="settings_crash_report_opt_out">Retirar Informe de Error</string>
+    <string name="settings_hint_crash_report_opt_out">Esta aplicación utiliza Crashlytics para recopilar datos anónimos sobre errores.
+        \nEsto me ayuda a hacer esta aplicación mejor, pero si no quieres que tus datos sean enviados, desactiva esta opción.
+        \nPuede leer la política de privacidad de Crashlytics <a href="http://try.crashlytics.com/terms/">aquí</a>.</string>
+
     <string name="settings_share">¡Compartir!</string>
     <string name="settings_share_title">¡Compartiendo Raffler!</string>
     <string name="settings_share_text">¡Descarga Raffler! Tomar decisiones nunca fue tan fácil. Descargar en %s</string>

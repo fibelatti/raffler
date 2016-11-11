@@ -137,6 +137,11 @@
     <string name="settings_title_quick_decision">Decisões Rápidas</string>
     <string name="settings_text_quick_decision">Clique nos botões para escolher uma decisão rápida:</string>
 
+    <string name="settings_crash_report_opt_out">Desativar Envio de Erros</string>
+    <string name="settings_hint_crash_report_opt_out">Este app utiliza o Crashlytics para coletar dados anônimos de erros.
+        \nIsso me ajuda a fazer o app cada vez melhor, porém se você não quer que seus dados sejam enviados desmarque esta opção.
+        \nVocê pode ler a política de privacidade do Crashlytics <a href="http://try.crashlytics.com/terms/">aqui</a>.</string>
+
     <string name="settings_share">Compartilhe!</string>
     <string name="settings_share_title">Compartilhando Raffler!</string>
     <string name="settings_share_text">Baixe o Raffler! Tomar decisões nunca foi tão fácil. Baixe em %s</string>
