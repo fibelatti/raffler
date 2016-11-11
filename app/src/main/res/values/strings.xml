@@ -150,6 +150,11 @@
     <string name="settings_title_quick_decision">Quick Decisions</string>
     <string name="settings_text_quick_decision">Click each button to set a quick decision:</string>
 
+    <string name="settings_crash_report_opt_out">Crash Report Opt-out</string>
+    <string name="settings_hint_crash_report_opt_out">This app uses Crashlytics to collect anonymized data about crashes and errors.
+        \nIt helps me make this app better, but if you don\'t want your data to be sent uncheck this option.
+        \nYou can read Crashlytics privacy policy <a href="http://try.crashlytics.com/terms/">here</a>.</string>
+
     <string name="settings_share">Tell your friends!</string>
     <string name="settings_share_title">Sharing Raffler!</string>
     <string name="settings_share_text">Check out Raffler! Making decisions never been so easy. Download at %s</string>

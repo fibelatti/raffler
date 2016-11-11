@@ -31,7 +31,7 @@
             android:id="@+id/divider_radio_group_title"
             layout="@layout/divider_default"
             android:layout_width="match_parent"
-            android:layout_height="1dp"
+            android:layout_height="@dimen/divider_size"
             android:layout_below="@+id/radio_group_title"/>
 
         <RadioGroup

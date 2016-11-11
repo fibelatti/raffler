@@ -6,6 +6,7 @@ import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.widget.Toolbar;
+import android.text.method.LinkMovementMethod;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -48,6 +49,11 @@ public class SettingsActivity
     Button quickDecisionOne;
     @BindView(R.id.button_quick_decision_two)
     Button quickDecisionTwo;
+
+    @BindView(R.id.chk_crash_report_opt_out)
+    CheckBox crashOptOutCheckBox;
+    @BindView(R.id.txt_crash_report_opt_out)
+    TextView crashOptOutHint;
 
     @BindView(R.id.button_share)
     Button buttonShare;
@@ -145,10 +151,25 @@ public class SettingsActivity
                 quickDecisionFragment.show(getSupportFragmentManager(), QuickDecisionSettingDialogFragment.TAG);
             }
         });
+
+        crashOptOutHint.setMovementMethod(LinkMovementMethod.getInstance());
+
+        crashOptOutCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (Database.settingsDao.setCrashReportEnabled(isChecked)) {
+                    Snackbar.make(layout, getString(R.string.settings_msg_save), Snackbar.LENGTH_LONG).show();
+                } else {
+                    crashOptOutCheckBox.setChecked(false);
+                    Snackbar.make(layout, getString(R.string.generic_msg_error), Snackbar.LENGTH_LONG).show();
+                }
+            }
+        });
     }
 
     private void fetchDataFromDb() {
         rouletteMusicCheckBox.setChecked(Database.settingsDao.getRouletteMusicEnabled());
+        crashOptOutCheckBox.setChecked(Database.settingsDao.getCrashReportEnabled());
 
         if (quickDecisionList != null) quickDecisionList.clear();
         quickDecisionList.addAll(Database.quickDecisionDao.fetchQuickDecisionsByStatus(true));
