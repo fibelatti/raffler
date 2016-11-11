@@ -40,11 +40,7 @@
                     android:textColor="@color/colorAccent"
                     android:textSize="@dimen/text_size_regular"/>
 
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginBottom="@dimen/margin_smaller"
-                    android:background="@color/colorAccent"/>
+                <include layout="@layout/divider_default"/>
             </LinearLayout>
 
             <LinearLayout
@@ -85,11 +81,7 @@
                 android:textColor="@color/colorAccent"
                 android:textSize="@dimen/text_size_regular"/>
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginBottom="@dimen/margin_smaller"
-                android:background="@color/colorAccent"/>
+            <include layout="@layout/divider_default"/>
         </LinearLayout>
 
         <TextView
