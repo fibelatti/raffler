@@ -169,6 +169,7 @@ public class SettingsActivity
 
     private void fetchDataFromDb() {
         rouletteMusicCheckBox.setChecked(Database.settingsDao.getRouletteMusicEnabled());
+        crashOptOutCheckBox.setChecked(Database.settingsDao.getCrashReportEnabled());
 
         if (quickDecisionList != null) quickDecisionList.clear();
         quickDecisionList.addAll(Database.quickDecisionDao.fetchQuickDecisionsByStatus(true));
