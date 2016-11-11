@@ -5,6 +5,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteConstraintException;
 import android.database.sqlite.SQLiteDatabase;
 
+import com.crashlytics.android.Crashlytics;
 import com.fibelatti.raffler.Constants;
 import com.fibelatti.raffler.db.DbContentProvider;
 import com.fibelatti.raffler.models.QuickDecision;
@@ -102,7 +103,7 @@ public class QuickDecisionDao
         try {
             return super.update(QUICK_DECISION_TABLE, getContentValue(), selection, selectionArgs) > 0;
         } catch (SQLiteConstraintException e) {
-//            Crashlytics.logException(e);
+            Crashlytics.logException(e);
             return false;
         }
     }
