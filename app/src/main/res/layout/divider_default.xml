@@ -3,5 +3,5 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="@dimen/divider_size"
-    android:layout_marginBottom="@dimen/margin_smaller"
+    android:layout_marginBottom="@dimen/margin_small"
     android:background="@color/colorAccent"/>
