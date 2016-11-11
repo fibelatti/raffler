@@ -10,7 +10,7 @@ public interface ISettingsSchema {
             + SETTINGS_COLUMN_ROULETTE_MUSIC_ENABLED
             + " INTEGER DEFAULT 1,"
             + SETTINGS_COLUMN_CRASH_REPORT_ENABLED
-            + " INTEGER DEFAULT 1,"
+            + " INTEGER DEFAULT 1"
             + ")";
 
     String SETTINGS_TABLE_DROP = "DROP TABLE IF EXISTS " + SETTINGS_TABLE;
@@ -22,7 +22,7 @@ public interface ISettingsSchema {
     String SETTINGS_TABLE_INITIAL_SETUP = "INSERT OR REPLACE INTO "
             + SETTINGS_TABLE
             + " VALUES ("
-            + "COALESCE((SELECT " + SETTINGS_COLUMN_ROULETTE_MUSIC_ENABLED + " FROM " + SETTINGS_TABLE + "), 1)"
+            + "COALESCE((SELECT " + SETTINGS_COLUMN_ROULETTE_MUSIC_ENABLED + " FROM " + SETTINGS_TABLE + "), 1),"
             + "COALESCE((SELECT " + SETTINGS_COLUMN_CRASH_REPORT_ENABLED + " FROM " + SETTINGS_TABLE + "), 1)"
             + ")";
 
