@@ -45,7 +45,7 @@ public class RandomWinnersAdapter
     @Override
     public GroupViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.list_row_n_winners, parent, false);
+                .inflate(R.layout.list_row_random_winners, parent, false);
 
         return new GroupViewHolder(itemView);
     }

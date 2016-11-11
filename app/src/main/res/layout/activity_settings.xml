@@ -14,6 +14,8 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginLeft="@dimen/margin_small"
+        android:layout_marginRight="@dimen/margin_small"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <ScrollView
@@ -29,7 +31,7 @@
                     android:id="@+id/layout_roulette_music"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="@dimen/padding_small">
+                    android:layout_marginTop="@dimen/margin_small">
 
                     <TextView
                         android:id="@+id/title_settings_sound"
@@ -39,13 +41,12 @@
                         android:textColor="@color/colorAccent"
                         android:textSize="@dimen/text_size_regular"/>
 
-                    <View
+                    <include
                         android:id="@+id/divider_settings_sound"
+                        layout="@layout/divider_default"
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
-                        android:layout_below="@+id/title_settings_sound"
-                        android:layout_marginBottom="@dimen/margin_small"
-                        android:background="@color/colorAccent"/>
+                        android:layout_below="@+id/title_settings_sound"/>
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -74,7 +75,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/layout_roulette_music"
-                    android:padding="@dimen/padding_small">
+                    android:layout_marginTop="@dimen/margin_small">
 
                     <TextView
                         android:id="@+id/title_settings_quick_decision"
@@ -84,21 +85,18 @@
                         android:textColor="@color/colorAccent"
                         android:textSize="@dimen/text_size_regular"/>
 
-                    <View
+                    <include
                         android:id="@+id/divider_settings_quick_decision"
+                        layout="@layout/divider_default"
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
-                        android:layout_below="@+id/title_settings_quick_decision"
-                        android:layout_marginBottom="@dimen/margin_small"
-                        android:background="@color/colorAccent"/>
+                        android:layout_below="@+id/title_settings_quick_decision"/>
 
                     <TextView
                         android:id="@+id/txt_settings_quick_decision"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_below="@+id/divider_settings_quick_decision"
-                        android:paddingLeft="@dimen/padding_smaller"
-                        android:paddingRight="@dimen/padding_smaller"
                         android:text="@string/settings_text_quick_decision"
                         android:textColor="@color/textPrimary"
                         android:textSize="@dimen/text_size_regular"/>
@@ -129,22 +127,21 @@
             </RelativeLayout>
         </ScrollView>
 
-        <View
+        <include
             android:id="@+id/divider_footer"
+            layout="@layout/divider_default"
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:layout_above="@+id/layout_share_and_rate"
-            android:layout_margin="@dimen/margin_small"
-            android:background="@color/colorAccent"/>
+            android:layout_above="@+id/layout_share_and_rate"/>
 
         <LinearLayout
             android:id="@+id/layout_share_and_rate"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_above="@+id/settings_about"
+            android:layout_marginLeft="@dimen/margin_large"
+            android:layout_marginRight="@dimen/margin_large"
             android:orientation="horizontal"
-            android:paddingLeft="@dimen/padding_large"
-            android:paddingRight="@dimen/padding_large"
             android:weightSum="2">
 
             <Button

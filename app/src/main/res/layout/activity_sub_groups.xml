@@ -14,25 +14,33 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginLeft="@dimen/margin_small"
+        android:layout_marginRight="@dimen/margin_small"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <TextView
             android:id="@+id/radio_group_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="@dimen/padding_small"
+            android:layout_marginTop="@dimen/margin_small"
             android:text="@string/subgroups_hint_radio_group_title"
             android:textColor="@color/colorAccent"
             android:textSize="@dimen/text_size_regular"/>
+
+        <include
+            android:id="@+id/divider_radio_group_title"
+            layout="@layout/divider_default"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_below="@+id/radio_group_title"/>
 
         <RadioGroup
             android:id="@+id/radio_group"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/radio_group_title"
+            android:layout_below="@+id/divider_radio_group_title"
+            android:layout_marginBottom="@dimen/margin_smaller"
             android:orientation="horizontal"
-            android:paddingLeft="@dimen/padding_small"
-            android:paddingRight="@dimen/padding_small"
             android:weightSum="2">
 
             <RadioButton
@@ -55,8 +63,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/radio_group"
-            android:orientation="horizontal"
-            android:padding="@dimen/padding_small">
+            android:layout_marginBottom="@dimen/margin_smaller"
+            android:layout_marginTop="@dimen/margin_small"
+            android:orientation="horizontal">
 
             <android.support.design.widget.TextInputLayout
                 android:id="@+id/input_layout_quantity"
@@ -82,9 +91,11 @@
                 android:id="@+id/btn_raffle_subgroups"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/margin_small"
+                android:layout_marginStart="@dimen/margin_small"
+                android:layout_marginTop="@dimen/margin_small"
                 android:background="@null"
                 android:contentDescription="@string/subgroups_action_raffle"
-                android:padding="@dimen/padding_small"
                 android:src="@drawable/ic_play_circle_white"
                 android:text="@string/subgroups_action_raffle"
                 android:tint="@color/colorAccent"/>
@@ -95,8 +106,6 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_below="@id/layout_quantity"
-            android:paddingLeft="@dimen/padding_smaller"
-            android:paddingRight="@dimen/padding_smaller"
             android:scrollbars="vertical"/>
     </RelativeLayout>
 

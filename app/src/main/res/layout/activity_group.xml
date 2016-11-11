@@ -21,6 +21,8 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginLeft="@dimen/margin_small"
+        android:layout_marginRight="@dimen/margin_small"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <View
@@ -41,9 +43,9 @@
         android:layout_width="@dimen/clickable_area"
         android:layout_height="@dimen/clickable_area"
         android:layout_gravity="bottom|end"
-        android:layout_marginBottom="@dimen/margin_large"
-        android:layout_marginEnd="@dimen/margin_large"
-        android:layout_marginRight="@dimen/margin_large"/>
+        android:layout_marginBottom="@dimen/margin_tutorial"
+        android:layout_marginEnd="@dimen/margin_tutorial"
+        android:layout_marginRight="@dimen/margin_tutorial"/>
 
     <com.github.clans.fab.FloatingActionMenu
         android:id="@+id/fam"

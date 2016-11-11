@@ -20,13 +20,15 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginLeft="@dimen/margin_small"
+        android:layout_marginRight="@dimen/margin_small"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <android.support.design.widget.TextInputLayout
             android:id="@+id/input_layout_group_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="@dimen/padding_small"
+            android:layout_marginTop="@dimen/margin_small"
             android:theme="@style/InputLayout">
 
             <EditText
@@ -47,8 +49,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/input_layout_group_name"
-            android:orientation="horizontal"
-            android:padding="@dimen/padding_small">
+            android:layout_marginTop="@dimen/margin_small"
+            android:orientation="horizontal">
 
             <android.support.design.widget.TextInputLayout
                 android:id="@+id/input_layout_group_item_name"
@@ -74,9 +76,11 @@
                 android:id="@+id/btn_add_item"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/margin_small"
+                android:layout_marginStart="@dimen/margin_small"
+                android:layout_marginTop="@dimen/margin_small"
                 android:background="@null"
                 android:contentDescription="@string/group_form_action_add"
-                android:padding="@dimen/padding_small"
                 android:src="@drawable/ic_add_circle_white"
                 android:text="@string/group_form_action_add"
                 android:tint="@color/colorAccent"/>
