@@ -5,7 +5,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
+import android.widget.Button;
 
 import com.fibelatti.raffler.R;
 import com.fibelatti.raffler.models.QuickDecision;
@@ -24,8 +24,8 @@ public class QuickDecisionAdapter
 
     public class QuickDecisionViewHolder
             extends RecyclerView.ViewHolder {
-        @BindView(R.id.name)
-        public TextView quickDecisionName;
+        @BindView(R.id.button_quick_decision)
+        public Button quickDecisionButton;
 
         public QuickDecisionViewHolder(View view) {
             super(view);
@@ -59,13 +59,15 @@ public class QuickDecisionAdapter
 
     @Override
     public void onBindViewHolder(QuickDecisionViewHolder holder, int position) {
-        QuickDecision quickDecision = quickDecisions.get(position);
+        int positionInList = position % quickDecisions.size();
 
-        holder.quickDecisionName.setText(quickDecision.getName());
+        QuickDecision quickDecision = quickDecisions.get(positionInList);
+
+        holder.quickDecisionButton.setText(quickDecision.getName());
     }
 
     @Override
     public int getItemCount() {
-        return quickDecisions.size();
+        return Integer.MAX_VALUE;
     }
 }
