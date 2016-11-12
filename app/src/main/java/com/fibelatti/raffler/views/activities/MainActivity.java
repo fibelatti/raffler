@@ -189,6 +189,9 @@ public class MainActivity
         sequence.addSequenceItem(
                 new MaterialShowcaseView.Builder(this)
                         .setTarget(toolbar)
+                        .withButtonDismissStyle()
+                        .withPinkDismissButton()
+                        .setDismissTextColor(ContextCompat.getColor(context, R.color.colorWhite))
                         .setDismissText(getString(R.string.hint_got_it))
                         .setSkipText(getString(R.string.hint_skip_tutorial))
                         .setContentText(getString(R.string.main_tutorial_intro))
@@ -200,6 +203,9 @@ public class MainActivity
         sequence.addSequenceItem(
                 new MaterialShowcaseView.Builder(this)
                         .setTarget(quickDecisionLayout)
+                        .withButtonDismissStyle()
+                        .withPinkDismissButton()
+                        .setDismissTextColor(ContextCompat.getColor(context, R.color.colorWhite))
                         .setDismissText(getString(R.string.hint_got_it))
                         .setSkipText(getString(R.string.hint_skip_tutorial))
                         .setContentText(getString(R.string.main_tutorial_quick_decision))
@@ -212,6 +218,9 @@ public class MainActivity
         sequence.addSequenceItem(
                 new MaterialShowcaseView.Builder(this)
                         .setTarget(fab)
+                        .withButtonDismissStyle()
+                        .withPinkDismissButton()
+                        .setDismissTextColor(ContextCompat.getColor(context, R.color.colorWhite))
                         .setDismissText(getString(R.string.hint_got_it))
                         .setContentText(getString(R.string.main_tutorial_add_group))
                         .setMaskColour(ContextCompat.getColor(context, R.color.colorPrimary))

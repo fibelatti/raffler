@@ -51,7 +51,7 @@ dependencies {
     compile 'com.github.clans:fab:1.6.4'
 
     // Tutorials
-    compile 'com.github.fibelatti:MaterialShowcaseView:2.0.1'
+    compile 'com.github.fibelatti:MaterialShowcaseView:2.1.0'
 
     // Crashlytics
     compile('com.crashlytics.sdk.android:crashlytics:2.6.1@aar') {
