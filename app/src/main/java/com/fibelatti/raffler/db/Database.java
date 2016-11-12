@@ -64,8 +64,7 @@ public class Database {
             db.execSQL(IQuickDecisionSchema.QUICK_DECISION_TABLE_CREATE);
             db.execSQL(ISettingsSchema.SETTINGS_TABLE_CREATE);
 
-            db.execSQL(IQuickDecisionSchema.QUICK_DECISION_INITIAL_SETUP);
-            db.execSQL(ISettingsSchema.SETTINGS_TABLE_INITIAL_SETUP);
+            initialSetUp(db);
         }
 
         @Override
@@ -75,17 +74,26 @@ public class Database {
 //                    .putCustomAttribute(Constants.ANALYTICS_PARAM_OLD_VERSION, oldVersion)
 //                    .putCustomAttribute(Constants.ANALYTICS_PARAM_NEW_VERSION, newVersion));
 
-            // Should only destroy old data if really necessary
-            //db.execSQL(IGroupItemSchema.GROUP_ITEMS_TABLE_DROP);
-            //db.execSQL(IGroupSchema.GROUPS_TABLE_DROP);
-            //db.execSQL(IQuickDecisionSchema.QUICK_DECISION_TABLE_DROP);
-            //db.execSQL(ISettingsSchema.SETTINGS_TABLE_DROP);
+            int upgradeTo = oldVersion + 1;
+            while (upgradeTo <= newVersion) {
+                switch (upgradeTo) {
+                    case 4:
+                        db.execSQL(IQuickDecisionSchema.QUICK_DECISION_TABLE_DROP);
+                        db.execSQL(IQuickDecisionSchema.QUICK_DECISION_TABLE_CREATE);
 
-            if (oldVersion == 3 && newVersion == 4)
-                db.execSQL(SettingsDao.SETTINGS_ALTER_TABLE_CRASH_REPORT);
+                        db.execSQL(ISettingsSchema.SETTINGS_ALTER_TABLE_CRASH_REPORT_V4);
+                        break;
+                }
 
-            onCreate(db);
+                upgradeTo++;
+            }
+
+            initialSetUp(db);
+        }
+
+        public void initialSetUp(SQLiteDatabase db) {
+            db.execSQL(IQuickDecisionSchema.QUICK_DECISION_INITIAL_SETUP);
+            db.execSQL(ISettingsSchema.SETTINGS_TABLE_INITIAL_SETUP);
         }
     }
-
 }

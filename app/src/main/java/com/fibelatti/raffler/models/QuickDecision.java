@@ -11,7 +11,6 @@ public class QuickDecision
     String key;
     String name;
     List<String> values;
-    Boolean enabled;
 
     private QuickDecision() {
     }
@@ -56,21 +55,12 @@ public class QuickDecision
         this.values = Arrays.asList(values.split("\\s*,\\s*"));
     }
 
-    public Boolean getEnabled() {
-        return enabled;
-    }
-
-    public void setEnabled(Boolean enabled) {
-        this.enabled = enabled;
-    }
-
     public static final Parcelable.Creator<QuickDecision> CREATOR = new Parcelable.Creator<QuickDecision>() {
         public QuickDecision createFromParcel(Parcel in) {
             return new QuickDecision.Builder()
                     .setKey((String) in.readValue(String.class.getClassLoader()))
                     .setName((String) in.readValue(String.class.getClassLoader()))
                     .setValues((List<String>) in.readValue(String.class.getClassLoader()))
-                    .setEnabled((Byte) in.readValue(Byte.class.getClassLoader()) != 0)
                     .build();
         }
 
@@ -89,7 +79,6 @@ public class QuickDecision
         dest.writeValue(getKey());
         dest.writeValue(getName());
         dest.writeValue(getValues());
-        dest.writeValue((byte) (getEnabled() ? 1 : 0));
     }
 
     public static class Builder {
@@ -111,11 +100,6 @@ public class QuickDecision
 
         public Builder setValues(List<String> values) {
             quickDecision.setValues(values);
-            return this;
-        }
-
-        public Builder setEnabled(Boolean enabled) {
-            quickDecision.setEnabled(enabled);
             return this;
         }
 
