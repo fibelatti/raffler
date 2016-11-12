@@ -78,11 +78,13 @@ public class Database {
             // Should only destroy old data if really necessary
             //db.execSQL(IGroupItemSchema.GROUP_ITEMS_TABLE_DROP);
             //db.execSQL(IGroupSchema.GROUPS_TABLE_DROP);
-            //db.execSQL(IQuickDecisionSchema.QUICK_DECISION_TABLE_DROP);
+            db.execSQL(IQuickDecisionSchema.QUICK_DECISION_TABLE_DROP);
             //db.execSQL(ISettingsSchema.SETTINGS_TABLE_DROP);
 
-            if (oldVersion == 3 && newVersion == 4)
-                db.execSQL(SettingsDao.SETTINGS_ALTER_TABLE_CRASH_REPORT);
+            switch(oldVersion) {
+                case 3:
+                    db.execSQL(SettingsDao.SETTINGS_ALTER_TABLE_CRASH_REPORT);
+            }
 
             onCreate(db);
         }

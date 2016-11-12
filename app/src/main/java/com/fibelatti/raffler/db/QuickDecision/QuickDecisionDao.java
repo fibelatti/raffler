@@ -1,11 +1,8 @@
 package com.fibelatti.raffler.db.QuickDecision;
 
-import android.content.ContentValues;
 import android.database.Cursor;
-import android.database.sqlite.SQLiteConstraintException;
 import android.database.sqlite.SQLiteDatabase;
 
-import com.crashlytics.android.Crashlytics;
 import com.fibelatti.raffler.Constants;
 import com.fibelatti.raffler.db.DbContentProvider;
 import com.fibelatti.raffler.models.QuickDecision;
@@ -19,7 +16,6 @@ public class QuickDecisionDao
         implements IQuickDecisionSchema, IQuickDecisionDao {
 
     private Cursor cursor;
-    private ContentValues initialValues;
 
     String locale = Constants.SUPPORTED_LOCALES.contains(Locale.getDefault().getLanguage()) ?
             Locale.getDefault().getLanguage() : Constants.LOCALE_EN;
@@ -30,8 +26,6 @@ public class QuickDecisionDao
 
     @Override
     public QuickDecision fetchQuickDecisionById(long quickDecisionId) {
-
-
         final String selectionArgs[] = {String.valueOf(quickDecisionId), locale};
         final String selection = QUICK_DECISION_COLUMN_ID + " = ?" + " AND " + QUICK_DECISION_COLUMN_LOCALE + " = ?";
         QuickDecision quickDecision = new QuickDecision.Builder().build();
@@ -71,50 +65,12 @@ public class QuickDecisionDao
         return quickDecisionList;
     }
 
-    @Override
-    public List<QuickDecision> fetchQuickDecisionsByStatus(Boolean enabled) {
-        List<QuickDecision> quickDecisionList = new ArrayList<>();
-
-        final String selectionArgs[] = {enabled ? "1" : "0", locale};
-        final String selection = QUICK_DECISION_COLUMN_ENABLED + " = ?" + " AND " + QUICK_DECISION_COLUMN_LOCALE + " = ?";
-
-        cursor = super.query(QUICK_DECISION_TABLE, QUICK_DECISION_COLUMNS, selection,
-                selectionArgs, QUICK_DECISION_COLUMN_ID);
-
-        if (cursor != null) {
-            cursor.moveToFirst();
-            while (!cursor.isAfterLast()) {
-                QuickDecision quickDecision = cursorToEntity(cursor);
-                quickDecisionList.add(quickDecision);
-                cursor.moveToNext();
-            }
-            cursor.close();
-        }
-
-        return quickDecisionList;
-    }
-
-    @Override
-    public boolean toggleQuickDecisionEnabled(QuickDecision quickDecision) {
-        setContentValue(quickDecision);
-        final String selectionArgs[] = {String.valueOf(quickDecision.getKey()), locale};
-        final String selection = QUICK_DECISION_COLUMN_ID + " = ?" + " AND " + QUICK_DECISION_COLUMN_LOCALE + " = ?";
-
-        try {
-            return super.update(QUICK_DECISION_TABLE, getContentValue(), selection, selectionArgs) > 0;
-        } catch (SQLiteConstraintException e) {
-            Crashlytics.logException(e);
-            return false;
-        }
-    }
-
     protected QuickDecision cursorToEntity(Cursor cursor) {
         QuickDecision quickDecision = new QuickDecision.Builder().build();
 
         int idIndex;
         int quickDecisionNameIndex;
         int quickDecisionValuesIndex;
-        int quickDecisionEnabledIndex;
 
         if (cursor != null) {
             if (cursor.getColumnIndex(QUICK_DECISION_COLUMN_ID) != -1) {
@@ -131,22 +87,8 @@ public class QuickDecisionDao
                         QUICK_DECISION_COLUMN_VALUES);
                 quickDecision.setValues(cursor.getString(quickDecisionValuesIndex));
             }
-            if (cursor.getColumnIndex(QUICK_DECISION_COLUMN_ENABLED) != -1) {
-                quickDecisionEnabledIndex = cursor.getColumnIndexOrThrow(
-                        QUICK_DECISION_COLUMN_ENABLED);
-                quickDecision.setEnabled(cursor.getInt(quickDecisionEnabledIndex) != 0);
-            }
         }
 
         return quickDecision;
-    }
-
-    private void setContentValue(QuickDecision quickDecision) {
-        initialValues = new ContentValues();
-        initialValues.put(QUICK_DECISION_COLUMN_ENABLED, quickDecision.getEnabled() ? 1 : 0);
-    }
-
-    private ContentValues getContentValue() {
-        return initialValues;
     }
 }
