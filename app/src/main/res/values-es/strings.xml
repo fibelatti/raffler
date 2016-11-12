@@ -23,7 +23,7 @@
     <string name="main_section_title_my_groups">Mis grupos</string>
 
     <string name="main_tutorial_intro">Bienvenido a Raffler! Parece que eres nuevo por aquí, entonces te explicaré cómo hacer las cosas&#8230;</string>
-    <string name="main_tutorial_quick_decision">Éstos son los botones de decisiones rápidas: golpéelos y consiga un resultado inmediato!</string>
+    <string name="main_tutorial_quick_decision">Éstos son los botones de decisiones rápidas: golpéelos y consiga un resultado inmediato! Desplazarse horizontalmente para obtener más opciones&#8230;</string>
     <string name="main_tutorial_add_group">La verdadera diversión comienza cuando creas tu primer grupo. Cuando pienses que estás listo toca este botón aquí&#8230;</string>
 
     <!-- GroupActivity -->

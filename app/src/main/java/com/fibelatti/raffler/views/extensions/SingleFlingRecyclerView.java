@@ -100,7 +100,6 @@ public class SingleFlingRecyclerView
 
     public void scrollToNextSnap(int position) {
         scrollToPosition(safeTargetPosition(position, getItemCount()));
-        adjustPositionX(1);
     }
 
     private int getItemCount() {
