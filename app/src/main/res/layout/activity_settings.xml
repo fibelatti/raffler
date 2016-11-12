@@ -71,63 +71,8 @@
                 </RelativeLayout>
 
                 <RelativeLayout
-                    android:id="@+id/layout_quick_decision"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/layout_roulette_music"
-                    android:layout_marginTop="@dimen/margin_small">
-
-                    <TextView
-                        android:id="@+id/title_settings_quick_decision"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/settings_title_quick_decision"
-                        android:textColor="@color/colorAccent"
-                        android:textSize="@dimen/text_size_regular"/>
-
-                    <include
-                        android:id="@+id/divider_settings_quick_decision"
-                        layout="@layout/divider_default"
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/divider_size"
-                        android:layout_below="@+id/title_settings_quick_decision"/>
-
-                    <TextView
-                        android:id="@+id/txt_settings_quick_decision"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@+id/divider_settings_quick_decision"
-                        android:text="@string/settings_text_quick_decision"
-                        android:textColor="@color/textPrimary"
-                        android:textSize="@dimen/text_size_regular"/>
-
-                    <LinearLayout
-                        android:id="@+id/layout_quick_decision_buttons"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@+id/txt_settings_quick_decision"
-                        android:orientation="horizontal"
-                        android:weightSum="2">
-
-                        <Button
-                            android:id="@+id/button_quick_decision_one"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:theme="@style/AboutButton"/>
-
-                        <Button
-                            android:id="@+id/button_quick_decision_two"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:theme="@style/AboutButton"/>
-                    </LinearLayout>
-                </RelativeLayout>
-
-                <RelativeLayout
                     android:id="@+id/layout_crash_report_opt_out"
-                    android:layout_below="@+id/layout_quick_decision"
+                    android:layout_below="@+id/layout_roulette_music"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/margin_small">
