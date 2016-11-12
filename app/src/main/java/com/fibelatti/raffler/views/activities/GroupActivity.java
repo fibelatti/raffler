@@ -329,6 +329,9 @@ public class GroupActivity
         sequence.addSequenceItem(
                 new MaterialShowcaseView.Builder(this)
                         .setTarget(fakeTutorialViewCheckBox)
+                        .withButtonDismissStyle()
+                        .withPinkDismissButton()
+                        .setDismissTextColor(ContextCompat.getColor(context, R.color.colorWhite))
                         .setDismissText(getString(R.string.hint_got_it))
                         .setSkipText(getString(R.string.hint_skip_tutorial))
                         .setContentText(getString(R.string.group_tutorial_check_items))
@@ -340,6 +343,9 @@ public class GroupActivity
         sequence.addSequenceItem(
                 new MaterialShowcaseView.Builder(this)
                         .setTarget(fakeTutorialViewMenu)
+                        .withButtonDismissStyle()
+                        .withPinkDismissButton()
+                        .setDismissTextColor(ContextCompat.getColor(context, R.color.colorWhite))
                         .setDismissText(getString(R.string.hint_got_it))
                         .setSkipText(getString(R.string.hint_skip_tutorial))
                         .setContentText(getString(R.string.group_tutorial_menu))
@@ -352,6 +358,9 @@ public class GroupActivity
         sequence.addSequenceItem(
                 new MaterialShowcaseView.Builder(this)
                         .setTarget(fakeTutorialViewFam)
+                        .withButtonDismissStyle()
+                        .withPinkDismissButton()
+                        .setDismissTextColor(ContextCompat.getColor(context, R.color.colorWhite))
                         .setDismissText(getString(R.string.hint_got_it))
                         .setSkipText(getString(R.string.hint_skip_tutorial))
                         .setContentText(getString(R.string.group_tutorial_play))
@@ -365,6 +374,9 @@ public class GroupActivity
         sequence.addSequenceItem(
                 new MaterialShowcaseView.Builder(this)
                         .setTarget(fakeTutorialViewMenu)
+                        .withButtonDismissStyle()
+                        .withPinkDismissButton()
+                        .setDismissTextColor(ContextCompat.getColor(context, R.color.colorWhite))
                         .setDismissText(getString(R.string.hint_got_it))
                         .setContentText(getString(R.string.group_tutorial_help))
                         .setShapePadding(150)

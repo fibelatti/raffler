@@ -325,6 +325,9 @@ public class GroupFormActivity
         sequence.addSequenceItem(
                 new MaterialShowcaseView.Builder(this)
                         .setTarget(groupNameLayout)
+                        .withButtonDismissStyle()
+                        .withPinkDismissButton()
+                        .setDismissTextColor(ContextCompat.getColor(context, R.color.colorWhite))
                         .setDismissText(getString(R.string.hint_got_it))
                         .setSkipText(getString(R.string.hint_skip_tutorial))
                         .setContentText(getString(R.string.group_form_tutorial_group_name))
@@ -336,6 +339,9 @@ public class GroupFormActivity
         sequence.addSequenceItem(
                 new MaterialShowcaseView.Builder(this)
                         .setTarget(groupItemNameLayout)
+                        .withButtonDismissStyle()
+                        .withPinkDismissButton()
+                        .setDismissTextColor(ContextCompat.getColor(context, R.color.colorWhite))
                         .setDismissText(getString(R.string.hint_got_it))
                         .setSkipText(getString(R.string.hint_skip_tutorial))
                         .setContentText(getString(R.string.group_form_tutorial_item_name))
@@ -348,6 +354,9 @@ public class GroupFormActivity
         sequence.addSequenceItem(
                 new MaterialShowcaseView.Builder(this)
                         .setTarget(buttonAddItem)
+                        .withButtonDismissStyle()
+                        .withPinkDismissButton()
+                        .setDismissTextColor(ContextCompat.getColor(context, R.color.colorWhite))
                         .setDismissText(getString(R.string.hint_got_it))
                         .setSkipText(getString(R.string.hint_skip_tutorial))
                         .setContentText(getString(R.string.group_form_tutorial_add_item))
@@ -360,6 +369,9 @@ public class GroupFormActivity
         sequence.addSequenceItem(
                 new MaterialShowcaseView.Builder(this)
                         .setTarget(fakeTutorialView)
+                        .withButtonDismissStyle()
+                        .withPinkDismissButton()
+                        .setDismissTextColor(ContextCompat.getColor(context, R.color.colorWhite))
                         .setDismissText(getString(R.string.hint_got_it))
                         .setContentText(getString(R.string.group_form_tutorial_toolbar))
                         .setShapePadding(150)
