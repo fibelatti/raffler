@@ -13,8 +13,8 @@ buildscript {
 }
 
 android {
-    compileSdkVersion 24
-    buildToolsVersion "24.0.2"
+    compileSdkVersion rootProject.ext.compileSdkVersion
+    buildToolsVersion rootProject.ext.buildToolsVersion
 
     signingConfigs {
         release_config {
@@ -26,10 +26,10 @@ android {
     }
     defaultConfig {
         applicationId "com.fibelatti.raffler"
-        minSdkVersion 16
-        targetSdkVersion 24
         versionCode 8
         versionName "1.3.0"
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
 
         manifestPlaceholders = [fabricApiKey: FABRIC_API_KEY]
     }
@@ -44,30 +44,32 @@ android {
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    testCompile 'junit:junit:4.12'
 
     // Material Design
-    compile 'com.android.support:appcompat-v7:24.2.1'
-    compile 'com.android.support:design:24.2.1'
-    compile 'com.android.support:recyclerview-v7:24.2.1'
-    compile 'com.android.support:cardview-v7:24.2.1'
+    compile "com.android.support:appcompat-v7:$rootProject.ext.appCompatVersion"
+    compile "com.android.support:design:$rootProject.ext.designVersion"
+    compile "com.android.support:recyclerview-v7:$rootProject.ext.recyclerViewVersion"
+    compile "com.android.support:cardview-v7:$rootProject.ext.cardViewVersion"
 
     // Butter Knife
-    compile 'com.jakewharton:butterknife:8.2.1'
-    apt 'com.jakewharton:butterknife-compiler:8.2.1'
+    compile "com.jakewharton:butterknife:$rootProject.ext.butterKnifeVersion"
+    apt "com.jakewharton:butterknife-compiler:$rootProject.ext.butterKnifeVersion"
 
     // Custom FAB
-    compile 'com.github.clans:fab:1.6.4'
+    compile "com.github.clans:fab:$rootProject.ext.clansFabVersion"
 
     // Tutorials
-    compile 'com.github.fibelatti:MaterialShowcaseView:2.1.0'
+    compile "com.github.fibelatti:MaterialShowcaseView:$rootProject.ext.tutorialVersion"
 
     // Crashlytics
-    compile('com.crashlytics.sdk.android:crashlytics:2.6.1@aar') {
+    compile("com.crashlytics.sdk.android:crashlytics:$rootProject.ext.crashlyticsVersion@aar") {
         transitive = true;
     }
 //    Answers - Currently disabled while the app has no privacy policy
-//    compile('com.crashlytics.sdk.android:answers:1.3.10@aar') {
+//    compile("com.crashlytics.sdk.android:answers:1.3.10@aar") {
 //        transitive = true;
 //    }
+
+    // Testing
+    testCompile "junit:junit:$rootProject.ext.jUnitVersion"
 }
