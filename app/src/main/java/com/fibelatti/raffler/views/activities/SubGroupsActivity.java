@@ -123,7 +123,8 @@ public class SubGroupsActivity
             if (validateQuantity())
                 raffleSubGroups(Integer.valueOf(inputQuantity.getText().toString()));
         } else {
-            Double quantity = Math.ceil((double) group.getItemsCount() / Integer.valueOf(inputQuantity.getText().toString()));
+            String quantityInput = inputQuantity.getText().toString().isEmpty() ? "0" : inputQuantity.getText().toString();
+            Double quantity = Math.ceil((double) group.getItemsCount() / Integer.valueOf(quantityInput));
 
             if (validateQuantityWithMinimum())
                 raffleSubGroups(quantity.intValue());
@@ -186,7 +187,8 @@ public class SubGroupsActivity
     private boolean validateQuantityWithMinimum() {
         boolean partialResult = validateQuantity();
 
-        int quantity = Integer.valueOf(inputQuantity.getText().toString());
+        int quantity = inputQuantity.getText().toString().isEmpty() ? 0
+                : Integer.valueOf(inputQuantity.getText().toString());
 
         if (quantity < 2) {
             subgroupsQuantityLayout.setError(getString(R.string.subgroups_msg_validate_quantity_minimum, 2));

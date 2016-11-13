@@ -385,10 +385,12 @@ public class GroupFormActivity
     }
 
     private void showTutorialSaveAndEdit() {
-        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-        imm.hideSoftInputFromWindow(buttonAddItem.getWindowToken(), 0);
-
         MaterialShowcaseSequence sequence = new MaterialShowcaseSequence(this, Constants.TUTORIAL_KEY_GROUP_FORM_SAVE);
+
+        if (!sequence.hasFired()) {
+            InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(buttonAddItem.getWindowToken(), 0);
+        }
 
         sequence.addSequenceItem(
                 new MaterialShowcaseView.Builder(this)
