@@ -131,23 +131,28 @@ public class MainActivity
         recyclerViewGroups.setLayoutManager(new LinearLayoutManager(this));
         recyclerViewGroups.setItemAnimator(new DefaultItemAnimator());
         recyclerViewGroups.setAdapter(groupsAdapter);
-        recyclerViewGroups.addOnItemTouchListener(new RecyclerTouchListener(this, new RecyclerTouchListener.OnItemTouchListener() {
-            @Override
-            public void onItemTouch(View view, int position) {
-                Group group = groupList.get(position);
-                navigator.startGroupActivity(group);
-            }
-        }));
+
+        recyclerViewGroups.addOnItemTouchListener(new RecyclerTouchListener.Builder(this)
+                .setOnItemTouchListener(new RecyclerTouchListener.OnItemTouchListener() {
+                    @Override
+                    public void onItemTouch(View view, int position) {
+                        Group group = groupList.get(position);
+                        navigator.startGroupActivity(group);
+                    }
+                })
+                .build());
 
         recyclerViewQuickDecision.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
         recyclerViewQuickDecision.setAdapter(quickDecisionAdapter);
-        recyclerViewQuickDecision.addOnItemTouchListener(new RecyclerTouchListener(this, new RecyclerTouchListener.OnItemTouchListener() {
-            @Override
-            public void onItemTouch(View view, int position) {
-                int positionInList = position % quickDecisionList.size();
-                navigator.startQuickDecisionResultActivity(quickDecisionList.get(positionInList));
-            }
-        }));
+        recyclerViewQuickDecision.addOnItemTouchListener(new RecyclerTouchListener.Builder(this)
+                .setOnItemTouchListener(new RecyclerTouchListener.OnItemTouchListener() {
+                    @Override
+                    public void onItemTouch(View view, int position) {
+                        int positionInList = position % quickDecisionList.size();
+                        navigator.startQuickDecisionResultActivity(quickDecisionList.get(positionInList));
+                    }
+                })
+                .build());
     }
 
     private void setUpFab() {

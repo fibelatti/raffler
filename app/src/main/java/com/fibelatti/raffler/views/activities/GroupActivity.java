@@ -178,12 +178,14 @@ public class GroupActivity
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
         recyclerView.setAdapter(adapter);
-        recyclerView.addOnItemTouchListener(new RecyclerTouchListener(this, new RecyclerTouchListener.OnItemTouchListener() {
-            @Override
-            public void onItemTouch(View view, int position) {
-                presenter.toggleItemSelected(position);
-            }
-        }));
+        recyclerView.addOnItemTouchListener(new RecyclerTouchListener.Builder(this)
+                .setOnItemTouchListener(new RecyclerTouchListener.OnItemTouchListener() {
+                    @Override
+                    public void onItemTouch(View view, int position) {
+                        presenter.toggleItemSelected(position);
+                    }
+                })
+                .build());
     }
 
     private void setUpFab() {
