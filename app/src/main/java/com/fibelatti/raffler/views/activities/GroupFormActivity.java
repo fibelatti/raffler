@@ -26,13 +26,15 @@ import com.fibelatti.raffler.helpers.AlertDialogHelper;
 import com.fibelatti.raffler.helpers.FileHelper;
 import com.fibelatti.raffler.models.Group;
 import com.fibelatti.raffler.models.GroupItem;
-import com.fibelatti.raffler.presenters.BaseGroupPresenter;
-import com.fibelatti.raffler.presenters.IBaseGroupPresenter;
-import com.fibelatti.raffler.presenters.IBaseGroupPresenterView;
+import com.fibelatti.raffler.presenters.GroupFormPresenter;
+import com.fibelatti.raffler.presenters.IGroupFormPresenter;
+import com.fibelatti.raffler.presenters.IGroupFormPresenterView;
 import com.fibelatti.raffler.utils.StringUtils;
 import com.fibelatti.raffler.views.adapters.GroupAdapter;
 import com.fibelatti.raffler.views.extensions.DividerItemDecoration;
 import com.fibelatti.raffler.views.extensions.RecyclerTouchListener;
+import com.fibelatti.raffler.views.fragments.EditNameDialogFragment;
+import com.fibelatti.raffler.views.fragments.IEditNameListener;
 import com.fibelatti.raffler.views.fragments.IIncludeRangeListener;
 import com.fibelatti.raffler.views.fragments.IncludeRangeDialogFragment;
 
@@ -43,9 +45,9 @@ import uk.co.deanwild.materialshowcaseview.MaterialShowcaseView;
 
 public class GroupFormActivity
         extends BaseActivity
-        implements IBaseGroupPresenterView, IIncludeRangeListener {
+        implements IGroupFormPresenterView, IIncludeRangeListener, IEditNameListener {
     private Context context;
-    private IBaseGroupPresenter presenter;
+    private IGroupFormPresenter presenter;
     private GroupAdapter adapter;
 
     private Group group;
@@ -77,7 +79,7 @@ public class GroupFormActivity
         super.onCreate(savedInstanceState);
 
         context = getApplicationContext();
-        presenter = BaseGroupPresenter.createPresenter(context, this);
+        presenter = GroupFormPresenter.createPresenter(context, this);
         adapter = new GroupAdapter(this);
 
         if (savedInstanceState != null) {
@@ -153,12 +155,21 @@ public class GroupFormActivity
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
         recyclerView.setAdapter(adapter);
-        recyclerView.addOnItemTouchListener(new RecyclerTouchListener(this, new RecyclerTouchListener.OnItemTouchListener() {
-            @Override
-            public void onItemTouch(View view, int position) {
-                presenter.toggleItemSelected(position);
-            }
-        }));
+        RecyclerTouchListener build = new RecyclerTouchListener.Builder(this)
+                .setOnItemTouchListener(new RecyclerTouchListener.OnItemTouchListener() {
+                    @Override
+                    public void onItemTouch(View view, int position) {
+                        presenter.toggleItemSelected(position);
+                    }
+                })
+                .setOnItemLongPressListener(new RecyclerTouchListener.OnItemLongPressListener() {
+                    @Override
+                    public void onItemLongPress(View view, int position) {
+                        presenter.showItemEditPopUp(position);
+                    }
+                })
+                .build();
+        recyclerView.addOnItemTouchListener(build);
     }
 
     private void setUpAddButton() {
@@ -390,6 +401,12 @@ public class GroupFormActivity
     }
 
     @Override
+    public void onItemSelectedToEdit(String itemName) {
+        DialogFragment editItemFragment = EditNameDialogFragment.newInstance(itemName);
+        editItemFragment.show(getSupportFragmentManager(), EditNameDialogFragment.TAG);
+    }
+
+    @Override
     public void includeRangeCallback(int initialValue, int finalValue) {
         GroupItem groupItem;
 
@@ -401,5 +418,10 @@ public class GroupFormActivity
 
             presenter.addItemToGroup(groupItem);
         }
+    }
+
+    @Override
+    public void editNameCallback(String newName) {
+        this.presenter.editItemName(newName);
     }
 }
