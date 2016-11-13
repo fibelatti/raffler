@@ -10,6 +10,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 
@@ -64,6 +65,11 @@ public class EditNameDialogFragment
         if (savedInstanceState != null) {
             newName.setText(savedInstanceState.getString(Constants.INTENT_EXTRA_GROUP_ITEM_NAME));
         }
+
+        newName.setFocusableInTouchMode(true);
+        newName.requestFocus();
+        ((InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE)).showSoftInput(newName, InputMethodManager.SHOW_IMPLICIT);
+        newName.setSelection(newName.getText().length());
 
         dialog.setOnShowListener(new DialogInterface.OnShowListener() {
             @Override
