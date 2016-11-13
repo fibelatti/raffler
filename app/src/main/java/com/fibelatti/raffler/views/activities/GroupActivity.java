@@ -28,9 +28,9 @@ import com.fibelatti.raffler.R;
 import com.fibelatti.raffler.helpers.AlertDialogHelper;
 import com.fibelatti.raffler.helpers.FileHelper;
 import com.fibelatti.raffler.models.Group;
-import com.fibelatti.raffler.presenters.BaseGroupPresenter;
-import com.fibelatti.raffler.presenters.IBaseGroupPresenter;
-import com.fibelatti.raffler.presenters.IBaseGroupPresenterView;
+import com.fibelatti.raffler.presenters.GroupPresenter;
+import com.fibelatti.raffler.presenters.IGroupPresenter;
+import com.fibelatti.raffler.presenters.IGroupPresenterView;
 import com.fibelatti.raffler.views.Navigator;
 import com.fibelatti.raffler.views.adapters.GroupAdapter;
 import com.fibelatti.raffler.views.extensions.DividerItemDecoration;
@@ -47,10 +47,10 @@ import uk.co.deanwild.materialshowcaseview.MaterialShowcaseView;
 
 public class GroupActivity
         extends BaseActivity
-        implements IBaseGroupPresenterView {
+        implements IGroupPresenterView {
     private Context context;
     private Navigator navigator;
-    private IBaseGroupPresenter presenter;
+    private IGroupPresenter presenter;
     private GroupAdapter adapter;
     private AlertDialogHelper dialogHelper;
 
@@ -86,7 +86,7 @@ public class GroupActivity
 
         context = getApplicationContext();
         navigator = new Navigator(this);
-        presenter = BaseGroupPresenter.createPresenter(context, this);
+        presenter = GroupPresenter.createPresenter(context, this);
         adapter = new GroupAdapter(this);
         dialogHelper = new AlertDialogHelper(this);
 
