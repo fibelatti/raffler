@@ -103,11 +103,16 @@
     <string name="group_form_dialog_initial_number">Initial number</string>
     <string name="group_form_dialog_final_number">Final number</string>
     <string name="group_form_dialog_hint_include">Include</string>
+    <string name="group_form_dialog_hint_done">Done</string>
     <string name="group_form_dialog_hint_cancel">Cancel</string>
 
     <string name="group_form_msg_validate_initial_number">Initial number must not be empty</string>
     <string name="group_form_msg_validate_final_number_empty">Final number must not be empty</string>
     <string name="group_form_msg_validate_final_number_greater">Final number must be greater than initial number</string>
+
+    <string name="group_form_dialog_title_edit_item">Edit item</string>
+    <string name="group_form_dialog_msg_edit_item">Select a new name for this item:</string>
+    <string name="group_form_dialog_edit_item_new_name">New name</string>
 
     <string name="group_form_tutorial_group_name">Creating a group is easy: first you should choose the group name&#8230;</string>
     <string name="group_form_tutorial_item_name">Then you should type one item at a time in this field&#8230;</string>
