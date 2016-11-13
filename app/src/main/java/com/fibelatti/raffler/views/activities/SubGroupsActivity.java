@@ -119,15 +119,15 @@ public class SubGroupsActivity
     }
 
     private void raffle() {
-        if (radioSubGroups.isChecked()) {
-            if (validateQuantity())
-                raffleSubGroups(Integer.valueOf(inputQuantity.getText().toString()));
-        } else {
-            String quantityInput = inputQuantity.getText().toString().isEmpty() ? "0" : inputQuantity.getText().toString();
-            Double quantity = Math.ceil((double) group.getItemsCount() / Integer.valueOf(quantityInput));
+        String quantityInput = inputQuantity.getText().toString().isEmpty() ? "0" : inputQuantity.getText().toString();
 
-            if (validateQuantityWithMinimum())
+        if (validateQuantity(Integer.valueOf(quantityInput))) {
+            if (radioSubGroups.isChecked()) {
+                raffleSubGroups(Integer.valueOf(inputQuantity.getText().toString()));
+            } else {
+                Double quantity = Math.ceil((double) group.getItemsCount() / Integer.valueOf(quantityInput));
                 raffleSubGroups(quantity.intValue());
+            }
         }
     }
 
@@ -160,7 +160,7 @@ public class SubGroupsActivity
         adapter.notifyDataSetChanged();
     }
 
-    private boolean validateQuantity() {
+    private boolean validateQuantity(int quantity) {
         if (StringUtils.isNullOrEmpty(inputQuantity.getText().toString())) {
             subgroupsQuantityLayout.setError(getString(R.string.subgroups_msg_validate_quantity_empty));
             requestFocus(inputQuantity);
@@ -170,7 +170,14 @@ public class SubGroupsActivity
             subgroupsQuantityLayout.setErrorEnabled(false);
         }
 
-        int quantity = Integer.valueOf(inputQuantity.getText().toString());
+        if (quantity == 0) {
+            subgroupsQuantityLayout.setError(getString(R.string.subgroups_msg_validate_quantity_zero));
+            requestFocus(inputQuantity);
+            return false;
+        } else {
+            subgroupsQuantityLayout.setError(null);
+            subgroupsQuantityLayout.setErrorEnabled(false);
+        }
 
         if (quantity > getMaximumQuantity()) {
             subgroupsQuantityLayout.setError(getString(R.string.subgroups_msg_validate_quantity_maximum, getMaximumQuantity()));
@@ -184,26 +191,8 @@ public class SubGroupsActivity
         return true;
     }
 
-    private boolean validateQuantityWithMinimum() {
-        boolean partialResult = validateQuantity();
-
-        int quantity = inputQuantity.getText().toString().isEmpty() ? 0
-                : Integer.valueOf(inputQuantity.getText().toString());
-
-        if (quantity < 2) {
-            subgroupsQuantityLayout.setError(getString(R.string.subgroups_msg_validate_quantity_minimum, 2));
-            requestFocus(inputQuantity);
-            return false;
-        } else {
-            subgroupsQuantityLayout.setError(null);
-            subgroupsQuantityLayout.setErrorEnabled(false);
-        }
-
-        return partialResult;
-    }
-
     private int getMaximumQuantity() {
-        Double value = Math.ceil((double) group.getItemsCount() / 2);
+        Double value = Math.max(Math.ceil((double) group.getItemsCount() / 2), 2);
 
         return value.intValue();
     }

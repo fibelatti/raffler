@@ -130,6 +130,7 @@
     <string name="subgroups_msg_validate_quantity_maximum">La cantidad debe ser igual o inferior a %d</string>
     <string name="subgroups_msg_validate_quantity_minimum">La cantidad debe ser igual o mayor a %d</string>
     <string name="subgroups_msg_validate_quantity_empty">La cantidad no puede estar en blanco</string>
+    <string name="subgroups_msg_validate_quantity_zero">La cantidad no debe ser cero</string>
     <string name="subgroups_hint_group_name">Grupo #%s</string>
 
     <!-- SettingsActivity -->
