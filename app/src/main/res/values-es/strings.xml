@@ -104,6 +104,7 @@
     <string name="group_form_tutorial_group_name">Crear un grupo es fácil: primero debe elegir el nombre del grupo&#8230;</string>
     <string name="group_form_tutorial_item_name">A continuación, debe escribir un elemento a la vez en este campo&#8230;</string>
     <string name="group_form_tutorial_add_item">Y haga clic en este botón para añadir el elemento&#8230;</string>
+    <string name="group_form_tutorial_edit">Si ha escrito incorrectamente el nombre del elemento, puede presionar largo sobre el elemento para editarlo&#8230;</string>
     <string name="group_form_tutorial_toolbar">Cuando termine, haga clic en &#x2713; para guardar su grupo! Explora el menú para ver qué más puedes hacer&#8230;</string>
 
     <!-- RouletteActivity -->

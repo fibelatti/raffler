@@ -30,6 +30,7 @@ public interface Constants {
     String TUTORIAL_KEY_MAIN = "com.fibelatti.raffler.TUTORIAL_MAIN";
     String TUTORIAL_KEY_GROUP = "com.fibelatti.raffler.TUTORIAL_GROUP";
     String TUTORIAL_KEY_GROUP_FORM = "com.fibelatti.raffler.TUTORIAL_GROUP_FORM";
+    String TUTORIAL_KEY_GROUP_FORM_SAVE = "com.fibelatti.raffler.TUTORIAL_GROUP_FORM_SAVE";
 
     String ANALYTICS_KEY_UPGRADED_DATABASE = "Upgraded database";
     String ANALYTICS_PARAM_OLD_VERSION = "Old version";

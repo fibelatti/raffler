@@ -17,6 +17,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageButton;
 
@@ -60,6 +61,8 @@ public class GroupFormActivity
     Toolbar toolbar;
     @BindView(R.id.fake_tutorial_view)
     View fakeTutorialView;
+    @BindView(R.id.fake_tutorial_view_edit_item)
+    View fakeTutorialViewEditItem;
     @BindView(R.id.recycler_view)
     RecyclerView recyclerView;
     @BindView(R.id.input_group_name)
@@ -210,6 +213,8 @@ public class GroupFormActivity
 
             presenter.addItemToGroup(groupItem);
             groupItemName.setText(null);
+
+            showTutorialSaveAndEdit();
         }
     }
 
@@ -376,6 +381,28 @@ public class GroupFormActivity
                         .build()
         );
 
+        sequence.start();
+    }
+
+    private void showTutorialSaveAndEdit() {
+        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(buttonAddItem.getWindowToken(), 0);
+
+        MaterialShowcaseSequence sequence = new MaterialShowcaseSequence(this, Constants.TUTORIAL_KEY_GROUP_FORM_SAVE);
+
+        sequence.addSequenceItem(
+                new MaterialShowcaseView.Builder(this)
+                        .setTarget(fakeTutorialViewEditItem)
+                        .withButtonDismissStyle()
+                        .withPinkDismissButton()
+                        .setDismissTextColor(ContextCompat.getColor(context, R.color.colorWhite))
+                        .setDismissText(getString(R.string.hint_got_it))
+                        .setSkipText(getString(R.string.hint_skip_tutorial))
+                        .setContentText(getString(R.string.group_form_tutorial_edit))
+                        .setMaskColour(ContextCompat.getColor(context, R.color.colorPrimary))
+                        .withRectangleShape(true)
+                        .build()
+        );
 
         sequence.addSequenceItem(
                 new MaterialShowcaseView.Builder(this)

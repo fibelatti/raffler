@@ -117,6 +117,7 @@
     <string name="group_form_tutorial_group_name">Creating a group is easy: first you should choose the group name&#8230;</string>
     <string name="group_form_tutorial_item_name">Then you should type one item at a time in this field&#8230;</string>
     <string name="group_form_tutorial_add_item">And click this button to insert the item&#8230;</string>
+    <string name="group_form_tutorial_edit">If you mistyped the item name, you can long press on the item to edit&#8230;</string>
     <string name="group_form_tutorial_toolbar">When you\'re done click on the &#x2713; icon to save your group! Explore the menu to see what else you can do&#8230;</string>
 
     <!-- RouletteActivity -->
