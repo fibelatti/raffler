@@ -56,7 +56,7 @@ public class RecyclerTouchListener
             extends GestureDetector.SimpleOnGestureListener {
         @Override
         public boolean onSingleTapUp(MotionEvent event) {
-            if (childView != null) {
+            if (childView != null && itemTouchListener != null) {
                 itemTouchListener.onItemTouch(childView, childViewPosition);
             }
 
@@ -65,7 +65,7 @@ public class RecyclerTouchListener
 
         @Override
         public void onLongPress(MotionEvent event) {
-            if (childView != null) {
+            if (childView != null && itemLongPressListener != null) {
                 itemLongPressListener.onItemLongPress(childView, childViewPosition);
             }
         }
