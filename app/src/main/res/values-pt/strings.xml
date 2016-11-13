@@ -90,15 +90,21 @@
     <string name="group_form_dialog_initial_number">Número inicial</string>
     <string name="group_form_dialog_final_number">Número final</string>
     <string name="group_form_dialog_hint_include">Incluir</string>
+    <string name="group_form_dialog_hint_done">Pronto</string>
     <string name="group_form_dialog_hint_cancel">Cancelar</string>
 
     <string name="group_form_msg_validate_initial_number">Número inicial não pode estar em branco</string>
     <string name="group_form_msg_validate_final_number_empty">Número final não pode estar em branco</string>
     <string name="group_form_msg_validate_final_number_greater">Número final tem que ser maior que o número inicial</string>
 
+    <string name="group_form_dialog_title_edit_item">Editando item</string>
+    <string name="group_form_dialog_msg_edit_item">Escolha um novo nome para este item:</string>
+    <string name="group_form_dialog_edit_item_new_name">Novo nome</string>
+
     <string name="group_form_tutorial_group_name">Criar um grupo é fácil: comece escolhendo o nome do grupo&#8230;</string>
     <string name="group_form_tutorial_item_name">Então digite um item de cada vez neste campo&#8230;</string>
     <string name="group_form_tutorial_add_item">E clique neste botão para adicionar os itens&#8230;</string>
+    <string name="group_form_tutorial_edit">Se você errou na hora de digitar o nome do item, pressione e segure em cima do item desejado para editar&#8230;</string>
     <string name="group_form_tutorial_toolbar">Quando estiver tudo pronto clique no botão &#x2713; para salvar seu grupo! Explore o menu para ver o que mais você pode fazer&#8230;</string>
 
     <!-- RouletteActivity -->

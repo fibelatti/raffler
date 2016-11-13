@@ -1,9 +1,8 @@
 package com.fibelatti.raffler.presenters;
 
 import com.fibelatti.raffler.models.Group;
-import com.fibelatti.raffler.models.GroupItem;
 
-public interface IBaseGroupPresenter {
+public interface IGroupPresenter {
     void onCreate();
 
     void onPause();
@@ -16,21 +15,11 @@ public interface IBaseGroupPresenter {
 
     void refreshGroup();
 
-    boolean saveGroup();
-
     boolean deleteGroup();
-
-    void setGroupName(String newName);
-
-    void addItemToGroup(GroupItem item);
 
     void toggleItemSelected(int position);
 
     void selectAllItems();
 
     void unselectAllItems();
-
-    void deleteSelectedItems();
-
-    void deleteAllItems();
 }

@@ -86,13 +86,20 @@
                 android:tint="@color/colorAccent"/>
         </LinearLayout>
 
+        <View
+            android:id="@+id/fake_tutorial_view_edit_item"
+            android:layout_width="@dimen/clickable_area"
+            android:layout_height="@dimen/clickable_area"
+            android:layout_below="@id/input_layout_group_item"
+            android:layout_gravity="center|start"/>
+
         <android.support.v7.widget.RecyclerView
             android:id="@+id/recycler_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_below="@id/input_layout_group_item"
-            android:paddingLeft="@dimen/padding_small"
-            android:paddingRight="@dimen/padding_small"
+            android:layout_marginLeft="@dimen/margin_small"
+            android:layout_marginRight="@dimen/margin_small"
             android:scrollbars="vertical"/>
     </RelativeLayout>
 
