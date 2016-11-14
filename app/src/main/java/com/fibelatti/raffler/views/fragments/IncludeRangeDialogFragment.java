@@ -13,6 +13,7 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.fibelatti.raffler.Constants;
 import com.fibelatti.raffler.R;
 import com.fibelatti.raffler.utils.StringUtils;
 
@@ -21,7 +22,6 @@ import butterknife.ButterKnife;
 
 public class IncludeRangeDialogFragment
         extends DialogFragment {
-
     public static final String TAG = IncludeRangeDialogFragment.class.getSimpleName();
 
     private Context context;
@@ -52,6 +52,11 @@ public class IncludeRangeDialogFragment
                 .setPositiveButton(R.string.group_form_dialog_hint_include, null)
                 .setNegativeButton(R.string.group_form_dialog_hint_cancel, null)
                 .create();
+
+        if (savedInstanceState != null) {
+            initialNumber.setText(savedInstanceState.getString(Constants.INTENT_EXTRA_DIALOG_INITIAL_NUMBER));
+            finalNumber.setText(savedInstanceState.getString(Constants.INTENT_EXTRA_DIALOG_FINAL_NUMBER));
+        }
 
         dialog.setOnShowListener(new DialogInterface.OnShowListener() {
             @Override
@@ -89,6 +94,13 @@ public class IncludeRangeDialogFragment
         } catch (ClassCastException castException) {
             /** The activity does not implement the listener. */
         }
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putString(Constants.INTENT_EXTRA_DIALOG_INITIAL_NUMBER, initialNumber.getText().toString());
+        outState.putString(Constants.INTENT_EXTRA_DIALOG_FINAL_NUMBER, finalNumber.getText().toString());
     }
 
     private boolean validateForm() {

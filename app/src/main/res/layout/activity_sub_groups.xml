@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/coordinator_layout"
@@ -8,29 +9,73 @@
     android:fitsSystemWindows="true"
     tools:context=".views.activities.SubGroupsActivity">
 
-    <include layout="@layout/toolbar_default" />
+    <include layout="@layout/toolbar_default"/>
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginLeft="@dimen/margin_small"
+        android:layout_marginRight="@dimen/margin_small"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-        <LinearLayout
-            android:id="@+id/layout_subgroups_quantity"
+        <TextView
+            android:id="@+id/radio_group_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_small"
+            android:text="@string/subgroups_hint_radio_group_title"
+            android:textColor="@color/colorAccent"
+            android:textSize="@dimen/text_size_regular"/>
+
+        <include
+            android:id="@+id/divider_radio_group_title"
+            layout="@layout/divider_default"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/divider_size"
+            android:layout_below="@+id/radio_group_title"/>
+
+        <RadioGroup
+            android:id="@+id/radio_group"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/divider_radio_group_title"
+            android:layout_marginBottom="@dimen/margin_smaller"
             android:orientation="horizontal"
-            android:padding="@dimen/padding_small">
+            android:weightSum="2">
+
+            <RadioButton
+                android:id="@+id/radio_subgroups"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/subgroups_hint_radio_subgroups"/>
+
+            <RadioButton
+                android:id="@+id/radio_members"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/subgroups_hint_radio_members"/>
+        </RadioGroup>
+
+        <LinearLayout
+            android:id="@+id/layout_quantity"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/radio_group"
+            android:layout_marginBottom="@dimen/margin_smaller"
+            android:layout_marginTop="@dimen/margin_small"
+            android:orientation="horizontal">
 
             <android.support.design.widget.TextInputLayout
-                android:id="@+id/input_layout_subgroups_quantity"
+                android:id="@+id/input_layout_quantity"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:theme="@style/InputLayout">
 
                 <EditText
-                    android:id="@+id/input_subgroups_quantity"
+                    android:id="@+id/input_quantity"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/subgroups_hint_quantity"
@@ -39,29 +84,29 @@
                     android:maxLength="@integer/text_max_length_3"
                     android:singleLine="true"
                     android:textColor="@color/textPrimary"
-                    android:textSize="@dimen/text_size_regular" />
+                    android:textSize="@dimen/text_size_regular"/>
             </android.support.design.widget.TextInputLayout>
 
             <ImageButton
                 android:id="@+id/btn_raffle_subgroups"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/margin_small"
+                android:layout_marginStart="@dimen/margin_small"
+                android:layout_marginTop="@dimen/margin_small"
                 android:background="@null"
                 android:contentDescription="@string/subgroups_action_raffle"
-                android:padding="@dimen/padding_small"
                 android:src="@drawable/ic_play_circle_white"
                 android:text="@string/subgroups_action_raffle"
-                android:tint="@color/colorAccent" />
+                android:tint="@color/colorAccent"/>
         </LinearLayout>
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/recycler_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@id/layout_subgroups_quantity"
-            android:paddingLeft="@dimen/padding_smaller"
-            android:paddingRight="@dimen/padding_smaller"
-            android:scrollbars="vertical" />
+            android:layout_below="@id/layout_quantity"
+            android:scrollbars="vertical"/>
     </RelativeLayout>
 
 </android.support.design.widget.CoordinatorLayout>

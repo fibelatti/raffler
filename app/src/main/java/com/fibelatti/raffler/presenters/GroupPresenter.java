@@ -6,25 +6,22 @@ import com.fibelatti.raffler.db.Database;
 import com.fibelatti.raffler.models.Group;
 import com.fibelatti.raffler.models.GroupItem;
 
-import java.util.ArrayList;
-import java.util.List;
-
-public class BaseGroupPresenter
-        implements IBaseGroupPresenter {
+public class GroupPresenter
+        implements IGroupPresenter {
 
     private Context context;
-    private IBaseGroupPresenterView view;
+    private IGroupPresenterView view;
 
     private Group group;
 
-    private BaseGroupPresenter(Context context, IBaseGroupPresenterView view) {
+    private GroupPresenter(Context context, IGroupPresenterView view) {
         this.context = context;
         this.view = view;
-        this.group = new Group();
+        this.group = new Group.Builder().build();
     }
 
-    public static BaseGroupPresenter createPresenter(Context context, IBaseGroupPresenterView view) {
-        return new BaseGroupPresenter(context, view);
+    public static GroupPresenter createPresenter(Context context, IGroupPresenterView view) {
+        return new GroupPresenter(context, view);
     }
 
     @Override
@@ -60,26 +57,8 @@ public class BaseGroupPresenter
     }
 
     @Override
-    public boolean saveGroup() {
-        return Database.groupDao.saveGroup(group);
-    }
-
-    @Override
     public boolean deleteGroup() {
         return Database.groupDao.deleteGroup(group);
-    }
-
-
-    @Override
-    public void setGroupName(String newName) {
-        this.group.setName(newName);
-        this.view.onGroupChanged(group);
-    }
-
-    @Override
-    public void addItemToGroup(GroupItem item) {
-        this.group.addItem(item);
-        this.view.onGroupChanged(group);
     }
 
     @Override
@@ -98,22 +77,6 @@ public class BaseGroupPresenter
     @Override
     public void unselectAllItems() {
         setSelectedToItems(false);
-        view.onGroupChanged(group);
-    }
-
-    @Override
-    public void deleteSelectedItems() {
-        List<GroupItem> toRemove = new ArrayList<>();
-        for (GroupItem item : group.getItems()) {
-            if (item.getSelected()) toRemove.add(item);
-        }
-        group.removeItems(toRemove);
-        view.onGroupChanged(group);
-    }
-
-    @Override
-    public void deleteAllItems() {
-        group.removeAllItems();
         view.onGroupChanged(group);
     }
 

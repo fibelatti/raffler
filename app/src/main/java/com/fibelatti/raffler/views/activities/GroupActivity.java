@@ -28,17 +28,15 @@ import com.fibelatti.raffler.R;
 import com.fibelatti.raffler.helpers.AlertDialogHelper;
 import com.fibelatti.raffler.helpers.FileHelper;
 import com.fibelatti.raffler.models.Group;
-import com.fibelatti.raffler.presenters.BaseGroupPresenter;
-import com.fibelatti.raffler.presenters.IBaseGroupPresenter;
-import com.fibelatti.raffler.presenters.IBaseGroupPresenterView;
+import com.fibelatti.raffler.presenters.GroupPresenter;
+import com.fibelatti.raffler.presenters.IGroupPresenter;
+import com.fibelatti.raffler.presenters.IGroupPresenterView;
 import com.fibelatti.raffler.views.Navigator;
 import com.fibelatti.raffler.views.adapters.GroupAdapter;
 import com.fibelatti.raffler.views.extensions.DividerItemDecoration;
 import com.fibelatti.raffler.views.extensions.RecyclerTouchListener;
 import com.github.clans.fab.FloatingActionButton;
 import com.github.clans.fab.FloatingActionMenu;
-
-import org.parceler.Parcels;
 
 import java.io.File;
 
@@ -49,10 +47,10 @@ import uk.co.deanwild.materialshowcaseview.MaterialShowcaseView;
 
 public class GroupActivity
         extends BaseActivity
-        implements IBaseGroupPresenterView {
+        implements IGroupPresenterView {
     private Context context;
     private Navigator navigator;
-    private IBaseGroupPresenter presenter;
+    private IGroupPresenter presenter;
     private GroupAdapter adapter;
     private AlertDialogHelper dialogHelper;
 
@@ -88,14 +86,14 @@ public class GroupActivity
 
         context = getApplicationContext();
         navigator = new Navigator(this);
-        presenter = BaseGroupPresenter.createPresenter(context, this);
+        presenter = GroupPresenter.createPresenter(context, this);
         adapter = new GroupAdapter(this);
         dialogHelper = new AlertDialogHelper(this);
 
         presenter.onCreate();
 
         if (savedInstanceState != null) {
-            presenter.restoreGroup((Group) Parcels.unwrap(savedInstanceState.getParcelable(Constants.INTENT_EXTRA_GROUP)));
+            presenter.restoreGroup((Group) savedInstanceState.getParcelable(Constants.INTENT_EXTRA_GROUP));
         } else if (getIntent().hasExtra(Constants.INTENT_EXTRA_GROUP)) {
             presenter.restoreGroup(fetchDataFromIntent());
         }
@@ -122,7 +120,7 @@ public class GroupActivity
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         instanceRestored = true;
-        outState.putParcelable(Constants.INTENT_EXTRA_GROUP, Parcels.wrap(group));
+        outState.putParcelable(Constants.INTENT_EXTRA_GROUP, group);
     }
 
     @Override
@@ -180,12 +178,14 @@ public class GroupActivity
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
         recyclerView.setAdapter(adapter);
-        recyclerView.addOnItemTouchListener(new RecyclerTouchListener(this, new RecyclerTouchListener.OnItemTouchListener() {
-            @Override
-            public void onItemTouch(View view, int position) {
-                presenter.toggleItemSelected(position);
-            }
-        }));
+        recyclerView.addOnItemTouchListener(new RecyclerTouchListener.Builder(this)
+                .setOnItemTouchListener(new RecyclerTouchListener.OnItemTouchListener() {
+                    @Override
+                    public void onItemTouch(View view, int position) {
+                        presenter.toggleItemSelected(position);
+                    }
+                })
+                .build());
     }
 
     private void setUpFab() {
@@ -200,8 +200,10 @@ public class GroupActivity
                 if (validateSelection()) {
 //                    Answers.getInstance().logCustom(new CustomEvent(Constants.ANALYTICS_KEY_MODE_ROULETTE));
 
-                    Group newGroup = new Group();
-                    newGroup.setItems(group.getSelectedItems());
+                    Group newGroup = new Group.Builder()
+                            .fromGroup(group)
+                            .setItems(group.getSelectedItems())
+                            .build();
                     navigator.startRouletteActivity(newGroup);
                 }
             }
@@ -213,8 +215,10 @@ public class GroupActivity
                 if (validateSelection()) {
 //                    Answers.getInstance().logCustom(new CustomEvent(Constants.ANALYTICS_KEY_MODE_RANDOM_WINNERS));
 
-                    Group newGroup = new Group();
-                    newGroup.setItems(group.getSelectedItems());
+                    Group newGroup = new Group.Builder()
+                            .fromGroup(group)
+                            .setItems(group.getSelectedItems())
+                            .build();
                     navigator.startRandomWinnersActivity(newGroup);
                 }
             }
@@ -226,8 +230,10 @@ public class GroupActivity
 //                Answers.getInstance().logCustom(new CustomEvent(Constants.ANALYTICS_KEY_MODE_SUB_GROUPS));
 
                 if (validateSelection()) {
-                    Group newGroup = new Group();
-                    newGroup.setItems(group.getSelectedItems());
+                    Group newGroup = new Group.Builder()
+                            .fromGroup(group)
+                            .setItems(group.getSelectedItems())
+                            .build();
                     navigator.startSubGroupsActivity(newGroup);
                 }
             }
@@ -265,7 +271,7 @@ public class GroupActivity
     }
 
     private Group fetchDataFromIntent() {
-        return (Group) Parcels.unwrap(getIntent().getParcelableExtra(Constants.INTENT_EXTRA_GROUP));
+        return (Group) getIntent().getParcelableExtra(Constants.INTENT_EXTRA_GROUP);
     }
 
     private void fetchDataFromDb() {
@@ -325,20 +331,28 @@ public class GroupActivity
         sequence.addSequenceItem(
                 new MaterialShowcaseView.Builder(this)
                         .setTarget(fakeTutorialViewCheckBox)
+                        .withButtonDismissStyle()
+                        .withPinkDismissButton()
+                        .setDismissTextColor(ContextCompat.getColor(context, R.color.colorWhite))
                         .setDismissText(getString(R.string.hint_got_it))
+                        .setSkipText(getString(R.string.hint_skip_tutorial))
                         .setContentText(getString(R.string.group_tutorial_check_items))
                         .setShapePadding(100)
-                        .setMaskColour(ContextCompat.getColor(context, R.color.colorPrimaryWithTransparency))
+                        .setMaskColour(ContextCompat.getColor(context, R.color.colorPrimary))
                         .build()
         );
 
         sequence.addSequenceItem(
                 new MaterialShowcaseView.Builder(this)
                         .setTarget(fakeTutorialViewMenu)
+                        .withButtonDismissStyle()
+                        .withPinkDismissButton()
+                        .setDismissTextColor(ContextCompat.getColor(context, R.color.colorWhite))
                         .setDismissText(getString(R.string.hint_got_it))
+                        .setSkipText(getString(R.string.hint_skip_tutorial))
                         .setContentText(getString(R.string.group_tutorial_menu))
                         .setShapePadding(100)
-                        .setMaskColour(ContextCompat.getColor(context, R.color.colorPrimaryWithTransparency))
+                        .setMaskColour(ContextCompat.getColor(context, R.color.colorPrimary))
                         .setDelay(200)
                         .build()
         );
@@ -346,10 +360,14 @@ public class GroupActivity
         sequence.addSequenceItem(
                 new MaterialShowcaseView.Builder(this)
                         .setTarget(fakeTutorialViewFam)
+                        .withButtonDismissStyle()
+                        .withPinkDismissButton()
+                        .setDismissTextColor(ContextCompat.getColor(context, R.color.colorWhite))
                         .setDismissText(getString(R.string.hint_got_it))
+                        .setSkipText(getString(R.string.hint_skip_tutorial))
                         .setContentText(getString(R.string.group_tutorial_play))
                         .setShapePadding(50)
-                        .setMaskColour(ContextCompat.getColor(context, R.color.colorPrimaryWithTransparency))
+                        .setMaskColour(ContextCompat.getColor(context, R.color.colorPrimary))
                         .setDelay(200)
                         .build()
         );
@@ -358,10 +376,13 @@ public class GroupActivity
         sequence.addSequenceItem(
                 new MaterialShowcaseView.Builder(this)
                         .setTarget(fakeTutorialViewMenu)
+                        .withButtonDismissStyle()
+                        .withPinkDismissButton()
+                        .setDismissTextColor(ContextCompat.getColor(context, R.color.colorWhite))
                         .setDismissText(getString(R.string.hint_got_it))
                         .setContentText(getString(R.string.group_tutorial_help))
                         .setShapePadding(150)
-                        .setMaskColour(ContextCompat.getColor(context, R.color.colorPrimaryWithTransparency))
+                        .setMaskColour(ContextCompat.getColor(context, R.color.colorPrimary))
                         .setDelay(200)
                         .build()
         );

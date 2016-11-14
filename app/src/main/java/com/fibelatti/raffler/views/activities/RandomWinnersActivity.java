@@ -11,6 +11,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageButton;
 
@@ -20,8 +21,6 @@ import com.fibelatti.raffler.models.Group;
 import com.fibelatti.raffler.utils.RandomizeUtils;
 import com.fibelatti.raffler.utils.StringUtils;
 import com.fibelatti.raffler.views.adapters.RandomWinnersAdapter;
-
-import org.parceler.Parcels;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -94,6 +93,11 @@ public class RandomWinnersActivity
         buttonRaffleWinners.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if (view != null) {
+                    InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                    imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+                }
+
                 raffleWinners();
             }
         });
@@ -104,7 +108,7 @@ public class RandomWinnersActivity
     }
 
     private Group fetchDataFromIntent() {
-        return (Group) Parcels.unwrap(getIntent().getParcelableExtra(Constants.INTENT_EXTRA_GROUP));
+        return (Group) getIntent().getParcelableExtra(Constants.INTENT_EXTRA_GROUP);
     }
 
     private void raffleWinners() {

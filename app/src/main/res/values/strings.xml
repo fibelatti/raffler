@@ -17,6 +17,7 @@
     <string name="hint_yes">Yes</string>
     <string name="hint_no">No</string>
     <string name="hint_got_it">GOT IT</string>
+    <string name="hint_skip_tutorial">SKIP TUTORIAL</string>
 
     <string name="generic_msg_error">Oops! Something went wrong. Please try again.</string>
 
@@ -35,7 +36,7 @@
     <string name="main_section_title_my_groups">My groups</string>
 
     <string name="main_tutorial_intro">Welcome to Raffler! It seems that you\'re new around here, so I\'ll explain how to get things going&#8230;</string>
-    <string name="main_tutorial_quick_decision">These are the quick decision buttons: tap them and get an immediate result!</string>
+    <string name="main_tutorial_quick_decision">These are the quick decision buttons: tap them and get an immediate result! Scroll horizontally for more options&#8230;</string>
     <string name="main_tutorial_add_group">The real fun begins when you create your first group. Whenever you think you\'re ready tap this button over here&#8230;</string>
 
     <!-- GroupActivity -->
@@ -102,15 +103,21 @@
     <string name="group_form_dialog_initial_number">Initial number</string>
     <string name="group_form_dialog_final_number">Final number</string>
     <string name="group_form_dialog_hint_include">Include</string>
+    <string name="group_form_dialog_hint_done">Done</string>
     <string name="group_form_dialog_hint_cancel">Cancel</string>
 
     <string name="group_form_msg_validate_initial_number">Initial number must not be empty</string>
     <string name="group_form_msg_validate_final_number_empty">Final number must not be empty</string>
     <string name="group_form_msg_validate_final_number_greater">Final number must be greater than initial number</string>
 
+    <string name="group_form_dialog_title_edit_item">Edit item</string>
+    <string name="group_form_dialog_msg_edit_item">Select a new name for this item:</string>
+    <string name="group_form_dialog_edit_item_new_name">New name</string>
+
     <string name="group_form_tutorial_group_name">Creating a group is easy: first you should choose the group name&#8230;</string>
     <string name="group_form_tutorial_item_name">Then you should type one item at a time in this field&#8230;</string>
     <string name="group_form_tutorial_add_item">And click this button to insert the item&#8230;</string>
+    <string name="group_form_tutorial_edit">If you mistyped the item name, you can long press on the item to edit&#8230;</string>
     <string name="group_form_tutorial_toolbar">When you\'re done click on the &#x2713; icon to save your group! Explore the menu to see what else you can do&#8230;</string>
 
     <!-- RouletteActivity -->
@@ -128,10 +135,15 @@
 
     <!-- SubGroupsActivity -->
     <string name="subgroups_title">Sub Groups!</string>
-    <string name="subgroups_hint_quantity">Quantity of subgroups</string>
+    <string name="subgroups_hint_radio_group_title">Type</string>
+    <string name="subgroups_hint_radio_subgroups">Sub Groups</string>
+    <string name="subgroups_hint_radio_members">Elements per group</string>
+    <string name="subgroups_hint_quantity">Quantity</string>
     <string name="subgroups_action_raffle">Raffle</string>
-    <string name="subgroups_msg_validate_quantity">Quantity should be equal or less than %d</string>
+    <string name="subgroups_msg_validate_quantity_maximum">Quantity should be equal or less than %d</string>
+    <string name="subgroups_msg_validate_quantity_minimum">Quantity should be equal or greater than %d</string>
     <string name="subgroups_msg_validate_quantity_empty">Quantity should not be empty</string>
+    <string name="subgroups_msg_validate_quantity_zero">Quantity should not be zero</string>
     <string name="subgroups_hint_group_name">Group #%s</string>
 
     <!-- SettingsActivity -->
@@ -140,14 +152,21 @@
     <string name="settings_msg_save">Changes saved</string>
 
     <string name="settings_title_sound">Sound Effects</string>
-
     <string name="settings_hint_roulette_music">Enable roulette music</string>
+
+    <string name="settings_title_quick_decision">Quick Decisions</string>
+    <string name="settings_text_quick_decision">Click each button to set a quick decision:</string>
+
+    <string name="settings_crash_report_opt_out">Crash Report Opt-out</string>
+    <string name="settings_hint_crash_report_opt_out">This app uses Crashlytics to collect anonymized data about crashes and errors.
+        \nIt helps me make this app better, but if you don\'t want your data to be sent uncheck this option.
+        \nYou can read Crashlytics privacy policy <a href="http://try.crashlytics.com/terms/">here</a>.</string>
 
     <string name="settings_share">Tell your friends!</string>
     <string name="settings_share_title">Sharing Raffler!</string>
     <string name="settings_share_text">Check out Raffler! Making decisions never been so easy. Download at %s</string>
     <string name="settings_rate">Rate this app!</string>
-    <string name="settings_about">Developed with ❤ by Filipe Belatti.</string>
+    <string name="settings_about">Developed with ❤ by Filipe Belatti</string>
     <string name="settings_app_version">Version: 1.3.0</string>
 
     <!-- DialogRate -->
@@ -160,4 +179,8 @@
     <string name="dialog_rate_send_email">Send e-mail</string>
     <string name="dialog_rate_send_email_subject">Raffler! - Feedback</string>
     <string name="dialog_rate_send_email_title">Choose e-mail app</string>
+
+    <!-- DialogQuickDecision -->
+    <string name="dialog_quick_decision_title">Set Quick Decision</string>
+    <string name="dialog_quick_decision_header">Select a new value for this quick decision button:</string>
 </resources>

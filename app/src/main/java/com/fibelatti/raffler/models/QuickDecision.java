@@ -1,36 +1,26 @@
 package com.fibelatti.raffler.models;
 
-import com.fibelatti.raffler.db.Database;
+import android.os.Parcel;
+import android.os.Parcelable;
 
-import org.parceler.Parcel;
-
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-@Parcel
-public class QuickDecision {
-    Long id;
+public class QuickDecision
+        implements Parcelable {
+    String key;
     String name;
     List<String> values;
-    Boolean enabled;
 
-    public QuickDecision() {
+    private QuickDecision() {
     }
 
-    public QuickDecision(Long id, String name, ArrayList<String> values, Boolean enabled) {
-        this.id = id;
-        this.name = name;
-        this.values = values;
-        this.enabled = enabled;
+    public String getKey() {
+        return key;
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
+    public void setKey(String key) {
+        this.key = key;
     }
 
     public String getName() {
@@ -57,7 +47,7 @@ public class QuickDecision {
         return values != null ? values.get(index) : "";
     }
 
-    public void setValues(ArrayList<String> values) {
+    public void setValues(List<String> values) {
         this.values = values;
     }
 
@@ -65,19 +55,56 @@ public class QuickDecision {
         this.values = Arrays.asList(values.split("\\s*,\\s*"));
     }
 
-    public Boolean getEnabled() {
-        return enabled;
+    public static final Parcelable.Creator<QuickDecision> CREATOR = new Parcelable.Creator<QuickDecision>() {
+        public QuickDecision createFromParcel(Parcel in) {
+            return new QuickDecision.Builder()
+                    .setKey((String) in.readValue(String.class.getClassLoader()))
+                    .setName((String) in.readValue(String.class.getClassLoader()))
+                    .setValues((List<String>) in.readValue(String.class.getClassLoader()))
+                    .build();
+        }
+
+        public QuickDecision[] newArray(int size) {
+            return new QuickDecision[size];
+        }
+    };
+
+    @Override
+    public int describeContents() {
+        return 0;
     }
 
-    public void setEnabled(Boolean enabled) {
-        this.enabled = enabled;
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeValue(getKey());
+        dest.writeValue(getName());
+        dest.writeValue(getValues());
     }
 
-    public void refresh() {
-        QuickDecision qd = Database.quickDecisionDao.fetchQuickDecisionById(this.id);
+    public static class Builder {
+        final QuickDecision quickDecision;
 
-        this.name = qd.getName();
-        this.values = qd.getValues();
-        this.enabled = qd.getEnabled();
+        public Builder() {
+            quickDecision = new QuickDecision();
+        }
+
+        public Builder setKey(String key) {
+            quickDecision.setKey(key);
+            return this;
+        }
+
+        public Builder setName(String name) {
+            quickDecision.setName(name);
+            return this;
+        }
+
+        public Builder setValues(List<String> values) {
+            quickDecision.setValues(values);
+            return this;
+        }
+
+        public QuickDecision build() {
+            return quickDecision;
+        }
     }
 }

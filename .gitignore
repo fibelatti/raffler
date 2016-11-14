@@ -1,5 +1,11 @@
+# APK
+app/*.apk
+
 # Built application files
 build/
+
+# Gradle Properties
+gradle.properties
 
 # Gradle generated files
 .gradle/

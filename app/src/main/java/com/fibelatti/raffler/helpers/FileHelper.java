@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 
+import com.crashlytics.android.Crashlytics;
 import com.fibelatti.raffler.Constants;
 import com.fibelatti.raffler.models.Group;
 import com.fibelatti.raffler.models.GroupItem;
@@ -65,7 +66,7 @@ public class FileHelper {
             outputStreamWriter.write(data);
             outputStreamWriter.close();
         } catch (IOException e) {
-//            Crashlytics.log("File write failed: " + e.toString());
+            Crashlytics.log("File write failed: " + e.toString());
         }
     }
 
@@ -101,22 +102,22 @@ public class FileHelper {
     }
 
     private Group convertJsonToGroup(String json) {
-        Group group = new Group();
+        Group.Builder groupBuilder = new Group.Builder();
 
         try {
             JSONObject groupJson = new JSONObject(json);
             JSONArray groupItemsJson = groupJson.getJSONArray(jsonPropertyGroupItems);
 
-            group.setName(groupJson.getString(jsonPropertyGroupName));
+            groupBuilder.setName(groupJson.getString(jsonPropertyGroupName));
 
             for (int i = 0; i < groupItemsJson.length(); i++) {
-                group.addItem(new GroupItem(groupItemsJson.get(i).toString()));
+                groupBuilder.addItem(new GroupItem.Builder().setName(groupItemsJson.get(i).toString()).build());
             }
 
         } catch (JSONException e) {
             e.printStackTrace();
         }
 
-        return group;
+        return groupBuilder.build();
     }
 }

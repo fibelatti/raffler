@@ -14,7 +14,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.AnimationUtils;
-import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -25,7 +24,9 @@ import com.fibelatti.raffler.models.Group;
 import com.fibelatti.raffler.models.QuickDecision;
 import com.fibelatti.raffler.views.Navigator;
 import com.fibelatti.raffler.views.adapters.MainAdapter;
+import com.fibelatti.raffler.views.adapters.QuickDecisionAdapter;
 import com.fibelatti.raffler.views.extensions.RecyclerTouchListener;
+import com.fibelatti.raffler.views.extensions.SingleFlingRecyclerView;
 import com.github.clans.fab.FloatingActionButton;
 
 import java.util.ArrayList;
@@ -42,9 +43,10 @@ public class MainActivity
     private Navigator navigator;
 
     private List<Group> groupList;
-    private MainAdapter adapter;
+    private MainAdapter groupsAdapter;
 
     private List<QuickDecision> quickDecisionList;
+    private QuickDecisionAdapter quickDecisionAdapter;
 
     //region layout bindings
     @BindView(R.id.coordinator_layout)
@@ -53,14 +55,12 @@ public class MainActivity
     Toolbar toolbar;
     @BindView(R.id.layout_quick_decision)
     LinearLayout quickDecisionLayout;
-    @BindView(R.id.button_quick_decision_one)
-    Button quickDecisionOne;
-    @BindView(R.id.button_quick_decision_two)
-    Button quickDecisionTwo;
+    @BindView(R.id.recycler_view_quick_decision)
+    SingleFlingRecyclerView recyclerViewQuickDecision;
     @BindView(R.id.placeholder)
     TextView placeholder;
-    @BindView(R.id.recycler_view)
-    RecyclerView recyclerView;
+    @BindView(R.id.recycler_view_groups)
+    RecyclerView recyclerViewGroups;
     @BindView(R.id.fab)
     FloatingActionButton fab;
     //endregion
@@ -72,8 +72,9 @@ public class MainActivity
         context = getApplicationContext();
         navigator = new Navigator(this);
         groupList = new ArrayList<>();
-        adapter = new MainAdapter(this, groupList);
+        groupsAdapter = new MainAdapter(this, groupList);
         quickDecisionList = new ArrayList<>();
+        quickDecisionAdapter = new QuickDecisionAdapter(this);
 
         setUpLayout();
         setUpRecyclerView();
@@ -127,16 +128,31 @@ public class MainActivity
     }
 
     private void setUpRecyclerView() {
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setItemAnimator(new DefaultItemAnimator());
-        recyclerView.setAdapter(adapter);
-        recyclerView.addOnItemTouchListener(new RecyclerTouchListener(this, new RecyclerTouchListener.OnItemTouchListener() {
-            @Override
-            public void onItemTouch(View view, int position) {
-                Group group = groupList.get(position);
-                navigator.startGroupActivity(group);
-            }
-        }));
+        recyclerViewGroups.setLayoutManager(new LinearLayoutManager(this));
+        recyclerViewGroups.setItemAnimator(new DefaultItemAnimator());
+        recyclerViewGroups.setAdapter(groupsAdapter);
+
+        recyclerViewGroups.addOnItemTouchListener(new RecyclerTouchListener.Builder(this)
+                .setOnItemTouchListener(new RecyclerTouchListener.OnItemTouchListener() {
+                    @Override
+                    public void onItemTouch(View view, int position) {
+                        Group group = groupList.get(position);
+                        navigator.startGroupActivity(group);
+                    }
+                })
+                .build());
+
+        recyclerViewQuickDecision.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+        recyclerViewQuickDecision.setAdapter(quickDecisionAdapter);
+        recyclerViewQuickDecision.addOnItemTouchListener(new RecyclerTouchListener.Builder(this)
+                .setOnItemTouchListener(new RecyclerTouchListener.OnItemTouchListener() {
+                    @Override
+                    public void onItemTouch(View view, int position) {
+                        int positionInList = position % quickDecisionList.size();
+                        navigator.startQuickDecisionResultActivity(quickDecisionList.get(positionInList));
+                    }
+                })
+                .build());
     }
 
     private void setUpFab() {
@@ -153,42 +169,23 @@ public class MainActivity
     private void setUpValues() {
         if (groupList.size() > 0) {
             placeholder.setVisibility(View.GONE);
-            recyclerView.setVisibility(View.VISIBLE);
+            recyclerViewGroups.setVisibility(View.VISIBLE);
         } else {
             placeholder.setVisibility(View.VISIBLE);
-            recyclerView.setVisibility(View.GONE);
-        }
-
-        if (quickDecisionList.size() == 2) {
-            quickDecisionLayout.setVisibility(View.VISIBLE);
-
-            quickDecisionOne.setText(quickDecisionList.get(0).getName());
-            quickDecisionOne.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    navigator.startQuickDecisionResultActivity(quickDecisionList.get(0));
-                }
-            });
-
-            quickDecisionTwo.setText(quickDecisionList.get(1).getName());
-            quickDecisionTwo.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    navigator.startQuickDecisionResultActivity(quickDecisionList.get(1));
-                }
-            });
-        } else {
-            quickDecisionLayout.setVisibility(View.GONE);
+            recyclerViewGroups.setVisibility(View.GONE);
         }
     }
 
     private void fetchData() {
-        if (groupList != null) groupList.clear();
+        if (!groupList.isEmpty()) groupList.clear();
         groupList.addAll(Database.groupDao.fetchAllGroups());
-        adapter.notifyDataSetChanged();
+        groupsAdapter.notifyDataSetChanged();
 
-        if (quickDecisionList != null) quickDecisionList.clear();
-        quickDecisionList.addAll(Database.quickDecisionDao.fetchEnabledQuickDecisions());
+        boolean firstTimeLoad = quickDecisionList.isEmpty();
+        if (!firstTimeLoad) quickDecisionList.clear();
+        quickDecisionList.addAll(Database.quickDecisionDao.fetchAllQuickDecisions());
+        quickDecisionAdapter.setQuickDecisions(quickDecisionList);
+        if (firstTimeLoad) recyclerViewQuickDecision.scrollToNextSnap(Integer.MAX_VALUE / 2);
     }
 
     private void showTutorial() {
@@ -197,20 +194,27 @@ public class MainActivity
         sequence.addSequenceItem(
                 new MaterialShowcaseView.Builder(this)
                         .setTarget(toolbar)
+                        .withButtonDismissStyle()
+                        .withPinkDismissButton()
+                        .setDismissTextColor(ContextCompat.getColor(context, R.color.colorWhite))
                         .setDismissText(getString(R.string.hint_got_it))
+                        .setSkipText(getString(R.string.hint_skip_tutorial))
                         .setContentText(getString(R.string.main_tutorial_intro))
-                        .setMaskColour(ContextCompat.getColor(context, R.color.colorPrimaryWithTransparency))
-                        .withRectangleShape(true)
-                        .setShapePadding(-10)
+                        .setMaskColour(ContextCompat.getColor(context, R.color.colorPrimary))
+                        .withoutShape()
                         .build()
         );
 
         sequence.addSequenceItem(
                 new MaterialShowcaseView.Builder(this)
                         .setTarget(quickDecisionLayout)
+                        .withButtonDismissStyle()
+                        .withPinkDismissButton()
+                        .setDismissTextColor(ContextCompat.getColor(context, R.color.colorWhite))
                         .setDismissText(getString(R.string.hint_got_it))
+                        .setSkipText(getString(R.string.hint_skip_tutorial))
                         .setContentText(getString(R.string.main_tutorial_quick_decision))
-                        .setMaskColour(ContextCompat.getColor(context, R.color.colorPrimaryWithTransparency))
+                        .setMaskColour(ContextCompat.getColor(context, R.color.colorPrimary))
                         .withRectangleShape(true)
                         .setDelay(200)
                         .build()
@@ -219,9 +223,12 @@ public class MainActivity
         sequence.addSequenceItem(
                 new MaterialShowcaseView.Builder(this)
                         .setTarget(fab)
+                        .withButtonDismissStyle()
+                        .withPinkDismissButton()
+                        .setDismissTextColor(ContextCompat.getColor(context, R.color.colorWhite))
                         .setDismissText(getString(R.string.hint_got_it))
                         .setContentText(getString(R.string.main_tutorial_add_group))
-                        .setMaskColour(ContextCompat.getColor(context, R.color.colorPrimaryWithTransparency))
+                        .setMaskColour(ContextCompat.getColor(context, R.color.colorPrimary))
                         .setDelay(200)
                         .build()
         );

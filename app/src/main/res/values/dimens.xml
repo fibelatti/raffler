@@ -11,15 +11,18 @@
     <dimen name="text_size_extra_large">24sp</dimen>
 
     <dimen name="padding_smaller">4dp</dimen>
-    <dimen name="padding_small">10dp</dimen>
+    <dimen name="padding_small">8dp</dimen>
     <dimen name="padding_regular">16dp</dimen>
     <dimen name="padding_large">24dp</dimen>
+    <dimen name="padding_larger">32dp</dimen>
 
-    <dimen name="margin_smaller">8dp</dimen>
-    <dimen name="margin_small">12dp</dimen>
-    <dimen name="margin_regular">20dp</dimen>
-    <dimen name="margin_large">30dp</dimen>
+    <dimen name="margin_smaller">4dp</dimen>
+    <dimen name="margin_small">8dp</dimen>
+    <dimen name="margin_regular">16dp</dimen>
+    <dimen name="margin_large">24dp</dimen>
     <dimen name="margin_larger">40dp</dimen>
+
+    <dimen name="margin_tutorial">30dp</dimen>
 
     <dimen name="clickable_area">40dp</dimen>
     <dimen name="image_view_horizontal_margin">16dp</dimen>
@@ -32,4 +35,5 @@
     <dimen name="card_radius">2dp</dimen>
 
     <dimen name="quick_decision_result">48sp</dimen>
+    <dimen name="quick_decision_button_width">200dp</dimen>
 </resources>

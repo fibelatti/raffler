@@ -1,30 +1,16 @@
 package com.fibelatti.raffler.models;
 
-import org.parceler.Parcel;
+import android.os.Parcel;
+import android.os.Parcelable;
 
-@Parcel
-public class GroupItem {
+public class GroupItem
+        implements Parcelable {
     Long id;
     Long groupId;
     String name;
     Boolean isSelected;
 
-    public GroupItem() {
-    }
-
-    public GroupItem(String name) {
-        this(null, null, name);
-    }
-
-    public GroupItem(Long groupId, String name) {
-        this(null, groupId, name);
-    }
-
-    public GroupItem(Long id, Long groupId, String name) {
-        this.id = id;
-        this.groupId = groupId;
-        this.name = name;
-        this.isSelected = true;
+    private GroupItem() {
     }
 
     public Long getId() {
@@ -59,5 +45,65 @@ public class GroupItem {
 
     public void setSelected(Boolean selected) {
         isSelected = selected;
+    }
+
+    public static final Parcelable.Creator<GroupItem> CREATOR = new Parcelable.Creator<GroupItem>() {
+        public GroupItem createFromParcel(Parcel in) {
+            return new GroupItem.Builder()
+                    .setId((Long) in.readValue(Long.class.getClassLoader()))
+                    .setGroupId((Long) in.readValue(Long.class.getClassLoader()))
+                    .setName((String) in.readValue(String.class.getClassLoader()))
+                    .setSelected((Byte) in.readValue(Byte.class.getClassLoader()) != 0)
+                    .build();
+        }
+
+        public GroupItem[] newArray(int size) {
+            return new GroupItem[size];
+        }
+    };
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeValue(getId());
+        dest.writeValue(getGroupId());
+        dest.writeValue(getName());
+        dest.writeValue((byte) (getSelected() ? 1 : 0));
+    }
+
+    public static class Builder {
+        final GroupItem groupItem;
+
+        public Builder() {
+            groupItem = new GroupItem();
+        }
+
+        public Builder setId(Long id) {
+            groupItem.setId(id);
+            return this;
+        }
+
+        public Builder setGroupId(Long groupId) {
+            groupItem.setGroupId(groupId);
+            return this;
+        }
+
+        public Builder setName(String name) {
+            groupItem.setName(name);
+            return this;
+        }
+
+        public Builder setSelected(Boolean selected) {
+            groupItem.setSelected(selected);
+            return this;
+        }
+
+        public GroupItem build() {
+            return groupItem;
+        }
     }
 }

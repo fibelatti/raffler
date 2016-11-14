@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="@dimen/padding_regular">
@@ -11,14 +12,14 @@
         android:padding="@dimen/padding_small"
         android:text="@string/dialog_rate_header"
         android:textColor="@color/textPrimary"
-        android:textSize="@dimen/text_size_regular" />
+        android:textSize="@dimen/text_size_regular"/>
 
     <RatingBar
         android:id="@+id/rating_bar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/header_text"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"/>
 
     <LinearLayout
         android:id="@+id/layout_feedback_positive"
@@ -34,7 +35,7 @@
             android:padding="@dimen/padding_small"
             android:text="@string/dialog_rate_feedback_positive"
             android:textColor="@color/textPrimary"
-            android:textSize="@dimen/text_size_small" />
+            android:textSize="@dimen/text_size_small"/>
 
         <Button
             android:id="@+id/button_play_store"
@@ -42,7 +43,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:text="@string/dialog_rate_play_store"
-            android:theme="@style/AboutButton" />
+            android:theme="@style/AboutButton"/>
     </LinearLayout>
 
     <LinearLayout
@@ -59,7 +60,7 @@
             android:padding="@dimen/padding_small"
             android:text="@string/dialog_rate_feedback_negative"
             android:textColor="@color/textPrimary"
-            android:textSize="@dimen/text_size_small" />
+            android:textSize="@dimen/text_size_small"/>
 
         <Button
             android:id="@+id/button_email"
@@ -67,6 +68,6 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:text="@string/dialog_rate_send_email"
-            android:theme="@style/AboutButton" />
+            android:theme="@style/AboutButton"/>
     </LinearLayout>
 </RelativeLayout>

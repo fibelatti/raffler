@@ -9,6 +9,9 @@ public interface Constants {
 
     String INTENT_EXTRA_GROUP = "com.fibelatti.raffler.GROUP";
     String INTENT_EXTRA_QUICK_DECISION = "com.fibelatti.raffler.QUICK_DECISION";
+    String INTENT_EXTRA_GROUP_ITEM_NAME = "com.fibelatti.raffler.GROUP_ITEM_NAME";
+    String INTENT_EXTRA_DIALOG_INITIAL_NUMBER = "com.fibelatti.raffler.DIALOG_INITIAL_NUMBER";
+    String INTENT_EXTRA_DIALOG_FINAL_NUMBER = "com.fibelatti.raffler.DIALOG_FINAL_NUMBER";
 
     int REQUEST_CODE_GROUP_ACTION = 1;
     int REQUEST_CODE_GROUP_EDIT = 2;
@@ -18,11 +21,16 @@ public interface Constants {
 
     String FILE_PATH_EXPORTED_GROUP = "raffler_group.rflr";
 
-    List<String> SUPPORTED_LOCALES = Arrays.asList("en", "pt", "es");
+    String LOCALE_EN = "en";
+    String LOCALE_PT = "pt";
+    String LOCALE_ES = "es";
+
+    List<String> SUPPORTED_LOCALES = Arrays.asList(LOCALE_EN, LOCALE_PT, LOCALE_ES);
 
     String TUTORIAL_KEY_MAIN = "com.fibelatti.raffler.TUTORIAL_MAIN";
     String TUTORIAL_KEY_GROUP = "com.fibelatti.raffler.TUTORIAL_GROUP";
     String TUTORIAL_KEY_GROUP_FORM = "com.fibelatti.raffler.TUTORIAL_GROUP_FORM";
+    String TUTORIAL_KEY_GROUP_FORM_SAVE = "com.fibelatti.raffler.TUTORIAL_GROUP_FORM_SAVE";
 
     String ANALYTICS_KEY_UPGRADED_DATABASE = "Upgraded database";
     String ANALYTICS_PARAM_OLD_VERSION = "Old version";

@@ -1,31 +1,21 @@
 package com.fibelatti.raffler.models;
 
-import com.fibelatti.raffler.db.Database;
+import android.os.Parcel;
+import android.os.Parcelable;
 
-import org.parceler.Parcel;
+import com.fibelatti.raffler.db.Database;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-@Parcel
-public class Group {
+public class Group
+        implements Parcelable {
     Long id;
     String name;
     List<GroupItem> items;
 
-    public Group() {
-        this(null, null, new ArrayList<GroupItem>());
-    }
-
-    public Group(String name) {
-        this(null, name, new ArrayList<GroupItem>());
-    }
-
-    public Group(Long id, String name, ArrayList<GroupItem> items) {
-        this.id = id;
-        this.name = name;
-        this.items = items;
+    private Group() {
     }
 
     public Long getId() {
@@ -106,5 +96,75 @@ public class Group {
         this.name = g.getName();
         this.items.clear();
         this.items.addAll(g.getItems());
+    }
+
+    public static final Parcelable.Creator<Group> CREATOR = new Parcelable.Creator<Group>() {
+        public Group createFromParcel(Parcel in) {
+            return new Group.Builder()
+                    .setId((Long) in.readValue(Long.class.getClassLoader()))
+                    .setName((String) in.readValue(String.class.getClassLoader()))
+                    .setItems((List<GroupItem>) in.readValue(GroupItem.class.getClassLoader()))
+                    .build();
+        }
+
+        public Group[] newArray(int size) {
+            return new Group[size];
+        }
+    };
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeValue(getId());
+        dest.writeValue(getName());
+        dest.writeValue(getItems());
+    }
+
+    public static class Builder {
+        final Group group;
+
+        public Builder() {
+            group = new Group();
+        }
+
+        public Builder setId(Long id) {
+            group.setId(id);
+            return this;
+        }
+
+        public Builder setName(String name) {
+            group.setName(name);
+            return this;
+        }
+
+        public Builder setItems(List<GroupItem> groupItems) {
+            group.setItems(groupItems);
+            return this;
+        }
+
+        public Builder addItem(GroupItem groupItem) {
+            if (group.getItems() == null) group.setItems(new ArrayList<GroupItem>());
+            group.addItem(groupItem);
+
+            return this;
+        }
+
+        public Builder fromGroup(Group group) {
+            this.group.setId(group.getId());
+            this.group.setName(group.getName());
+            this.group.setItems(group.getItems());
+
+            return this;
+        }
+
+        public Group build() {
+            if (group.getItems() == null) group.setItems(new ArrayList<GroupItem>());
+
+            return group;
+        }
     }
 }

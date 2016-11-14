@@ -5,6 +5,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteConstraintException;
 import android.database.sqlite.SQLiteDatabase;
 
+import com.crashlytics.android.Crashlytics;
 import com.fibelatti.raffler.db.Database;
 import com.fibelatti.raffler.db.DbContentProvider;
 import com.fibelatti.raffler.models.Group;
@@ -27,7 +28,7 @@ public class GroupDao
     public Group fetchGroupById(long groupId) {
         final String selectionArgs[] = {String.valueOf(groupId)};
         final String selection = GROUPS_COLUMN_ID + " = ?";
-        Group group = new Group();
+        Group group = new Group.Builder().build();
         cursor = super.query(GROUPS_TABLE, GROUPS_COLUMNS, selection,
                 selectionArgs, GROUPS_COLUMN_ID);
         if (cursor != null) {
@@ -76,7 +77,7 @@ public class GroupDao
 
             return newId > 0 && Database.groupItemDao.saveGroupItems(group);
         } catch (SQLiteConstraintException e) {
-//            Crashlytics.logException(e);
+            Crashlytics.logException(e);
             return false;
         }
     }
@@ -90,7 +91,7 @@ public class GroupDao
             return super.update(GROUPS_TABLE, getContentValue(), selection, selectionArgs) > 0
                     && Database.groupItemDao.saveGroupItems(group);
         } catch (SQLiteConstraintException e) {
-//            Crashlytics.logException(e);
+            Crashlytics.logException(e);
             return false;
         }
     }
@@ -109,25 +110,25 @@ public class GroupDao
     }
 
     protected Group cursorToEntity(Cursor cursor) {
-        Group group = new Group();
+        Group.Builder groupBuilder = new Group.Builder();
 
-        int idIndex;
+        int idIndex = -1;
         int groupNameIndex;
 
         if (cursor != null) {
             if (cursor.getColumnIndex(GROUPS_COLUMN_ID) != -1) {
                 idIndex = cursor.getColumnIndexOrThrow(GROUPS_COLUMN_ID);
-                group.setId(cursor.getLong(idIndex));
+                groupBuilder.setId(cursor.getLong(idIndex));
             }
             if (cursor.getColumnIndex(GROUPS_COLUMN_NAME) != -1) {
                 groupNameIndex = cursor.getColumnIndexOrThrow(
                         GROUPS_COLUMN_NAME);
-                group.setName(cursor.getString(groupNameIndex));
+                groupBuilder.setName(cursor.getString(groupNameIndex));
             }
 
-            group.setItems(Database.groupItemDao.fetchAllGroupItemsByGroupId(group.getId()));
+            groupBuilder.setItems(Database.groupItemDao.fetchAllGroupItemsByGroupId(cursor.getLong(idIndex)));
         }
-        return group;
+        return groupBuilder.build();
     }
 
     private void setContentValue(Group group) {

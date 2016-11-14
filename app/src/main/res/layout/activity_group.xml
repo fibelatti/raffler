@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:fab="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -9,30 +10,32 @@
     android:fitsSystemWindows="true"
     tools:context=".views.activities.GroupActivity">
 
-    <include layout="@layout/toolbar_default" />
+    <include layout="@layout/toolbar_default"/>
 
     <View
         android:id="@+id/fake_tutorial_view_menu"
         android:layout_width="@dimen/clickable_area"
         android:layout_height="@dimen/clickable_area"
-        android:layout_gravity="top|end" />
+        android:layout_gravity="top|end"/>
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginLeft="@dimen/margin_small"
+        android:layout_marginRight="@dimen/margin_small"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <View
             android:id="@+id/fake_tutorial_view_check_box"
             android:layout_width="@dimen/clickable_area"
             android:layout_height="@dimen/clickable_area"
-            android:layout_gravity="center|start" />
+            android:layout_gravity="center|start"/>
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/recycler_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:scrollbars="vertical" />
+            android:scrollbars="vertical"/>
     </RelativeLayout>
 
     <View
@@ -40,9 +43,9 @@
         android:layout_width="@dimen/clickable_area"
         android:layout_height="@dimen/clickable_area"
         android:layout_gravity="bottom|end"
-        android:layout_marginBottom="@dimen/margin_large"
-        android:layout_marginEnd="@dimen/margin_large"
-        android:layout_marginRight="@dimen/margin_large" />
+        android:layout_marginBottom="@dimen/margin_tutorial"
+        android:layout_marginEnd="@dimen/margin_tutorial"
+        android:layout_marginRight="@dimen/margin_tutorial"/>
 
     <com.github.clans.fab.FloatingActionMenu
         android:id="@+id/fam"
@@ -69,7 +72,7 @@
             app:fab_colorNormal="@color/colorAccent"
             app:fab_colorPressed="@color/colorAccent"
             fab:fab_label="@string/group_label_fab_roulette"
-            fab:fab_size="mini" />
+            fab:fab_size="mini"/>
 
         <com.github.clans.fab.FloatingActionButton
             android:id="@+id/fab_list"
@@ -79,7 +82,7 @@
             app:fab_colorNormal="@color/colorAccent"
             app:fab_colorPressed="@color/colorAccent"
             fab:fab_label="@string/group_label_fab_list"
-            fab:fab_size="mini" />
+            fab:fab_size="mini"/>
 
         <com.github.clans.fab.FloatingActionButton
             android:id="@+id/fab_group"
@@ -89,7 +92,7 @@
             app:fab_colorNormal="@color/colorAccent"
             app:fab_colorPressed="@color/colorAccent"
             fab:fab_label="@string/group_label_fab_groups"
-            fab:fab_size="mini" />
+            fab:fab_size="mini"/>
 
     </com.github.clans.fab.FloatingActionMenu>
 
