@@ -13,7 +13,7 @@
     <string name="label_settings_activity" translatable="false">SettingsActivity</string>
 
     <!-- Generics -->
-    <string name="hint_ok">Ok</string>
+    <string name="hint_ok">OK</string>
     <string name="hint_yes">Yes</string>
     <string name="hint_no">No</string>
     <string name="hint_got_it">GOT IT</string>
@@ -44,6 +44,7 @@
     <string name="group_label_fab_roulette">Roulette</string>
     <string name="group_label_fab_list">Random Winners</string>
     <string name="group_label_fab_groups">Sub Groups</string>
+    <string name="group_label_fab_voting">Secret Voting</string>
 
     <string name="group_action_share">Share</string>
     <string name="group_action_help">Help</string>

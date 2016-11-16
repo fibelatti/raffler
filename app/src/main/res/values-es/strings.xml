@@ -1,6 +1,6 @@
 <resources>
     <!-- Generics -->
-    <string name="hint_ok">Ok</string>
+    <string name="hint_ok">OK</string>
     <string name="hint_yes">Sí</string>
     <string name="hint_no">No</string>
     <string name="hint_got_it">¡VALE!</string>
@@ -31,6 +31,7 @@
     <string name="group_label_fab_roulette">Ruleta</string>
     <string name="group_label_fab_list">Ganadores aleatorios</string>
     <string name="group_label_fab_groups">Sub Grupos</string>
+    <string name="group_label_fab_voting">Votación Secreta</string>
 
     <string name="group_action_share">Compartir</string>
     <string name="group_action_help">Ayuda</string>
