@@ -56,6 +56,12 @@ public class RouletteActivity
         rouletteHelper.stopMusic();
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        this.rouletteHelper = null;
+    }
+
     private void setUpLayout() {
         setContentView(R.layout.activity_roulette);
         ButterKnife.bind(this);
