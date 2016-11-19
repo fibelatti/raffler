@@ -3,6 +3,8 @@
     <string name="hint_ok">OK</string>
     <string name="hint_yes">Sim</string>
     <string name="hint_no">Não</string>
+    <string name="hint_done">Pronto</string>
+    <string name="hint_cancel">Cancelar</string>
     <string name="hint_got_it">ENTENDI</string>
     <string name="hint_skip_tutorial">PULAR TUTORIAL</string>
 
@@ -169,7 +171,7 @@
     <string name="dialog_rate_send_email_subject">Raffler! - Sugestões</string>
     <string name="dialog_rate_send_email_title">Escolher aplicativo de e-mail</string>
 
-    <!-- DialogQuickDecision -->
-    <string name="dialog_quick_decision_title">Escolha a Decisão Rápida</string>
-    <string name="dialog_quick_decision_header">Escolha um novo valor para este botão de decisão rápida:</string>
+    <!-- DialogPin -->
+    <string name="dialog_pin_msg_validate_length">O pin deve ter 4 caracteres</string>
+    <string name="dialog_pin_msg_validate_pin">Pin inválido, tente novamente</string>
 </resources>

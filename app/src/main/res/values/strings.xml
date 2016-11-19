@@ -16,6 +16,8 @@
     <string name="hint_ok">OK</string>
     <string name="hint_yes">Yes</string>
     <string name="hint_no">No</string>
+    <string name="hint_done">Done</string>
+    <string name="hint_cancel">Cancel</string>
     <string name="hint_got_it">GOT IT</string>
     <string name="hint_skip_tutorial">SKIP TUTORIAL</string>
 
@@ -182,7 +184,7 @@
     <string name="dialog_rate_send_email_subject">Raffler! - Feedback</string>
     <string name="dialog_rate_send_email_title">Choose e-mail app</string>
 
-    <!-- DialogQuickDecision -->
-    <string name="dialog_quick_decision_title">Set Quick Decision</string>
-    <string name="dialog_quick_decision_header">Select a new value for this quick decision button:</string>
+    <!-- DialogPin -->
+    <string name="dialog_pin_msg_validate_length">Pin should have 4 characters</string>
+    <string name="dialog_pin_msg_validate_pin">Invalid pin, please try again</string>
 </resources>
