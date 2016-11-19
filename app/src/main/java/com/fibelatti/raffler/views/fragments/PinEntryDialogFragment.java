@@ -58,7 +58,7 @@ public class PinEntryDialogFragment
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         this.context = getActivity();
-        this.sharedPref = getActivity().getPreferences(Context.MODE_PRIVATE);
+        this.sharedPref = getActivity().getSharedPreferences(Constants.PREF_NAME_PIN, Context.MODE_PRIVATE);
 
         View view = View.inflate(getContext(), R.layout.dialog_pin_entry, null);
         ButterKnife.bind(this, view);
@@ -92,12 +92,12 @@ public class PinEntryDialogFragment
                                         editor.apply();
 
                                         listener.onPinEntrySuccess();
+                                        dialog.dismiss();
                                     }
                                 } catch (Exception e) {
                                     Crashlytics.logException(e);
+                                    dialog.dismiss();
                                 }
-
-                                dialog.dismiss();
                             }
                         }
                     });

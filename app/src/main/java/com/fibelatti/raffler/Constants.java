@@ -14,6 +14,8 @@ public interface Constants {
     String INTENT_EXTRA_DIALOG_PIN_CALLER_NAME = "com.fibelatti.raffler.PIN_CALLER_NAME";
     String INTENT_EXTRA_DIALOG_PIN_MESSAGE = "com.fibelatti.raffler.PIN_MESSAGE";
 
+    String PREF_NAME_PIN = "com.fibelatti.raffler.PREF_NAME_PIN";
+
     int REQUEST_CODE_GROUP_ACTION = 1;
     int REQUEST_CODE_GROUP_EDIT = 2;
 
