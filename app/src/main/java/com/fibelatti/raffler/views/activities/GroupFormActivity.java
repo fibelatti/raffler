@@ -137,6 +137,11 @@ public class GroupFormActivity
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    public void onBackPressed() {
+        confirmFinish();
+    }
+
     private void setUpLayout() {
         setContentView(R.layout.activity_group_form);
         ButterKnife.bind(this);
@@ -297,7 +302,7 @@ public class GroupFormActivity
     private void confirmFinish() {
         boolean countHasChanged = group.getItemsCount() != 0 && group.getItemsCount() != initialItemCount;
 
-        if (countHasChanged) {
+        if (countHasChanged || (group.getId() == null && groupName.getText().length() > 0)) {
             AlertDialogHelper dialogHelper = new AlertDialogHelper(this);
             dialogHelper.createYesNoDialog(
                     getString(R.string.group_form_dialog_title_unsaved_changes),
