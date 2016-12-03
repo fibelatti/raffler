@@ -122,7 +122,7 @@ public class SecretVotingResultsFragment
         setUpLayout();
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            getActivity().getWindow().setStatusBarColor(ContextCompat.getColor(getActivity(), R.color.colorAccent));
+            getActivity().getWindow().setStatusBarColor(ContextCompat.getColor(getActivity(), R.color.colorWhiteOpaque));
         }
     }
 
