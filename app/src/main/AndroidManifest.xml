@@ -128,6 +128,18 @@
         </activity>
 
         <activity
+            android:name=".views.activities.SecretVotingActivity"
+            android:configChanges="orientation"
+            android:label="@string/label_subgroups_activity"
+            android:parentActivityName=".views.activities.GroupActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".views.activities.GroupActivity" />
+        </activity>
+
+        <activity
             android:name=".views.activities.SettingsActivity"
             android:configChanges="orientation"
             android:label="@string/label_settings_activity"

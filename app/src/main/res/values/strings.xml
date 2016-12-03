@@ -10,6 +10,7 @@
     <string name="label_roulette_activity" translatable="false">RouletteActivity</string>
     <string name="label_random_winners_activity" translatable="false">RandomWinnersActivity</string>
     <string name="label_subgroups_activity" translatable="false">SubGroupsActivity</string>
+    <string name="label_secret_voting_activity" translatable="false">SecretVotingActivity</string>
     <string name="label_settings_activity" translatable="false">SettingsActivity</string>
 
     <!-- Generics -->
@@ -18,6 +19,7 @@
     <string name="hint_no">No</string>
     <string name="hint_done">Done</string>
     <string name="hint_cancel">Cancel</string>
+    <string name="hint_button_back">Navigate back</string>
     <string name="hint_got_it">GOT IT</string>
     <string name="hint_skip_tutorial">SKIP TUTORIAL</string>
 
@@ -127,7 +129,6 @@
     <!-- RouletteActivity -->
     <string name="roulette_title">Roulette!</string>
     <string name="roulette_msg_stopping">Stopping&#8230;</string>
-    <string name="roulette_button_back">Back to group</string>
 
     <!-- RandomWinnersActivity -->
     <string name="random_winners_title">Random Winners!</string>
@@ -149,6 +150,34 @@
     <string name="subgroups_msg_validate_quantity_empty">Quantity should not be empty</string>
     <string name="subgroups_msg_validate_quantity_zero">Quantity should not be zero</string>
     <string name="subgroups_hint_group_name">Group #%s</string>
+
+    <!-- SecretVotingActivity -->
+    <string name="secret_voting_header_text">You are voting for %s</string>
+
+    <string name="secret_voting_menu_next_vote">If you are the next to vote press the button below when you\'re ready</string>
+    <string name="secret_voting_menu_next_vote_button">Vote</string>
+    <string name="secret_voting_menu_end_voting">Once everyone has voted press the button below to see the results</string>
+    <string name="secret_voting_menu_end_voting_button">See Results</string>
+
+    <string name="secret_voting_menu_abandon_voting_text">All votes will be lost, confirm your pin to abandon this voting:</string>
+    <string name="secret_voting_menu_end_voting_text">Please confirm your pin before checking the results of this voting:</string>
+
+    <string name="secret_voting_vote_confirm_title">Confirm your vote</string>
+    <string name="secret_voting_vote_confirm_message">You have voted for: %s\n\nDo you confirm?</string>
+
+    <string name="secret_voting_results_header_text">Results for %s voting</string>
+    <string name="secret_voting_results_graph_text_percent">%d%%</string>
+    <plurals name="secret_voting_results_graph_text_votes">
+        <item quantity="one">%s vote</item>
+        <item quantity="other">%s votes</item>
+    </plurals>
+    <string name="secret_voting_results_first_place">First place</string>
+    <string name="secret_voting_results_second_place">Second place</string>
+    <string name="secret_voting_results_third_place">Third place</string>
+
+    <string name="secret_voting_pin_dialog_title">Enter pin</string>
+    <string name="secret_voting_pin_enter_pin">Before letting anyone vote create a pin to make sure only you will be able to end the voting before sharing the results:</string>
+    <string name="secret_voting_pin_confirm_pin">Please confirm the pin before seeing the results:</string>
 
     <!-- SettingsActivity -->
     <string name="settings_title">Settings</string>

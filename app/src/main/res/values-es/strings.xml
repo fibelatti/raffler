@@ -5,6 +5,7 @@
     <string name="hint_no">No</string>
     <string name="hint_done">Hecho</string>
     <string name="hint_cancel">Cancelar</string>
+    <string name="hint_button_back">Volver</string>
     <string name="hint_got_it">¡VALE!</string>
     <string name="hint_skip_tutorial">SALTAR TUTORIAL</string>
 
@@ -114,7 +115,6 @@
     <!-- RouletteActivity -->
     <string name="roulette_title">Ruleta!</string>
     <string name="roulette_msg_stopping">Parando&#8230;</string>
-    <string name="roulette_button_back">Volver al grupo</string>
 
     <!-- RandomWinnersActivity -->
     <string name="random_winners_title">Ganadores Aleatorios</string>
@@ -136,6 +136,34 @@
     <string name="subgroups_msg_validate_quantity_empty">La cantidad no puede estar en blanco</string>
     <string name="subgroups_msg_validate_quantity_zero">La cantidad no debe ser cero</string>
     <string name="subgroups_hint_group_name">Grupo #%s</string>
+
+    <!-- SecretVotingActivity -->
+    <string name="secret_voting_header_text">Usted está votando por %s</string>
+
+    <string name="secret_voting_menu_next_vote">Si usted es el siguiente para votar, presione el botón debajo cuando esté listo</string>
+    <string name="secret_voting_menu_next_vote_button">Votar</string>
+    <string name="secret_voting_menu_end_voting">Una vez que todos hayan votado, pulse el botón de abajo para ver los resultados</string>
+    <string name="secret_voting_menu_end_voting_button">Ver los resultados</string>
+
+    <string name="secret_voting_menu_abandon_voting_text">Todos los votos se perderán, confirme su pin para abandonar esta votación:</string>
+    <string name="secret_voting_menu_end_voting_text">Confirme su pin antes de verificar los resultados de esta votación:</string>
+
+    <string name="secret_voting_vote_confirm_title">Confirme su voto</string>
+    <string name="secret_voting_vote_confirm_message">Usted ha votado: %s\n\n¿Va a confirmar?</string>
+
+    <string name="secret_voting_results_header_text">Resultados de la votación para %s</string>
+    <string name="secret_voting_results_graph_text_percent">%d%%</string>
+    <plurals name="secret_voting_results_graph_text_votes">
+        <item quantity="one">%s voto</item>
+        <item quantity="other">%s votos</item>
+    </plurals>
+    <string name="secret_voting_results_first_place">Primer lugar</string>
+    <string name="secret_voting_results_second_place">En segundo lugar</string>
+    <string name="secret_voting_results_third_place">En tercer lugar</string>
+
+    <string name="secret_voting_pin_dialog_title">Introducir el pin</string>
+    <string name="secret_voting_pin_enter_pin">Antes de permitir que alguien vote cree un pin para asegurarse de que sólo tu podrá terminar la votación antes de compartir los resultados:</string>
+    <string name="secret_voting_pin_confirm_pin">Por favor, confirme el pin antes de ver los resultados:</string>
 
     <!-- SettingsActivity -->
     <string name="settings_title">Ajustes</string>

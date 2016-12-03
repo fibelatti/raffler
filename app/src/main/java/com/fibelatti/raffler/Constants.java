@@ -7,6 +7,8 @@ public interface Constants {
     String PLAY_STORE_BASE_URL = "http://play.google.com/store/apps/details";
 
     String INTENT_EXTRA_GROUP = "com.fibelatti.raffler.GROUP";
+    String INTENT_EXTRA_VOTES_MAP = "com.fibelatti.raffler.VOTES_MAP";
+    String INTENT_EXTRA_GROUP_NAME = "com.fibelatti.raffler.GROUP_NAME";
     String INTENT_EXTRA_QUICK_DECISION = "com.fibelatti.raffler.QUICK_DECISION";
     String INTENT_EXTRA_GROUP_ITEM_NAME = "com.fibelatti.raffler.GROUP_ITEM_NAME";
     String INTENT_EXTRA_DIALOG_INITIAL_NUMBER = "com.fibelatti.raffler.DIALOG_INITIAL_NUMBER";
