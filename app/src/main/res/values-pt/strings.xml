@@ -9,6 +9,7 @@
     <string name="generic_msg_error">Opa! Algo deu errado. Tente de novo.</string>
 
     <!-- MainActivity -->
+    <string name="main_action_search">Buscar</string>
     <string name="main_action_settings">Configurações</string>
 
     <string name="main_hint_placeholder">
