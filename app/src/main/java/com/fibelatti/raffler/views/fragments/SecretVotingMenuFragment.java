@@ -40,6 +40,8 @@ public class SecretVotingMenuFragment
     TextView headerText;
     @BindView(R.id.button_next_vote)
     Button buttonNextVote;
+    @BindView(R.id.tv_total_votes)
+    TextView totalVotesText;
     @BindView(R.id.button_end_voting)
     Button buttonEndVoting;
     //endregion
@@ -80,6 +82,7 @@ public class SecretVotingMenuFragment
 
         this.sharedPref = getActivity().getSharedPreferences(Constants.PREF_NAME_PIN, Context.MODE_PRIVATE);
         this.headerText.setText(getString(R.string.secret_voting_header_text, getArguments().getString(Constants.INTENT_EXTRA_GROUP_NAME)));
+        this.totalVotesText.setText(getString(R.string.secret_voting_menu_total_votes, ((SecretVotingActivity) getActivity()).getTotalVotes()));
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             getActivity().getWindow().setStatusBarColor(ContextCompat.getColor(getActivity(), R.color.colorAccent));

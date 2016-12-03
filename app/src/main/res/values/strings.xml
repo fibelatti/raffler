@@ -157,6 +157,7 @@
     <string name="secret_voting_menu_next_vote">If you are the next to vote press the button below when you\'re ready</string>
     <string name="secret_voting_menu_next_vote_button">Vote</string>
     <string name="secret_voting_menu_end_voting">Once everyone has voted press the button below to see the results</string>
+    <string name="secret_voting_menu_total_votes">%d people voted</string>
     <string name="secret_voting_menu_end_voting_button">See Results</string>
 
     <string name="secret_voting_menu_abandon_voting_text">All votes will be lost, confirm your pin to abandon this voting:</string>

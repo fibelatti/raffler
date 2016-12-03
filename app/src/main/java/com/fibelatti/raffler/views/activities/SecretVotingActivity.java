@@ -97,6 +97,15 @@ public class SecretVotingActivity
         }
     }
 
+    public int getTotalVotes() {
+        int total = 0;
+        for (int value : votesMap.values()) {
+            total += value;
+        }
+
+        return total;
+    }
+
     @Override
     public void onNewVoteClick() {
         presenter.newVote();
