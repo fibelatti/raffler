@@ -19,6 +19,7 @@ import android.widget.TextView;
 import com.fibelatti.raffler.Constants;
 import com.fibelatti.raffler.R;
 import com.fibelatti.raffler.db.Database;
+import com.fibelatti.raffler.helpers.AnalyticsHelper;
 import com.fibelatti.raffler.views.fragments.RateAppDialogFragment;
 
 import butterknife.BindView;
@@ -124,6 +125,8 @@ public class SettingsActivity
         buttonShare.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                AnalyticsHelper.getInstance().fireShareAppEvent();
+
                 String message = getString(R.string.settings_share_text, String.format("%s?id=%s", Constants.PLAY_STORE_BASE_URL, getPackageName()));
                 Intent share = new Intent(Intent.ACTION_SEND);
                 share.setType("text/plain");
@@ -136,6 +139,8 @@ public class SettingsActivity
         buttonRate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                AnalyticsHelper.getInstance().fireRateAppEvent();
+
                 DialogFragment rateFragment = new RateAppDialogFragment();
                 rateFragment.show(getSupportFragmentManager(), RateAppDialogFragment.TAG);
             }
