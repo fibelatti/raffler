@@ -26,6 +26,7 @@ import android.view.animation.OvershootInterpolator;
 import com.fibelatti.raffler.Constants;
 import com.fibelatti.raffler.R;
 import com.fibelatti.raffler.helpers.AlertDialogHelper;
+import com.fibelatti.raffler.helpers.AnalyticsHelper;
 import com.fibelatti.raffler.helpers.FileHelper;
 import com.fibelatti.raffler.models.Group;
 import com.fibelatti.raffler.presenters.GroupPresenter;
@@ -198,7 +199,7 @@ public class GroupActivity
             @Override
             public void onClick(View view) {
                 if (validateSelection()) {
-//                    Answers.getInstance().logCustom(new CustomEvent(Constants.ANALYTICS_KEY_MODE_ROULETTE));
+                    AnalyticsHelper.getInstance().fireRouletteEvent();
 
                     Group newGroup = new Group.Builder()
                             .fromGroup(group)
@@ -213,7 +214,7 @@ public class GroupActivity
             @Override
             public void onClick(View view) {
                 if (validateSelection()) {
-//                    Answers.getInstance().logCustom(new CustomEvent(Constants.ANALYTICS_KEY_MODE_RANDOM_WINNERS));
+                    AnalyticsHelper.getInstance().fireRandomWinnersEvent();
 
                     Group newGroup = new Group.Builder()
                             .fromGroup(group)
@@ -227,7 +228,7 @@ public class GroupActivity
         fab_group.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                Answers.getInstance().logCustom(new CustomEvent(Constants.ANALYTICS_KEY_MODE_SUB_GROUPS));
+                AnalyticsHelper.getInstance().fireSubGroupsEvent();
 
                 if (validateSelection()) {
                     Group newGroup = new Group.Builder()
@@ -322,7 +323,7 @@ public class GroupActivity
             startActivity(Intent.createChooser(fileHelper.createFileShareIntent(uri), getResources().getText(R.string.group_action_share)));
         }
 
-//        Answers.getInstance().logCustom(new CustomEvent(Constants.ANALYTICS_KEY_GROUP_SHARED));
+        AnalyticsHelper.getInstance().fireShareGroupEvent();
     }
 
     private void showTutorial() {

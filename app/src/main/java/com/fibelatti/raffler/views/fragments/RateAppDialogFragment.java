@@ -17,6 +17,7 @@ import android.widget.RatingBar;
 
 import com.fibelatti.raffler.Constants;
 import com.fibelatti.raffler.R;
+import com.fibelatti.raffler.helpers.AnalyticsHelper;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -67,6 +68,7 @@ public class RateAppDialogFragment
         buttonPlayStore.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                AnalyticsHelper.getInstance().firePlayStoreEvent();
                 rateApp();
                 dialog.dismiss();
             }

@@ -17,6 +17,7 @@ import com.fibelatti.raffler.db.QuickDecision.QuickDecisionDao;
 import com.fibelatti.raffler.db.Settings.ISettingsDao;
 import com.fibelatti.raffler.db.Settings.ISettingsSchema;
 import com.fibelatti.raffler.db.Settings.SettingsDao;
+import com.fibelatti.raffler.helpers.AnalyticsHelper;
 
 public class Database {
     public static final String TAG = Database.class.getSimpleName();
@@ -70,9 +71,7 @@ public class Database {
         @Override
         public void onUpgrade(SQLiteDatabase db, int oldVersion,
                               int newVersion) {
-//            Answers.getInstance().logCustom(new CustomEvent(Constants.ANALYTICS_KEY_UPGRADED_DATABASE)
-//                    .putCustomAttribute(Constants.ANALYTICS_PARAM_OLD_VERSION, oldVersion)
-//                    .putCustomAttribute(Constants.ANALYTICS_PARAM_NEW_VERSION, newVersion));
+            AnalyticsHelper.getInstance().fireUpdateDatabaseEvent(oldVersion, newVersion);
 
             int upgradeTo = oldVersion + 1;
             while (upgradeTo <= newVersion) {

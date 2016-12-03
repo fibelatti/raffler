@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.fibelatti.raffler.Constants;
 import com.fibelatti.raffler.R;
+import com.fibelatti.raffler.helpers.AnalyticsHelper;
 import com.fibelatti.raffler.models.QuickDecision;
 import com.fibelatti.raffler.utils.ImageUtils;
 import com.github.clans.fab.FloatingActionButton;
@@ -86,8 +87,6 @@ public class QuickDecisionResultActivity
             getWindow().setStatusBarColor(color);
         }
 
-//        Answers.getInstance().logCustom(new CustomEvent(Constants.ANALYTICS_KEY_QUICK_DECISION_RESULT)
-//                .putCustomAttribute(Constants.ANALYTICS_PARAM_QUICK_DECISION_NAME, quickDecision.getName())
-//                .putCustomAttribute(Constants.ANALYTICS_PARAM_QUICK_DECISION_VALUE, quickDecision.getValueAt(randomIndex)));
+        AnalyticsHelper.getInstance().fireQuickDecisionEvent();
     }
 }
