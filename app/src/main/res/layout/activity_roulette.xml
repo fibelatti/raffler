@@ -27,7 +27,7 @@
         android:contentDescription="@string/roulette_button_back"
         android:padding="@dimen/padding_small"
         android:src="@drawable/ic_arrow_back_white_24dp"
-        android:text="@string/roulette_button_back"
+        android:text="@string/hint_button_back"
         android:tint="@color/colorAccent"/>
 
     <com.github.clans.fab.FloatingActionButton

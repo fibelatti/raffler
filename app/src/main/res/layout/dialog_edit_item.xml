@@ -27,7 +27,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/group_form_dialog_edit_item_new_name"
-            android:inputType="textCapSentences|textNoSuggestions"
+            android:inputType="textCapSentences"
             android:maxLength="@integer/text_max_length_25"
             android:singleLine="true"
             android:textColor="@color/textPrimary"
