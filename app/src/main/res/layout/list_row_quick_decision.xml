@@ -2,6 +2,6 @@
 <Button
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/button_quick_decision"
-    android:layout_width="@dimen/quick_decision_button_width"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:theme="@style/QuickDecisionButton"/>

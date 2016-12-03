@@ -34,6 +34,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import uk.co.deanwild.materialshowcaseview.MaterialShowcaseSequence;
 import uk.co.deanwild.materialshowcaseview.MaterialShowcaseView;
 
@@ -234,5 +235,17 @@ public class MainActivity
         );
 
         sequence.start();
+    }
+
+    @OnClick(R.id.img_next)
+    public void nextQuickDecision() {
+        recyclerViewQuickDecision.smoothScrollToNextSnap(
+                ((LinearLayoutManager) recyclerViewQuickDecision.getLayoutManager()).findFirstVisibleItemPosition() + 1);
+    }
+
+    @OnClick(R.id.img_previous)
+    public void previousQuickDecision() {
+        recyclerViewQuickDecision.smoothScrollToNextSnap(
+                ((LinearLayoutManager) recyclerViewQuickDecision.getLayoutManager()).findFirstVisibleItemPosition() - 1);
     }
 }
