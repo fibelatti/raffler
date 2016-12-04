@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.fibelatti.raffler">
+          package="com.fibelatti.raffler">
 
-    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.INTERNET"/>
 
     <application
         android:name=".RafflerApplication"
@@ -14,141 +14,132 @@
 
         <meta-data
             android:name="io.fabric.ApiKey"
-            android:value="${fabricApiKey}" />
+            android:value="${fabricApiKey}"/>
 
         <activity
             android:name=".views.activities.MainActivity"
             android:configChanges="orientation"
-            android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.intent.action.MAIN"/>
 
-                <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
 
         <activity
             android:name=".views.activities.QuickDecisionResultActivity"
             android:configChanges="orientation"
-            android:label="@string/label_quick_decision_result_activity"
             android:parentActivityName=".views.activities.MainActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".views.activities.MainActivity" />
+                android:value=".views.activities.MainActivity"/>
         </activity>
 
         <activity
             android:name=".views.activities.GroupActivity"
             android:configChanges="orientation"
-            android:label="@string/label_group_activity"
             android:parentActivityName="com.fibelatti.raffler.views.activities.MainActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.fibelatti.raffler.views.activities.MainActivity" />
+                android:value="com.fibelatti.raffler.views.activities.MainActivity"/>
         </activity>
 
         <activity
             android:name=".views.activities.GroupFormActivity"
             android:configChanges="orientation"
-            android:label="@string/label_group_form_activity"
             android:parentActivityName=".views.activities.GroupActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="stateHidden">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".views.activities.GroupActivity" />
+                android:value=".views.activities.GroupActivity"/>
 
             <!-- Intent filter for opening files from system -->
             <intent-filter android:label="@string/app_name">
-                <action android:name="android.intent.action.VIEW" />
+                <action android:name="android.intent.action.VIEW"/>
 
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
 
-                <data android:scheme="file" />
-                <data android:host="*" />
-                <data android:mimeType="application/json" />
-                <data android:pathPattern=".*\\.rflr" />
+                <data android:scheme="file"/>
+                <data android:host="*"/>
+                <data android:mimeType="application/json"/>
+                <data android:pathPattern=".*\\.rflr"/>
             </intent-filter>
             <!-- Intent filter for open files from email -->
             <intent-filter android:label="@string/app_name">
-                <data android:scheme="content" />
+                <data android:scheme="content"/>
 
-                <action android:name="android.intent.action.VIEW" />
+                <action android:name="android.intent.action.VIEW"/>
 
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
 
-                <data android:mimeType="application/octet-stream" />
-                <data android:pathPattern=".*\\.rflr" />
+                <data android:mimeType="application/octet-stream"/>
+                <data android:pathPattern=".*\\.rflr"/>
             </intent-filter>
         </activity>
 
         <activity
             android:name=".views.activities.RouletteActivity"
             android:configChanges="orientation"
-            android:label="@string/label_roulette_activity"
             android:parentActivityName=".views.activities.GroupActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".views.activities.GroupActivity" />
+                android:value=".views.activities.GroupActivity"/>
         </activity>
 
         <activity
             android:name=".views.activities.RandomWinnersActivity"
             android:configChanges="orientation"
-            android:label="@string/label_random_winners_activity"
             android:parentActivityName=".views.activities.GroupActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".views.activities.GroupActivity" />
+                android:value=".views.activities.GroupActivity"/>
         </activity>
 
         <activity
             android:name=".views.activities.SubGroupsActivity"
             android:configChanges="orientation"
-            android:label="@string/label_subgroups_activity"
             android:parentActivityName=".views.activities.GroupActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".views.activities.GroupActivity" />
+                android:value=".views.activities.GroupActivity"/>
         </activity>
 
         <activity
             android:name=".views.activities.SecretVotingActivity"
             android:configChanges="orientation"
-            android:label="@string/label_subgroups_activity"
             android:parentActivityName=".views.activities.GroupActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".views.activities.GroupActivity" />
+                android:value=".views.activities.GroupActivity"/>
         </activity>
 
         <activity
             android:name=".views.activities.SettingsActivity"
             android:configChanges="orientation"
-            android:label="@string/label_settings_activity"
             android:parentActivityName=".views.activities.MainActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".views.activities.MainActivity" />
+                android:value=".views.activities.MainActivity"/>
         </activity>
 
         <provider
@@ -159,7 +150,7 @@
 
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/fileprovider" />
+                android:resource="@xml/fileprovider"/>
         </provider>
     </application>
 

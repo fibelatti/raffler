@@ -3,16 +3,6 @@
 
     <string name="file_provider_authority" translatable="false">com.fibelatti.raffler.fileprovider</string>
 
-    <!-- Labels -->
-    <string name="label_quick_decision_result_activity" translatable="false">QuickDecisionResultActivity</string>
-    <string name="label_group_activity" translatable="false">GroupActivity</string>
-    <string name="label_group_form_activity" translatable="false">GroupFormActivity</string>
-    <string name="label_roulette_activity" translatable="false">RouletteActivity</string>
-    <string name="label_random_winners_activity" translatable="false">RandomWinnersActivity</string>
-    <string name="label_subgroups_activity" translatable="false">SubGroupsActivity</string>
-    <string name="label_secret_voting_activity" translatable="false">SecretVotingActivity</string>
-    <string name="label_settings_activity" translatable="false">SettingsActivity</string>
-
     <!-- Generics -->
     <string name="hint_ok">OK</string>
     <string name="hint_yes">Yes</string>
