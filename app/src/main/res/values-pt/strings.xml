@@ -143,7 +143,10 @@
     <string name="secret_voting_menu_next_vote">Se você é o próximo a votar aperte o botão abaixo</string>
     <string name="secret_voting_menu_next_vote_button">Votar</string>
     <string name="secret_voting_menu_end_voting">Após todos os votos aperte o botão abaixo para ver os resultados</string>
-    <string name="secret_voting_menu_total_votes">%d pessoas votaram</string>
+    <plurals name="secret_voting_menu_total_votes">
+        <item quantity="one">%d pessoa votou</item>
+        <item quantity="other">%d pessoas votaram</item>
+    </plurals>
     <string name="secret_voting_menu_end_voting_button">Ver resultados</string>
 
     <string name="secret_voting_menu_abandon_voting_text">Todos os votos serão perdidos, confirme seu pin para abandonar essa votação:</string>

@@ -82,7 +82,9 @@ public class SecretVotingMenuFragment
 
         this.sharedPref = getActivity().getSharedPreferences(Constants.PREF_NAME_PIN, Context.MODE_PRIVATE);
         this.headerText.setText(getString(R.string.secret_voting_header_text, getArguments().getString(Constants.INTENT_EXTRA_GROUP_NAME)));
-        this.totalVotesText.setText(getString(R.string.secret_voting_menu_total_votes, ((SecretVotingActivity) getActivity()).getTotalVotes()));
+
+        int votesQuantity = ((SecretVotingActivity) getActivity()).getTotalVotes();
+        this.totalVotesText.setText(getResources().getQuantityString(R.plurals.secret_voting_menu_total_votes, votesQuantity, votesQuantity));
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             getActivity().getWindow().setStatusBarColor(ContextCompat.getColor(getActivity(), R.color.colorAccent));
