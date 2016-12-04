@@ -3,19 +3,13 @@
 
     <string name="file_provider_authority" translatable="false">com.fibelatti.raffler.fileprovider</string>
 
-    <!-- Labels -->
-    <string name="label_quick_decision_result_activity" translatable="false">QuickDecisionResultActivity</string>
-    <string name="label_group_activity" translatable="false">GroupActivity</string>
-    <string name="label_group_form_activity" translatable="false">GroupFormActivity</string>
-    <string name="label_roulette_activity" translatable="false">RouletteActivity</string>
-    <string name="label_random_winners_activity" translatable="false">RandomWinnersActivity</string>
-    <string name="label_subgroups_activity" translatable="false">SubGroupsActivity</string>
-    <string name="label_settings_activity" translatable="false">SettingsActivity</string>
-
     <!-- Generics -->
-    <string name="hint_ok">Ok</string>
+    <string name="hint_ok">OK</string>
     <string name="hint_yes">Yes</string>
     <string name="hint_no">No</string>
+    <string name="hint_done">Done</string>
+    <string name="hint_cancel">Cancel</string>
+    <string name="hint_button_back">Navigate back</string>
     <string name="hint_got_it">GOT IT</string>
     <string name="hint_skip_tutorial">SKIP TUTORIAL</string>
 
@@ -44,6 +38,7 @@
     <string name="group_label_fab_roulette">Roulette</string>
     <string name="group_label_fab_list">Random Winners</string>
     <string name="group_label_fab_groups">Sub Groups</string>
+    <string name="group_label_fab_voting">Secret Voting</string>
 
     <string name="group_action_share">Share</string>
     <string name="group_action_help">Help</string>
@@ -124,7 +119,6 @@
     <!-- RouletteActivity -->
     <string name="roulette_title">Roulette!</string>
     <string name="roulette_msg_stopping">Stopping&#8230;</string>
-    <string name="roulette_button_back">Back to group</string>
 
     <!-- RandomWinnersActivity -->
     <string name="random_winners_title">Random Winners!</string>
@@ -146,6 +140,48 @@
     <string name="subgroups_msg_validate_quantity_empty">Quantity should not be empty</string>
     <string name="subgroups_msg_validate_quantity_zero">Quantity should not be zero</string>
     <string name="subgroups_hint_group_name">Group #%s</string>
+
+    <!-- SecretVotingActivity -->
+    <string name="secret_voting_header_text">You are voting for %s</string>
+
+    <string name="secret_voting_menu_next_vote">If you are the next to vote press the button below when you\'re ready</string>
+    <string name="secret_voting_menu_next_vote_button">Vote</string>
+    <string name="secret_voting_menu_end_voting">Once everyone has voted press the button below to see the results</string>
+    <plurals name="secret_voting_menu_total_votes">
+        <item quantity="one">%d person voted</item>
+        <item quantity="other">%d people voted</item>
+    </plurals>
+
+    <string name="secret_voting_menu_end_voting_button">See Results</string>
+
+    <string name="secret_voting_menu_abandon_voting_text">All votes will be lost, confirm your pin to abandon this voting:</string>
+    <string name="secret_voting_menu_end_voting_text">Please confirm your pin before checking the results of this voting:</string>
+
+    <string name="secret_voting_vote_confirm_title">Confirm your vote</string>
+    <string name="secret_voting_vote_confirm_message">You have voted for: %s\n\nDo you confirm?</string>
+
+    <string name="secret_voting_results_header_text">Results for %s voting</string>
+    <string name="secret_voting_results_graph_text_percent">%d%%</string>
+    <plurals name="secret_voting_results_graph_text_votes">
+        <item quantity="one">%s vote</item>
+        <item quantity="other">%s votes</item>
+    </plurals>
+    <string name="secret_voting_results_first_place">First place</string>
+    <string name="secret_voting_results_second_place">Second place</string>
+    <string name="secret_voting_results_third_place">Third place</string>
+    <plurals name="secret_voting_results_tie">
+        <item quantity="one">%1$s + %2$d other</item>
+        <item quantity="other">%1$s + %2$d others</item>
+    </plurals>
+
+    <string name="secret_voting_pin_dialog_title">Enter pin</string>
+    <string name="secret_voting_pin_enter_pin">Before letting anyone vote create a pin to make sure only you will be able to end the voting before sharing the results:</string>
+    <string name="secret_voting_pin_confirm_pin">Please confirm the pin before seeing the results:</string>
+
+    <string name="secret_voting_results_tie_break_title">Tie break</string>
+    <string name="secret_voting_results_tie_break_hint">The following items were tied after the first voting, what do you want to do?</string>
+    <string name="secret_voting_results_tie_break_vote_again">Vote again</string>
+    <string name="secret_voting_results_tie_break_roulette">Roulette!</string>
 
     <!-- SettingsActivity -->
     <string name="settings_title">Settings</string>
@@ -181,7 +217,7 @@
     <string name="dialog_rate_send_email_subject">Raffler! - Feedback</string>
     <string name="dialog_rate_send_email_title">Choose e-mail app</string>
 
-    <!-- DialogQuickDecision -->
-    <string name="dialog_quick_decision_title">Set Quick Decision</string>
-    <string name="dialog_quick_decision_header">Select a new value for this quick decision button:</string>
+    <!-- DialogPin -->
+    <string name="dialog_pin_msg_validate_length">Pin should have 4 characters</string>
+    <string name="dialog_pin_msg_validate_pin">Invalid pin, please try again</string>
 </resources>

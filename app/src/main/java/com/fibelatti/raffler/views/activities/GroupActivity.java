@@ -11,6 +11,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.content.FileProvider;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -36,6 +37,8 @@ import com.fibelatti.raffler.views.Navigator;
 import com.fibelatti.raffler.views.adapters.GroupAdapter;
 import com.fibelatti.raffler.views.extensions.DividerItemDecoration;
 import com.fibelatti.raffler.views.extensions.RecyclerTouchListener;
+import com.fibelatti.raffler.views.fragments.IPinEntryListener;
+import com.fibelatti.raffler.views.fragments.PinEntryDialogFragment;
 import com.github.clans.fab.FloatingActionButton;
 import com.github.clans.fab.FloatingActionMenu;
 
@@ -48,7 +51,7 @@ import uk.co.deanwild.materialshowcaseview.MaterialShowcaseView;
 
 public class GroupActivity
         extends BaseActivity
-        implements IGroupPresenterView {
+        implements IGroupPresenterView, IPinEntryListener {
     private Context context;
     private Navigator navigator;
     private IGroupPresenter presenter;
@@ -79,6 +82,9 @@ public class GroupActivity
     FloatingActionButton fab_list;
     @BindView(R.id.fab_group)
     FloatingActionButton fab_group;
+    @BindView(R.id.fab_voting)
+    FloatingActionButton fab_voting;
+
     //endregion
 
     @Override
@@ -239,6 +245,20 @@ public class GroupActivity
                 }
             }
         });
+
+        fab_voting.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AnalyticsHelper.getInstance().fireSecretVotingEvent();
+
+                if (validateSelection()) {
+                    DialogFragment pinEntryFragment = PinEntryDialogFragment
+                            .newInstance(SecretVotingActivity.class.getSimpleName(),
+                                    getString(R.string.secret_voting_pin_enter_pin));
+                    pinEntryFragment.show(getSupportFragmentManager(), PinEntryDialogFragment.TAG);
+                }
+            }
+        });
     }
 
     private void createCustomAnimation() {
@@ -396,5 +416,15 @@ public class GroupActivity
         this.group = group;
         if (adapter != null) adapter.setGroupItems(group.getItems());
         this.setTitle(group.getName());
+    }
+
+    @Override
+    public void onPinEntrySuccess() {
+        Group newGroup = new Group.Builder()
+                .fromGroup(group)
+                .setName(group.getName())
+                .setItems(group.getSelectedItems())
+                .build();
+        navigator.startSecretVotingActivity(newGroup);
     }
 }

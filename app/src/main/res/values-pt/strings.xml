@@ -1,8 +1,11 @@
 <resources>
     <!-- Generics -->
-    <string name="hint_ok">Ok</string>
+    <string name="hint_ok">OK</string>
     <string name="hint_yes">Sim</string>
     <string name="hint_no">Não</string>
+    <string name="hint_done">Pronto</string>
+    <string name="hint_cancel">Cancelar</string>
+    <string name="hint_button_back">Voltar</string>
     <string name="hint_got_it">ENTENDI</string>
     <string name="hint_skip_tutorial">PULAR TUTORIAL</string>
 
@@ -31,6 +34,7 @@
     <string name="group_label_fab_roulette">Roleta</string>
     <string name="group_label_fab_list">Ganhadores Aleatórios</string>
     <string name="group_label_fab_groups">Sub Grupos</string>
+    <string name="group_label_fab_voting">Votação Secreta</string>
 
     <string name="group_action_share">Compartilhar</string>
     <string name="group_action_help">Ajuda</string>
@@ -111,7 +115,6 @@
     <!-- RouletteActivity -->
     <string name="roulette_title">Roda a roda!</string>
     <string name="roulette_msg_stopping">Parando&#8230;</string>
-    <string name="roulette_button_back">Voltar para o grupo</string>
 
     <!-- RandomWinnersActivity -->
     <string name="random_winners_title">Ganhadores Aleatórios</string>
@@ -133,6 +136,47 @@
     <string name="subgroups_msg_validate_quantity_empty">A quantidade não pode estar em branco</string>
     <string name="subgroups_msg_validate_quantity_zero">A quantidade não pode ser zero</string>
     <string name="subgroups_hint_group_name">Grupo #%s</string>
+
+    <!-- SecretVotingActivity -->
+    <string name="secret_voting_header_text">Você está votando para %s</string>
+
+    <string name="secret_voting_menu_next_vote">Se você é o próximo a votar aperte o botão abaixo</string>
+    <string name="secret_voting_menu_next_vote_button">Votar</string>
+    <string name="secret_voting_menu_end_voting">Após todos os votos aperte o botão abaixo para ver os resultados</string>
+    <plurals name="secret_voting_menu_total_votes">
+        <item quantity="one">%d pessoa votou</item>
+        <item quantity="other">%d pessoas votaram</item>
+    </plurals>
+    <string name="secret_voting_menu_end_voting_button">Ver resultados</string>
+
+    <string name="secret_voting_menu_abandon_voting_text">Todos os votos serão perdidos, confirme seu pin para abandonar essa votação:</string>
+    <string name="secret_voting_menu_end_voting_text">Por favor confirme seu pin antes de visualizar os resultados dessa votação:</string>
+
+    <string name="secret_voting_vote_confirm_title">Confirme seu voto</string>
+    <string name="secret_voting_vote_confirm_message">Você votou para: %s\n\nConfirmar?</string>
+
+    <string name="secret_voting_results_header_text">Resultados da votação para %s</string>
+    <string name="secret_voting_results_graph_text_percent">%d%%</string>
+    <plurals name="secret_voting_results_graph_text_votes">
+        <item quantity="one">%s voto</item>
+        <item quantity="other">%s votos</item>
+    </plurals>
+    <string name="secret_voting_results_first_place">Primeiro colocado</string>
+    <string name="secret_voting_results_second_place">Segundo colocado</string>
+    <string name="secret_voting_results_third_place">Terceiro colocado</string>
+    <plurals name="secret_voting_results_tie">
+        <item quantity="one">%1$s + %2$d outro</item>
+        <item quantity="other">%1$s + %2$d outros</item>
+    </plurals>
+
+    <string name="secret_voting_pin_dialog_title">Entre seu pin</string>
+    <string name="secret_voting_pin_enter_pin">Antes de iniciar a votação crie um pin para que apenas vocês seja capaz de encerrar a votação antes de compartilhar os resultados:</string>
+    <string name="secret_voting_pin_confirm_pin">Por favor confirme seu pin antes de visualizar os resultados:</string>
+
+    <string name="secret_voting_results_tie_break_title">Desempate</string>
+    <string name="secret_voting_results_tie_break_hint">Os itens a seguir terminaram empatados após a primeira votação, como gostaria de desempatar?</string>
+    <string name="secret_voting_results_tie_break_vote_again">Votar novamente</string>
+    <string name="secret_voting_results_tie_break_roulette">Roleta!</string>
 
     <!-- SettingsActivity -->
     <string name="settings_title">Configurações</string>
@@ -168,7 +212,7 @@
     <string name="dialog_rate_send_email_subject">Raffler! - Sugestões</string>
     <string name="dialog_rate_send_email_title">Escolher aplicativo de e-mail</string>
 
-    <!-- DialogQuickDecision -->
-    <string name="dialog_quick_decision_title">Escolha a Decisão Rápida</string>
-    <string name="dialog_quick_decision_header">Escolha um novo valor para este botão de decisão rápida:</string>
+    <!-- DialogPin -->
+    <string name="dialog_pin_msg_validate_length">O pin deve ter 4 caracteres</string>
+    <string name="dialog_pin_msg_validate_pin">Pin inválido, tente novamente</string>
 </resources>

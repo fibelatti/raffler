@@ -62,6 +62,11 @@ public class RouletteActivity
         this.rouletteHelper = null;
     }
 
+    @Override
+    public void onBackPressed() {
+        finish();
+    }
+
     private void setUpLayout() {
         setContentView(R.layout.activity_roulette);
         ButterKnife.bind(this);
