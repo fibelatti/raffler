@@ -1,7 +1,9 @@
 package com.fibelatti.raffler.views.adapters;
 
+import android.app.Activity;
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +12,7 @@ import android.widget.TextView;
 import com.fibelatti.raffler.R;
 import com.fibelatti.raffler.models.Group;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -19,7 +22,7 @@ public class MainAdapter
         extends RecyclerView.Adapter<MainAdapter.GroupViewHolder> {
 
     private Context context;
-    private List<Group> groupList;
+    private List<Group> groupList, filterList;
 
     public class GroupViewHolder
             extends RecyclerView.ViewHolder {
@@ -34,9 +37,20 @@ public class MainAdapter
         }
     }
 
-    public MainAdapter(Context context, List<Group> groupList) {
+    public MainAdapter(Context context) {
         this.context = context;
-        this.groupList = groupList;
+        this.groupList = new ArrayList<>();
+        this.filterList = new ArrayList<>();
+    }
+
+    public void setGroups(List<Group> groupList) {
+        this.groupList.clear();
+        this.groupList.addAll(groupList);
+
+        this.filterList.clear();
+        this.filterList.addAll(groupList);
+
+        notifyDataSetChanged();
     }
 
     private Context getContext() {
@@ -53,7 +67,7 @@ public class MainAdapter
 
     @Override
     public void onBindViewHolder(GroupViewHolder holder, int position) {
-        Group group = groupList.get(position);
+        Group group = filterList.get(position);
 
         holder.name.setText(group.getName());
         holder.itemCount.setText(getContext().getResources().getQuantityString(R.plurals.main_hint_group_items_quantity,
@@ -62,6 +76,32 @@ public class MainAdapter
 
     @Override
     public int getItemCount() {
-        return groupList.size();
+        return (filterList != null ? filterList.size() : 0);
+    }
+
+    public void filter(final String text) {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                filterList.clear();
+                if (TextUtils.isEmpty(text)) {
+                    filterList.addAll(groupList);
+                } else {
+                    for (Group item : groupList) {
+                        if (item.getName().toLowerCase().contains(text.toLowerCase())) {
+                            filterList.add(item);
+                        }
+                    }
+                }
+
+                ((Activity) context).runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        notifyDataSetChanged();
+                    }
+                });
+
+            }
+        }).start();
     }
 }

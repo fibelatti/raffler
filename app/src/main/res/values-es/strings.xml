@@ -9,6 +9,7 @@
     <string name="generic_msg_error">Ups! Algo salió mal. Inténtelo de nuevo.</string>
 
     <!-- MainActivity -->
+    <string name="main_action_search">Buscar</string>
     <string name="main_action_settings">Ajustes</string>
 
     <string name="main_hint_placeholder">

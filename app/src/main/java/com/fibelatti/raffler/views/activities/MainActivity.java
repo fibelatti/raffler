@@ -6,9 +6,11 @@ import android.os.Bundle;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -39,7 +41,8 @@ import uk.co.deanwild.materialshowcaseview.MaterialShowcaseSequence;
 import uk.co.deanwild.materialshowcaseview.MaterialShowcaseView;
 
 public class MainActivity
-        extends BaseActivity {
+        extends BaseActivity
+        implements SearchView.OnQueryTextListener {
     private Context context;
     private Navigator navigator;
 
@@ -73,7 +76,7 @@ public class MainActivity
         context = getApplicationContext();
         navigator = new Navigator(this);
         groupList = new ArrayList<>();
-        groupsAdapter = new MainAdapter(this, groupList);
+        groupsAdapter = new MainAdapter(this);
         quickDecisionList = new ArrayList<>();
         quickDecisionAdapter = new QuickDecisionAdapter(this);
 
@@ -108,6 +111,25 @@ public class MainActivity
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_main, menu);
+
+        final MenuItem searchItem = menu.findItem(R.id.action_search);
+        final SearchView searchView = (SearchView) MenuItemCompat.getActionView(searchItem);
+
+        searchView.setOnQueryTextListener(this);
+        MenuItemCompat.setOnActionExpandListener(searchItem, new MenuItemCompat.OnActionExpandListener() {
+            @Override
+            public boolean onMenuItemActionExpand(MenuItem item) {
+                fab.hide(true);
+                return true;
+            }
+
+            @Override
+            public boolean onMenuItemActionCollapse(MenuItem item) {
+                fab.show(true);
+                return true;
+            }
+        });
+
         return true;
     }
 
@@ -180,7 +202,7 @@ public class MainActivity
     private void fetchData() {
         if (!groupList.isEmpty()) groupList.clear();
         groupList.addAll(Database.groupDao.fetchAllGroups());
-        groupsAdapter.notifyDataSetChanged();
+        groupsAdapter.setGroups(groupList);
 
         boolean firstTimeLoad = quickDecisionList.isEmpty();
         if (!firstTimeLoad) quickDecisionList.clear();
@@ -235,6 +257,18 @@ public class MainActivity
         );
 
         sequence.start();
+    }
+
+    @Override
+    public boolean onQueryTextChange(String query) {
+        groupsAdapter.filter(query);
+        return true;
+    }
+
+    @Override
+    public boolean onQueryTextSubmit(String query) {
+        groupsAdapter.filter(query);
+        return true;
     }
 
     @OnClick(R.id.img_next)
