@@ -249,6 +249,8 @@ public class GroupActivity
         fab_voting.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                AnalyticsHelper.getInstance().fireSecretVotingEvent();
+
                 if (validateSelection()) {
                     DialogFragment pinEntryFragment = PinEntryDialogFragment
                             .newInstance(SecretVotingActivity.class.getSimpleName(),
