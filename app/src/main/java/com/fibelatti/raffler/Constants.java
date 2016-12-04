@@ -4,14 +4,19 @@ import java.util.Arrays;
 import java.util.List;
 
 public interface Constants {
-
     String PLAY_STORE_BASE_URL = "http://play.google.com/store/apps/details";
 
     String INTENT_EXTRA_GROUP = "com.fibelatti.raffler.GROUP";
+    String INTENT_EXTRA_VOTES_MAP = "com.fibelatti.raffler.VOTES_MAP";
+    String INTENT_EXTRA_GROUP_NAME = "com.fibelatti.raffler.GROUP_NAME";
     String INTENT_EXTRA_QUICK_DECISION = "com.fibelatti.raffler.QUICK_DECISION";
     String INTENT_EXTRA_GROUP_ITEM_NAME = "com.fibelatti.raffler.GROUP_ITEM_NAME";
     String INTENT_EXTRA_DIALOG_INITIAL_NUMBER = "com.fibelatti.raffler.DIALOG_INITIAL_NUMBER";
     String INTENT_EXTRA_DIALOG_FINAL_NUMBER = "com.fibelatti.raffler.DIALOG_FINAL_NUMBER";
+    String INTENT_EXTRA_DIALOG_PIN_CALLER_NAME = "com.fibelatti.raffler.PIN_CALLER_NAME";
+    String INTENT_EXTRA_DIALOG_PIN_MESSAGE = "com.fibelatti.raffler.PIN_MESSAGE";
+
+    String PREF_NAME_PIN = "com.fibelatti.raffler.PREF_NAME_PIN";
 
     int REQUEST_CODE_GROUP_ACTION = 1;
     int REQUEST_CODE_GROUP_EDIT = 2;
@@ -31,23 +36,4 @@ public interface Constants {
     String TUTORIAL_KEY_GROUP = "com.fibelatti.raffler.TUTORIAL_GROUP";
     String TUTORIAL_KEY_GROUP_FORM = "com.fibelatti.raffler.TUTORIAL_GROUP_FORM";
     String TUTORIAL_KEY_GROUP_FORM_SAVE = "com.fibelatti.raffler.TUTORIAL_GROUP_FORM_SAVE";
-
-    String ANALYTICS_KEY_UPGRADED_DATABASE = "Upgraded database";
-    String ANALYTICS_PARAM_OLD_VERSION = "Old version";
-    String ANALYTICS_PARAM_NEW_VERSION = "New version";
-
-    String ANALYTICS_KEY_TOGGLED_SONG = "Toggled song";
-    String ANALYTICS_PARAM_TOGGLED_SONG = "New value";
-
-    String ANALYTICS_KEY_QUICK_DECISION_RESULT = "Quick decision result";
-    String ANALYTICS_PARAM_QUICK_DECISION_NAME = "Quick decision name";
-    String ANALYTICS_PARAM_QUICK_DECISION_VALUE = "Quick decision value";
-
-    String ANALYTICS_KEY_GROUP_CREATED = "Group created";
-
-    String ANALYTICS_KEY_GROUP_SHARED = "Group shared";
-
-    String ANALYTICS_KEY_MODE_ROULETTE = "Roulette mode";
-    String ANALYTICS_KEY_MODE_RANDOM_WINNERS = "Random Winners mode";
-    String ANALYTICS_KEY_MODE_SUB_GROUPS = "Sub Groups mode";
 }

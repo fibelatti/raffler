@@ -94,6 +94,16 @@
             fab:fab_label="@string/group_label_fab_groups"
             fab:fab_size="mini"/>
 
+        <com.github.clans.fab.FloatingActionButton
+            android:id="@+id/fab_voting"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_rate_review_white_24dp"
+            app:fab_colorNormal="@color/colorAccent"
+            app:fab_colorPressed="@color/colorAccent"
+            fab:fab_label="@string/group_label_fab_voting"
+            fab:fab_size="mini"/>
+
     </com.github.clans.fab.FloatingActionMenu>
 
 </android.support.design.widget.CoordinatorLayout>

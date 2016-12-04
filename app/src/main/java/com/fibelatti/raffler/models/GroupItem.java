@@ -3,8 +3,10 @@ package com.fibelatti.raffler.models;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import java.io.Serializable;
+
 public class GroupItem
-        implements Parcelable {
+        implements Parcelable, Serializable {
     Long id;
     Long groupId;
     String name;

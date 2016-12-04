@@ -39,10 +39,12 @@ ext {
     designVersion = '24.2.1'
     recyclerViewVersion = '24.2.1'
     cardViewVersion = '24.2.1'
+    percentSupportVersion = '24.2.1'
 
     butterKnifeVersion = '8.2.1'
     clansFabVersion = '1.6.4'
     tutorialVersion = '2.1.0'
+    chartsVersion = '0.3.2'
     crashlyticsVersion = '2.6.1'
 
     jUnitVersion = '4.12'

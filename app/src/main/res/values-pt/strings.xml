@@ -1,14 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE resources [
+    <!ENTITY appname "Raffler">
+    ]>
+
 <resources>
     <!-- Generics -->
-    <string name="hint_ok">Ok</string>
+    <string name="hint_ok">OK</string>
     <string name="hint_yes">Sim</string>
     <string name="hint_no">Não</string>
+    <string name="hint_done">Pronto</string>
+    <string name="hint_cancel">Cancelar</string>
+    <string name="hint_button_back">Voltar</string>
     <string name="hint_got_it">ENTENDI</string>
     <string name="hint_skip_tutorial">PULAR TUTORIAL</string>
 
     <string name="generic_msg_error">Opa! Algo deu errado. Tente de novo.</string>
 
     <!-- MainActivity -->
+    <string name="main_action_search">Buscar</string>
     <string name="main_action_settings">Configurações</string>
 
     <string name="main_hint_placeholder">
@@ -22,7 +31,7 @@
     <string name="main_section_title_quick_decisions">Decisões rápidas</string>
     <string name="main_section_title_my_groups">Meus grupos</string>
 
-    <string name="main_tutorial_intro">Bem-vindo ao Raffler! Essa parece ser sua primeira vez por aqui, então vou te explicar algumas coisas&#8230;</string>
+    <string name="main_tutorial_intro">Bem-vindo ao &appname; Essa parece ser sua primeira vez por aqui, então vou te explicar algumas coisas&#8230;</string>
     <string name="main_tutorial_quick_decision">Esses são os botões de decisão rápida: clique neles e tenha a resposta imediatamente! Deslize horizontalmente para mais opções&#8230;</string>
     <string name="main_tutorial_add_group">A diversão só começa quando você cria o seu primeiro grupo. Quando você achar que está pronto, clique neste botão&#8230;</string>
 
@@ -30,6 +39,7 @@
     <string name="group_label_fab_roulette">Roleta</string>
     <string name="group_label_fab_list">Ganhadores Aleatórios</string>
     <string name="group_label_fab_groups">Sub Grupos</string>
+    <string name="group_label_fab_voting">Votação Secreta</string>
 
     <string name="group_action_share">Compartilhar</string>
     <string name="group_action_help">Ajuda</string>
@@ -49,7 +59,9 @@
         \n\nExplore todos os métodos:
         \n\n<b>Roleta</b> escolherá um item aleatoriamente com uma animação clássica.
         \n\n<b>Ganhadores Aleatórios</b> perguntará quantos itens você quer sortear dentre as opções e mostrará o resultado.
-        \n\n<b>Sub Grupos</b> formará grupos aleatoriamente entre os itens.</string>
+        \n\n<b>Sub Grupos</b> formará grupos aleatoriamente entre os itens.
+        \n\n<b>Votação secreta</b> permitirá que seus amigos votem um a um para eleger um vencedor.
+    </string>
 
     <string name="group_tutorial_check_items">Cada sorteio é diferente, escolha quais itens incluir marcando suas caixinhas&#8230;</string>
     <string name="group_tutorial_menu">Use o menu para mais opções&#8230;</string>
@@ -110,7 +122,6 @@
     <!-- RouletteActivity -->
     <string name="roulette_title">Roda a roda!</string>
     <string name="roulette_msg_stopping">Parando&#8230;</string>
-    <string name="roulette_button_back">Voltar para o grupo</string>
 
     <!-- RandomWinnersActivity -->
     <string name="random_winners_title">Ganhadores Aleatórios</string>
@@ -133,6 +144,47 @@
     <string name="subgroups_msg_validate_quantity_zero">A quantidade não pode ser zero</string>
     <string name="subgroups_hint_group_name">Grupo #%s</string>
 
+    <!-- SecretVotingActivity -->
+    <string name="secret_voting_header_text">Você está votando para %s</string>
+
+    <string name="secret_voting_menu_next_vote">Se você é o próximo a votar aperte o botão abaixo</string>
+    <string name="secret_voting_menu_next_vote_button">Votar</string>
+    <string name="secret_voting_menu_end_voting">Após todos os votos aperte o botão abaixo para ver os resultados</string>
+    <plurals name="secret_voting_menu_total_votes">
+        <item quantity="one">%d pessoa votou</item>
+        <item quantity="other">%d pessoas votaram</item>
+    </plurals>
+    <string name="secret_voting_menu_end_voting_button">Ver resultados</string>
+
+    <string name="secret_voting_menu_abandon_voting_text">Todos os votos serão perdidos, confirme seu pin para abandonar essa votação:</string>
+    <string name="secret_voting_menu_end_voting_text">Por favor confirme seu pin antes de visualizar os resultados dessa votação:</string>
+
+    <string name="secret_voting_vote_confirm_title">Confirme seu voto</string>
+    <string name="secret_voting_vote_confirm_message">Você votou para: %s\n\nConfirmar?</string>
+
+    <string name="secret_voting_results_header_text">Resultados da votação para %s</string>
+    <string name="secret_voting_results_graph_text_percent">%d%%</string>
+    <plurals name="secret_voting_results_graph_text_votes">
+        <item quantity="one">%s voto</item>
+        <item quantity="other">%s votos</item>
+    </plurals>
+    <string name="secret_voting_results_first_place">Primeiro colocado</string>
+    <string name="secret_voting_results_second_place">Segundo colocado</string>
+    <string name="secret_voting_results_third_place">Terceiro colocado</string>
+    <plurals name="secret_voting_results_tie">
+        <item quantity="one">%1$s + %2$d outro</item>
+        <item quantity="other">%1$s + %2$d outros</item>
+    </plurals>
+
+    <string name="secret_voting_pin_dialog_title">Entre seu pin</string>
+    <string name="secret_voting_pin_enter_pin">Antes de iniciar a votação crie um pin para que apenas vocês seja capaz de encerrar a votação antes de compartilhar os resultados:</string>
+    <string name="secret_voting_pin_confirm_pin">Por favor confirme seu pin antes de visualizar os resultados:</string>
+
+    <string name="secret_voting_results_tie_break_title">Desempate</string>
+    <string name="secret_voting_results_tie_break_hint">Os itens a seguir terminaram empatados após a primeira votação, como gostaria de desempatar?</string>
+    <string name="secret_voting_results_tie_break_vote_again">Votar novamente</string>
+    <string name="secret_voting_results_tie_break_roulette">Roleta!</string>
+
     <!-- SettingsActivity -->
     <string name="settings_title">Configurações</string>
 
@@ -150,24 +202,24 @@
         \nVocê pode ler a política de privacidade do Crashlytics <a href="http://try.crashlytics.com/terms/">aqui</a>.</string>
 
     <string name="settings_share">Compartilhe!</string>
-    <string name="settings_share_title">Compartilhando Raffler!</string>
-    <string name="settings_share_text">Baixe o Raffler! Tomar decisões nunca foi tão fácil. Baixe em %s</string>
+    <string name="settings_share_title">Compartilhando &appname;</string>
+    <string name="settings_share_text">Baixe o &appname; Tomar decisões nunca foi tão fácil. Baixe em %s</string>
     <string name="settings_rate">Dê sua avaliação!</string>
     <string name="settings_about">Desenvolvido com ❤ por Filipe Belatti</string>
-    <string name="settings_app_version">Versão: 1.3.0</string>
+    <string name="settings_app_version">Versão: %s</string>
 
     <!-- DialogRate -->
     <string name="dialog_rate_title">Avaliando</string>
     <string name="dialog_rate_cancel">Cancelar</string>
-    <string name="dialog_rate_header">Se está gostando do Raffler! eu adoraria receber sua avaliação!</string>
+    <string name="dialog_rate_header">Se está gostando do &appname; eu adoraria receber sua avaliação!</string>
     <string name="dialog_rate_feedback_positive">Que bom que está gostando! Que tal mostrar seu amor na Play Store?</string>
     <string name="dialog_rate_play_store">Play Store</string>
     <string name="dialog_rate_feedback_negative">Gostaria de me enviar um e-mail sugerindo o que posso fazer para melhorar sua experiência com o app?</string>
     <string name="dialog_rate_send_email">Enviar e-mail</string>
-    <string name="dialog_rate_send_email_subject">Raffler! - Sugestões</string>
+    <string name="dialog_rate_send_email_subject">&appname; - Sugestões</string>
     <string name="dialog_rate_send_email_title">Escolher aplicativo de e-mail</string>
 
-    <!-- DialogQuickDecision -->
-    <string name="dialog_quick_decision_title">Escolha a Decisão Rápida</string>
-    <string name="dialog_quick_decision_header">Escolha um novo valor para este botão de decisão rápida:</string>
+    <!-- DialogPin -->
+    <string name="dialog_pin_msg_validate_length">O pin deve ter 4 caracteres</string>
+    <string name="dialog_pin_msg_validate_pin">Pin inválido, tente novamente</string>
 </resources>

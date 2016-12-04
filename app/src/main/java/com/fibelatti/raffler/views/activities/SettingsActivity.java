@@ -1,6 +1,8 @@
 package com.fibelatti.raffler.views.activities;
 
 import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
@@ -17,6 +19,7 @@ import android.widget.TextView;
 import com.fibelatti.raffler.Constants;
 import com.fibelatti.raffler.R;
 import com.fibelatti.raffler.db.Database;
+import com.fibelatti.raffler.helpers.AnalyticsHelper;
 import com.fibelatti.raffler.views.fragments.RateAppDialogFragment;
 
 import butterknife.BindView;
@@ -45,6 +48,9 @@ public class SettingsActivity
     Button buttonShare;
     @BindView(R.id.button_rate)
     Button buttonRate;
+
+    @BindView(R.id.settings_version)
+    TextView appVersion;
     //endregion
 
     @Override
@@ -79,6 +85,13 @@ public class SettingsActivity
     }
 
     private void setValues() {
+        try {
+            PackageInfo pInfo = getPackageManager().getPackageInfo(getPackageName(), 0);
+            appVersion.setText(getString(R.string.settings_app_version, pInfo.versionName));
+        } catch (PackageManager.NameNotFoundException e) {
+            appVersion.setVisibility(View.GONE);
+        }
+
         this.setTitle(getResources().getString(R.string.settings_title));
     }
 
@@ -112,6 +125,8 @@ public class SettingsActivity
         buttonShare.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                AnalyticsHelper.getInstance().fireShareAppEvent();
+
                 String message = getString(R.string.settings_share_text, String.format("%s?id=%s", Constants.PLAY_STORE_BASE_URL, getPackageName()));
                 Intent share = new Intent(Intent.ACTION_SEND);
                 share.setType("text/plain");
@@ -124,6 +139,8 @@ public class SettingsActivity
         buttonRate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                AnalyticsHelper.getInstance().fireRateAppEvent();
+
                 DialogFragment rateFragment = new RateAppDialogFragment();
                 rateFragment.show(getSupportFragmentManager(), RateAppDialogFragment.TAG);
             }

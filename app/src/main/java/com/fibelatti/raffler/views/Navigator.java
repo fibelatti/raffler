@@ -11,6 +11,7 @@ import com.fibelatti.raffler.views.activities.GroupFormActivity;
 import com.fibelatti.raffler.views.activities.QuickDecisionResultActivity;
 import com.fibelatti.raffler.views.activities.RandomWinnersActivity;
 import com.fibelatti.raffler.views.activities.RouletteActivity;
+import com.fibelatti.raffler.views.activities.SecretVotingActivity;
 import com.fibelatti.raffler.views.activities.SettingsActivity;
 import com.fibelatti.raffler.views.activities.SubGroupsActivity;
 
@@ -57,6 +58,12 @@ public class Navigator {
 
     public void startSubGroupsActivity(Group group) {
         Intent intent = new Intent(activity, SubGroupsActivity.class);
+        intent.putExtra(Constants.INTENT_EXTRA_GROUP, group);
+        activity.startActivity(intent);
+    }
+
+    public void startSecretVotingActivity(Group group) {
+        Intent intent = new Intent(activity, SecretVotingActivity.class);
         intent.putExtra(Constants.INTENT_EXTRA_GROUP, group);
         activity.startActivity(intent);
     }

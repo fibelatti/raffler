@@ -11,6 +11,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.content.FileProvider;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -26,6 +27,7 @@ import android.view.animation.OvershootInterpolator;
 import com.fibelatti.raffler.Constants;
 import com.fibelatti.raffler.R;
 import com.fibelatti.raffler.helpers.AlertDialogHelper;
+import com.fibelatti.raffler.helpers.AnalyticsHelper;
 import com.fibelatti.raffler.helpers.FileHelper;
 import com.fibelatti.raffler.models.Group;
 import com.fibelatti.raffler.presenters.GroupPresenter;
@@ -35,6 +37,8 @@ import com.fibelatti.raffler.views.Navigator;
 import com.fibelatti.raffler.views.adapters.GroupAdapter;
 import com.fibelatti.raffler.views.extensions.DividerItemDecoration;
 import com.fibelatti.raffler.views.extensions.RecyclerTouchListener;
+import com.fibelatti.raffler.views.fragments.IPinEntryListener;
+import com.fibelatti.raffler.views.fragments.PinEntryDialogFragment;
 import com.github.clans.fab.FloatingActionButton;
 import com.github.clans.fab.FloatingActionMenu;
 
@@ -47,7 +51,7 @@ import uk.co.deanwild.materialshowcaseview.MaterialShowcaseView;
 
 public class GroupActivity
         extends BaseActivity
-        implements IGroupPresenterView {
+        implements IGroupPresenterView, IPinEntryListener {
     private Context context;
     private Navigator navigator;
     private IGroupPresenter presenter;
@@ -78,6 +82,9 @@ public class GroupActivity
     FloatingActionButton fab_list;
     @BindView(R.id.fab_group)
     FloatingActionButton fab_group;
+    @BindView(R.id.fab_voting)
+    FloatingActionButton fab_voting;
+
     //endregion
 
     @Override
@@ -198,7 +205,7 @@ public class GroupActivity
             @Override
             public void onClick(View view) {
                 if (validateSelection()) {
-//                    Answers.getInstance().logCustom(new CustomEvent(Constants.ANALYTICS_KEY_MODE_ROULETTE));
+                    AnalyticsHelper.getInstance().fireRouletteEvent();
 
                     Group newGroup = new Group.Builder()
                             .fromGroup(group)
@@ -213,7 +220,7 @@ public class GroupActivity
             @Override
             public void onClick(View view) {
                 if (validateSelection()) {
-//                    Answers.getInstance().logCustom(new CustomEvent(Constants.ANALYTICS_KEY_MODE_RANDOM_WINNERS));
+                    AnalyticsHelper.getInstance().fireRandomWinnersEvent();
 
                     Group newGroup = new Group.Builder()
                             .fromGroup(group)
@@ -227,7 +234,7 @@ public class GroupActivity
         fab_group.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                Answers.getInstance().logCustom(new CustomEvent(Constants.ANALYTICS_KEY_MODE_SUB_GROUPS));
+                AnalyticsHelper.getInstance().fireSubGroupsEvent();
 
                 if (validateSelection()) {
                     Group newGroup = new Group.Builder()
@@ -235,6 +242,20 @@ public class GroupActivity
                             .setItems(group.getSelectedItems())
                             .build();
                     navigator.startSubGroupsActivity(newGroup);
+                }
+            }
+        });
+
+        fab_voting.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AnalyticsHelper.getInstance().fireSecretVotingEvent();
+
+                if (validateSelection()) {
+                    DialogFragment pinEntryFragment = PinEntryDialogFragment
+                            .newInstance(SecretVotingActivity.class.getSimpleName(),
+                                    getString(R.string.secret_voting_pin_enter_pin));
+                    pinEntryFragment.show(getSupportFragmentManager(), PinEntryDialogFragment.TAG);
                 }
             }
         });
@@ -322,7 +343,7 @@ public class GroupActivity
             startActivity(Intent.createChooser(fileHelper.createFileShareIntent(uri), getResources().getText(R.string.group_action_share)));
         }
 
-//        Answers.getInstance().logCustom(new CustomEvent(Constants.ANALYTICS_KEY_GROUP_SHARED));
+        AnalyticsHelper.getInstance().fireShareGroupEvent();
     }
 
     private void showTutorial() {
@@ -395,5 +416,15 @@ public class GroupActivity
         this.group = group;
         if (adapter != null) adapter.setGroupItems(group.getItems());
         this.setTitle(group.getName());
+    }
+
+    @Override
+    public void onPinEntrySuccess() {
+        Group newGroup = new Group.Builder()
+                .fromGroup(group)
+                .setName(group.getName())
+                .setItems(group.getSelectedItems())
+                .build();
+        navigator.startSecretVotingActivity(newGroup);
     }
 }
