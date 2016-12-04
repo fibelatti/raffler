@@ -1,5 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE resources [
+    <!ENTITY appname "Raffler">
+    ]>
+
 <resources>
-    <string name="app_name" translatable="false">Raffler!</string>
+    <string name="app_name" translatable="false">&appname;</string>
 
     <string name="file_provider_authority" translatable="false">com.fibelatti.raffler.fileprovider</string>
 
@@ -30,7 +35,7 @@
     <string name="main_section_title_quick_decisions">Quick decisions</string>
     <string name="main_section_title_my_groups">My groups</string>
 
-    <string name="main_tutorial_intro">Welcome to Raffler! It seems that you\'re new around here, so I\'ll explain how to get things going&#8230;</string>
+    <string name="main_tutorial_intro">Welcome to &appname; It seems that you\'re new around here, so I\'ll explain how to get things going&#8230;</string>
     <string name="main_tutorial_quick_decision">These are the quick decision buttons: tap them and get an immediate result! Scroll horizontally for more options&#8230;</string>
     <string name="main_tutorial_add_group">The real fun begins when you create your first group. Whenever you think you\'re ready tap this button over here&#8230;</string>
 
@@ -200,8 +205,8 @@
         \nYou can read Crashlytics privacy policy <a href="http://try.crashlytics.com/terms/">here</a>.</string>
 
     <string name="settings_share">Tell your friends!</string>
-    <string name="settings_share_title">Sharing Raffler!</string>
-    <string name="settings_share_text">Check out Raffler! Making decisions never been so easy. Download at %s</string>
+    <string name="settings_share_title">Sharing &appname;</string>
+    <string name="settings_share_text">Check out &appname; Making decisions never been so easy. Download at %s</string>
     <string name="settings_rate">Rate this app!</string>
     <string name="settings_about">Developed with ❤ by Filipe Belatti</string>
     <string name="settings_app_version">Version: %s</string>
@@ -209,12 +214,12 @@
     <!-- DialogRate -->
     <string name="dialog_rate_title">Rate this app!</string>
     <string name="dialog_rate_cancel">Cancel</string>
-    <string name="dialog_rate_header">If you\'re enjoying Raffler! I would love to receive your review!</string>
+    <string name="dialog_rate_header">If you\'re enjoying &appname; I would love to receive your review!</string>
     <string name="dialog_rate_feedback_positive">I\'m glad you\'re enjoying it! What about showing your love at the Play Store?</string>
     <string name="dialog_rate_play_store">Play Store</string>
     <string name="dialog_rate_feedback_negative">Would you mind sending me an e-mail suggesting what can I do to improve your experience with the app?</string>
     <string name="dialog_rate_send_email">Send e-mail</string>
-    <string name="dialog_rate_send_email_subject">Raffler! - Feedback</string>
+    <string name="dialog_rate_send_email_subject">&appname; - Feedback</string>
     <string name="dialog_rate_send_email_title">Choose e-mail app</string>
 
     <!-- DialogPin -->
