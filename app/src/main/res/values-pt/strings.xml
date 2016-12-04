@@ -59,7 +59,9 @@
         \n\nExplore todos os métodos:
         \n\n<b>Roleta</b> escolherá um item aleatoriamente com uma animação clássica.
         \n\n<b>Ganhadores Aleatórios</b> perguntará quantos itens você quer sortear dentre as opções e mostrará o resultado.
-        \n\n<b>Sub Grupos</b> formará grupos aleatoriamente entre os itens.</string>
+        \n\n<b>Sub Grupos</b> formará grupos aleatoriamente entre os itens.
+        \n\n<b>Votação secreta</b> permitirá que seus amigos votem um a um para eleger um vencedor.
+    </string>
 
     <string name="group_tutorial_check_items">Cada sorteio é diferente, escolha quais itens incluir marcando suas caixinhas&#8230;</string>
     <string name="group_tutorial_menu">Use o menu para mais opções&#8230;</string>

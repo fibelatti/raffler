@@ -59,7 +59,9 @@
         \n\nExplora los métodos:
         \n\n<b>Ruleta</b> elegirá un resultado al azar con una animación.
         \n\n<b>Ganadores Aleatorios</b> le preguntará la cantidad de opciones que desea elegir en el sorteo y vá a mostrarlos de forma inmediata.
-        \n\n<b>Sub Groups</b> formará subgrupos dispuestos al azar entre sus opciones.</string>
+        \n\n<b>Sub Groups</b> formará subgrupos dispuestos al azar entre sus opciones.
+        \n\n<b>Votación Secreta</b> será el anfitrión de la votación para que tus amigos pueden votar uno por uno para elegir al ganador.
+    </string>
 
     <string name="group_tutorial_check_items">Cada rifa es diferente, elige qué elementos incluir en esta ronda cambiando sus casillas&#8230;</string>
     <string name="group_tutorial_menu">Utilice el menú para ver más opciones&#8230;</string>

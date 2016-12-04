@@ -63,7 +63,9 @@
         \n\nExplore all methods:
         \n\n<b>Roulette</b> will choose one random result with an animation.
         \n\n<b>Random Winners</b> will ask you how many options you want to choose from the raffle and display them right away.
-        \n\n<b>Sub Groups</b> will form randomly arranged sub groups among your options.</string>
+        \n\n<b>Sub Groups</b> will form randomly arranged sub groups among your options.
+        \n\n<b>Secret Voting</b> will host a voting so your friends can vote one by one to elect a winner.
+    </string>
 
     <string name="group_tutorial_check_items">Each raffle is different, choose which items to include in this round by toggling their checkboxes&#8230;</string>
     <string name="group_tutorial_menu">Use the menu for more options&#8230;</string>
