@@ -148,6 +148,7 @@ public class PinEntryDialogFragment
             return true;
         } else if (!pin.equals(savedPin)) {
             layoutPinEntry.setError(getString(R.string.dialog_pin_msg_validate_pin));
+            pinEntry.setText("");
             requestFocus(pinEntry);
             return false;
         } else {
