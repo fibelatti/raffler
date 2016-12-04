@@ -109,6 +109,8 @@ public class PinEntryDialogFragment
             }
         });
 
+        dialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
+
         return dialog;
     }
 
