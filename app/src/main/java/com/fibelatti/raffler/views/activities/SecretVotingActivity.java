@@ -187,6 +187,7 @@ public class SecretVotingActivity
 
     @Override
     public void onRoulette(Group group) {
+        finish();
         navigator.startRouletteActivity(group);
     }
 }
