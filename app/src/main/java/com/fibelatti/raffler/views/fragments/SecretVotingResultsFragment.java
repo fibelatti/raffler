@@ -6,6 +6,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.percent.PercentLayoutHelper;
 import android.support.percent.PercentRelativeLayout;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.CardView;
@@ -13,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -41,6 +43,7 @@ public class SecretVotingResultsFragment
     private Resources resources;
     private Group group;
     private LinkedHashMap<GroupItem, Integer> votesMap;
+    private LinkedHashMap<Integer, List<GroupItem>> orderedVotesMap;
     private int totalVotes;
 
     //region layout bindings
@@ -57,6 +60,8 @@ public class SecretVotingResultsFragment
     WaveLoadingView graphFirstPlace;
     @BindView(R.id.tv_first_place)
     TextView textFirstPlace;
+    @BindView(R.id.button_tie_break)
+    Button buttonTieBreak;
 
     @BindView(R.id.cv_second_place)
     CardView cardSecondPlace;
@@ -117,8 +122,9 @@ public class SecretVotingResultsFragment
         }
 
         this.votesMap = sortByValue(votesMap, true);
-        setUpData();
 
+        parseResults();
+        setUpData();
         setUpLayout();
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
@@ -139,8 +145,106 @@ public class SecretVotingResultsFragment
     }
 
     private void setUpLayout() {
-        final boolean isThirdPlaceVisible = cardThirdPlace.getVisibility() == View.VISIBLE;
+        calculateFirstCardMeasures();
+        calculateSecondCardMeasures();
+        calculateThirdCardMeasures();
+    }
 
+    private void setUpData() {
+        if (orderedVotesMap != null) {
+            for (int current : orderedVotesMap.keySet()) {
+                totalVotes += current;
+            }
+
+            this.headerText.setText(getString(R.string.secret_voting_results_header_text, group.getName()));
+
+            int quantity;
+            int percent;
+            String itemName;
+
+            // First place
+            quantity = (new ArrayList<>(orderedVotesMap.keySet())).get(0);
+
+            percent = (int) ((quantity / (float) totalVotes) * 100);
+            itemName = (new ArrayList<>(orderedVotesMap.values())).get(0).size() == 1 ? (new ArrayList<>(orderedVotesMap.values())).get(0).get(0).getName()
+                    : resources.getQuantityString(R.plurals.secret_voting_results_tie, (new ArrayList<>(orderedVotesMap.values())).get(0).size() - 1, (new ArrayList<>(orderedVotesMap.values())).get(0).get(0).getName(), (new ArrayList<>(orderedVotesMap.values())).get(0).size() - 1);
+
+            graphFirstPlace.setProgressValue(percent);
+            graphFirstPlace.setCenterTitle(getString(R.string.secret_voting_results_graph_text_percent, percent));
+            graphFirstPlace.setBottomTitle(resources.getQuantityString(R.plurals.secret_voting_results_graph_text_votes, quantity, quantity));
+            textFirstPlace.setText(itemName);
+
+            if ((new ArrayList<>(orderedVotesMap.values())).get(0).size() > 1) buttonTieBreak.setVisibility(View.VISIBLE);
+
+            // Second place
+            quantity = orderedVotesMap.size() > 1 ? (new ArrayList<>(orderedVotesMap.keySet())).get(1) : 0;
+
+            if (quantity == 0) {
+                PercentRelativeLayout.LayoutParams params = (PercentRelativeLayout.LayoutParams) cardFirstPlace.getLayoutParams();
+                PercentLayoutHelper.PercentLayoutInfo info = params.getPercentLayoutInfo();
+                info.heightPercent = 1.0f;
+                cardFirstPlace.requestLayout();
+
+                cardSecondPlace.setVisibility(View.GONE);
+                cardThirdPlace.setVisibility(View.GONE);
+            } else {
+                percent = (int) ((quantity / (float) totalVotes) * 100);
+                itemName = (new ArrayList<>(orderedVotesMap.values())).get(1).size() == 1 ? (new ArrayList<>(orderedVotesMap.values())).get(1).get(0).getName()
+                        : resources.getQuantityString(R.plurals.secret_voting_results_tie, (new ArrayList<>(orderedVotesMap.values())).get(1).size() - 1, (new ArrayList<>(orderedVotesMap.values())).get(1).get(0).getName(), (new ArrayList<>(orderedVotesMap.values())).get(1).size() - 1);
+
+                graphSecondPlace.setProgressValue(percent);
+                graphSecondPlace.setCenterTitle(getString(R.string.secret_voting_results_graph_text_percent, percent));
+                graphSecondPlace.setBottomTitle(resources.getQuantityString(R.plurals.secret_voting_results_graph_text_votes, quantity, quantity));
+                textSecondPlace.setText(itemName);
+
+                // Third place
+                quantity = orderedVotesMap.size() > 2 ? (new ArrayList<>(orderedVotesMap.keySet())).get(2) : 0;
+
+                if (quantity == 0) {
+                    PercentRelativeLayout.LayoutParams params = (PercentRelativeLayout.LayoutParams) cardSecondPlace.getLayoutParams();
+                    PercentLayoutHelper.PercentLayoutInfo info = params.getPercentLayoutInfo();
+                    info.widthPercent = 1.0f;
+                    cardSecondPlace.requestLayout();
+
+                    cardThirdPlace.setVisibility(View.GONE);
+                } else {
+                    percent = (int) ((quantity / (float) totalVotes) * 100);
+                    itemName = (new ArrayList<>(orderedVotesMap.values())).get(2).size() == 1 ? (new ArrayList<>(orderedVotesMap.values())).get(2).get(0).getName()
+                            : resources.getQuantityString(R.plurals.secret_voting_results_tie, (new ArrayList<>(orderedVotesMap.values())).get(2).size() - 1, (new ArrayList<>(orderedVotesMap.values())).get(2).get(0).getName(), (new ArrayList<>(orderedVotesMap.values())).get(2).size() - 1);
+
+                    graphThirdPlace.setProgressValue(percent);
+                    graphThirdPlace.setCenterTitle(getString(R.string.secret_voting_results_graph_text_percent, percent));
+                    graphThirdPlace.setBottomTitle(resources.getQuantityString(R.plurals.secret_voting_results_graph_text_votes, quantity, quantity));
+                    textThirdPlace.setText(itemName);
+                }
+            }
+        }
+    }
+
+    private void parseResults() {
+        orderedVotesMap = new LinkedHashMap<>();
+
+        int currentVotesQuantity;
+        List<GroupItem> currentItemsList;
+
+        for (GroupItem item : this.votesMap.keySet()) {
+            currentVotesQuantity = votesMap.get(item);
+
+            if (orderedVotesMap.get(currentVotesQuantity) == null) {
+                currentItemsList = new ArrayList<>();
+                currentItemsList.add(item);
+
+                orderedVotesMap.put(currentVotesQuantity, currentItemsList);
+            } else {
+                currentItemsList = orderedVotesMap.get(currentVotesQuantity);
+                currentItemsList.add(item);
+
+                orderedVotesMap.put(currentVotesQuantity, currentItemsList);
+            }
+        }
+    }
+
+    private void calculateFirstCardMeasures() {
         ViewTreeObserver firstObserver = cardFirstPlace.getViewTreeObserver();
         firstObserver.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
             @Override
@@ -152,7 +256,8 @@ public class SecretVotingResultsFragment
                                 - getResources().getDimensionPixelSize(R.dimen.margin_small)
                                 - textFirstPlaceHeader.getHeight()
                                 - dividerFirstPlace.getHeight() - getResources().getDimensionPixelSize(R.dimen.margin_small)
-                                - textFirstPlace.getHeight() - getResources().getDimensionPixelSize(R.dimen.margin_regular),
+                                - textFirstPlace.getHeight() - getResources().getDimensionPixelSize(R.dimen.margin_regular)
+                                - buttonTieBreak.getHeight() - getResources().getDimensionPixelSize(R.dimen.margin_small),
                         cardFirstPlace.getWidth()
                                 - getResources().getDimensionPixelSize(R.dimen.padding_small) * 2
                                 - getResources().getDimensionPixelSize(R.dimen.margin_small) * 2);
@@ -165,6 +270,10 @@ public class SecretVotingResultsFragment
                 cardFirstPlace.getViewTreeObserver().removeOnGlobalLayoutListener(this);
             }
         });
+    }
+
+    private void calculateSecondCardMeasures() {
+        final boolean isThirdPlaceVisible = cardThirdPlace.getVisibility() == View.VISIBLE;
 
         ViewTreeObserver secondObserver = cardSecondPlace.getViewTreeObserver();
         secondObserver.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
@@ -191,7 +300,9 @@ public class SecretVotingResultsFragment
                 cardSecondPlace.getViewTreeObserver().removeOnGlobalLayoutListener(this);
             }
         });
+    }
 
+    private void calculateThirdCardMeasures() {
         ViewTreeObserver thirdObserver = cardThirdPlace.getViewTreeObserver();
         thirdObserver.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
             @Override
@@ -217,72 +328,6 @@ public class SecretVotingResultsFragment
                 cardThirdPlace.getViewTreeObserver().removeOnGlobalLayoutListener(this);
             }
         });
-    }
-
-    private void setUpData() {
-        if (votesMap != null) {
-            for (int current : votesMap.values()) {
-                totalVotes += current;
-            }
-
-            this.headerText.setText(getString(R.string.secret_voting_results_header_text, group.getName()));
-
-            int quantity;
-            int percent;
-            GroupItem item;
-
-            // First place
-            quantity = (new ArrayList<>(votesMap.values())).get(0);
-
-            percent = (int) ((quantity / (float) totalVotes) * 100);
-            item = (new ArrayList<>(votesMap.keySet())).get(0);
-
-            graphFirstPlace.setProgressValue(percent);
-            graphFirstPlace.setCenterTitle(getString(R.string.secret_voting_results_graph_text_percent, percent));
-            graphFirstPlace.setBottomTitle(resources.getQuantityString(R.plurals.secret_voting_results_graph_text_votes, quantity, quantity));
-            textFirstPlace.setText(item.getName());
-
-            // Second place
-            quantity = (new ArrayList<>(votesMap.values())).get(1);
-
-            if (quantity == 0) {
-                PercentRelativeLayout.LayoutParams params = (PercentRelativeLayout.LayoutParams) cardFirstPlace.getLayoutParams();
-                PercentLayoutHelper.PercentLayoutInfo info = params.getPercentLayoutInfo();
-                info.heightPercent = 1.0f;
-                cardFirstPlace.requestLayout();
-
-                cardSecondPlace.setVisibility(View.GONE);
-                cardThirdPlace.setVisibility(View.GONE);
-            } else {
-                percent = (int) ((quantity / (float) totalVotes) * 100);
-                item = (new ArrayList<>(votesMap.keySet())).get(1);
-
-                graphSecondPlace.setProgressValue(percent);
-                graphSecondPlace.setCenterTitle(getString(R.string.secret_voting_results_graph_text_percent, percent));
-                graphSecondPlace.setBottomTitle(resources.getQuantityString(R.plurals.secret_voting_results_graph_text_votes, quantity, quantity));
-                textSecondPlace.setText(item.getName());
-
-                // Third place
-                quantity = (new ArrayList<>(votesMap.values())).get(2);
-
-                if (quantity == 0) {
-                    PercentRelativeLayout.LayoutParams params = (PercentRelativeLayout.LayoutParams) cardSecondPlace.getLayoutParams();
-                    PercentLayoutHelper.PercentLayoutInfo info = params.getPercentLayoutInfo();
-                    info.widthPercent = 1.0f;
-                    cardSecondPlace.requestLayout();
-
-                    cardThirdPlace.setVisibility(View.GONE);
-                } else {
-                    percent = (int) ((quantity / (float) totalVotes) * 100);
-                    item = (new ArrayList<>(votesMap.keySet())).get(2);
-
-                    graphThirdPlace.setProgressValue(percent);
-                    graphThirdPlace.setCenterTitle(getString(R.string.secret_voting_results_graph_text_percent, percent));
-                    graphThirdPlace.setBottomTitle(resources.getQuantityString(R.plurals.secret_voting_results_graph_text_votes, quantity, quantity));
-                    textThirdPlace.setText(item.getName());
-                }
-            }
-        }
     }
 
     private <K, V extends Comparable<? super V>> LinkedHashMap<K, V> sortByValue(Map<K, V> map, boolean reverse) {
@@ -329,5 +374,16 @@ public class SecretVotingResultsFragment
             colors.add(Color.rgb(r1 + redStep * i, g1 + greenStep * i, b1 + blueStep * i));
 
         return colors;
+    }
+
+    @OnClick(R.id.button_tie_break)
+    public void openTieBreakDialog() {
+        Group newGroup = new Group.Builder()
+                .setName(group.getName())
+                .setItems((new ArrayList<>(orderedVotesMap.values())).get(0))
+                .build();
+
+        DialogFragment tieBreakFragment = TieBreakDialogFragment.newInstance(newGroup);
+        tieBreakFragment.show(getActivity().getSupportFragmentManager(), EditNameDialogFragment.TAG);
     }
 }

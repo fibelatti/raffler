@@ -123,6 +123,7 @@
         <activity
             android:name=".views.activities.SecretVotingActivity"
             android:configChanges="orientation"
+            android:launchMode="singleInstance"
             android:parentActivityName=".views.activities.GroupActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">

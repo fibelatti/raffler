@@ -15,9 +15,11 @@ import com.fibelatti.raffler.models.GroupItem;
 import com.fibelatti.raffler.presenters.ISecretVotingPresenter;
 import com.fibelatti.raffler.presenters.ISecretVotingPresenterView;
 import com.fibelatti.raffler.presenters.SecretVotingPresenter;
+import com.fibelatti.raffler.views.Navigator;
 import com.fibelatti.raffler.views.fragments.IPinEntryListener;
 import com.fibelatti.raffler.views.fragments.ISecretVotingMenuListener;
 import com.fibelatti.raffler.views.fragments.ISecretVotingVoteListener;
+import com.fibelatti.raffler.views.fragments.ITieBreakListener;
 import com.fibelatti.raffler.views.fragments.SecretVotingMenuFragment;
 import com.fibelatti.raffler.views.fragments.SecretVotingResultsFragment;
 import com.fibelatti.raffler.views.fragments.SecretVotingVoteFragment;
@@ -26,16 +28,25 @@ import java.util.LinkedHashMap;
 
 public class SecretVotingActivity
         extends BaseActivity
-        implements ISecretVotingPresenterView, ISecretVotingMenuListener, ISecretVotingVoteListener, IPinEntryListener {
+        implements ISecretVotingPresenterView, ISecretVotingMenuListener, ISecretVotingVoteListener, IPinEntryListener, ITieBreakListener {
+    private Navigator navigator;
+    private SharedPreferences sharedPref;
     private ISecretVotingPresenter presenter;
     private Group group;
     private LinkedHashMap<GroupItem, Integer> votesMap;
 
     private Fragment votingMenuFragment;
 
+    String pinBackup;
+    boolean keepPin = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        navigator = new Navigator(this);
+        sharedPref = getSharedPreferences(Constants.PREF_NAME_PIN, Context.MODE_PRIVATE);
+        pinBackup = sharedPref.getString(SecretVotingActivity.class.getSimpleName(), "");
 
         presenter = SecretVotingPresenter.createPresenter(this);
         if (savedInstanceState != null) {
@@ -60,9 +71,11 @@ public class SecretVotingActivity
         super.onDestroy();
         presenter.onDestroy();
 
-        SharedPreferences.Editor editor = getSharedPreferences(Constants.PREF_NAME_PIN, Context.MODE_PRIVATE).edit();
-        editor.remove(SecretVotingActivity.class.getSimpleName());
-        editor.apply();
+        if (!keepPin) {
+            SharedPreferences.Editor editor = sharedPref.edit();
+            editor.remove(SecretVotingActivity.class.getSimpleName());
+            editor.apply();
+        }
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             getWindow().setStatusBarColor(ContextCompat.getColor(this, R.color.colorPrimary));
@@ -158,5 +171,22 @@ public class SecretVotingActivity
                 getSupportFragmentManager().findFragmentById(R.id.fragment_holder);
 
         if (fragment != null) fragment.onPinEntrySuccess();
+    }
+
+    @Override
+    public void onNewVoting(Group group) {
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putString(SecretVotingActivity.class.getSimpleName(), pinBackup);
+        editor.apply();
+
+        keepPin = true;
+
+        finish();
+        navigator.startSecretVotingActivity(group);
+    }
+
+    @Override
+    public void onRoulette(Group group) {
+        navigator.startRouletteActivity(group);
     }
 }

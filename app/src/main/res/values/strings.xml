@@ -169,10 +169,19 @@
     <string name="secret_voting_results_first_place">First place</string>
     <string name="secret_voting_results_second_place">Second place</string>
     <string name="secret_voting_results_third_place">Third place</string>
+    <plurals name="secret_voting_results_tie">
+        <item quantity="one">%1$s + %2$d other</item>
+        <item quantity="other">%1$s + %2$d others</item>
+    </plurals>
 
     <string name="secret_voting_pin_dialog_title">Enter pin</string>
     <string name="secret_voting_pin_enter_pin">Before letting anyone vote create a pin to make sure only you will be able to end the voting before sharing the results:</string>
     <string name="secret_voting_pin_confirm_pin">Please confirm the pin before seeing the results:</string>
+
+    <string name="secret_voting_results_tie_break_title">Tie break</string>
+    <string name="secret_voting_results_tie_break_hint">The following items were tied after the first voting, what do you want to do?</string>
+    <string name="secret_voting_results_tie_break_vote_again">Vote again</string>
+    <string name="secret_voting_results_tie_break_roulette">Roulette!</string>
 
     <!-- SettingsActivity -->
     <string name="settings_title">Settings</string>

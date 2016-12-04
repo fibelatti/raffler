@@ -164,10 +164,19 @@
     <string name="secret_voting_results_first_place">Primeiro colocado</string>
     <string name="secret_voting_results_second_place">Segundo colocado</string>
     <string name="secret_voting_results_third_place">Terceiro colocado</string>
+    <plurals name="secret_voting_results_tie">
+        <item quantity="one">%1$s + %2$d outro</item>
+        <item quantity="other">%1$s + %2$d outros</item>
+    </plurals>
 
     <string name="secret_voting_pin_dialog_title">Entre seu pin</string>
     <string name="secret_voting_pin_enter_pin">Antes de iniciar a votação crie um pin para que apenas vocês seja capaz de encerrar a votação antes de compartilhar os resultados:</string>
     <string name="secret_voting_pin_confirm_pin">Por favor confirme seu pin antes de visualizar os resultados:</string>
+
+    <string name="secret_voting_results_tie_break_title">Desempate</string>
+    <string name="secret_voting_results_tie_break_hint">Os itens a seguir terminaram empatados após a primeira votação, como gostaria de desempatar?</string>
+    <string name="secret_voting_results_tie_break_vote_again">Votar novamente</string>
+    <string name="secret_voting_results_tie_break_roulette">Roleta!</string>
 
     <!-- SettingsActivity -->
     <string name="settings_title">Configurações</string>
