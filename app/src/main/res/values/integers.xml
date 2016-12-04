@@ -2,4 +2,6 @@
 <resources>
     <integer name="text_max_length_3">3</integer>
     <integer name="text_max_length_25">25</integer>
+
+    <integer name="graph_wave_amplitude">20</integer>
 </resources>

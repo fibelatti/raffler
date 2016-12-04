@@ -27,6 +27,10 @@
     <dimen name="clickable_area">40dp</dimen>
     <dimen name="image_view_horizontal_margin">16dp</dimen>
 
+    <dimen name="button_height">60dp</dimen>
+
+    <dimen name="voting_button_width">150dp</dimen>
+
     <dimen name="divider_size">1dp</dimen>
 
     <dimen name="label_radius">2dp</dimen>
