@@ -88,7 +88,7 @@ public class SecretVotingActivity
         if (fragment != null && fragment.isVisible()) {
             fragment.backToGroup();
         } else {
-            super.onBackPressed();
+            finish();
         }
     }
 
