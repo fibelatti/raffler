@@ -244,6 +244,8 @@ public class SecretVotingResultsFragment
     }
 
     private void calculateFirstCardMeasures() {
+        final boolean isTieBreakVisible = buttonTieBreak.getVisibility() == View.VISIBLE;
+
         ViewTreeObserver firstObserver = cardFirstPlace.getViewTreeObserver();
         firstObserver.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
             @Override
@@ -256,7 +258,7 @@ public class SecretVotingResultsFragment
                                 - textFirstPlaceHeader.getHeight()
                                 - dividerFirstPlace.getHeight() - getResources().getDimensionPixelSize(R.dimen.margin_small)
                                 - textFirstPlace.getHeight() - getResources().getDimensionPixelSize(R.dimen.margin_regular)
-                                - buttonTieBreak.getHeight() - getResources().getDimensionPixelSize(R.dimen.margin_small),
+                                - (isTieBreakVisible ? buttonTieBreak.getHeight() - getResources().getDimensionPixelSize(R.dimen.margin_small) : 0),
                         cardFirstPlace.getWidth()
                                 - getResources().getDimensionPixelSize(R.dimen.padding_small) * 2
                                 - getResources().getDimensionPixelSize(R.dimen.margin_small) * 2);
