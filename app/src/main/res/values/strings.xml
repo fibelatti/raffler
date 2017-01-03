@@ -44,6 +44,7 @@
     <string name="group_label_fab_list">Random Winners</string>
     <string name="group_label_fab_groups">Sub Groups</string>
     <string name="group_label_fab_voting">Secret Voting</string>
+    <string name="group_label_fab_combination">Combination</string>
 
     <string name="group_action_share">Share</string>
     <string name="group_action_help">Help</string>
@@ -65,6 +66,7 @@
         \n\n<b>Random Winners</b> will ask you how many options you want to choose from the raffle and display them right away.
         \n\n<b>Sub Groups</b> will form randomly arranged sub groups among your options.
         \n\n<b>Secret Voting</b> will host a voting so your friends can vote one by one to elect a winner.
+        \n\n<b>Combination</b> will combine two groups to form pairs among them.
     </string>
 
     <string name="group_tutorial_check_items">Each raffle is different, choose which items to include in this round by toggling their checkboxes&#8230;</string>

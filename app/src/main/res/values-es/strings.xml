@@ -40,6 +40,7 @@
     <string name="group_label_fab_list">Ganadores aleatorios</string>
     <string name="group_label_fab_groups">Sub Grupos</string>
     <string name="group_label_fab_voting">Votación Secreta</string>
+    <string name="group_label_fab_combination">Combinación</string>
 
     <string name="group_action_share">Compartir</string>
     <string name="group_action_help">Ayuda</string>
@@ -61,6 +62,7 @@
         \n\n<b>Ganadores Aleatorios</b> le preguntará la cantidad de opciones que desea elegir en el sorteo y vá a mostrarlos de forma inmediata.
         \n\n<b>Sub Groups</b> formará subgrupos dispuestos al azar entre sus opciones.
         \n\n<b>Votación Secreta</b> será el anfitrión de la votación para que tus amigos pueden votar uno por uno para elegir al ganador.
+        \n\n<b>Combinación</b> formará parejas entre los elementos de dos grupos.
     </string>
 
     <string name="group_tutorial_check_items">Cada rifa es diferente, elige qué elementos incluir en esta ronda cambiando sus casillas&#8230;</string>
