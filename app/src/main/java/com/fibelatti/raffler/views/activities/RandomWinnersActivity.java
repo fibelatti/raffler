@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.TextInputLayout;
+import android.support.v4.app.DialogFragment;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -11,16 +12,25 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
+import android.view.animation.AnimationUtils;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageButton;
 
 import com.fibelatti.raffler.Constants;
 import com.fibelatti.raffler.R;
+import com.fibelatti.raffler.helpers.AnalyticsHelper;
 import com.fibelatti.raffler.models.Group;
+import com.fibelatti.raffler.models.GroupItem;
+import com.fibelatti.raffler.utils.AnimatorUtils;
 import com.fibelatti.raffler.utils.RandomizeUtils;
 import com.fibelatti.raffler.utils.StringUtils;
+import com.fibelatti.raffler.views.Navigator;
 import com.fibelatti.raffler.views.adapters.RandomWinnersAdapter;
+import com.fibelatti.raffler.views.fragments.IPinEntryListener;
+import com.fibelatti.raffler.views.fragments.PinEntryDialogFragment;
+import com.github.clans.fab.FloatingActionButton;
+import com.github.clans.fab.FloatingActionMenu;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,9 +39,12 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class RandomWinnersActivity
-        extends BaseActivity {
+        extends BaseActivity
+        implements IPinEntryListener {
     private Context context;
+    private Navigator navigator;
     private Group group;
+    private Group raffledGroup;
     private RandomWinnersAdapter adapter;
     private ArrayList<String> winners = new ArrayList<>();
 
@@ -48,6 +61,12 @@ public class RandomWinnersActivity
     TextInputLayout winnersQuantityLayout;
     @BindView(R.id.btn_raffle_winners)
     ImageButton buttonRaffleWinners;
+    @BindView(R.id.fam)
+    FloatingActionMenu fam;
+    @BindView(R.id.fab_voting)
+    FloatingActionButton fab_voting;
+    @BindView(R.id.fab_combination)
+    FloatingActionButton fab_combination;
     //endregion
 
     @Override
@@ -55,12 +74,14 @@ public class RandomWinnersActivity
         super.onCreate(savedInstanceState);
 
         context = getApplicationContext();
+        navigator = new Navigator(this);
         group = fetchDataFromIntent();
         adapter = new RandomWinnersAdapter(this, winners);
 
         setUpLayout();
         setUpRecyclerView();
         setUpRaffleButton();
+        setUpFab();
         setValues();
     }
 
@@ -103,6 +124,39 @@ public class RandomWinnersActivity
         });
     }
 
+    private void setUpFab() {
+        fam.setVisibility(View.GONE);
+        fam.setMenuButtonShowAnimation(AnimationUtils.loadAnimation(this, R.anim.show_from_bottom));
+        fam.setMenuButtonHideAnimation(AnimationUtils.loadAnimation(this, R.anim.hide_to_bottom));
+        fam.setClosedOnTouchOutside(true);
+        AnimatorUtils.createFamOpenCloseAnimation(fam);
+
+        fab_voting.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AnalyticsHelper.getInstance().fireSecretVotingEvent();
+
+                DialogFragment pinEntryFragment = PinEntryDialogFragment
+                        .newInstance(SecretVotingActivity.class.getSimpleName(),
+                                getString(R.string.secret_voting_pin_enter_pin));
+                pinEntryFragment.show(getSupportFragmentManager(), PinEntryDialogFragment.TAG);
+            }
+        });
+
+        fab_combination.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AnalyticsHelper.getInstance().fireCombinationEvent();
+
+                Group newGroup = new Group.Builder()
+                        .fromGroup(raffledGroup)
+                        .setItems(raffledGroup.getItems())
+                        .build();
+                navigator.startCombinationActivity(newGroup);
+            }
+        });
+    }
+
     private void setValues() {
         this.setTitle(getResources().getString(R.string.random_winners_title));
     }
@@ -117,12 +171,18 @@ public class RandomWinnersActivity
             List<Integer> winnersIndex = RandomizeUtils.getRandomIndexesInRange(quantity, group.getItemsCount());
 
             winners.clear();
+            raffledGroup = new Group.Builder()
+                    .setName(group.getName())
+                    .build();
 
             for (int index : winnersIndex) {
                 winners.add(group.getItemName(index));
+                raffledGroup.addItem(new GroupItem.Builder().setName(group.getItemName(index)).build());
             }
 
             adapter.notifyDataSetChanged();
+
+            fam.setVisibility(View.VISIBLE);
         }
     }
 
@@ -154,5 +214,10 @@ public class RandomWinnersActivity
         if (view.requestFocus()) {
             getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
         }
+    }
+
+    @Override
+    public void onPinEntrySuccess() {
+        navigator.startSecretVotingActivity(raffledGroup);
     }
 }
