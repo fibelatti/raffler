@@ -84,7 +84,8 @@ public class GroupActivity
     FloatingActionButton fab_group;
     @BindView(R.id.fab_voting)
     FloatingActionButton fab_voting;
-
+    @BindView(R.id.fab_combination)
+    FloatingActionButton fab_combination;
     //endregion
 
     @Override
@@ -249,9 +250,9 @@ public class GroupActivity
         fab_voting.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AnalyticsHelper.getInstance().fireSecretVotingEvent();
-
                 if (validateSelection()) {
+                    AnalyticsHelper.getInstance().fireSecretVotingEvent();
+
                     DialogFragment pinEntryFragment = PinEntryDialogFragment
                             .newInstance(SecretVotingActivity.class.getSimpleName(),
                                     getString(R.string.secret_voting_pin_enter_pin));

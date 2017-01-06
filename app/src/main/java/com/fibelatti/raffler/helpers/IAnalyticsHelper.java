@@ -19,6 +19,8 @@ public interface IAnalyticsHelper {
 
     void fireSecretVotingEvent();
 
+    void fireCombinationEvent();
+
     void fireFabricToggleEvent(boolean newValue);
 
     void fireShareAppEvent();
