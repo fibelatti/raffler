@@ -2,13 +2,12 @@
 <android.support.design.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:fab="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/coordinator_layout"
+    android:id="@+id/root_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context=".views.activities.RandomWinnersActivity">
+    tools:context=".views.activities.CombinationActivity">
 
     <include layout="@layout/toolbar_default"/>
 
@@ -19,26 +18,71 @@
         android:layout_marginRight="@dimen/margin_small"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-        <LinearLayout
-            android:id="@+id/layout_winners_quantity"
+        <TextView
+            android:id="@+id/tv_title_combined_groups"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_small"
+            android:text="@string/combination_combined_groups_title"
+            android:textColor="@color/colorAccent"
+            android:textSize="@dimen/text_size_regular"/>
+
+        <include
+            android:id="@+id/divider_combined_groups"
+            layout="@layout/divider_default"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/divider_size"
+            android:layout_below="@+id/tv_title_combined_groups"/>
+
+        <Button
+            android:id="@+id/button_group_one"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/divider_combined_groups"
+            android:layout_marginTop="@dimen/margin_small"
+            android:text="@string/combination_button_placeholder"
+            android:theme="@style/AboutButton"/>
+
+        <ImageView
+            android:id="@+id/iv_add_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/button_group_one"
+            android:layout_centerInParent="true"
+            android:layout_marginTop="@dimen/margin_small"
+            android:src="@drawable/ic_add_circle_white"
+            android:tint="@color/colorAccent"/>
+
+        <Button
+            android:id="@+id/button_group_two"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/iv_add_icon"
+            android:layout_marginTop="@dimen/margin_small"
+            android:text="@string/combination_button_placeholder"
+            android:theme="@style/AboutButton"/>
+
+        <LinearLayout
+            android:id="@+id/layout_quantity"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/button_group_two"
             android:layout_marginBottom="@dimen/margin_smaller"
+            android:layout_marginTop="@dimen/margin_small"
             android:orientation="horizontal">
 
             <android.support.design.widget.TextInputLayout
-                android:id="@+id/input_layout_winners_quantity"
+                android:id="@+id/input_layout_quantity"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:theme="@style/InputLayout">
 
                 <EditText
-                    android:id="@+id/input_winners_quantity"
+                    android:id="@+id/input_quantity"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/random_winners_hint_quantity"
+                    android:hint="@string/combination_hint_quantity"
                     android:imeOptions="actionNext"
                     android:inputType="number"
                     android:maxLength="@integer/text_max_length_3"
@@ -48,16 +92,16 @@
             </android.support.design.widget.TextInputLayout>
 
             <ImageButton
-                android:id="@+id/btn_raffle_winners"
+                android:id="@+id/btn_raffle_combinations"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/margin_small"
                 android:layout_marginStart="@dimen/margin_small"
                 android:layout_marginTop="@dimen/margin_small"
                 android:background="@null"
-                android:contentDescription="@string/random_winners_action_raffle"
+                android:contentDescription="@string/combination_action_raffle"
                 android:src="@drawable/ic_play_circle_white"
-                android:text="@string/random_winners_action_raffle"
+                android:text="@string/subgroups_action_raffle"
                 android:tint="@color/colorAccent"/>
         </LinearLayout>
 
@@ -65,47 +109,8 @@
             android:id="@+id/recycler_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@id/layout_winners_quantity"
+            android:layout_below="@id/layout_quantity"
             android:scrollbars="vertical"/>
     </RelativeLayout>
-
-    <com.github.clans.fab.FloatingActionMenu
-        android:id="@+id/fam"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_gravity="bottom|end"
-        android:layout_marginBottom="@dimen/fab_margin"
-        android:layout_marginEnd="@dimen/fab_margin"
-        android:layout_marginRight="@dimen/fab_margin"
-        app:layout_behavior=".views.extensions.ClansFloatingActionBehavior"
-        app:menu_colorNormal="@color/colorAccent"
-        app:menu_colorPressed="@color/colorAccent"
-        fab:menu_icon="@drawable/ic_play_arrow_white"
-        fab:menu_labels_position="left"
-        fab:menu_labels_style="@style/menu_labels_style">
-
-        <com.github.clans.fab.FloatingActionButton
-            android:id="@+id/fab_voting"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_rate_review_white_24dp"
-            app:fab_colorNormal="@color/colorAccent"
-            app:fab_colorPressed="@color/colorAccent"
-            fab:fab_label="@string/group_label_fab_voting"
-            fab:fab_size="mini"/>
-
-        <com.github.clans.fab.FloatingActionButton
-            android:id="@+id/fab_combination"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_merge_type_white_24dp"
-            app:fab_colorNormal="@color/colorAccent"
-            app:fab_colorPressed="@color/colorAccent"
-            fab:fab_label="@string/group_label_fab_combination"
-            fab:fab_size="mini"/>
-
-    </com.github.clans.fab.FloatingActionMenu>
 
 </android.support.design.widget.CoordinatorLayout>

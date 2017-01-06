@@ -19,6 +19,7 @@ public class AnalyticsHelper
     private final String ANALYTICS_KEY_MODE_RANDOM_WINNERS = "Random Winners mode";
     private final String ANALYTICS_KEY_MODE_SUB_GROUPS = "Sub Groups mode";
     private final String ANALYTICS_KEY_MODE_SECRET_VOTING = "Secret Voting mode";
+    private final String ANALYTICS_KEY_MODE_COMBINATION = "Combination mode";
 
     private final String ANALYTICS_KEY_FABRIC_TOGGLE = "Toggled fabric";
     private final String ANALYTICS_PARAM_FABRIC_TOGGLE = "New value";
@@ -85,6 +86,11 @@ public class AnalyticsHelper
     @Override
     public void fireSecretVotingEvent() {
 //        Answers.getInstance().logCustom(new CustomEvent(ANALYTICS_KEY_MODE_SECRET_VOTING));
+    }
+
+    @Override
+    public void fireCombinationEvent() {
+//        Answers.getInstance().logCustom(new CustomEvent(ANALYTICS_KEY_MODE_COMBINATION));
     }
 
     @Override
