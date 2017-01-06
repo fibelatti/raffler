@@ -58,7 +58,7 @@ public class SubGroupsAdapter
         StringBuilder sb = new StringBuilder();
 
         for (GroupItem item : group.getItems()) {
-            sb.append("\n");
+            if (!sb.toString().isEmpty()) sb.append("\n");
             sb.append(item.getName());
         }
 
