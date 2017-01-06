@@ -9,25 +9,23 @@ import android.widget.TextView;
 
 import com.fibelatti.raffler.R;
 import com.fibelatti.raffler.models.Group;
-import com.fibelatti.raffler.models.GroupItem;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class SubGroupsAdapter
-        extends RecyclerView.Adapter<SubGroupsAdapter.GroupViewHolder> {
+public class CombinationGroupSelectionAdapter
+        extends RecyclerView.Adapter<CombinationGroupSelectionAdapter.GroupViewHolder> {
 
     private Context context;
-    private List<Group> subgroupsList;
+    private List<Group> groupList;
 
     public class GroupViewHolder
             extends RecyclerView.ViewHolder {
         @BindView(R.id.name)
         public TextView name;
-        @BindView(R.id.items)
-        public TextView items;
 
         public GroupViewHolder(View view) {
             super(view);
@@ -35,9 +33,16 @@ public class SubGroupsAdapter
         }
     }
 
-    public SubGroupsAdapter(Context context, List<Group> subgroupsList) {
+    public CombinationGroupSelectionAdapter(Context context) {
         this.context = context;
-        this.subgroupsList = subgroupsList;
+        this.groupList = new ArrayList<>();
+    }
+
+    public void setGroups(List<Group> groupList) {
+        this.groupList.clear();
+        this.groupList.addAll(groupList);
+
+        notifyDataSetChanged();
     }
 
     private Context getContext() {
@@ -47,27 +52,20 @@ public class SubGroupsAdapter
     @Override
     public GroupViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.list_row_sub_groups, parent, false);
+                .inflate(R.layout.list_row_combination_group, parent, false);
 
         return new GroupViewHolder(itemView);
     }
 
     @Override
     public void onBindViewHolder(GroupViewHolder holder, int position) {
-        Group group = subgroupsList.get(position);
-        StringBuilder sb = new StringBuilder();
-
-        for (GroupItem item : group.getItems()) {
-            if (!sb.toString().isEmpty()) sb.append("\n");
-            sb.append(item.getName());
-        }
+        Group group = groupList.get(position);
 
         holder.name.setText(group.getName());
-        holder.items.setText(sb.toString());
     }
 
     @Override
     public int getItemCount() {
-        return subgroupsList.size();
+        return (groupList != null ? groupList.size() : 0);
     }
 }

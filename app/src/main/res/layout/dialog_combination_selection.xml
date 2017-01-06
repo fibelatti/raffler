@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="@dimen/padding_regular">
+
+    <TabHost
+        android:id="@+id/tab_host"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TabWidget
+                android:id="@android:id/tabs"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+            </TabWidget>
+
+            <FrameLayout
+                android:id="@android:id/tabcontent"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <RelativeLayout
+                    android:id="@+id/tab_layout_one"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tv_existing_group_hint"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/margin_small"
+                        android:text="@string/combination_dialog_tab_one_hint"
+                        android:textColor="@color/textPrimary"
+                        android:textSize="@dimen/text_size_regular"/>
+
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/recycler_view_existing_group"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_below="@+id/tv_existing_group_hint"
+                        android:layout_marginTop="@dimen/margin_small"/>
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/tab_layout_two"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tv_type_items_hint"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/margin_small"
+                        android:text="@string/combination_dialog_tab_two_hint"
+                        android:textColor="@color/textPrimary"
+                        android:textSize="@dimen/text_size_regular"/>
+
+                    <android.support.design.widget.TextInputLayout
+                        android:id="@+id/input_layout_items"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/tv_type_items_hint"
+                        android:layout_marginTop="@dimen/margin_small"
+                        android:theme="@style/InputLayout">
+
+                        <EditText
+                            android:id="@+id/input_items"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="@string/combination_dialog_tab_two_items_hint"
+                            android:imeOptions="actionNext"
+                            android:textColor="@color/textPrimary"
+                            android:textSize="@dimen/text_size_regular"/>
+                    </android.support.design.widget.TextInputLayout>
+
+                    <Button
+                        android:id="@+id/button_finish_typing"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/input_layout_items"
+                        android:layout_marginTop="@dimen/margin_small"
+                        android:text="@string/combination_dialog_tab_two_button_finish"
+                        android:theme="@style/AboutButton"/>
+
+                </RelativeLayout>
+            </FrameLayout>
+        </LinearLayout>
+    </TabHost>
+</RelativeLayout>

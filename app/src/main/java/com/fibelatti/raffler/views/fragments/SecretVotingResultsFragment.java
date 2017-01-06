@@ -1,7 +1,6 @@
 package com.fibelatti.raffler.views.fragments;
 
 import android.content.res.Resources;
-import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.percent.PercentLayoutHelper;
@@ -245,6 +244,8 @@ public class SecretVotingResultsFragment
     }
 
     private void calculateFirstCardMeasures() {
+        final boolean isTieBreakVisible = buttonTieBreak.getVisibility() == View.VISIBLE;
+
         ViewTreeObserver firstObserver = cardFirstPlace.getViewTreeObserver();
         firstObserver.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
             @Override
@@ -257,7 +258,7 @@ public class SecretVotingResultsFragment
                                 - textFirstPlaceHeader.getHeight()
                                 - dividerFirstPlace.getHeight() - getResources().getDimensionPixelSize(R.dimen.margin_small)
                                 - textFirstPlace.getHeight() - getResources().getDimensionPixelSize(R.dimen.margin_regular)
-                                - buttonTieBreak.getHeight() - getResources().getDimensionPixelSize(R.dimen.margin_small),
+                                - (isTieBreakVisible ? buttonTieBreak.getHeight() - getResources().getDimensionPixelSize(R.dimen.margin_small) : 0),
                         cardFirstPlace.getWidth()
                                 - getResources().getDimensionPixelSize(R.dimen.padding_small) * 2
                                 - getResources().getDimensionPixelSize(R.dimen.margin_small) * 2);
@@ -345,35 +346,6 @@ public class SecretVotingResultsFragment
             result.put(entry.getKey(), entry.getValue());
         }
         return result;
-    }
-
-    /***
-     * This code is not used anymore but it is useful, so it will be kept here.
-     *
-     * @param startColor
-     * @param endColor
-     * @param steps
-     * @return
-     */
-    private List<Integer> calculateColorGradient(int startColor, int endColor, int steps) {
-        List<Integer> colors = new ArrayList<>();
-
-        int r1 = Color.red(startColor);
-        int g1 = Color.green(startColor);
-        int b1 = Color.blue(startColor);
-
-        int r2 = Color.red(endColor);
-        int g2 = Color.green(endColor);
-        int b2 = Color.blue(endColor);
-
-        int redStep = (r2 - r1) / steps;
-        int greenStep = (g2 - g1) / steps;
-        int blueStep = (b2 - b1) / steps;
-
-        for (int i = 0; i <= steps; i++)
-            colors.add(Color.rgb(r1 + redStep * i, g1 + greenStep * i, b1 + blueStep * i));
-
-        return colors;
     }
 
     @OnClick(R.id.button_tie_break)

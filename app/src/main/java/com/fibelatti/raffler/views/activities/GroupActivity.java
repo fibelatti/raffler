@@ -1,9 +1,5 @@
 package com.fibelatti.raffler.views.activities;
 
-import android.animation.Animator;
-import android.animation.AnimatorListenerAdapter;
-import android.animation.AnimatorSet;
-import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -22,7 +18,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.AnimationUtils;
-import android.view.animation.OvershootInterpolator;
 
 import com.fibelatti.raffler.Constants;
 import com.fibelatti.raffler.R;
@@ -33,6 +28,7 @@ import com.fibelatti.raffler.models.Group;
 import com.fibelatti.raffler.presenters.GroupPresenter;
 import com.fibelatti.raffler.presenters.IGroupPresenter;
 import com.fibelatti.raffler.presenters.IGroupPresenterView;
+import com.fibelatti.raffler.utils.AnimatorUtils;
 import com.fibelatti.raffler.views.Navigator;
 import com.fibelatti.raffler.views.adapters.GroupAdapter;
 import com.fibelatti.raffler.views.extensions.DividerItemDecoration;
@@ -84,7 +80,8 @@ public class GroupActivity
     FloatingActionButton fab_group;
     @BindView(R.id.fab_voting)
     FloatingActionButton fab_voting;
-
+    @BindView(R.id.fab_combination)
+    FloatingActionButton fab_combination;
     //endregion
 
     @Override
@@ -199,7 +196,7 @@ public class GroupActivity
         fam.setMenuButtonShowAnimation(AnimationUtils.loadAnimation(this, R.anim.show_from_bottom));
         fam.setMenuButtonHideAnimation(AnimationUtils.loadAnimation(this, R.anim.hide_to_bottom));
         fam.setClosedOnTouchOutside(true);
-        createCustomAnimation();
+        AnimatorUtils.createFamOpenCloseAnimation(fam);
 
         fab_roulette.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -249,9 +246,9 @@ public class GroupActivity
         fab_voting.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AnalyticsHelper.getInstance().fireSecretVotingEvent();
-
                 if (validateSelection()) {
+                    AnalyticsHelper.getInstance().fireSecretVotingEvent();
+
                     DialogFragment pinEntryFragment = PinEntryDialogFragment
                             .newInstance(SecretVotingActivity.class.getSimpleName(),
                                     getString(R.string.secret_voting_pin_enter_pin));
@@ -259,36 +256,21 @@ public class GroupActivity
                 }
             }
         });
-    }
 
-    private void createCustomAnimation() {
-        AnimatorSet set = new AnimatorSet();
-
-        ObjectAnimator scaleOutX = ObjectAnimator.ofFloat(fam.getMenuIconView(), "scaleX", 1.0f, 0.2f);
-        ObjectAnimator scaleOutY = ObjectAnimator.ofFloat(fam.getMenuIconView(), "scaleY", 1.0f, 0.2f);
-
-        ObjectAnimator scaleInX = ObjectAnimator.ofFloat(fam.getMenuIconView(), "scaleX", 0.2f, 1.0f);
-        ObjectAnimator scaleInY = ObjectAnimator.ofFloat(fam.getMenuIconView(), "scaleY", 0.2f, 1.0f);
-
-        scaleOutX.setDuration(50);
-        scaleOutY.setDuration(50);
-
-        scaleInX.setDuration(150);
-        scaleInY.setDuration(150);
-
-        scaleInX.addListener(new AnimatorListenerAdapter() {
+        fab_combination.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onAnimationStart(Animator animation) {
-                fam.getMenuIconView().setImageResource(fam.isOpened()
-                        ? R.drawable.ic_play_arrow_white : R.drawable.ic_close_white_36dp);
+            public void onClick(View view) {
+                if (validateSelection()) {
+                    AnalyticsHelper.getInstance().fireCombinationEvent();
+
+                    Group newGroup = new Group.Builder()
+                            .fromGroup(group)
+                            .setItems(group.getSelectedItems())
+                            .build();
+                    navigator.startCombinationActivity(newGroup);
+                }
             }
         });
-
-        set.play(scaleOutX).with(scaleOutY);
-        set.play(scaleInX).with(scaleInY).after(scaleOutX);
-        set.setInterpolator(new OvershootInterpolator(2));
-
-        fam.setIconToggleAnimatorSet(set);
     }
 
     private Group fetchDataFromIntent() {

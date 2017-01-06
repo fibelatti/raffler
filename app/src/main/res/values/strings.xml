@@ -44,6 +44,7 @@
     <string name="group_label_fab_list">Random Winners</string>
     <string name="group_label_fab_groups">Sub Groups</string>
     <string name="group_label_fab_voting">Secret Voting</string>
+    <string name="group_label_fab_combination">Combination</string>
 
     <string name="group_action_share">Share</string>
     <string name="group_action_help">Help</string>
@@ -65,6 +66,7 @@
         \n\n<b>Random Winners</b> will ask you how many options you want to choose from the raffle and display them right away.
         \n\n<b>Sub Groups</b> will form randomly arranged sub groups among your options.
         \n\n<b>Secret Voting</b> will host a voting so your friends can vote one by one to elect a winner.
+        \n\n<b>Combination</b> will combine two groups to form pairs among them.
     </string>
 
     <string name="group_tutorial_check_items">Each raffle is different, choose which items to include in this round by toggling their checkboxes&#8230;</string>
@@ -189,6 +191,31 @@
     <string name="secret_voting_results_tie_break_hint">The following items were tied after the first voting, what do you want to do?</string>
     <string name="secret_voting_results_tie_break_vote_again">Vote again</string>
     <string name="secret_voting_results_tie_break_roulette">Roulette!</string>
+
+    <!-- CombinationActivity -->
+    <string name="combination_title">Combination!</string>
+    <string name="combination_combined_groups_title">Combining groups</string>
+    <string name="combination_button_placeholder">Select a group to combine</string>
+    <string name="combination_button_placeholder_selected">Custom list</string>
+    <string name="combination_hint_quantity">Quantity of pairs</string>
+    <string name="combination_action_raffle">Raffle</string>
+    <string name="combination_hint_group_name">Combination #%s</string>
+    <string name="combination_msg_validate_group_selection">Select a second group to combine</string>
+    <string name="combination_msg_validate_quantity_maximum">Quantity should be equal or less than %d</string>
+    <string name="combination_msg_validate_quantity_empty">Quantity should not be empty</string>
+    <string name="combination_msg_validate_quantity_zero">Quantity should not be zero</string>
+
+    <!-- CombinationDialog -->
+    <string name="combination_dialog_title">Group selection</string>
+
+    <string name="combination_dialog_tab_one_title">Existing group</string>
+    <string name="combination_dialog_tab_one_hint">Select from the list below one of your groups to combine:</string>
+
+    <string name="combination_dialog_tab_two_title">Type items</string>
+    <string name="combination_dialog_tab_two_hint">Create a quick list to combine (separate each item with a comma):</string>
+    <string name="combination_dialog_tab_two_items_hint">Items</string>
+    <string name="combination_dialog_form_msg_validate_input">Items must not be empty</string>
+    <string name="combination_dialog_tab_two_button_finish">Ready</string>
 
     <!-- SettingsActivity -->
     <string name="settings_title">Settings</string>
