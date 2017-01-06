@@ -192,6 +192,31 @@
     <string name="secret_voting_results_tie_break_vote_again">Vote again</string>
     <string name="secret_voting_results_tie_break_roulette">Roulette!</string>
 
+    <!-- CombinationActivity -->
+    <string name="combination_title">Combination!</string>
+    <string name="combination_combined_groups_title">Combining groups</string>
+    <string name="combination_button_placeholder">Select a group to combine</string>
+    <string name="combination_button_placeholder_selected">Custom list</string>
+    <string name="combination_hint_quantity">Quantity of pairs</string>
+    <string name="combination_action_raffle">Raffle</string>
+    <string name="combination_hint_group_name">Combination #%s</string>
+    <string name="combination_msg_validate_group_selection">Select a second group to combine</string>
+    <string name="combination_msg_validate_quantity_maximum">Quantity should be equal or less than %d</string>
+    <string name="combination_msg_validate_quantity_empty">Quantity should not be empty</string>
+    <string name="combination_msg_validate_quantity_zero">Quantity should not be zero</string>
+
+    <!-- CombinationDialog -->
+    <string name="combination_dialog_title">Group selection</string>
+
+    <string name="combination_dialog_tab_one_title">Existing group</string>
+    <string name="combination_dialog_tab_one_hint">Select from the list below one of your groups to combine:</string>
+
+    <string name="combination_dialog_tab_two_title">Type items</string>
+    <string name="combination_dialog_tab_two_hint">Create a quick list to combine (separate each item with a comma):</string>
+    <string name="combination_dialog_tab_two_items_hint">Items</string>
+    <string name="combination_dialog_form_msg_validate_input">Items must not be empty</string>
+    <string name="combination_dialog_tab_two_button_finish">Ready</string>
+
     <!-- SettingsActivity -->
     <string name="settings_title">Settings</string>
 

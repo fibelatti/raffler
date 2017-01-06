@@ -188,6 +188,31 @@
     <string name="secret_voting_results_tie_break_vote_again">Nueva votación</string>
     <string name="secret_voting_results_tie_break_roulette">Ruleta!</string>
 
+    <!-- CombinationActivity -->
+    <string name="combination_title">¡Combinación!</string>
+    <string name="combination_combined_groups_title">Combinando grupos</string>
+    <string name="combination_button_placeholder">Seleccione un grupo para combinar</string>
+    <string name="combination_button_placeholder_selected">Lista personalizada</string>
+    <string name="combination_hint_quantity">Cantidad de pares</string>
+    <string name="combination_action_raffle">Rifar</string>
+    <string name="combination_hint_group_name">Combinación #%s</string>
+    <string name="combination_msg_validate_group_selection">Seleccione un segundo grupo para combinar</string>
+    <string name="combination_msg_validate_quantity_maximum">La cantidad debe ser igual o inferior a %d</string>
+    <string name="combination_msg_validate_quantity_empty">La cantidad no puede estar en blanco</string>
+    <string name="combination_msg_validate_quantity_zero">La cantidad no debe ser cero</string>
+
+    <!-- CombinationDialog -->
+    <string name="combination_dialog_title">Selección de grupo</string>
+
+    <string name="combination_dialog_tab_one_title">Grupo existente</string>
+    <string name="combination_dialog_tab_one_hint">Seleccione uno de sus grupos que desea combinar en la lista siguiente:</string>
+
+    <string name="combination_dialog_tab_two_title">Escriba los elementos</string>
+    <string name="combination_dialog_tab_two_hint">Cree una lista rápida para combinar (separe cada elemento con una coma):</string>
+    <string name="combination_dialog_tab_two_items_hint">Elementos</string>
+    <string name="combination_dialog_form_msg_validate_input">Introduzca al menos un elemento</string>
+    <string name="combination_dialog_tab_two_button_finish">Listo</string>
+
     <!-- SettingsActivity -->
     <string name="settings_title">Ajustes</string>
 

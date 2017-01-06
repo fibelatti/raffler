@@ -133,6 +133,18 @@
         </activity>
 
         <activity
+            android:name=".views.activities.CombinationActivity"
+            android:configChanges="orientation"
+            android:parentActivityName=".views.activities.GroupActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="stateHidden">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".views.activities.GroupActivity"/>
+        </activity>
+
+        <activity
             android:name=".views.activities.SettingsActivity"
             android:configChanges="orientation"
             android:parentActivityName=".views.activities.MainActivity"

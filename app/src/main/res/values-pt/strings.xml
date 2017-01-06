@@ -62,7 +62,7 @@
         \n\n<b>Ganhadores Aleatórios</b> perguntará quantos itens você quer sortear dentre as opções e mostrará o resultado.
         \n\n<b>Sub Grupos</b> formará grupos aleatoriamente entre os itens.
         \n\n<b>Votação secreta</b> permitirá que seus amigos votem um a um para eleger um vencedor.
-        \n\n<b>Combinación</b> irá formar pares entre os items de dois grupos.
+        \n\n<b>Combinação</b> irá formar pares entre os itens de dois grupos.
     </string>
 
     <string name="group_tutorial_check_items">Cada sorteio é diferente, escolha quais itens incluir marcando suas caixinhas&#8230;</string>
@@ -186,6 +186,31 @@
     <string name="secret_voting_results_tie_break_hint">Os itens a seguir terminaram empatados após a primeira votação, como gostaria de desempatar?</string>
     <string name="secret_voting_results_tie_break_vote_again">Votar novamente</string>
     <string name="secret_voting_results_tie_break_roulette">Roleta!</string>
+
+    <!-- CombinationActivity -->
+    <string name="combination_title">Combinação!</string>
+    <string name="combination_combined_groups_title">Combinando grupos</string>
+    <string name="combination_button_placeholder">Selecione um grupo para combinar</string>
+    <string name="combination_button_placeholder_selected">Lista personalizada</string>
+    <string name="combination_hint_quantity">Quantidade de pares</string>
+    <string name="combination_action_raffle">Sortear</string>
+    <string name="combination_hint_group_name">Combinação #%s</string>
+    <string name="combination_msg_validate_group_selection">Escolha um segundo grupo para combinar</string>
+    <string name="combination_msg_validate_quantity_maximum">A quantidade deve ser igual ou menor que %d</string>
+    <string name="combination_msg_validate_quantity_empty">A quantidade não pode estar em branco</string>
+    <string name="combination_msg_validate_quantity_zero">A quantidade não pode ser zero</string>
+
+    <!-- CombinationDialog -->
+    <string name="combination_dialog_title">Seleção de grupo</string>
+
+    <string name="combination_dialog_tab_one_title">Grupo existente</string>
+    <string name="combination_dialog_tab_one_hint">Selecione na lista abaixo um de seus grupos para combinar:</string>
+
+    <string name="combination_dialog_tab_two_title">Digitar itens</string>
+    <string name="combination_dialog_tab_two_hint">Crie uma lista rápida para combinar (utilize vírgula para separar cada item):</string>
+    <string name="combination_dialog_tab_two_items_hint">Itens</string>
+    <string name="combination_dialog_form_msg_validate_input">Digite pelo menos um item</string>
+    <string name="combination_dialog_tab_two_button_finish">Pronto</string>
 
     <!-- SettingsActivity -->
     <string name="settings_title">Configurações</string>

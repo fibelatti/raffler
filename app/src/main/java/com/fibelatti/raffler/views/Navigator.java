@@ -6,6 +6,7 @@ import android.content.Intent;
 import com.fibelatti.raffler.Constants;
 import com.fibelatti.raffler.models.Group;
 import com.fibelatti.raffler.models.QuickDecision;
+import com.fibelatti.raffler.views.activities.CombinationActivity;
 import com.fibelatti.raffler.views.activities.GroupActivity;
 import com.fibelatti.raffler.views.activities.GroupFormActivity;
 import com.fibelatti.raffler.views.activities.QuickDecisionResultActivity;
@@ -64,6 +65,12 @@ public class Navigator {
 
     public void startSecretVotingActivity(Group group) {
         Intent intent = new Intent(activity, SecretVotingActivity.class);
+        intent.putExtra(Constants.INTENT_EXTRA_GROUP, group);
+        activity.startActivity(intent);
+    }
+
+    public void startCombinationActivity(Group group) {
+        Intent intent = new Intent(activity, CombinationActivity.class);
         intent.putExtra(Constants.INTENT_EXTRA_GROUP, group);
         activity.startActivity(intent);
     }

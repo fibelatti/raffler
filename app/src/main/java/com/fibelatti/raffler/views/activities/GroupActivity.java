@@ -259,6 +259,21 @@ public class GroupActivity
                 }
             }
         });
+
+        fab_combination.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (validateSelection()) {
+                    AnalyticsHelper.getInstance().fireCombinationEvent();
+
+                    Group newGroup = new Group.Builder()
+                            .fromGroup(group)
+                            .setItems(group.getSelectedItems())
+                            .build();
+                    navigator.startCombinationActivity(newGroup);
+                }
+            }
+        });
     }
 
     private void createCustomAnimation() {
