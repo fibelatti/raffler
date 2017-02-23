@@ -8,7 +8,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context=".views.activities.RouletteActivity">
+    tools:context=".presentation.ui.activities.RouletteActivity">
 
     <TextSwitcher
         android:id="@+id/text_switcher"
@@ -39,6 +39,6 @@
         android:src="@drawable/ic_stop_white"
         fab:fab_colorNormal="@color/colorAccent"
         fab:fab_colorPressed="@color/colorAccent"
-        fab:layout_behavior=".views.extensions.ClansFloatingActionBehavior"/>
+        fab:layout_behavior=".presentation.ui.extensions.ClansFloatingActionBehavior"/>
 
 </android.support.design.widget.CoordinatorLayout>

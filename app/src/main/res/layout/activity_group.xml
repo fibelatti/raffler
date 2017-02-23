@@ -8,7 +8,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context=".views.activities.GroupActivity">
+    tools:context=".presentation.ui.activities.GroupActivity">
 
     <include layout="@layout/toolbar_default"/>
 
@@ -57,7 +57,7 @@
         android:layout_marginBottom="@dimen/fab_margin"
         android:layout_marginEnd="@dimen/fab_margin"
         android:layout_marginRight="@dimen/fab_margin"
-        app:layout_behavior=".views.extensions.ClansFloatingActionBehavior"
+        app:layout_behavior=".presentation.ui.extensions.ClansFloatingActionBehavior"
         app:menu_colorNormal="@color/colorAccent"
         app:menu_colorPressed="@color/colorAccent"
         fab:menu_icon="@drawable/ic_play_arrow_white"

@@ -6,18 +6,18 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import com.fibelatti.raffler.db.Group.GroupDao;
-import com.fibelatti.raffler.db.Group.IGroupDao;
-import com.fibelatti.raffler.db.Group.IGroupSchema;
+import com.fibelatti.raffler.db.Group.GroupSchema;
+import com.fibelatti.raffler.db.Group.impl.GroupDaoImpl;
 import com.fibelatti.raffler.db.GroupItem.GroupItemDao;
-import com.fibelatti.raffler.db.GroupItem.IGroupItemDao;
-import com.fibelatti.raffler.db.GroupItem.IGroupItemSchema;
-import com.fibelatti.raffler.db.QuickDecision.IQuickDecisionDao;
-import com.fibelatti.raffler.db.QuickDecision.IQuickDecisionSchema;
+import com.fibelatti.raffler.db.GroupItem.GroupItemSchema;
+import com.fibelatti.raffler.db.GroupItem.impl.GroupItemDaoImpl;
 import com.fibelatti.raffler.db.QuickDecision.QuickDecisionDao;
-import com.fibelatti.raffler.db.Settings.ISettingsDao;
-import com.fibelatti.raffler.db.Settings.ISettingsSchema;
+import com.fibelatti.raffler.db.QuickDecision.QuickDecisionSchema;
+import com.fibelatti.raffler.db.QuickDecision.impl.QuickDecisionDaoImpl;
 import com.fibelatti.raffler.db.Settings.SettingsDao;
-import com.fibelatti.raffler.helpers.AnalyticsHelper;
+import com.fibelatti.raffler.db.Settings.SettingsSchema;
+import com.fibelatti.raffler.db.Settings.impl.SettingsDaoImpl;
+import com.fibelatti.raffler.helpers.impl.AnalyticsHelperImpl;
 
 public class Database {
     public static final String TAG = Database.class.getSimpleName();
@@ -27,19 +27,19 @@ public class Database {
     private DatabaseHelper dbHelper;
     private final Context context;
 
-    public static IGroupDao groupDao;
-    public static IGroupItemDao groupItemDao;
-    public static IQuickDecisionDao quickDecisionDao;
-    public static ISettingsDao settingsDao;
+    public static GroupDao groupDao;
+    public static GroupItemDao groupItemDao;
+    public static QuickDecisionDao quickDecisionDao;
+    public static SettingsDao settingsDao;
 
     public Database open() throws SQLException {
         dbHelper = new DatabaseHelper(context);
         SQLiteDatabase mDb = dbHelper.getWritableDatabase();
 
-        groupDao = new GroupDao(mDb);
-        groupItemDao = new GroupItemDao(mDb);
-        quickDecisionDao = new QuickDecisionDao(mDb);
-        settingsDao = new SettingsDao(mDb);
+        groupDao = new GroupDaoImpl(mDb);
+        groupItemDao = new GroupItemDaoImpl(mDb);
+        quickDecisionDao = new QuickDecisionDaoImpl(mDb);
+        settingsDao = new SettingsDaoImpl(mDb);
 
         return this;
     }
@@ -60,10 +60,10 @@ public class Database {
 
         @Override
         public void onCreate(SQLiteDatabase db) {
-            db.execSQL(IGroupSchema.GROUP_TABLE_CREATE);
-            db.execSQL(IGroupItemSchema.GROUP_ITEMS_TABLE_CREATE);
-            db.execSQL(IQuickDecisionSchema.QUICK_DECISION_TABLE_CREATE);
-            db.execSQL(ISettingsSchema.SETTINGS_TABLE_CREATE);
+            db.execSQL(GroupSchema.GROUP_TABLE_CREATE);
+            db.execSQL(GroupItemSchema.GROUP_ITEMS_TABLE_CREATE);
+            db.execSQL(QuickDecisionSchema.QUICK_DECISION_TABLE_CREATE);
+            db.execSQL(SettingsSchema.SETTINGS_TABLE_CREATE);
 
             initialSetUp(db);
         }
@@ -71,16 +71,16 @@ public class Database {
         @Override
         public void onUpgrade(SQLiteDatabase db, int oldVersion,
                               int newVersion) {
-            AnalyticsHelper.getInstance().fireUpdateDatabaseEvent(oldVersion, newVersion);
+            AnalyticsHelperImpl.getInstance().fireUpdateDatabaseEvent(oldVersion, newVersion);
 
             int upgradeTo = oldVersion + 1;
             while (upgradeTo <= newVersion) {
                 switch (upgradeTo) {
                     case 4:
-                        db.execSQL(IQuickDecisionSchema.QUICK_DECISION_TABLE_DROP);
-                        db.execSQL(IQuickDecisionSchema.QUICK_DECISION_TABLE_CREATE);
+                        db.execSQL(QuickDecisionSchema.QUICK_DECISION_TABLE_DROP);
+                        db.execSQL(QuickDecisionSchema.QUICK_DECISION_TABLE_CREATE);
 
-                        db.execSQL(ISettingsSchema.SETTINGS_ALTER_TABLE_CRASH_REPORT_V4);
+                        db.execSQL(SettingsSchema.SETTINGS_ALTER_TABLE_CRASH_REPORT_V4);
                         break;
                 }
 
@@ -91,8 +91,8 @@ public class Database {
         }
 
         public void initialSetUp(SQLiteDatabase db) {
-            db.execSQL(IQuickDecisionSchema.QUICK_DECISION_INITIAL_SETUP);
-            db.execSQL(ISettingsSchema.SETTINGS_TABLE_INITIAL_SETUP);
+            db.execSQL(QuickDecisionSchema.QUICK_DECISION_INITIAL_SETUP);
+            db.execSQL(SettingsSchema.SETTINGS_TABLE_INITIAL_SETUP);
         }
     }
 }

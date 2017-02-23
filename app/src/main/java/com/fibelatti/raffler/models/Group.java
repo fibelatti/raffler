@@ -147,7 +147,7 @@ public class Group
         }
 
         public Builder addItem(GroupItem groupItem) {
-            if (group.getItems() == null) group.setItems(new ArrayList<GroupItem>());
+            if (group.getItems() == null) group.setItems(new ArrayList<>());
             group.addItem(groupItem);
 
             return this;
@@ -162,7 +162,7 @@ public class Group
         }
 
         public Group build() {
-            if (group.getItems() == null) group.setItems(new ArrayList<GroupItem>());
+            if (group.getItems() == null) group.setItems(new ArrayList<>());
 
             return group;
         }

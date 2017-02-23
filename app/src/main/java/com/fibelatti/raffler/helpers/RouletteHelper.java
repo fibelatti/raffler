@@ -6,13 +6,11 @@ import android.media.MediaPlayer;
 import android.os.Handler;
 import android.support.v4.content.ContextCompat;
 import android.view.Gravity;
-import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.FrameLayout;
 import android.widget.TextSwitcher;
 import android.widget.TextView;
-import android.widget.ViewSwitcher;
 
 import com.fibelatti.raffler.R;
 import com.fibelatti.raffler.db.Database;
@@ -22,7 +20,7 @@ import java.util.Random;
 
 public class RouletteHelper {
     private Context context;
-    private IRouletteListener listener;
+    private RouletteListener listener;
     private Group group;
     private TextSwitcher textSwitcher;
 
@@ -39,7 +37,7 @@ public class RouletteHelper {
 
     private boolean isPlaying = true;
 
-    public RouletteHelper(Context context, IRouletteListener listener, Group group, TextSwitcher textSwitcher) {
+    public RouletteHelper(Context context, RouletteListener listener, Group group, TextSwitcher textSwitcher) {
         this.context = context;
         this.listener = listener;
         this.group = group;
@@ -64,15 +62,13 @@ public class RouletteHelper {
     }
 
     void setUpFactory() {
-        textSwitcher.setFactory(new ViewSwitcher.ViewFactory() {
-            public View makeView() {
-                TextView newText = new TextView(context);
-                newText.setLayoutParams(new FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.MATCH_PARENT));
-                newText.setGravity(Gravity.CENTER);
-                newText.setTextSize(context.getResources().getDimension(R.dimen.text_size_regular));
-                newText.setTextColor(ContextCompat.getColor(context, R.color.colorAccent));
-                return newText;
-            }
+        textSwitcher.setFactory(() -> {
+            TextView newText = new TextView(context);
+            newText.setLayoutParams(new FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.MATCH_PARENT));
+            newText.setGravity(Gravity.CENTER);
+            newText.setTextSize(context.getResources().getDimension(R.dimen.text_size_regular));
+            newText.setTextColor(ContextCompat.getColor(context, R.color.colorAccent));
+            return newText;
         });
 
     }
@@ -107,12 +103,9 @@ public class RouletteHelper {
         increaseIndex();
         textSwitcher.setText(getCurrentText());
 
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                if (!shouldStop()) {
-                    animate();
-                }
+        new Handler().postDelayed(() -> {
+            if (!shouldStop()) {
+                animate();
             }
         }, getCurrentSpeed());
     }
@@ -165,16 +158,13 @@ public class RouletteHelper {
         mediaVolume -= 0.05f;
         mediaPlayer.setVolume(mediaVolume, mediaVolume);
 
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                if (shouldStop()) {
-                    mediaPlayer.pause();
-                    mediaPlayer.seekTo(0);
-                    listener.onRouletteStopped();
-                } else {
-                    fadeOutMusic();
-                }
+        new Handler().postDelayed(() -> {
+            if (shouldStop()) {
+                mediaPlayer.pause();
+                mediaPlayer.seekTo(0);
+                listener.onRouletteStopped();
+            } else {
+                fadeOutMusic();
             }
         }, 600);
     }

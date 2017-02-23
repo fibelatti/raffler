@@ -20,7 +20,7 @@
         android:layout_below="@id/header_text"
         android:padding="@dimen/padding_large">
 
-        <com.fibelatti.raffler.views.extensions.PinEntryEditText
+        <com.fibelatti.raffler.presentation.ui.extensions.PinEntryEditText
             android:id="@+id/input_pin_entry"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

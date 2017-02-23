@@ -8,7 +8,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context=".views.activities.MainActivity">
+    tools:context=".presentation.ui.activities.MainActivity">
 
     <TextView
         android:id="@+id/text_result"
@@ -29,6 +29,6 @@
         android:src="@drawable/ic_close_white_36dp"
         fab:fab_colorNormal="@color/colorWhite"
         fab:fab_colorPressed="@color/colorWhite"
-        fab:layout_behavior=".views.extensions.ClansFloatingActionBehavior"/>
+        fab:layout_behavior=".presentation.ui.extensions.ClansFloatingActionBehavior"/>
 
 </android.support.design.widget.CoordinatorLayout>

@@ -17,7 +17,7 @@
             android:value="${fabricApiKey}"/>
 
         <activity
-            android:name=".views.activities.MainActivity"
+            android:name=".presentation.ui.activities.MainActivity"
             android:configChanges="orientation"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
@@ -29,37 +29,37 @@
         </activity>
 
         <activity
-            android:name=".views.activities.QuickDecisionResultActivity"
+            android:name=".presentation.ui.activities.QuickDecisionResultActivity"
             android:configChanges="orientation"
-            android:parentActivityName=".views.activities.MainActivity"
+            android:parentActivityName=".presentation.ui.activities.MainActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".views.activities.MainActivity"/>
+                android:value=".presentation.ui.activities.MainActivity"/>
         </activity>
 
         <activity
-            android:name=".views.activities.GroupActivity"
+            android:name=".presentation.ui.activities.GroupActivity"
             android:configChanges="orientation"
-            android:parentActivityName="com.fibelatti.raffler.views.activities.MainActivity"
+            android:parentActivityName=".presentation.ui.activities.MainActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.fibelatti.raffler.views.activities.MainActivity"/>
+                android:value=".presentation.ui.activities.MainActivity"/>
         </activity>
 
         <activity
-            android:name=".views.activities.GroupFormActivity"
+            android:name=".presentation.ui.activities.GroupFormActivity"
             android:configChanges="orientation"
-            android:parentActivityName=".views.activities.GroupActivity"
+            android:parentActivityName=".presentation.ui.activities.GroupActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="stateHidden">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".views.activities.GroupActivity"/>
+                android:value=".presentation.ui.activities.GroupActivity"/>
 
             <!-- Intent filter for opening files from system -->
             <intent-filter android:label="@string/app_name">
@@ -88,71 +88,71 @@
         </activity>
 
         <activity
-            android:name=".views.activities.RouletteActivity"
+            android:name=".presentation.ui.activities.RouletteActivity"
             android:configChanges="orientation"
-            android:parentActivityName=".views.activities.GroupActivity"
+            android:parentActivityName=".presentation.ui.activities.GroupActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".views.activities.GroupActivity"/>
+                android:value=".presentation.ui.activities.GroupActivity"/>
         </activity>
 
         <activity
-            android:name=".views.activities.RandomWinnersActivity"
+            android:name=".presentation.ui.activities.RandomWinnersActivity"
             android:configChanges="orientation"
-            android:parentActivityName=".views.activities.GroupActivity"
+            android:parentActivityName=".presentation.ui.activities.GroupActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".views.activities.GroupActivity"/>
+                android:value=".presentation.ui.activities.GroupActivity"/>
         </activity>
 
         <activity
-            android:name=".views.activities.SubGroupsActivity"
+            android:name=".presentation.ui.activities.SubGroupsActivity"
             android:configChanges="orientation"
-            android:parentActivityName=".views.activities.GroupActivity"
+            android:parentActivityName=".presentation.ui.activities.GroupActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".views.activities.GroupActivity"/>
+                android:value=".presentation.ui.activities.GroupActivity"/>
         </activity>
 
         <activity
-            android:name=".views.activities.SecretVotingActivity"
+            android:name=".presentation.ui.activities.SecretVotingActivity"
             android:configChanges="orientation"
             android:launchMode="singleInstance"
-            android:parentActivityName=".views.activities.GroupActivity"
+            android:parentActivityName=".presentation.ui.activities.GroupActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".views.activities.GroupActivity"/>
+                android:value=".presentation.ui.activities.GroupActivity"/>
         </activity>
 
         <activity
-            android:name=".views.activities.CombinationActivity"
+            android:name=".presentation.ui.activities.CombinationActivity"
             android:configChanges="orientation"
-            android:parentActivityName=".views.activities.GroupActivity"
+            android:parentActivityName=".presentation.ui.activities.GroupActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="stateHidden">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".views.activities.GroupActivity"/>
+                android:value=".presentation.ui.activities.GroupActivity"/>
         </activity>
 
         <activity
-            android:name=".views.activities.SettingsActivity"
+            android:name=".presentation.ui.activities.SettingsActivity"
             android:configChanges="orientation"
-            android:parentActivityName=".views.activities.MainActivity"
+            android:parentActivityName=".presentation.ui.activities.MainActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".views.activities.MainActivity"/>
+                android:value=".presentation.ui.activities.MainActivity"/>
         </activity>
 
         <provider
