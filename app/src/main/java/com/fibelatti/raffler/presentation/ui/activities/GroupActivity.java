@@ -89,7 +89,7 @@ public class GroupActivity
 
         context = getApplicationContext();
         navigator = new Navigator(this);
-        presenter = GroupPresenterImpl.createPresenter(context, this);
+        presenter = GroupPresenterImpl.createPresenter(this);
         adapter = new GroupAdapter(this);
         dialogHelper = new AlertDialogHelper(this);
 

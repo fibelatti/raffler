@@ -1,7 +1,5 @@
 package com.fibelatti.raffler.presentation.presenters.impl;
 
-import android.content.Context;
-
 import com.fibelatti.raffler.db.Database;
 import com.fibelatti.raffler.models.Group;
 import com.fibelatti.raffler.models.GroupItem;
@@ -11,19 +9,17 @@ import com.fibelatti.raffler.presentation.presenters.GroupPresenterView;
 public class GroupPresenterImpl
         implements GroupPresenter {
 
-    private Context context;
     private GroupPresenterView view;
 
     private Group group;
 
-    private GroupPresenterImpl(Context context, GroupPresenterView view) {
-        this.context = context;
+    private GroupPresenterImpl(GroupPresenterView view) {
         this.view = view;
         this.group = new Group.Builder().build();
     }
 
-    public static GroupPresenterImpl createPresenter(Context context, GroupPresenterView view) {
-        return new GroupPresenterImpl(context, view);
+    public static GroupPresenterImpl createPresenter(GroupPresenterView view) {
+        return new GroupPresenterImpl(view);
     }
 
     @Override

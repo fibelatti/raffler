@@ -81,7 +81,7 @@ public class GroupFormActivity
         super.onCreate(savedInstanceState);
 
         context = getApplicationContext();
-        presenter = GroupFormPresenterImpl.createPresenter(context, this);
+        presenter = GroupFormPresenterImpl.createPresenter(this);
         adapter = new GroupAdapter(this);
 
         if (savedInstanceState != null) {
