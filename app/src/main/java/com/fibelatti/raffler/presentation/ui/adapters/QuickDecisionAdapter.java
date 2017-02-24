@@ -9,6 +9,7 @@ import android.widget.Button;
 
 import com.fibelatti.raffler.R;
 import com.fibelatti.raffler.models.QuickDecision;
+import com.fibelatti.raffler.presentation.presenters.MainPresenterView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,6 +44,8 @@ public class QuickDecisionAdapter
         this.quickDecisions.addAll(quickDecisions);
 
         notifyDataSetChanged();
+
+        ((MainPresenterView) context).snapQuickDecisions();
     }
 
     private Context getContext() {
@@ -69,5 +72,10 @@ public class QuickDecisionAdapter
     @Override
     public int getItemCount() {
         return Integer.MAX_VALUE;
+    }
+
+    public void handleItemClick(int position) {
+        int positionInList = position % quickDecisions.size();
+        ((MainPresenterView) context).goToQuickDecision(quickDecisions.get(positionInList));
     }
 }

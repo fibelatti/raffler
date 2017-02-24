@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.fibelatti.raffler.R;
 import com.fibelatti.raffler.models.Group;
+import com.fibelatti.raffler.presentation.presenters.MainPresenterView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -51,6 +52,12 @@ public class MainAdapter
         this.filterList.addAll(groupList);
 
         notifyDataSetChanged();
+
+        if (groupList.size() > 0) {
+            ((MainPresenterView) context).showContent();
+        } else {
+            ((MainPresenterView) context).showPlaceholder();
+        }
     }
 
     private Context getContext() {
@@ -95,5 +102,9 @@ public class MainAdapter
             ((Activity) context).runOnUiThread(() -> notifyDataSetChanged());
 
         }).start();
+    }
+
+    public void handleItemClick(int position) {
+        ((MainPresenterView) context).goToGroup(groupList.get(position));
     }
 }

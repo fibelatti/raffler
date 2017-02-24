@@ -21,18 +21,17 @@ import android.widget.TextView;
 
 import com.fibelatti.raffler.Constants;
 import com.fibelatti.raffler.R;
-import com.fibelatti.raffler.db.Database;
 import com.fibelatti.raffler.models.Group;
 import com.fibelatti.raffler.models.QuickDecision;
+import com.fibelatti.raffler.presentation.presenters.MainPresenter;
+import com.fibelatti.raffler.presentation.presenters.MainPresenterView;
+import com.fibelatti.raffler.presentation.presenters.impl.MainPresenterImpl;
 import com.fibelatti.raffler.presentation.ui.Navigator;
 import com.fibelatti.raffler.presentation.ui.adapters.MainAdapter;
 import com.fibelatti.raffler.presentation.ui.adapters.QuickDecisionAdapter;
 import com.fibelatti.raffler.presentation.ui.extensions.RecyclerTouchListener;
 import com.fibelatti.raffler.presentation.ui.extensions.SingleFlingRecyclerView;
 import com.github.clans.fab.FloatingActionButton;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -42,14 +41,12 @@ import uk.co.deanwild.materialshowcaseview.MaterialShowcaseView;
 
 public class MainActivity
         extends BaseActivity
-        implements SearchView.OnQueryTextListener {
+        implements MainPresenterView, SearchView.OnQueryTextListener {
     private Context context;
     private Navigator navigator;
+    private MainPresenter presenter;
 
-    private List<Group> groupList;
     private MainAdapter groupsAdapter;
-
-    private List<QuickDecision> quickDecisionList;
     private QuickDecisionAdapter quickDecisionAdapter;
 
     //region layout bindings
@@ -75,9 +72,9 @@ public class MainActivity
 
         context = getApplicationContext();
         navigator = new Navigator(this);
-        groupList = new ArrayList<>();
+        presenter = MainPresenterImpl.createPresenter(this);
+
         groupsAdapter = new MainAdapter(this);
-        quickDecisionList = new ArrayList<>();
         quickDecisionAdapter = new QuickDecisionAdapter(this);
 
         setUpLayout();
@@ -91,7 +88,6 @@ public class MainActivity
     public void onResume() {
         super.onResume();
         fetchData();
-        setUpValues();
     }
 
     @Override
@@ -136,6 +132,8 @@ public class MainActivity
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
+            case R.id.action_account:
+                return true;
             case R.id.action_settings:
                 navigator.startSettingsActivity();
                 return true;
@@ -156,19 +154,13 @@ public class MainActivity
         recyclerViewGroups.setAdapter(groupsAdapter);
 
         recyclerViewGroups.addOnItemTouchListener(new RecyclerTouchListener.Builder(this)
-                .setOnItemTouchListener((view, position) -> {
-                    Group group = groupList.get(position);
-                    navigator.startGroupActivity(group);
-                })
+                .setOnItemTouchListener((view, position) -> groupsAdapter.handleItemClick(position))
                 .build());
 
         recyclerViewQuickDecision.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
         recyclerViewQuickDecision.setAdapter(quickDecisionAdapter);
         recyclerViewQuickDecision.addOnItemTouchListener(new RecyclerTouchListener.Builder(this)
-                .setOnItemTouchListener((view, position) -> {
-                    int positionInList = position % quickDecisionList.size();
-                    navigator.startQuickDecisionResultActivity(quickDecisionList.get(positionInList));
-                })
+                .setOnItemTouchListener((view, position) -> quickDecisionAdapter.handleItemClick(position))
                 .build());
     }
 
@@ -178,26 +170,9 @@ public class MainActivity
         fab.setHideAnimation(AnimationUtils.loadAnimation(this, R.anim.hide_to_bottom));
     }
 
-    private void setUpValues() {
-        if (groupList.size() > 0) {
-            placeholder.setVisibility(View.GONE);
-            recyclerViewGroups.setVisibility(View.VISIBLE);
-        } else {
-            placeholder.setVisibility(View.VISIBLE);
-            recyclerViewGroups.setVisibility(View.GONE);
-        }
-    }
-
     private void fetchData() {
-        if (!groupList.isEmpty()) groupList.clear();
-        groupList.addAll(Database.groupDao.fetchAllGroups());
-        groupsAdapter.setGroups(groupList);
-
-        boolean firstTimeLoad = quickDecisionList.isEmpty();
-        if (!firstTimeLoad) quickDecisionList.clear();
-        quickDecisionList.addAll(Database.quickDecisionDao.fetchAllQuickDecisions());
-        quickDecisionAdapter.setQuickDecisions(quickDecisionList);
-        if (firstTimeLoad) recyclerViewQuickDecision.scrollToNextSnap(Integer.MAX_VALUE / 2);
+        groupsAdapter.setGroups(presenter.getGroups());
+        quickDecisionAdapter.setQuickDecisions(presenter.getQuickDecisions());
     }
 
     private void showTutorial() {
@@ -246,6 +221,33 @@ public class MainActivity
         );
 
         sequence.start();
+    }
+
+    @Override
+    public void showContent() {
+        placeholder.setVisibility(View.GONE);
+        recyclerViewGroups.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void showPlaceholder() {
+        placeholder.setVisibility(View.VISIBLE);
+        recyclerViewGroups.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void goToGroup(Group group) {
+        navigator.startGroupActivity(group);
+    }
+
+    @Override
+    public void goToQuickDecision(QuickDecision quickDecision) {
+        navigator.startQuickDecisionResultActivity(quickDecision);
+    }
+
+    @Override
+    public void snapQuickDecisions() {
+        recyclerViewQuickDecision.scrollToNextSnap(Integer.MAX_VALUE / 2);
     }
 
     @Override
