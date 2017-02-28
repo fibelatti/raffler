@@ -109,7 +109,7 @@ public class GroupActivity
     }
 
     @Override
-    public void onResume() {
+    protected void onResume() {
         super.onResume();
         presenter.onResume();
         if (instanceRestored) {
@@ -120,7 +120,7 @@ public class GroupActivity
     }
 
     @Override
-    public void onSaveInstanceState(Bundle outState) {
+    protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         instanceRestored = true;
         outState.putParcelable(Constants.INTENT_EXTRA_GROUP, group);

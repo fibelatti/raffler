@@ -87,7 +87,7 @@ public class CombinationActivity
     }
 
     @Override
-    public void onSaveInstanceState(Bundle outState) {
+    protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putParcelable(Constants.INTENT_EXTRA_GROUP, groupOne);
         outState.putParcelable(Constants.INTENT_EXTRA_GROUP, groupTwo);

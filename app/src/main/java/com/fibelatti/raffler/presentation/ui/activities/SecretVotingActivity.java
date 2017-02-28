@@ -60,7 +60,7 @@ public class SecretVotingActivity
     }
 
     @Override
-    public void onSaveInstanceState(Bundle outState) {
+    protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putParcelable(Constants.INTENT_EXTRA_GROUP, group);
         outState.putSerializable(Constants.INTENT_EXTRA_VOTES_MAP, votesMap);

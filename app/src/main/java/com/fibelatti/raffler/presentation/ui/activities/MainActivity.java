@@ -85,9 +85,21 @@ public class MainActivity
     }
 
     @Override
-    public void onResume() {
+    protected void onResume() {
         super.onResume();
         fetchData();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        presenter.onPause();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        presenter.onDestroy();
     }
 
     @Override

@@ -102,7 +102,7 @@ public class GroupFormActivity
     }
 
     @Override
-    public void onSaveInstanceState(Bundle outState) {
+    protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putParcelable(Constants.INTENT_EXTRA_GROUP, group);
     }
