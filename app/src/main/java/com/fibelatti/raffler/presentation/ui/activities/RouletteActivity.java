@@ -2,16 +2,24 @@ package com.fibelatti.raffler.presentation.ui.activities;
 
 import android.content.Context;
 import android.content.Intent;
+import android.media.AudioManager;
+import android.media.MediaPlayer;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
 import android.support.v4.content.ContextCompat;
+import android.view.Gravity;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.FrameLayout;
 import android.widget.TextSwitcher;
+import android.widget.TextView;
 
 import com.fibelatti.raffler.Constants;
 import com.fibelatti.raffler.R;
+import com.fibelatti.raffler.db.Database;
 import com.fibelatti.raffler.helpers.RouletteHelper;
 import com.fibelatti.raffler.helpers.RouletteListener;
 import com.fibelatti.raffler.models.Group;
@@ -26,6 +34,9 @@ public class RouletteActivity
         implements RouletteListener {
     private Context context;
     private RouletteHelper rouletteHelper;
+
+    private MediaPlayer mediaPlayer;
+    private float mediaVolume = 1;
 
     //region layout bindings
     @BindView(R.id.coordinator_layout)
@@ -52,8 +63,11 @@ public class RouletteActivity
         setUpLayout();
         setUpFab();
         setValues();
+        setUpMediaPlayer();
+        setUpAnimations();
+        setUpFactory();
 
-        rouletteHelper = new RouletteHelper(this, this, group, textSwitcher);
+        rouletteHelper = new RouletteHelper(this, group);
         rouletteHelper.startRoulette();
     }
 
@@ -99,6 +113,33 @@ public class RouletteActivity
         this.setTitle(getResources().getString(R.string.roulette_title));
     }
 
+    private void setUpMediaPlayer() {
+        mediaPlayer = MediaPlayer.create(context, R.raw.easter_egg_soundtrack);
+        mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
+    }
+
+    private void setUpAnimations() {
+        Animation in = AnimationUtils.loadAnimation(context,
+                R.anim.slide_from_top);
+        Animation out = AnimationUtils.loadAnimation(context,
+                R.anim.slide_to_bottom);
+
+        textSwitcher.setInAnimation(in);
+        textSwitcher.setOutAnimation(out);
+    }
+
+    private void setUpFactory() {
+        textSwitcher.setFactory(() -> {
+            TextView newText = new TextView(context);
+            newText.setLayoutParams(new FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.MATCH_PARENT));
+            newText.setGravity(Gravity.CENTER);
+            newText.setTextSize(context.getResources().getDimension(R.dimen.text_size_regular));
+            newText.setTextColor(ContextCompat.getColor(context, R.color.colorAccent));
+            return newText;
+        });
+
+    }
+
     private Group fetchDataFromIntent() {
         return (Group) getIntent().getParcelableExtra(Constants.INTENT_EXTRA_GROUP);
     }
@@ -106,6 +147,36 @@ public class RouletteActivity
     @OnClick(R.id.button_back)
     public void backToGroup() {
         finish();
+    }
+
+    @Override
+    public void setNewText(String text) {
+        textSwitcher.setText(text);
+    }
+
+    @Override
+    public void startMedia() {
+        mediaVolume = Database.settingsDao.getRouletteMusicEnabled() ? 1 : 0;
+        mediaPlayer.setVolume(mediaVolume, mediaVolume);
+
+        mediaPlayer.start();
+    }
+
+    @Override
+    public void fadeMediaVolume() {
+        mediaVolume -= 0.05f;
+        mediaPlayer.setVolume(mediaVolume, mediaVolume);
+    }
+
+    @Override
+    public void pauseMedia() {
+        mediaPlayer.pause();
+        mediaPlayer.seekTo(0);
+    }
+
+    @Override
+    public void stopMedia() {
+        mediaPlayer.stop();
     }
 
     @Override

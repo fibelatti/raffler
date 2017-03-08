@@ -1,31 +1,14 @@
 package com.fibelatti.raffler.helpers;
 
-import android.content.Context;
-import android.media.AudioManager;
-import android.media.MediaPlayer;
 import android.os.Handler;
-import android.support.v4.content.ContextCompat;
-import android.view.Gravity;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
-import android.widget.FrameLayout;
-import android.widget.TextSwitcher;
-import android.widget.TextView;
 
-import com.fibelatti.raffler.R;
-import com.fibelatti.raffler.db.Database;
 import com.fibelatti.raffler.models.Group;
 
 import java.util.Random;
 
 public class RouletteHelper {
-    private Context context;
     private RouletteListener listener;
     private Group group;
-    private TextSwitcher textSwitcher;
-
-    private MediaPlayer mediaPlayer;
-    private float mediaVolume = 1;
 
     private int optionsCount;
     private int currentIndex = -1;
@@ -37,40 +20,10 @@ public class RouletteHelper {
 
     private boolean isPlaying = true;
 
-    public RouletteHelper(Context context, RouletteListener listener, Group group, TextSwitcher textSwitcher) {
-        this.context = context;
+    public RouletteHelper(RouletteListener listener, Group group) {
         this.listener = listener;
         this.group = group;
-        this.textSwitcher = textSwitcher;
         this.optionsCount = group.getItemsCount();
-        this.mediaPlayer = MediaPlayer.create(context, R.raw.easter_egg_soundtrack);
-
-        mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
-
-        setUpAnimations();
-        setUpFactory();
-    }
-
-    void setUpAnimations() {
-        Animation in = AnimationUtils.loadAnimation(context,
-                R.anim.slide_from_top);
-        Animation out = AnimationUtils.loadAnimation(context,
-                R.anim.slide_to_bottom);
-
-        textSwitcher.setInAnimation(in);
-        textSwitcher.setOutAnimation(out);
-    }
-
-    void setUpFactory() {
-        textSwitcher.setFactory(() -> {
-            TextView newText = new TextView(context);
-            newText.setLayoutParams(new FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.MATCH_PARENT));
-            newText.setGravity(Gravity.CENTER);
-            newText.setTextSize(context.getResources().getDimension(R.dimen.text_size_regular));
-            newText.setTextColor(ContextCompat.getColor(context, R.color.colorAccent));
-            return newText;
-        });
-
     }
 
     public void startRoulette() {
@@ -79,11 +32,8 @@ public class RouletteHelper {
         currentSpeed = minimumSpeed;
 
         isPlaying = true;
-        mediaVolume = Database.settingsDao.getRouletteMusicEnabled() ? 1 : 0;
-        mediaPlayer.setVolume(mediaVolume, mediaVolume);
 
-        mediaPlayer.start();
-
+        listener.startMedia();
         listener.onRouletteStarted();
 
         animate();
@@ -101,7 +51,7 @@ public class RouletteHelper {
 
     private void animate() {
         increaseIndex();
-        textSwitcher.setText(getCurrentText());
+        listener.setNewText(getCurrentText());
 
         new Handler().postDelayed(() -> {
             if (!shouldStop()) {
@@ -151,17 +101,15 @@ public class RouletteHelper {
     }
 
     public void stopMusic() {
-        mediaPlayer.stop();
+        listener.stopMedia();
     }
 
     private void fadeOutMusic() {
-        mediaVolume -= 0.05f;
-        mediaPlayer.setVolume(mediaVolume, mediaVolume);
+        listener.fadeMediaVolume();
 
         new Handler().postDelayed(() -> {
             if (shouldStop()) {
-                mediaPlayer.pause();
-                mediaPlayer.seekTo(0);
+                listener.pauseMedia();
                 listener.onRouletteStopped();
             } else {
                 fadeOutMusic();
