@@ -144,7 +144,7 @@
     <string name="subgroups_msg_validate_quantity_minimum">A quantidade deve ser maior ou igual que %d</string>
     <string name="subgroups_msg_validate_quantity_empty">A quantidade não pode estar em branco</string>
     <string name="subgroups_msg_validate_quantity_zero">A quantidade não pode ser zero</string>
-    <string name="subgroups_hint_group_name">Grupo #%s</string>
+    <string name="subgroups_hint_group_name">Grupo #%d</string>
 
     <!-- SecretVotingActivity -->
     <string name="secret_voting_header_text">Você está votando para %s</string>
@@ -194,7 +194,7 @@
     <string name="combination_button_placeholder_selected">Lista personalizada</string>
     <string name="combination_hint_quantity">Quantidade de pares</string>
     <string name="combination_action_raffle">Sortear</string>
-    <string name="combination_hint_group_name">Combinação #%s</string>
+    <string name="combination_hint_group_name">Combinação #%d</string>
     <string name="combination_msg_validate_group_selection">Escolha um segundo grupo para combinar</string>
     <string name="combination_msg_validate_quantity_maximum">A quantidade deve ser igual ou menor que %d</string>
     <string name="combination_msg_validate_quantity_empty">A quantidade não pode estar em branco</string>

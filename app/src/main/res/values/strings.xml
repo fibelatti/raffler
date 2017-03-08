@@ -148,7 +148,7 @@
     <string name="subgroups_msg_validate_quantity_minimum">Quantity should be equal or greater than %d</string>
     <string name="subgroups_msg_validate_quantity_empty">Quantity should not be empty</string>
     <string name="subgroups_msg_validate_quantity_zero">Quantity should not be zero</string>
-    <string name="subgroups_hint_group_name">Group #%s</string>
+    <string name="subgroups_hint_group_name">Group #%d</string>
 
     <!-- SecretVotingActivity -->
     <string name="secret_voting_header_text">You are voting for %s</string>
@@ -199,7 +199,7 @@
     <string name="combination_button_placeholder_selected">Custom list</string>
     <string name="combination_hint_quantity">Quantity of pairs</string>
     <string name="combination_action_raffle">Raffle</string>
-    <string name="combination_hint_group_name">Combination #%s</string>
+    <string name="combination_hint_group_name">Combination #%d</string>
     <string name="combination_msg_validate_group_selection">Select a second group to combine</string>
     <string name="combination_msg_validate_quantity_maximum">Quantity should be equal or less than %d</string>
     <string name="combination_msg_validate_quantity_empty">Quantity should not be empty</string>
