@@ -15,7 +15,6 @@ import com.fibelatti.raffler.models.GroupItem;
 import com.fibelatti.raffler.presentation.presenters.SecretVotingPresenter;
 import com.fibelatti.raffler.presentation.presenters.SecretVotingPresenterView;
 import com.fibelatti.raffler.presentation.presenters.impl.SecretVotingPresenterImpl;
-import com.fibelatti.raffler.presentation.ui.Navigator;
 import com.fibelatti.raffler.presentation.ui.fragments.SecretVotingMenuFragment;
 import com.fibelatti.raffler.presentation.ui.fragments.SecretVotingResultsFragment;
 import com.fibelatti.raffler.presentation.ui.fragments.SecretVotingVoteFragment;
@@ -29,7 +28,6 @@ import java.util.LinkedHashMap;
 public class SecretVotingActivity
         extends BaseActivity
         implements SecretVotingPresenterView, SecretVotingMenuListener, SecretVotingVoteListener, PinEntryListener, TieBreakListener {
-    private Navigator navigator;
     private SharedPreferences sharedPref;
     private SecretVotingPresenter presenter;
     private Group group;
@@ -40,11 +38,16 @@ public class SecretVotingActivity
     String pinBackup;
     boolean keepPin = false;
 
+    public static Intent getCallingIntent(Context context, Group group) {
+        Intent intent = new Intent(context, SecretVotingActivity.class);
+        intent.putExtra(Constants.INTENT_EXTRA_GROUP, group);
+        return intent;
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        navigator = new Navigator(this);
         sharedPref = getSharedPreferences(Constants.PREF_NAME_PIN, Context.MODE_PRIVATE);
         pinBackup = sharedPref.getString(SecretVotingActivity.class.getSimpleName(), "");
 
@@ -182,12 +185,13 @@ public class SecretVotingActivity
         keepPin = true;
 
         finish();
-        navigator.startSecretVotingActivity(group);
+
+        startActivity(getCallingIntent(this, group));
     }
 
     @Override
     public void onRoulette(Group group) {
         finish();
-        navigator.startRouletteActivity(group);
+        startActivity(RouletteActivity.getCallingIntent(this, group));
     }
 }

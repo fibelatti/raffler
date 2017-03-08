@@ -27,7 +27,6 @@ import com.fibelatti.raffler.models.Group;
 import com.fibelatti.raffler.presentation.presenters.GroupPresenter;
 import com.fibelatti.raffler.presentation.presenters.GroupPresenterView;
 import com.fibelatti.raffler.presentation.presenters.impl.GroupPresenterImpl;
-import com.fibelatti.raffler.presentation.ui.Navigator;
 import com.fibelatti.raffler.presentation.ui.adapters.GroupAdapter;
 import com.fibelatti.raffler.presentation.ui.extensions.DividerItemDecoration;
 import com.fibelatti.raffler.presentation.ui.extensions.RecyclerTouchListener;
@@ -48,7 +47,6 @@ public class GroupActivity
         extends BaseActivity
         implements GroupPresenterView, PinEntryListener {
     private Context context;
-    private Navigator navigator;
     private GroupPresenter presenter;
     private GroupAdapter adapter;
     private AlertDialogHelper dialogHelper;
@@ -83,12 +81,17 @@ public class GroupActivity
     FloatingActionButton fab_combination;
     //endregion
 
+    public static Intent getCallingIntent(Context context, Group group) {
+        Intent intent = new Intent(context, GroupActivity.class);
+        intent.putExtra(Constants.INTENT_EXTRA_GROUP, group);
+        return intent;
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         context = getApplicationContext();
-        navigator = new Navigator(this);
         presenter = GroupPresenterImpl.createPresenter(this);
         adapter = new GroupAdapter(this);
         dialogHelper = new AlertDialogHelper(this);
@@ -158,7 +161,7 @@ public class GroupActivity
                 presenter.unselectAllItems();
                 return true;
             case R.id.action_edit:
-                navigator.startGroupFormActivity(group);
+                startActivityForResult(GroupFormActivity.getCallingIntent(this, group), Constants.REQUEST_CODE_GROUP_EDIT);
                 return true;
             case R.id.action_delete:
                 deleteGroup();
@@ -200,7 +203,8 @@ public class GroupActivity
                         .fromGroup(group)
                         .setItems(group.getSelectedItems())
                         .build();
-                navigator.startRouletteActivity(newGroup);
+
+                startActivity(RouletteActivity.getCallingIntent(this, newGroup));
             }
         });
 
@@ -212,7 +216,8 @@ public class GroupActivity
                         .fromGroup(group)
                         .setItems(group.getSelectedItems())
                         .build();
-                navigator.startRandomWinnersActivity(newGroup);
+
+                startActivity(RandomWinnersActivity.getCallingIntent(this, newGroup));
             }
         });
 
@@ -224,7 +229,7 @@ public class GroupActivity
                         .fromGroup(group)
                         .setItems(group.getSelectedItems())
                         .build();
-                navigator.startSubGroupsActivity(newGroup);
+                startActivity(SubGroupsActivity.getCallingIntent(this, newGroup));
             }
         });
 
@@ -247,7 +252,8 @@ public class GroupActivity
                         .fromGroup(group)
                         .setItems(group.getSelectedItems())
                         .build();
-                navigator.startCombinationActivity(newGroup);
+
+                startActivity(CombinationActivity.getCallingIntent(this, newGroup));
             }
         });
     }
@@ -384,6 +390,7 @@ public class GroupActivity
                 .setName(group.getName())
                 .setItems(group.getSelectedItems())
                 .build();
-        navigator.startSecretVotingActivity(newGroup);
+
+        startActivity(SecretVotingActivity.getCallingIntent(this, newGroup));
     }
 }

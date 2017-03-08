@@ -26,7 +26,6 @@ import com.fibelatti.raffler.models.QuickDecision;
 import com.fibelatti.raffler.presentation.presenters.MainPresenter;
 import com.fibelatti.raffler.presentation.presenters.MainPresenterView;
 import com.fibelatti.raffler.presentation.presenters.impl.MainPresenterImpl;
-import com.fibelatti.raffler.presentation.ui.Navigator;
 import com.fibelatti.raffler.presentation.ui.adapters.MainAdapter;
 import com.fibelatti.raffler.presentation.ui.adapters.QuickDecisionAdapter;
 import com.fibelatti.raffler.presentation.ui.extensions.RecyclerTouchListener;
@@ -43,7 +42,6 @@ public class MainActivity
         extends BaseActivity
         implements MainPresenterView, SearchView.OnQueryTextListener {
     private Context context;
-    private Navigator navigator;
     private MainPresenter presenter;
 
     private MainAdapter groupsAdapter;
@@ -66,12 +64,15 @@ public class MainActivity
     FloatingActionButton fab;
     //endregion
 
+    public static Intent getCallingIntent(Context context) {
+        return new Intent(context, MainActivity.class);
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         context = getApplicationContext();
-        navigator = new Navigator(this);
         presenter = MainPresenterImpl.createPresenter(this);
 
         groupsAdapter = new MainAdapter(this);
@@ -144,10 +145,8 @@ public class MainActivity
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.action_account:
-                return true;
             case R.id.action_settings:
-                navigator.startSettingsActivity();
+                startActivity(SettingsActivity.getCallingIntent(this));
                 return true;
         }
 
@@ -177,7 +176,7 @@ public class MainActivity
     }
 
     private void setUpFab() {
-        fab.setOnClickListener(view -> navigator.startGroupFormActivity());
+        fab.setOnClickListener(view -> startActivityForResult(GroupFormActivity.getCallingIntent(this), Constants.REQUEST_CODE_GROUP_EDIT));
         fab.setShowAnimation(AnimationUtils.loadAnimation(this, R.anim.show_from_bottom));
         fab.setHideAnimation(AnimationUtils.loadAnimation(this, R.anim.hide_to_bottom));
     }
@@ -249,12 +248,12 @@ public class MainActivity
 
     @Override
     public void goToGroup(Group group) {
-        navigator.startGroupActivity(group);
+        startActivityForResult(GroupActivity.getCallingIntent(this, group), Constants.REQUEST_CODE_GROUP_ACTION);
     }
 
     @Override
     public void goToQuickDecision(QuickDecision quickDecision) {
-        navigator.startQuickDecisionResultActivity(quickDecision);
+        startActivity(QuickDecisionResultActivity.getCallingIntent(this, quickDecision));
     }
 
     @Override

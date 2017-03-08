@@ -1,6 +1,7 @@
 package com.fibelatti.raffler.presentation.ui.activities;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.TextInputLayout;
@@ -55,6 +56,12 @@ public class SubGroupsActivity
     @BindView(R.id.btn_raffle_subgroups)
     ImageButton buttonRaffleSubgroups;
     //endregion
+
+    public static Intent getCallingIntent(Context context, Group group) {
+        Intent intent = new Intent(context, SubGroupsActivity.class);
+        intent.putExtra(Constants.INTENT_EXTRA_GROUP, group);
+        return intent;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

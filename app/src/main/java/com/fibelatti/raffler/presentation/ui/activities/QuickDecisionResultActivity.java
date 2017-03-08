@@ -1,6 +1,7 @@
 package com.fibelatti.raffler.presentation.ui.activities;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
@@ -34,6 +35,12 @@ public class QuickDecisionResultActivity
     @BindView(R.id.fab)
     FloatingActionButton fab;
     //endregion
+
+    public static Intent getCallingIntent(Context context, QuickDecision quickDecision) {
+        Intent intent = new Intent(context, QuickDecisionResultActivity.class);
+        intent.putExtra(Constants.INTENT_EXTRA_QUICK_DECISION, quickDecision);
+        return intent;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

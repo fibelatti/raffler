@@ -76,6 +76,16 @@ public class GroupFormActivity
     ImageButton buttonAddItem;
     //endregion
 
+    public static Intent getCallingIntent(Context context) {
+        return new Intent(context, GroupFormActivity.class);
+    }
+
+    public static Intent getCallingIntent(Context context, Group group) {
+        Intent intent = new Intent(context, GroupFormActivity.class);
+        intent.putExtra(Constants.INTENT_EXTRA_GROUP, group);
+        return intent;
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

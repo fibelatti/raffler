@@ -1,5 +1,6 @@
 package com.fibelatti.raffler.presentation.ui.activities;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
@@ -51,6 +52,10 @@ public class SettingsActivity
     @BindView(R.id.settings_version)
     TextView appVersion;
     //endregion
+
+    public static Intent getCallingIntent(Context context) {
+        return new Intent(context, SettingsActivity.class);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

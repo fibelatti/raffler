@@ -1,6 +1,7 @@
 package com.fibelatti.raffler.presentation.ui.activities;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.CoordinatorLayout;
@@ -34,6 +35,12 @@ public class RouletteActivity
     @BindView(R.id.fab)
     FloatingActionButton fab;
     //endregion
+
+    public static Intent getCallingIntent(Context context, Group group) {
+        Intent intent = new Intent(context, RouletteActivity.class);
+        intent.putExtra(Constants.INTENT_EXTRA_GROUP, group);
+        return intent;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

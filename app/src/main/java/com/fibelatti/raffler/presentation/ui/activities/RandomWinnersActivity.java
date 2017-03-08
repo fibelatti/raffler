@@ -1,6 +1,7 @@
 package com.fibelatti.raffler.presentation.ui.activities;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.TextInputLayout;
@@ -22,7 +23,6 @@ import com.fibelatti.raffler.R;
 import com.fibelatti.raffler.helpers.impl.AnalyticsHelperImpl;
 import com.fibelatti.raffler.models.Group;
 import com.fibelatti.raffler.models.GroupItem;
-import com.fibelatti.raffler.presentation.ui.Navigator;
 import com.fibelatti.raffler.presentation.ui.adapters.RandomWinnersAdapter;
 import com.fibelatti.raffler.presentation.ui.fragments.PinEntryDialogFragment;
 import com.fibelatti.raffler.presentation.ui.listeners.PinEntryListener;
@@ -42,7 +42,6 @@ public class RandomWinnersActivity
         extends BaseActivity
         implements PinEntryListener {
     private Context context;
-    private Navigator navigator;
     private Group group;
     private Group raffledGroup;
     private RandomWinnersAdapter adapter;
@@ -69,12 +68,17 @@ public class RandomWinnersActivity
     FloatingActionButton fab_combination;
     //endregion
 
+    public static Intent getCallingIntent(Context context, Group group) {
+        Intent intent = new Intent(context, RandomWinnersActivity.class);
+        intent.putExtra(Constants.INTENT_EXTRA_GROUP, group);
+        return intent;
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         context = getApplicationContext();
-        navigator = new Navigator(this);
         group = fetchDataFromIntent();
         adapter = new RandomWinnersAdapter(this, winners);
 
@@ -144,7 +148,8 @@ public class RandomWinnersActivity
                     .fromGroup(raffledGroup)
                     .setItems(raffledGroup.getItems())
                     .build();
-            navigator.startCombinationActivity(newGroup);
+
+            startActivity(CombinationActivity.getCallingIntent(this, newGroup));
         });
     }
 
@@ -209,6 +214,6 @@ public class RandomWinnersActivity
 
     @Override
     public void onPinEntrySuccess() {
-        navigator.startSecretVotingActivity(raffledGroup);
+        startActivity(SecretVotingActivity.getCallingIntent(this, raffledGroup));
     }
 }
