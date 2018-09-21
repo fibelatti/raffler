@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/coordinator_layout"
@@ -9,7 +8,7 @@
     android:fitsSystemWindows="true"
     tools:context=".views.activities.SettingsActivity">
 
-    <include layout="@layout/toolbar_default"/>
+    <include layout="@layout/toolbar_default" />
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -24,97 +23,46 @@
             android:layout_above="@+id/divider_footer">
 
             <RelativeLayout
+                android:id="@+id/layout_roulette_music"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_small">
 
-                <RelativeLayout
-                    android:id="@+id/layout_roulette_music"
+                <TextView
+                    android:id="@+id/title_settings_sound"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/margin_small">
+                    android:text="@string/settings_title_sound"
+                    android:textColor="@color/colorAccent"
+                    android:textSize="@dimen/text_size_regular" />
 
-                    <TextView
-                        android:id="@+id/title_settings_sound"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/settings_title_sound"
-                        android:textColor="@color/colorAccent"
-                        android:textSize="@dimen/text_size_regular"/>
+                <include
+                    android:id="@+id/divider_settings_sound"
+                    layout="@layout/divider_default"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/divider_size"
+                    android:layout_below="@+id/title_settings_sound" />
 
-                    <include
-                        android:id="@+id/divider_settings_sound"
-                        layout="@layout/divider_default"
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/divider_size"
-                        android:layout_below="@+id/title_settings_sound"/>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@id/divider_settings_sound"
-                        android:orientation="horizontal">
-
-                        <CheckBox
-                            android:id="@+id/chk_roulette_music"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"/>
-
-                        <TextView
-                            android:id="@+id/txt_roulette_music"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:gravity="center_vertical"
-                            android:text="@string/settings_hint_roulette_music"
-                            android:textColor="@color/textPrimary"
-                            android:textSize="@dimen/text_size_regular"/>
-                    </LinearLayout>
-                </RelativeLayout>
-
-                <RelativeLayout
-                    android:id="@+id/layout_crash_report_opt_out"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/layout_roulette_music"
-                    android:layout_marginTop="@dimen/margin_small">
+                    android:layout_below="@id/divider_settings_sound"
+                    android:orientation="horizontal">
+
+                    <CheckBox
+                        android:id="@+id/chk_roulette_music"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
 
                     <TextView
-                        android:id="@+id/title_crash_report_opt_out"
+                        android:id="@+id/txt_roulette_music"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="@string/settings_crash_report_opt_out"
-                        android:textColor="@color/colorAccent"
-                        android:textSize="@dimen/text_size_regular"/>
-
-                    <include
-                        android:id="@+id/divider_settings_crash_report_opt_out"
-                        layout="@layout/divider_default"
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/divider_size"
-                        android:layout_below="@+id/title_crash_report_opt_out"/>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@id/divider_settings_crash_report_opt_out"
-                        android:orientation="horizontal">
-
-                        <CheckBox
-                            android:id="@+id/chk_crash_report_opt_out"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center_vertical"/>
-
-                        <TextView
-                            android:id="@+id/txt_crash_report_opt_out"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:gravity="center_vertical"
-                            android:text="@string/settings_hint_crash_report_opt_out"
-                            android:textColor="@color/textPrimary"
-                            android:textSize="@dimen/text_size_regular"/>
-                    </LinearLayout>
-                </RelativeLayout>
-
+                        android:gravity="center_vertical"
+                        android:text="@string/settings_hint_roulette_music"
+                        android:textColor="@color/textPrimary"
+                        android:textSize="@dimen/text_size_regular" />
+                </LinearLayout>
             </RelativeLayout>
         </ScrollView>
 
@@ -123,7 +71,7 @@
             layout="@layout/divider_default"
             android:layout_width="match_parent"
             android:layout_height="@dimen/divider_size"
-            android:layout_above="@+id/layout_share_and_rate"/>
+            android:layout_above="@+id/layout_share_and_rate" />
 
         <LinearLayout
             android:id="@+id/layout_share_and_rate"
@@ -142,7 +90,7 @@
                 android:layout_height="@dimen/button_height"
                 android:layout_weight="1"
                 android:text="@string/settings_share"
-                android:theme="@style/AboutButton"/>
+                android:theme="@style/AboutButton" />
 
             <Button
                 android:id="@+id/button_rate"
@@ -150,7 +98,7 @@
                 android:layout_height="@dimen/button_height"
                 android:layout_weight="1"
                 android:text="@string/settings_rate"
-                android:theme="@style/AboutButton"/>
+                android:theme="@style/AboutButton" />
         </LinearLayout>
 
         <TextView
@@ -162,7 +110,7 @@
             android:gravity="center_horizontal"
             android:text="@string/settings_about"
             android:textColor="@color/textPrimary"
-            android:textSize="@dimen/text_size_small"/>
+            android:textSize="@dimen/text_size_small" />
 
         <TextView
             android:id="@+id/settings_version"
@@ -173,7 +121,7 @@
             android:gravity="center_horizontal"
             android:text="@string/settings_app_version"
             android:textColor="@color/textPrimary"
-            android:textSize="@dimen/text_size_small"/>
+            android:textSize="@dimen/text_size_small" />
     </RelativeLayout>
 
 </android.support.design.widget.CoordinatorLayout>

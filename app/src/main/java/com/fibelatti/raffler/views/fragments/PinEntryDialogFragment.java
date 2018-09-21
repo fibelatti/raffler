@@ -14,7 +14,6 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.crashlytics.android.Crashlytics;
 import com.fibelatti.raffler.Constants;
 import com.fibelatti.raffler.R;
 import com.fibelatti.raffler.utils.EncryptUtils;
@@ -95,7 +94,6 @@ public class PinEntryDialogFragment
                                         dialog.dismiss();
                                     }
                                 } catch (Exception e) {
-                                    Crashlytics.logException(e);
                                     dialog.dismiss();
                                 }
                             }

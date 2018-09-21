@@ -22,7 +22,6 @@ import android.view.animation.AnimationUtils;
 import com.fibelatti.raffler.Constants;
 import com.fibelatti.raffler.R;
 import com.fibelatti.raffler.helpers.AlertDialogHelper;
-import com.fibelatti.raffler.helpers.AnalyticsHelper;
 import com.fibelatti.raffler.helpers.FileHelper;
 import com.fibelatti.raffler.models.Group;
 import com.fibelatti.raffler.presenters.GroupPresenter;
@@ -202,8 +201,6 @@ public class GroupActivity
             @Override
             public void onClick(View view) {
                 if (validateSelection()) {
-                    AnalyticsHelper.getInstance().fireRouletteEvent();
-
                     Group newGroup = new Group.Builder()
                             .fromGroup(group)
                             .setItems(group.getSelectedItems())
@@ -217,8 +214,6 @@ public class GroupActivity
             @Override
             public void onClick(View view) {
                 if (validateSelection()) {
-                    AnalyticsHelper.getInstance().fireRandomWinnersEvent();
-
                     Group newGroup = new Group.Builder()
                             .fromGroup(group)
                             .setItems(group.getSelectedItems())
@@ -231,8 +226,6 @@ public class GroupActivity
         fab_group.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AnalyticsHelper.getInstance().fireSubGroupsEvent();
-
                 if (validateSelection()) {
                     Group newGroup = new Group.Builder()
                             .fromGroup(group)
@@ -247,8 +240,6 @@ public class GroupActivity
             @Override
             public void onClick(View view) {
                 if (validateSelection()) {
-                    AnalyticsHelper.getInstance().fireSecretVotingEvent();
-
                     DialogFragment pinEntryFragment = PinEntryDialogFragment
                             .newInstance(SecretVotingActivity.class.getSimpleName(),
                                     getString(R.string.secret_voting_pin_enter_pin));
@@ -261,8 +252,6 @@ public class GroupActivity
             @Override
             public void onClick(View view) {
                 if (validateSelection()) {
-                    AnalyticsHelper.getInstance().fireCombinationEvent();
-
                     Group newGroup = new Group.Builder()
                             .fromGroup(group)
                             .setItems(group.getSelectedItems())
@@ -324,8 +313,6 @@ public class GroupActivity
 
             startActivity(Intent.createChooser(fileHelper.createFileShareIntent(uri), getResources().getText(R.string.group_action_share)));
         }
-
-        AnalyticsHelper.getInstance().fireShareGroupEvent();
     }
 
     private void showTutorial() {

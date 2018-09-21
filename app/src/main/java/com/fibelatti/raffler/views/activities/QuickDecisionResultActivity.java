@@ -12,7 +12,6 @@ import android.widget.TextView;
 
 import com.fibelatti.raffler.Constants;
 import com.fibelatti.raffler.R;
-import com.fibelatti.raffler.helpers.AnalyticsHelper;
 import com.fibelatti.raffler.models.QuickDecision;
 import com.fibelatti.raffler.utils.ImageUtils;
 import com.github.clans.fab.FloatingActionButton;
@@ -86,7 +85,5 @@ public class QuickDecisionResultActivity
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             getWindow().setStatusBarColor(color);
         }
-
-        AnalyticsHelper.getInstance().fireQuickDecisionEvent();
     }
 }

@@ -6,7 +6,6 @@ import android.database.sqlite.SQLiteConstraintException;
 import android.database.sqlite.SQLiteDatabase;
 
 import com.fibelatti.raffler.db.DbContentProvider;
-import com.fibelatti.raffler.helpers.AnalyticsHelper;
 import com.fibelatti.raffler.models.Settings;
 
 public class SettingsDao
@@ -62,38 +61,6 @@ public class SettingsDao
         currentSettings.setRouletteMusicEnabled(value);
         setContentValue(currentSettings);
         try {
-            AnalyticsHelper.getInstance().fireToggleSongEvent(value);
-            return super.update(SETTINGS_TABLE, getContentValue(), null, null) > 0;
-        } catch (SQLiteConstraintException ex) {
-            return false;
-        }
-    }
-
-    @Override
-    public boolean getCrashReportEnabled() {
-        boolean value = false;
-        cursor = super.query(SETTINGS_TABLE, SETTINGS_COLUMNS, null, null, null);
-
-        if (cursor != null) {
-            cursor.moveToFirst();
-
-            while (!cursor.isAfterLast()) {
-                value = cursorToEntity(cursor).getCrashReportEnabled();
-                cursor.moveToNext();
-            }
-            cursor.close();
-        }
-
-        return value;
-    }
-
-    @Override
-    public boolean setCrashReportEnabled(boolean value) {
-        Settings currentSettings = getSettings();
-        currentSettings.setCrashReportEnabled(value);
-        setContentValue(currentSettings);
-        try {
-            AnalyticsHelper.getInstance().fireFabricToggleEvent(value);
             return super.update(SETTINGS_TABLE, getContentValue(), null, null) > 0;
         } catch (SQLiteConstraintException ex) {
             return false;

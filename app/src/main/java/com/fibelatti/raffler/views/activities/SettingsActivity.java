@@ -8,7 +8,6 @@ import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.widget.Toolbar;
-import android.text.method.LinkMovementMethod;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -19,7 +18,6 @@ import android.widget.TextView;
 import com.fibelatti.raffler.Constants;
 import com.fibelatti.raffler.R;
 import com.fibelatti.raffler.db.Database;
-import com.fibelatti.raffler.helpers.AnalyticsHelper;
 import com.fibelatti.raffler.views.fragments.RateAppDialogFragment;
 
 import butterknife.BindView;
@@ -38,11 +36,6 @@ public class SettingsActivity
     CheckBox rouletteMusicCheckBox;
     @BindView(R.id.txt_roulette_music)
     TextView rouletteMusicText;
-
-    @BindView(R.id.chk_crash_report_opt_out)
-    CheckBox crashOptOutCheckBox;
-    @BindView(R.id.txt_crash_report_opt_out)
-    TextView crashOptOutHint;
 
     @BindView(R.id.button_share)
     Button buttonShare;
@@ -108,25 +101,9 @@ public class SettingsActivity
             }
         });
 
-        crashOptOutHint.setMovementMethod(LinkMovementMethod.getInstance());
-
-        crashOptOutCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (Database.settingsDao.setCrashReportEnabled(isChecked)) {
-                    Snackbar.make(layout, getString(R.string.settings_msg_save), Snackbar.LENGTH_LONG).show();
-                } else {
-                    crashOptOutCheckBox.setChecked(false);
-                    Snackbar.make(layout, getString(R.string.generic_msg_error), Snackbar.LENGTH_LONG).show();
-                }
-            }
-        });
-
         buttonShare.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AnalyticsHelper.getInstance().fireShareAppEvent();
-
                 String message = getString(R.string.settings_share_text, String.format("%s?id=%s", Constants.PLAY_STORE_BASE_URL, getPackageName()));
                 Intent share = new Intent(Intent.ACTION_SEND);
                 share.setType("text/plain");
@@ -139,8 +116,6 @@ public class SettingsActivity
         buttonRate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AnalyticsHelper.getInstance().fireRateAppEvent();
-
                 DialogFragment rateFragment = new RateAppDialogFragment();
                 rateFragment.show(getSupportFragmentManager(), RateAppDialogFragment.TAG);
             }
@@ -149,6 +124,5 @@ public class SettingsActivity
 
     private void fetchDataFromDb() {
         rouletteMusicCheckBox.setChecked(Database.settingsDao.getRouletteMusicEnabled());
-        crashOptOutCheckBox.setChecked(Database.settingsDao.getCrashReportEnabled());
     }
 }

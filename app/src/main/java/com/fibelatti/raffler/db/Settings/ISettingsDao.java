@@ -8,8 +8,4 @@ public interface ISettingsDao {
     boolean getRouletteMusicEnabled();
 
     boolean setRouletteMusicEnabled(boolean value);
-
-    boolean getCrashReportEnabled();
-
-    boolean setCrashReportEnabled(boolean value);
 }

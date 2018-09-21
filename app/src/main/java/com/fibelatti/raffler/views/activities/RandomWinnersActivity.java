@@ -19,7 +19,6 @@ import android.widget.ImageButton;
 
 import com.fibelatti.raffler.Constants;
 import com.fibelatti.raffler.R;
-import com.fibelatti.raffler.helpers.AnalyticsHelper;
 import com.fibelatti.raffler.models.Group;
 import com.fibelatti.raffler.models.GroupItem;
 import com.fibelatti.raffler.utils.AnimatorUtils;
@@ -134,8 +133,6 @@ public class RandomWinnersActivity
         fab_voting.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AnalyticsHelper.getInstance().fireSecretVotingEvent();
-
                 DialogFragment pinEntryFragment = PinEntryDialogFragment
                         .newInstance(SecretVotingActivity.class.getSimpleName(),
                                 getString(R.string.secret_voting_pin_enter_pin));
@@ -146,8 +143,6 @@ public class RandomWinnersActivity
         fab_combination.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AnalyticsHelper.getInstance().fireCombinationEvent();
-
                 Group newGroup = new Group.Builder()
                         .fromGroup(raffledGroup)
                         .setItems(raffledGroup.getItems())
