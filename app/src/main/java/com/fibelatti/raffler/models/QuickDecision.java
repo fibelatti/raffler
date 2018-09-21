@@ -8,9 +8,9 @@ import java.util.List;
 
 public class QuickDecision
         implements Parcelable {
-    String key;
-    String name;
-    List<String> values;
+    private String key;
+    private String name;
+    private List<String> values;
 
     private QuickDecision() {
     }

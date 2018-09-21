@@ -1,17 +1,15 @@
 package com.fibelatti.raffler.views.activities;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.TextInputLayout;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.WindowManager;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.RadioButton;
@@ -20,6 +18,7 @@ import com.fibelatti.raffler.Constants;
 import com.fibelatti.raffler.R;
 import com.fibelatti.raffler.models.Group;
 import com.fibelatti.raffler.models.GroupItem;
+import com.fibelatti.raffler.utils.KeyboardUtils;
 import com.fibelatti.raffler.utils.RandomizeUtils;
 import com.fibelatti.raffler.utils.StringUtils;
 import com.fibelatti.raffler.views.adapters.SubGroupsAdapter;
@@ -31,8 +30,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class SubGroupsActivity
-        extends BaseActivity {
-    private Context context;
+        extends AppCompatActivity {
+
     private Group group;
     private SubGroupsAdapter adapter;
     private ArrayList<Group> subgroups = new ArrayList<>();
@@ -60,9 +59,8 @@ public class SubGroupsActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        context = getApplicationContext();
         group = fetchDataFromIntent();
-        adapter = new SubGroupsAdapter(this, subgroups);
+        adapter = new SubGroupsAdapter(subgroups);
 
         setUpLayout();
         setUpRecyclerView();
@@ -100,8 +98,7 @@ public class SubGroupsActivity
             @Override
             public void onClick(View view) {
                 if (view != null) {
-                    InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-                    imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+                    KeyboardUtils.hideKeyboard(view);
                 }
 
                 raffle();
@@ -163,7 +160,7 @@ public class SubGroupsActivity
     private boolean validateQuantity(int quantity) {
         if (StringUtils.isNullOrEmpty(inputQuantity.getText().toString())) {
             subgroupsQuantityLayout.setError(getString(R.string.subgroups_msg_validate_quantity_empty));
-            requestFocus(inputQuantity);
+            KeyboardUtils.showKeyboard(inputQuantity);
             return false;
         } else {
             subgroupsQuantityLayout.setError(null);
@@ -172,7 +169,7 @@ public class SubGroupsActivity
 
         if (quantity == 0) {
             subgroupsQuantityLayout.setError(getString(R.string.subgroups_msg_validate_quantity_zero));
-            requestFocus(inputQuantity);
+            KeyboardUtils.showKeyboard(inputQuantity);
             return false;
         } else {
             subgroupsQuantityLayout.setError(null);
@@ -181,7 +178,7 @@ public class SubGroupsActivity
 
         if (quantity > getMaximumQuantity()) {
             subgroupsQuantityLayout.setError(getString(R.string.subgroups_msg_validate_quantity_maximum, getMaximumQuantity()));
-            requestFocus(inputQuantity);
+            KeyboardUtils.showKeyboard(inputQuantity);
             return false;
         } else {
             subgroupsQuantityLayout.setError(null);
@@ -195,11 +192,5 @@ public class SubGroupsActivity
         Double value = Math.max(Math.ceil((double) group.getItemsCount() / 2), 2);
 
         return value.intValue();
-    }
-
-    private void requestFocus(View view) {
-        if (view.requestFocus()) {
-            getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
-        }
     }
 }

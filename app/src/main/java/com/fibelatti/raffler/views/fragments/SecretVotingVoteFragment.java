@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -31,7 +32,6 @@ public class SecretVotingVoteFragment
         extends Fragment {
     public static final String TAG = SecretVotingVoteFragment.class.getSimpleName();
 
-    private Context context;
     private ISecretVotingVoteListener listener;
     private VoteAdapter adapter;
 
@@ -64,23 +64,22 @@ public class SecretVotingVoteFragment
         try {
             listener = (ISecretVotingVoteListener) context;
         } catch (ClassCastException castException) {
-            /** The activity does not implement the listener. */
+            /* The activity does not implement the listener. */
         }
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_secret_voting_vote, container, false);
     }
 
     @Override
-    public void onViewCreated(View view, Bundle savedInstanceState) {
+    public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         ButterKnife.bind(this, view);
 
-        context = getActivity();
-        adapter = new VoteAdapter(context);
+        adapter = new VoteAdapter();
 
         if (savedInstanceState != null) {
             this.group = savedInstanceState.getParcelable(Constants.INTENT_EXTRA_GROUP);
@@ -96,13 +95,13 @@ public class SecretVotingVoteFragment
         setUpRecyclerView();
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            getActivity().getWindow().setStatusBarColor(ContextCompat.getColor(context, R.color.colorWhiteOpaque));
+            getActivity().getWindow().setStatusBarColor(ContextCompat.getColor(getContext(), R.color.colorWhiteOpaque));
             getActivity().getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
         }
     }
 
     @Override
-    public void onSaveInstanceState(Bundle outState) {
+    public void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putParcelable(Constants.INTENT_EXTRA_GROUP, group);
     }
@@ -113,11 +112,11 @@ public class SecretVotingVoteFragment
     }
 
     private void setUpRecyclerView() {
-        recyclerView.setLayoutManager(new LinearLayoutManager(context));
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
-        recyclerView.addItemDecoration(new DividerItemDecoration(context, LinearLayoutManager.VERTICAL));
+        recyclerView.addItemDecoration(new DividerItemDecoration(recyclerView.getContext(), LinearLayoutManager.VERTICAL));
         recyclerView.setAdapter(adapter);
-        recyclerView.addOnItemTouchListener(new RecyclerTouchListener.Builder(context)
+        recyclerView.addOnItemTouchListener(new RecyclerTouchListener.Builder(getContext())
                 .setOnItemTouchListener(new RecyclerTouchListener.OnItemTouchListener() {
                     @Override
                     public void onItemTouch(View view, int position) {

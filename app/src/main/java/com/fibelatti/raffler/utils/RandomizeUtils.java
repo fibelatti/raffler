@@ -14,9 +14,7 @@ public class RandomizeUtils {
 
         Collections.shuffle(list);
 
-        if (quantity > limit) {
-            return list;
-        }
+        if (quantity > limit) return list;
 
         List<Integer> chosenNumbers = new ArrayList<>();
 

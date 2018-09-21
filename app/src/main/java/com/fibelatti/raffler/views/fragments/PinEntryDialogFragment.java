@@ -5,18 +5,19 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.TextView;
 
 import com.fibelatti.raffler.Constants;
 import com.fibelatti.raffler.R;
 import com.fibelatti.raffler.utils.EncryptUtils;
+import com.fibelatti.raffler.utils.KeyboardUtils;
 import com.fibelatti.raffler.utils.StringUtils;
 import com.fibelatti.raffler.views.extensions.PinEntryEditText;
 
@@ -27,7 +28,6 @@ public class PinEntryDialogFragment
         extends DialogFragment {
     public static final String TAG = PinEntryDialogFragment.class.getSimpleName();
 
-    private Context context;
     private IPinEntryListener listener;
     private SharedPreferences sharedPref;
 
@@ -55,8 +55,8 @@ public class PinEntryDialogFragment
     }
 
     @Override
+    @NonNull
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-        this.context = getActivity();
         this.sharedPref = getActivity().getSharedPreferences(Constants.PREF_NAME_PIN, Context.MODE_PRIVATE);
 
         View view = View.inflate(getContext(), R.layout.dialog_pin_entry, null);
@@ -78,7 +78,7 @@ public class PinEntryDialogFragment
             public void onShow(final DialogInterface dialog) {
                 Button buttonPositive = ((AlertDialog) dialog).getButton(DialogInterface.BUTTON_POSITIVE);
                 if (buttonPositive != null) {
-                    buttonPositive.setTextColor(ContextCompat.getColor(context, R.color.colorAccent));
+                    buttonPositive.setTextColor(ContextCompat.getColor(buttonPositive.getContext(), R.color.colorAccent));
                     buttonPositive.setOnClickListener(new View.OnClickListener() {
                         public void onClick(View view) {
                             if (validateForm()) {
@@ -102,12 +102,13 @@ public class PinEntryDialogFragment
                 }
 
                 Button buttonNegative = ((AlertDialog) dialog).getButton(DialogInterface.BUTTON_NEGATIVE);
-                if (buttonNegative != null)
-                    buttonNegative.setTextColor(ContextCompat.getColor(context, R.color.colorGray));
+                if (buttonNegative != null) {
+                    buttonNegative.setTextColor(ContextCompat.getColor(buttonNegative.getContext(), R.color.colorGray));
+                }
             }
         });
 
-        dialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
+        KeyboardUtils.showKeyboard(pinEntry);
 
         return dialog;
     }
@@ -118,7 +119,7 @@ public class PinEntryDialogFragment
         try {
             listener = (IPinEntryListener) context;
         } catch (ClassCastException castException) {
-            /** The activity does not implement the listener. */
+            /* The activity does not implement the listener. */
         }
     }
 
@@ -131,7 +132,7 @@ public class PinEntryDialogFragment
 
         if (StringUtils.isNullOrEmpty(input) || input.length() < 4) {
             layoutPinEntry.setError(getString(R.string.dialog_pin_msg_validate_length));
-            requestFocus(pinEntry);
+            KeyboardUtils.showKeyboard(pinEntry);
             return false;
         } else {
             layoutPinEntry.setError(null);
@@ -149,7 +150,7 @@ public class PinEntryDialogFragment
         } else if (!pin.equals(savedPin)) {
             layoutPinEntry.setError(getString(R.string.dialog_pin_msg_validate_pin));
             pinEntry.setText("");
-            requestFocus(pinEntry);
+            KeyboardUtils.showKeyboard(pinEntry);
             return false;
         } else {
             layoutPinEntry.setError(null);
@@ -157,11 +158,5 @@ public class PinEntryDialogFragment
         }
 
         return true;
-    }
-
-    private void requestFocus(View view) {
-        if (view.requestFocus()) {
-            getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
-        }
     }
 }

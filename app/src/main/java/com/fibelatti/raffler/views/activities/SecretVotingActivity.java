@@ -7,6 +7,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AppCompatActivity;
 
 import com.fibelatti.raffler.Constants;
 import com.fibelatti.raffler.R;
@@ -27,7 +28,7 @@ import com.fibelatti.raffler.views.fragments.SecretVotingVoteFragment;
 import java.util.LinkedHashMap;
 
 public class SecretVotingActivity
-        extends BaseActivity
+        extends AppCompatActivity
         implements ISecretVotingPresenterView, ISecretVotingMenuListener, ISecretVotingVoteListener, IPinEntryListener, ITieBreakListener {
     private SharedPreferences sharedPref;
     private ISecretVotingPresenter presenter;
@@ -46,7 +47,7 @@ public class SecretVotingActivity
         sharedPref = getSharedPreferences(Constants.PREF_NAME_PIN, Context.MODE_PRIVATE);
         pinBackup = sharedPref.getString(SecretVotingActivity.class.getSimpleName(), "");
 
-        presenter = SecretVotingPresenter.createPresenter(this);
+        presenter = new SecretVotingPresenter(this);
         if (savedInstanceState != null) {
             presenter.restoreGroup((Group) savedInstanceState.getParcelable(Constants.INTENT_EXTRA_GROUP));
             presenter.restoreVotes((LinkedHashMap<GroupItem, Integer>) savedInstanceState.getSerializable(Constants.INTENT_EXTRA_VOTES_MAP));
@@ -67,7 +68,6 @@ public class SecretVotingActivity
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        presenter.onDestroy();
 
         if (!keepPin) {
             SharedPreferences.Editor editor = sharedPref.edit();

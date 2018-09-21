@@ -19,20 +19,18 @@ import java.io.InputStream;
 import java.io.OutputStreamWriter;
 
 public class FileHelper {
-    private Context context;
 
-    private final String jsonPropertyGroupName = "name";
-    private final String jsonPropertyGroupItems = "items";
+    private static final String jsonPropertyGroupName = "name";
+    private static final String jsonPropertyGroupItems = "items";
 
-    public FileHelper(Context context) {
-        this.context = context;
+    private FileHelper() {
     }
 
-    public String getGroupFilePath() {
+    public static String getGroupFilePath(Context context) {
         return context.getFilesDir() + File.separator + Constants.FILE_PATH_EXPORTED_GROUP;
     }
 
-    public Intent createFileShareIntent(Uri uri) {
+    public static Intent createFileShareIntent(Uri uri) {
         Intent shareIntent = new Intent();
 
         shareIntent.setAction(Intent.ACTION_SEND);
@@ -43,7 +41,7 @@ public class FileHelper {
         return shareIntent;
     }
 
-    public boolean createFileFromGroup(Group group) {
+    public static boolean createFileFromGroup(Context context, Group group) {
 
         JSONObject groupJson = new JSONObject();
         try {
@@ -54,27 +52,27 @@ public class FileHelper {
             return false;
         }
 
-        writeToFile(groupJson.toString());
+        writeToFile(context, groupJson.toString());
 
         return true;
     }
 
-    private void writeToFile(String data) {
+    private static void writeToFile(Context context, String data) {
         try {
             OutputStreamWriter outputStreamWriter = new OutputStreamWriter(context.openFileOutput(Constants.FILE_PATH_EXPORTED_GROUP, Context.MODE_PRIVATE));
             outputStreamWriter.write(data);
             outputStreamWriter.close();
-        } catch (IOException e) {
+        } catch (IOException ignored) {
         }
     }
 
-    public Group readFromFile(Uri uri) {
-        String json = readJsonStringFromUri(uri);
+    public static Group readFromFile(Context context, Uri uri) {
+        String json = readJsonStringFromUri(context, uri);
 
         return convertJsonToGroup(json);
     }
 
-    private String readJsonStringFromUri(Uri data) {
+    private static String readJsonStringFromUri(Context context, Uri data) {
         final String scheme = data.getScheme();
 
         if (ContentResolver.SCHEME_CONTENT.equals(scheme)) {
@@ -99,7 +97,7 @@ public class FileHelper {
         return null;
     }
 
-    private Group convertJsonToGroup(String json) {
+    private static Group convertJsonToGroup(String json) {
         Group.Builder groupBuilder = new Group.Builder();
 
         try {

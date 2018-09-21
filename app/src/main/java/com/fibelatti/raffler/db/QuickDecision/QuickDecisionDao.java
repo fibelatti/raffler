@@ -17,7 +17,7 @@ public class QuickDecisionDao
 
     private Cursor cursor;
 
-    String locale = Constants.SUPPORTED_LOCALES.contains(Locale.getDefault().getLanguage()) ?
+    private String locale = Constants.SUPPORTED_LOCALES.contains(Locale.getDefault().getLanguage()) ?
             Locale.getDefault().getLanguage() : Constants.LOCALE_EN;
 
     public QuickDecisionDao(SQLiteDatabase db) {

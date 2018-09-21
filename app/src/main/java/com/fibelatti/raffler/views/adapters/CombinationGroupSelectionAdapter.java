@@ -1,6 +1,6 @@
 package com.fibelatti.raffler.views.adapters;
 
-import android.content.Context;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,7 +19,6 @@ import butterknife.ButterKnife;
 public class CombinationGroupSelectionAdapter
         extends RecyclerView.Adapter<CombinationGroupSelectionAdapter.GroupViewHolder> {
 
-    private Context context;
     private List<Group> groupList;
 
     public class GroupViewHolder
@@ -33,8 +32,7 @@ public class CombinationGroupSelectionAdapter
         }
     }
 
-    public CombinationGroupSelectionAdapter(Context context) {
-        this.context = context;
+    public CombinationGroupSelectionAdapter() {
         this.groupList = new ArrayList<>();
     }
 
@@ -45,12 +43,9 @@ public class CombinationGroupSelectionAdapter
         notifyDataSetChanged();
     }
 
-    private Context getContext() {
-        return context;
-    }
-
     @Override
-    public GroupViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    @NonNull
+    public GroupViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.list_row_combination_group, parent, false);
 
@@ -58,7 +53,7 @@ public class CombinationGroupSelectionAdapter
     }
 
     @Override
-    public void onBindViewHolder(GroupViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull GroupViewHolder holder, int position) {
         Group group = groupList.get(position);
 
         holder.name.setText(group.getName());

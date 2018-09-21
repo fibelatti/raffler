@@ -4,6 +4,7 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
@@ -27,7 +28,6 @@ public class TieBreakDialogFragment
         extends DialogFragment {
     public static final String TAG = TieBreakDialogFragment.class.getSimpleName();
 
-    private Context context;
     private ITieBreakListener listener;
     private TieBreakAdapter adapter;
 
@@ -55,14 +55,14 @@ public class TieBreakDialogFragment
         try {
             listener = (ITieBreakListener) context;
         } catch (ClassCastException castException) {
-            /** The activity does not implement the listener. */
+            /* The activity does not implement the listener. */
         }
     }
 
     @Override
+    @NonNull
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-        this.context = getActivity();
-        this.adapter = new TieBreakAdapter(context);
+        this.adapter = new TieBreakAdapter();
 
         View view = View.inflate(getContext(), R.layout.dialog_tie_break, null);
         ButterKnife.bind(this, view);
@@ -89,8 +89,9 @@ public class TieBreakDialogFragment
             @Override
             public void onShow(final DialogInterface dialog) {
                 Button buttonNegative = ((AlertDialog) dialog).getButton(DialogInterface.BUTTON_NEGATIVE);
-                if (buttonNegative != null)
-                    buttonNegative.setTextColor(ContextCompat.getColor(context, R.color.colorGray));
+                if (buttonNegative != null) {
+                    buttonNegative.setTextColor(ContextCompat.getColor(buttonNegative.getContext(), R.color.colorGray));
+                }
             }
         });
 
@@ -114,9 +115,9 @@ public class TieBreakDialogFragment
     }
 
     private void setUpRecyclerView() {
-        recyclerView.setLayoutManager(new LinearLayoutManager(context));
+        recyclerView.setLayoutManager(new LinearLayoutManager(recyclerView.getContext()));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
-        recyclerView.addItemDecoration(new DividerItemDecoration(context, LinearLayoutManager.VERTICAL));
+        recyclerView.addItemDecoration(new DividerItemDecoration(recyclerView.getContext(), LinearLayoutManager.VERTICAL));
         recyclerView.setAdapter(adapter);
     }
 }

@@ -4,18 +4,18 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.view.View;
-import android.view.WindowManager;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 
 import com.fibelatti.raffler.Constants;
 import com.fibelatti.raffler.R;
+import com.fibelatti.raffler.utils.KeyboardUtils;
 import com.fibelatti.raffler.utils.StringUtils;
 
 import butterknife.BindView;
@@ -25,7 +25,6 @@ public class EditNameDialogFragment
         extends DialogFragment {
     public static final String TAG = EditNameDialogFragment.class.getSimpleName();
 
-    private Context context;
     private IEditNameListener listener;
 
     @BindView(R.id.input_new_name)
@@ -47,9 +46,8 @@ public class EditNameDialogFragment
     }
 
     @Override
+    @NonNull
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-        this.context = getActivity();
-
         View view = View.inflate(getContext(), R.layout.dialog_edit_item, null);
         ButterKnife.bind(this, view);
 
@@ -67,8 +65,7 @@ public class EditNameDialogFragment
         }
 
         newName.setFocusableInTouchMode(true);
-        newName.requestFocus();
-        ((InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE)).showSoftInput(newName, InputMethodManager.SHOW_IMPLICIT);
+        KeyboardUtils.showKeyboard(newName);
         newName.setSelection(newName.getText().length());
 
         dialog.setOnShowListener(new DialogInterface.OnShowListener() {
@@ -76,7 +73,7 @@ public class EditNameDialogFragment
             public void onShow(final DialogInterface dialog) {
                 Button buttonPositive = ((AlertDialog) dialog).getButton(DialogInterface.BUTTON_POSITIVE);
                 if (buttonPositive != null) {
-                    buttonPositive.setTextColor(ContextCompat.getColor(context, R.color.colorAccent));
+                    buttonPositive.setTextColor(ContextCompat.getColor(getActivity(), R.color.colorAccent));
                     buttonPositive.setOnClickListener(new View.OnClickListener() {
                         public void onClick(View view) {
                             if (validateForm()) {
@@ -88,8 +85,9 @@ public class EditNameDialogFragment
                 }
 
                 Button buttonNegative = ((AlertDialog) dialog).getButton(DialogInterface.BUTTON_NEGATIVE);
-                if (buttonNegative != null)
-                    buttonNegative.setTextColor(ContextCompat.getColor(context, R.color.colorGray));
+                if (buttonNegative != null) {
+                    buttonNegative.setTextColor(ContextCompat.getColor(getActivity(), R.color.colorGray));
+                }
             }
         });
 
@@ -102,7 +100,7 @@ public class EditNameDialogFragment
         try {
             listener = (IEditNameListener) context;
         } catch (ClassCastException castException) {
-            /** The activity does not implement the listener. */
+            /* The activity does not implement the listener. */
         }
     }
 
@@ -119,7 +117,7 @@ public class EditNameDialogFragment
     private boolean validateName() {
         if (StringUtils.isNullOrEmpty(newName.getText().toString())) {
             newNameLayout.setError(getString(R.string.group_form_msg_validate_item_name));
-            requestFocus(newName);
+            KeyboardUtils.showKeyboard(newName);
             return false;
         } else {
             newNameLayout.setError(null);
@@ -127,11 +125,5 @@ public class EditNameDialogFragment
         }
 
         return true;
-    }
-
-    private void requestFocus(View view) {
-        if (view.requestFocus()) {
-            getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
-        }
     }
 }

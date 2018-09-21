@@ -1,12 +1,12 @@
 package com.fibelatti.raffler.views.activities;
 
-import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.TextView;
 
@@ -22,9 +22,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class QuickDecisionResultActivity
-        extends BaseActivity {
-    private Context context;
-    private QuickDecision quickDecision;
+        extends AppCompatActivity {
 
     //region layout bindings
     @BindView(R.id.coordinator_layout)
@@ -39,8 +37,6 @@ public class QuickDecisionResultActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        context = getApplicationContext();
-
         setUpLayout();
         setUpFab();
         setUpValues();
@@ -50,7 +46,7 @@ public class QuickDecisionResultActivity
     protected void onDestroy() {
         super.onDestroy();
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            getWindow().setStatusBarColor(ContextCompat.getColor(context, R.color.colorPrimary));
+            getWindow().setStatusBarColor(ContextCompat.getColor(this, R.color.colorPrimary));
         }
     }
 
@@ -69,12 +65,12 @@ public class QuickDecisionResultActivity
     }
 
     private void setUpValues() {
-        quickDecision = getIntent().getParcelableExtra(Constants.INTENT_EXTRA_QUICK_DECISION);
+        QuickDecision quickDecision = getIntent().getParcelableExtra(Constants.INTENT_EXTRA_QUICK_DECISION);
 
         int randomIndex = new Random().nextInt(quickDecision.getValuesCount());
         boolean isOdd = (randomIndex & 0x01) != 0;
-        int color = ContextCompat.getColor(context, isOdd ? R.color.colorAccent : R.color.colorPrimary);
-        Drawable sourceDrawable = ContextCompat.getDrawable(context, R.drawable.ic_close_white_36dp);
+        int color = ContextCompat.getColor(this, isOdd ? R.color.colorAccent : R.color.colorPrimary);
+        Drawable sourceDrawable = ContextCompat.getDrawable(this, R.drawable.ic_close_white_36dp);
         Bitmap sourceBitmap = ImageUtils.convertDrawableToBitmap(sourceDrawable);
         Bitmap changedBitmap = ImageUtils.changeImageColor(sourceBitmap, color);
 

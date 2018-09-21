@@ -1,6 +1,6 @@
 package com.fibelatti.raffler.views.adapters;
 
-import android.content.Context;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,7 +19,6 @@ import butterknife.ButterKnife;
 public class TieBreakAdapter
         extends RecyclerView.Adapter<TieBreakAdapter.GroupItemViewHolder> {
 
-    private Context context;
     private List<GroupItem> groupItems;
 
     public class GroupItemViewHolder
@@ -33,8 +32,7 @@ public class TieBreakAdapter
         }
     }
 
-    public TieBreakAdapter(Context context) {
-        this.context = context;
+    public TieBreakAdapter() {
         this.groupItems = new ArrayList<>();
     }
 
@@ -45,12 +43,9 @@ public class TieBreakAdapter
         notifyDataSetChanged();
     }
 
-    private Context getContext() {
-        return context;
-    }
-
     @Override
-    public GroupItemViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    @NonNull
+    public GroupItemViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.list_row_simple_group_item, parent, false);
 
@@ -58,7 +53,7 @@ public class TieBreakAdapter
     }
 
     @Override
-    public void onBindViewHolder(GroupItemViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull GroupItemViewHolder holder, int position) {
         GroupItem groupItem = groupItems.get(position);
 
         holder.itemName.setText(groupItem.getName());

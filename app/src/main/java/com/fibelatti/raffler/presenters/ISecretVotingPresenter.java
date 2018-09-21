@@ -6,14 +6,6 @@ import com.fibelatti.raffler.models.GroupItem;
 import java.util.LinkedHashMap;
 
 public interface ISecretVotingPresenter {
-    void onCreate();
-
-    void onPause();
-
-    void onResume();
-
-    void onDestroy();
-
     void newVote();
 
     void addVote(GroupItem groupItem);

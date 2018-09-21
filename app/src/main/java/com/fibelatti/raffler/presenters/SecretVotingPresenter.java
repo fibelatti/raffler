@@ -12,36 +12,10 @@ public class SecretVotingPresenter
     private Group group;
     private LinkedHashMap<GroupItem, Integer> votesMap;
 
-    private SecretVotingPresenter(ISecretVotingPresenterView view) {
+    public SecretVotingPresenter(ISecretVotingPresenterView view) {
         this.view = view;
         this.group = new Group.Builder().build();
         this.votesMap = new LinkedHashMap<>();
-    }
-
-    public static SecretVotingPresenter createPresenter(ISecretVotingPresenterView view) {
-        return new SecretVotingPresenter(view);
-    }
-
-    @Override
-    public void onCreate() {
-
-    }
-
-    @Override
-    public void onPause() {
-
-    }
-
-    @Override
-    public void onResume() {
-
-    }
-
-    @Override
-    public void onDestroy() {
-        this.view = null;
-        this.group = null;
-        this.votesMap = null;
     }
 
     @Override

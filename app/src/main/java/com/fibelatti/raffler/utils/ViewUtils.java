@@ -31,6 +31,9 @@ import android.view.View;
  */
 public class ViewUtils {
 
+    private ViewUtils() {
+    }
+
     /**
      * Get center child in X Axes
      */
@@ -95,7 +98,7 @@ public class ViewUtils {
         return childCount;
     }
 
-    public static boolean isChildInCenterX(RecyclerView recyclerView, View view) {
+    private static boolean isChildInCenterX(RecyclerView recyclerView, View view) {
         int childCount = recyclerView.getChildCount();
         int[] lvLocationOnScreen = new int[2];
         int[] vLocationOnScreen = new int[2];
@@ -103,14 +106,12 @@ public class ViewUtils {
         int middleX = lvLocationOnScreen[0] + recyclerView.getWidth() / 2;
         if (childCount > 0) {
             view.getLocationOnScreen(vLocationOnScreen);
-            if (vLocationOnScreen[0] <= middleX && vLocationOnScreen[0] + view.getWidth() >= middleX) {
-                return true;
-            }
+            return vLocationOnScreen[0] <= middleX && vLocationOnScreen[0] + view.getWidth() >= middleX;
         }
         return false;
     }
 
-    public static boolean isChildInCenterY(RecyclerView recyclerView, View view) {
+    private static boolean isChildInCenterY(RecyclerView recyclerView, View view) {
         int childCount = recyclerView.getChildCount();
         int[] lvLocationOnScreen = new int[2];
         int[] vLocationOnScreen = new int[2];
@@ -118,9 +119,7 @@ public class ViewUtils {
         int middleY = lvLocationOnScreen[1] + recyclerView.getHeight() / 2;
         if (childCount > 0) {
             view.getLocationOnScreen(vLocationOnScreen);
-            if (vLocationOnScreen[1] <= middleY && vLocationOnScreen[1] + view.getHeight() >= middleY) {
-                return true;
-            }
+            return vLocationOnScreen[1] <= middleY && vLocationOnScreen[1] + view.getHeight() >= middleY;
         }
         return false;
     }

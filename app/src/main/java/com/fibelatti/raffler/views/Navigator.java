@@ -33,12 +33,14 @@ public class Navigator {
     }
 
     public static void startGroupFormActivity(Activity activity) {
-        startGroupFormActivity(activity,null);
+        startGroupFormActivity(activity, null);
     }
 
     public static void startGroupFormActivity(Activity activity, Group group) {
         Intent intent = new Intent(activity, GroupFormActivity.class);
-        if (group != null) intent.putExtra(Constants.INTENT_EXTRA_GROUP, group);
+        if (group != null) {
+            intent.putExtra(Constants.INTENT_EXTRA_GROUP, group);
+        }
         activity.startActivityForResult(intent, Constants.REQUEST_CODE_GROUP_EDIT);
     }
 

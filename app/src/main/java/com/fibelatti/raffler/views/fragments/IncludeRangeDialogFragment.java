@@ -9,12 +9,12 @@ import android.support.v4.app.DialogFragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 
 import com.fibelatti.raffler.Constants;
 import com.fibelatti.raffler.R;
+import com.fibelatti.raffler.utils.KeyboardUtils;
 import com.fibelatti.raffler.utils.StringUtils;
 
 import butterknife.BindView;
@@ -24,7 +24,6 @@ public class IncludeRangeDialogFragment
         extends DialogFragment {
     public static final String TAG = IncludeRangeDialogFragment.class.getSimpleName();
 
-    private Context context;
     private IIncludeRangeListener listener;
 
     @BindView(R.id.input_initial_number)
@@ -41,8 +40,6 @@ public class IncludeRangeDialogFragment
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-        this.context = getActivity();
-
         View view = View.inflate(getContext(), R.layout.dialog_include_number_range, null);
         ButterKnife.bind(this, view);
 
@@ -63,7 +60,7 @@ public class IncludeRangeDialogFragment
             public void onShow(final DialogInterface dialog) {
                 Button buttonPositive = ((AlertDialog) dialog).getButton(DialogInterface.BUTTON_POSITIVE);
                 if (buttonPositive != null) {
-                    buttonPositive.setTextColor(ContextCompat.getColor(context, R.color.colorAccent));
+                    buttonPositive.setTextColor(ContextCompat.getColor(getActivity(), R.color.colorAccent));
                     buttonPositive.setOnClickListener(new View.OnClickListener() {
                         public void onClick(View view) {
                             if (validateForm()) {
@@ -78,8 +75,9 @@ public class IncludeRangeDialogFragment
                 }
 
                 Button buttonNegative = ((AlertDialog) dialog).getButton(DialogInterface.BUTTON_NEGATIVE);
-                if (buttonNegative != null)
-                    buttonNegative.setTextColor(ContextCompat.getColor(context, R.color.colorGray));
+                if (buttonNegative != null) {
+                    buttonNegative.setTextColor(ContextCompat.getColor(getActivity(), R.color.colorGray));
+                }
             }
         });
 
@@ -92,7 +90,7 @@ public class IncludeRangeDialogFragment
         try {
             listener = (IIncludeRangeListener) context;
         } catch (ClassCastException castException) {
-            /** The activity does not implement the listener. */
+            /* The activity does not implement the listener. */
         }
     }
 
@@ -110,7 +108,7 @@ public class IncludeRangeDialogFragment
     private boolean validateInitialNumber() {
         if (StringUtils.isNullOrEmpty(initialNumber.getText().toString())) {
             initialNumberLayout.setError(getString(R.string.group_form_msg_validate_initial_number));
-            requestFocus(initialNumber);
+            KeyboardUtils.showKeyboard(initialNumber);
             return false;
         } else {
             initialNumberLayout.setError(null);
@@ -126,11 +124,11 @@ public class IncludeRangeDialogFragment
 
         if (StringUtils.isNullOrEmpty(finalNumberValue)) {
             finalNumberLayout.setError(getString(R.string.group_form_msg_validate_final_number_empty));
-            requestFocus(finalNumber);
+            KeyboardUtils.showKeyboard(finalNumber);
             return false;
         } else if (validateInitialNumber() && !isValidRange(initialNumberValue, finalNumberValue)) {
             finalNumberLayout.setError(getString(R.string.group_form_msg_validate_final_number_greater));
-            requestFocus(finalNumber);
+            KeyboardUtils.showKeyboard(finalNumber);
             return false;
         } else {
             finalNumberLayout.setError(null);
@@ -142,11 +140,5 @@ public class IncludeRangeDialogFragment
 
     private boolean isValidRange(String initialNumber, String finalNumber) {
         return Integer.valueOf(initialNumber) < Integer.valueOf(finalNumber);
-    }
-
-    private void requestFocus(View view) {
-        if (view.requestFocus()) {
-            getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
-        }
     }
 }

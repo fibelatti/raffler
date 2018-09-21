@@ -29,8 +29,9 @@ public class AlertDialogHelper {
         dialog.show();
 
         Button buttonPositive = dialog.getButton(DialogInterface.BUTTON_POSITIVE);
-        if (buttonPositive != null)
+        if (buttonPositive != null) {
             buttonPositive.setTextColor(ContextCompat.getColor(context, R.color.colorAccent));
+        }
     }
 
     public static void createYesNoDialog(
@@ -54,11 +55,13 @@ public class AlertDialogHelper {
         dialog.show();
 
         Button buttonPositive = dialog.getButton(DialogInterface.BUTTON_POSITIVE);
-        if (buttonPositive != null)
+        if (buttonPositive != null) {
             buttonPositive.setTextColor(ContextCompat.getColor(context, R.color.colorGray));
+        }
 
         Button buttonNegative = dialog.getButton(DialogInterface.BUTTON_NEGATIVE);
-        if (buttonNegative != null)
+        if (buttonNegative != null) {
             buttonNegative.setTextColor(ContextCompat.getColor(context, R.color.colorAccent));
+        }
     }
 }

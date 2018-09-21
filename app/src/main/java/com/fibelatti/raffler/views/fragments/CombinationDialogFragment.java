@@ -4,6 +4,7 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.content.ContextCompat;
@@ -13,7 +14,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TabHost;
@@ -23,6 +23,7 @@ import com.fibelatti.raffler.R;
 import com.fibelatti.raffler.db.Database;
 import com.fibelatti.raffler.models.Group;
 import com.fibelatti.raffler.models.GroupItem;
+import com.fibelatti.raffler.utils.KeyboardUtils;
 import com.fibelatti.raffler.utils.StringUtils;
 import com.fibelatti.raffler.views.adapters.CombinationGroupSelectionAdapter;
 import com.fibelatti.raffler.views.extensions.DividerItemDecoration;
@@ -46,7 +47,6 @@ public class CombinationDialogFragment
     private static final String COMBINATION_INSTANCE_SELECTED_TAB = "Selected Tab";
     private static final String COMBINATION_INSTANCE_TYPED_ITEMS = "Typed Items";
 
-    private Context context;
     private ICombinationListener listener;
     private CombinationGroupSelectionAdapter adapter;
     private List<Group> groupList;
@@ -87,15 +87,15 @@ public class CombinationDialogFragment
     }
 
     @Override
+    @NonNull
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-        this.context = getActivity();
-        this.adapter = new CombinationGroupSelectionAdapter(context);
+        this.adapter = new CombinationGroupSelectionAdapter();
         this.groupList = new ArrayList<>();
 
         View view = View.inflate(getContext(), R.layout.dialog_combination_selection, null);
         ButterKnife.bind(this, view);
 
-        final AlertDialog dialog = new AlertDialog.Builder(getActivity())
+        final AlertDialog dialog = new AlertDialog.Builder(getContext())
                 .setView(view)
                 .setTitle(getString(R.string.combination_dialog_title))
                 .setNegativeButton(R.string.group_form_dialog_hint_cancel, null)
@@ -105,8 +105,9 @@ public class CombinationDialogFragment
             @Override
             public void onShow(final DialogInterface dialog) {
                 Button buttonNegative = ((AlertDialog) dialog).getButton(DialogInterface.BUTTON_NEGATIVE);
-                if (buttonNegative != null)
-                    buttonNegative.setTextColor(ContextCompat.getColor(context, R.color.colorGray));
+                if (buttonNegative != null) {
+                    buttonNegative.setTextColor(ContextCompat.getColor(buttonNegative.getContext(), R.color.colorGray));
+                }
             }
         });
 
@@ -133,7 +134,7 @@ public class CombinationDialogFragment
         try {
             listener = (ICombinationListener) context;
         } catch (ClassCastException castException) {
-            /** The activity does not implement the listener. */
+            /* The activity does not implement the listener. */
         }
     }
 
@@ -161,12 +162,12 @@ public class CombinationDialogFragment
     }
 
     private void setUpRecyclerView() {
-        recyclerView.setLayoutManager(new LinearLayoutManager(context));
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
-        recyclerView.addItemDecoration(new DividerItemDecoration(context, LinearLayoutManager.VERTICAL));
+        recyclerView.addItemDecoration(new DividerItemDecoration(recyclerView.getContext(), LinearLayoutManager.VERTICAL));
         recyclerView.setAdapter(adapter);
 
-        recyclerView.addOnItemTouchListener(new RecyclerTouchListener.Builder(context)
+        recyclerView.addOnItemTouchListener(new RecyclerTouchListener.Builder(getContext())
                 .setOnItemTouchListener(new RecyclerTouchListener.OnItemTouchListener() {
                     @Override
                     public void onItemTouch(View view, int position) {
@@ -179,6 +180,7 @@ public class CombinationDialogFragment
 
     private void fetchData() {
         if (!groupList.isEmpty()) groupList.clear();
+
         groupList.addAll(Database.groupDao.fetchAllGroups());
         adapter.setGroups(groupList);
     }
@@ -190,7 +192,7 @@ public class CombinationDialogFragment
     private boolean validateInput() {
         if (StringUtils.isNullOrEmpty(inputItems.getText().toString())) {
             inputItemsLayout.setError(getString(R.string.combination_dialog_form_msg_validate_input));
-            requestFocus(inputItems);
+            KeyboardUtils.showKeyboard(inputItems);
             return false;
         } else {
             inputItemsLayout.setError(null);
@@ -198,12 +200,6 @@ public class CombinationDialogFragment
         }
 
         return true;
-    }
-
-    private void requestFocus(View view) {
-        if (view.requestFocus()) {
-            getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
-        }
     }
 
     @OnClick(R.id.button_finish_typing)

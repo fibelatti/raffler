@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.DialogFragment;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
@@ -24,7 +25,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class SettingsActivity
-        extends BaseActivity {
+        extends AppCompatActivity {
 
     //region layout bindings
     @BindView(R.id.coordinator_layout)

@@ -4,14 +4,6 @@ import com.fibelatti.raffler.models.Group;
 import com.fibelatti.raffler.models.GroupItem;
 
 public interface IGroupFormPresenter {
-    void onCreate();
-
-    void onPause();
-
-    void onResume();
-
-    void onDestroy();
-
     void restoreGroup(Group group);
 
     boolean saveGroup();

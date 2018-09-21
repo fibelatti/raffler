@@ -1,12 +1,12 @@
 package com.fibelatti.raffler.views.activities;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.MenuItemCompat;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -41,9 +41,8 @@ import uk.co.deanwild.materialshowcaseview.MaterialShowcaseSequence;
 import uk.co.deanwild.materialshowcaseview.MaterialShowcaseView;
 
 public class MainActivity
-        extends BaseActivity
+        extends AppCompatActivity
         implements SearchView.OnQueryTextListener {
-    private Context context;
 
     private List<Group> groupList;
     private MainAdapter groupsAdapter;
@@ -72,11 +71,10 @@ public class MainActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        context = getApplicationContext();
         groupList = new ArrayList<>();
-        groupsAdapter = new MainAdapter(this);
+        groupsAdapter = new MainAdapter();
         quickDecisionList = new ArrayList<>();
-        quickDecisionAdapter = new QuickDecisionAdapter(this);
+        quickDecisionAdapter = new QuickDecisionAdapter();
 
         setUpLayout();
         setUpRecyclerView();
@@ -217,11 +215,11 @@ public class MainActivity
                         .setTarget(toolbar)
                         .withButtonDismissStyle()
                         .withPinkDismissButton()
-                        .setDismissTextColor(ContextCompat.getColor(context, R.color.colorWhite))
+                        .setDismissTextColor(ContextCompat.getColor(this, R.color.colorWhite))
                         .setDismissText(getString(R.string.hint_got_it))
                         .setSkipText(getString(R.string.hint_skip_tutorial))
                         .setContentText(getString(R.string.main_tutorial_intro))
-                        .setMaskColour(ContextCompat.getColor(context, R.color.colorPrimary))
+                        .setMaskColour(ContextCompat.getColor(this, R.color.colorPrimary))
                         .withoutShape()
                         .build()
         );
@@ -231,11 +229,11 @@ public class MainActivity
                         .setTarget(quickDecisionLayout)
                         .withButtonDismissStyle()
                         .withPinkDismissButton()
-                        .setDismissTextColor(ContextCompat.getColor(context, R.color.colorWhite))
+                        .setDismissTextColor(ContextCompat.getColor(this, R.color.colorWhite))
                         .setDismissText(getString(R.string.hint_got_it))
                         .setSkipText(getString(R.string.hint_skip_tutorial))
                         .setContentText(getString(R.string.main_tutorial_quick_decision))
-                        .setMaskColour(ContextCompat.getColor(context, R.color.colorPrimary))
+                        .setMaskColour(ContextCompat.getColor(this, R.color.colorPrimary))
                         .withRectangleShape(true)
                         .setDelay(200)
                         .build()
@@ -246,10 +244,10 @@ public class MainActivity
                         .setTarget(fab)
                         .withButtonDismissStyle()
                         .withPinkDismissButton()
-                        .setDismissTextColor(ContextCompat.getColor(context, R.color.colorWhite))
+                        .setDismissTextColor(ContextCompat.getColor(this, R.color.colorWhite))
                         .setDismissText(getString(R.string.hint_got_it))
                         .setContentText(getString(R.string.main_tutorial_add_group))
-                        .setMaskColour(ContextCompat.getColor(context, R.color.colorPrimary))
+                        .setMaskColour(ContextCompat.getColor(this, R.color.colorPrimary))
                         .setDelay(200)
                         .build()
         );

@@ -1,7 +1,5 @@
 package com.fibelatti.raffler.presenters;
 
-import android.content.Context;
-
 import com.fibelatti.raffler.db.Database;
 import com.fibelatti.raffler.models.Group;
 import com.fibelatti.raffler.models.GroupItem;
@@ -12,40 +10,14 @@ import java.util.List;
 public class GroupFormPresenter
         implements IGroupFormPresenter {
 
-    private Context context;
     private IGroupFormPresenterView view;
 
     private Group group;
     private Integer editIndex;
 
-    private GroupFormPresenter(Context context, IGroupFormPresenterView view) {
-        this.context = context;
+    public GroupFormPresenter(IGroupFormPresenterView view) {
         this.view = view;
         this.group = new Group.Builder().build();
-    }
-
-    public static GroupFormPresenter createPresenter(Context context, IGroupFormPresenterView view) {
-        return new GroupFormPresenter(context, view);
-    }
-
-    @Override
-    public void onCreate() {
-
-    }
-
-    @Override
-    public void onPause() {
-
-    }
-
-    @Override
-    public void onResume() {
-
-    }
-
-    @Override
-    public void onDestroy() {
-
     }
 
     @Override
@@ -94,7 +66,9 @@ public class GroupFormPresenter
 
     @Override
     public void unselectAllItems() {
-        setSelectedToItems(false);
+        for (GroupItem item : group.getItems()) {
+            item.setSelected(false);
+        }
         view.onGroupChanged(group);
     }
 
@@ -112,11 +86,5 @@ public class GroupFormPresenter
     public void deleteAllItems() {
         group.removeAllItems();
         view.onGroupChanged(group);
-    }
-
-    private void setSelectedToItems(boolean value) {
-        for (GroupItem item : group.getItems()) {
-            item.setSelected(value);
-        }
     }
 }

@@ -1,19 +1,17 @@
 package com.fibelatti.raffler.views.activities;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.DialogFragment;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.WindowManager;
 import android.view.animation.AnimationUtils;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageButton;
 
@@ -22,6 +20,7 @@ import com.fibelatti.raffler.R;
 import com.fibelatti.raffler.models.Group;
 import com.fibelatti.raffler.models.GroupItem;
 import com.fibelatti.raffler.utils.AnimatorUtils;
+import com.fibelatti.raffler.utils.KeyboardUtils;
 import com.fibelatti.raffler.utils.RandomizeUtils;
 import com.fibelatti.raffler.utils.StringUtils;
 import com.fibelatti.raffler.views.Navigator;
@@ -38,9 +37,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class RandomWinnersActivity
-        extends BaseActivity
+        extends AppCompatActivity
         implements IPinEntryListener {
-    private Context context;
     private Group group;
     private Group raffledGroup;
     private RandomWinnersAdapter adapter;
@@ -71,9 +69,8 @@ public class RandomWinnersActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        context = getApplicationContext();
         group = fetchDataFromIntent();
-        adapter = new RandomWinnersAdapter(this, winners);
+        adapter = new RandomWinnersAdapter(winners);
 
         setUpLayout();
         setUpRecyclerView();
@@ -112,8 +109,7 @@ public class RandomWinnersActivity
             @Override
             public void onClick(View view) {
                 if (view != null) {
-                    InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-                    imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+                    KeyboardUtils.hideKeyboard(view);
                 }
 
                 raffleWinners();
@@ -182,7 +178,7 @@ public class RandomWinnersActivity
     private boolean validateQuantity() {
         if (StringUtils.isNullOrEmpty(winnersQuantity.getText().toString())) {
             winnersQuantityLayout.setError(getString(R.string.subgroups_msg_validate_quantity_empty));
-            requestFocus(winnersQuantity);
+            KeyboardUtils.showKeyboard(winnersQuantity);
             return false;
         } else {
             winnersQuantityLayout.setError(null);
@@ -193,7 +189,7 @@ public class RandomWinnersActivity
 
         if (quantity >= group.getItemsCount()) {
             winnersQuantityLayout.setError(getString(R.string.random_winners_msg_validate_quantity, group.getItemsCount()));
-            requestFocus(winnersQuantity);
+            KeyboardUtils.showKeyboard(winnersQuantity);
             return false;
         } else {
             winnersQuantityLayout.setError(null);
@@ -201,12 +197,6 @@ public class RandomWinnersActivity
         }
 
         return true;
-    }
-
-    private void requestFocus(View view) {
-        if (view.requestFocus()) {
-            getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
-        }
     }
 
     @Override

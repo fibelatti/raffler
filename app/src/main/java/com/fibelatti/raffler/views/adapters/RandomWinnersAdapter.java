@@ -1,6 +1,6 @@
 package com.fibelatti.raffler.views.adapters;
 
-import android.content.Context;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,7 +17,6 @@ import butterknife.ButterKnife;
 public class RandomWinnersAdapter
         extends RecyclerView.Adapter<RandomWinnersAdapter.GroupViewHolder> {
 
-    private Context context;
     private List<String> winnersList;
 
     public class GroupViewHolder
@@ -33,17 +32,13 @@ public class RandomWinnersAdapter
         }
     }
 
-    public RandomWinnersAdapter(Context context, List<String> winnersList) {
-        this.context = context;
+    public RandomWinnersAdapter(List<String> winnersList) {
         this.winnersList = winnersList;
     }
 
-    private Context getContext() {
-        return context;
-    }
-
     @Override
-    public GroupViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    @NonNull
+    public GroupViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.list_row_random_winners, parent, false);
 
@@ -51,10 +46,10 @@ public class RandomWinnersAdapter
     }
 
     @Override
-    public void onBindViewHolder(GroupViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull GroupViewHolder holder, int position) {
         String winner = winnersList.get(position);
 
-        holder.number.setText(context.getString(R.string.random_winners_msg_result, position + 1));
+        holder.number.setText(holder.itemView.getContext().getString(R.string.random_winners_msg_result, position + 1));
         holder.name.setText(winner);
     }
 

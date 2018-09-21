@@ -3,14 +3,6 @@ package com.fibelatti.raffler.presenters;
 import com.fibelatti.raffler.models.Group;
 
 public interface IGroupPresenter {
-    void onCreate();
-
-    void onPause();
-
-    void onResume();
-
-    void onDestroy();
-
     void restoreGroup(Group group);
 
     void refreshGroup();

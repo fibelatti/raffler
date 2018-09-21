@@ -7,10 +7,10 @@ import java.io.Serializable;
 
 public class GroupItem
         implements Parcelable, Serializable {
-    Long id;
-    Long groupId;
-    String name;
-    Boolean isSelected;
+    private Long id;
+    private Long groupId;
+    private String name;
+    private Boolean isSelected;
 
     private GroupItem() {
     }

@@ -65,7 +65,7 @@ public class SecretVotingMenuFragment
         try {
             listener = (ISecretVotingMenuListener) context;
         } catch (ClassCastException castException) {
-            /** The activity does not implement the listener. */
+            /* The activity does not implement the listener. */
         }
     }
 

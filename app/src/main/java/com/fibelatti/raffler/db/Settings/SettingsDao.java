@@ -71,16 +71,11 @@ public class SettingsDao
         Settings.Builder settingsBuilder = new Settings.Builder();
 
         int rouletteMusicEnabledColumnIndex;
-        int crashReportEnabledColumnIndex;
 
         if (cursor != null) {
             if (cursor.getColumnIndex(SETTINGS_COLUMN_ROULETTE_MUSIC_ENABLED) != -1) {
                 rouletteMusicEnabledColumnIndex = cursor.getColumnIndexOrThrow(SETTINGS_COLUMN_ROULETTE_MUSIC_ENABLED);
                 settingsBuilder.setRouletteMusicEnabled(cursor.getInt(rouletteMusicEnabledColumnIndex) != 0);
-            }
-            if (cursor.getColumnIndex(SETTINGS_COLUMN_CRASH_REPORT_ENABLED) != -1) {
-                crashReportEnabledColumnIndex = cursor.getColumnIndexOrThrow(SETTINGS_COLUMN_CRASH_REPORT_ENABLED);
-                settingsBuilder.setCrashReportEnabled(cursor.getInt(crashReportEnabledColumnIndex) != 0);
             }
         }
         return settingsBuilder.build();
@@ -89,7 +84,6 @@ public class SettingsDao
     private void setContentValue(Settings settings) {
         initialValues = new ContentValues();
         initialValues.put(SETTINGS_COLUMN_ROULETTE_MUSIC_ENABLED, !settings.getRouletteMusicEnabled() ? 0 : 1);
-        initialValues.put(SETTINGS_COLUMN_CRASH_REPORT_ENABLED, !settings.getCrashReportEnabled() ? 0 : 1);
     }
 
     private ContentValues getContentValue() {

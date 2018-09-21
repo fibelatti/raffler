@@ -1,6 +1,6 @@
 package com.fibelatti.raffler.views.adapters;
 
-import android.content.Context;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,7 +20,6 @@ import butterknife.ButterKnife;
 public class GroupAdapter
         extends RecyclerView.Adapter<GroupAdapter.GroupItemViewHolder> {
 
-    private Context context;
     private List<GroupItem> groupItems;
 
     public class GroupItemViewHolder
@@ -36,8 +35,7 @@ public class GroupAdapter
         }
     }
 
-    public GroupAdapter(Context context) {
-        this.context = context;
+    public GroupAdapter() {
         this.groupItems = new ArrayList<>();
     }
 
@@ -48,12 +46,9 @@ public class GroupAdapter
         notifyDataSetChanged();
     }
 
-    private Context getContext() {
-        return context;
-    }
-
     @Override
-    public GroupItemViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    @NonNull
+    public GroupItemViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.list_row_group_item, parent, false);
 
@@ -61,7 +56,7 @@ public class GroupAdapter
     }
 
     @Override
-    public void onBindViewHolder(GroupItemViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull GroupItemViewHolder holder, int position) {
         GroupItem groupItem = groupItems.get(position);
 
         holder.itemName.setText(groupItem.getName());

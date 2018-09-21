@@ -1,11 +1,11 @@
 package com.fibelatti.raffler.views.activities;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.DialogFragment;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -13,7 +13,6 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -22,6 +21,7 @@ import com.fibelatti.raffler.Constants;
 import com.fibelatti.raffler.R;
 import com.fibelatti.raffler.models.Group;
 import com.fibelatti.raffler.models.GroupItem;
+import com.fibelatti.raffler.utils.KeyboardUtils;
 import com.fibelatti.raffler.utils.RandomizeUtils;
 import com.fibelatti.raffler.utils.StringUtils;
 import com.fibelatti.raffler.views.adapters.SubGroupsAdapter;
@@ -35,10 +35,9 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class CombinationActivity
-        extends BaseActivity
+        extends AppCompatActivity
         implements ICombinationListener {
 
-    private Context context;
     private Group groupOne;
     private Group groupTwo;
     private SubGroupsAdapter adapter;
@@ -69,8 +68,7 @@ public class CombinationActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        context = getApplicationContext();
-        adapter = new SubGroupsAdapter(this, combinations);
+        adapter = new SubGroupsAdapter(combinations);
 
         if (savedInstanceState != null) {
             groupOne = savedInstanceState.getParcelable(Constants.INTENT_EXTRA_GROUP);
@@ -144,8 +142,7 @@ public class CombinationActivity
             @Override
             public void onClick(View view) {
                 if (view != null) {
-                    InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-                    imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+                    KeyboardUtils.hideKeyboard(view);
                 }
 
                 raffle();
@@ -207,7 +204,7 @@ public class CombinationActivity
     private boolean validateQuantity(int quantity) {
         if (StringUtils.isNullOrEmpty(inputQuantity.getText().toString())) {
             subgroupsQuantityLayout.setError(getString(R.string.combination_msg_validate_quantity_empty));
-            requestFocus(inputQuantity);
+            KeyboardUtils.showKeyboard(inputQuantity);
             return false;
         } else {
             subgroupsQuantityLayout.setError(null);
@@ -216,7 +213,7 @@ public class CombinationActivity
 
         if (quantity == 0) {
             subgroupsQuantityLayout.setError(getString(R.string.combination_msg_validate_quantity_zero));
-            requestFocus(inputQuantity);
+            KeyboardUtils.showKeyboard(inputQuantity);
             return false;
         } else {
             subgroupsQuantityLayout.setError(null);
@@ -225,7 +222,7 @@ public class CombinationActivity
 
         if (quantity > maxCombinations) {
             subgroupsQuantityLayout.setError(getString(R.string.combination_msg_validate_quantity_maximum, maxCombinations));
-            requestFocus(inputQuantity);
+            KeyboardUtils.showKeyboard(inputQuantity);
             return false;
         } else {
             subgroupsQuantityLayout.setError(null);
@@ -233,12 +230,6 @@ public class CombinationActivity
         }
 
         return true;
-    }
-
-    private void requestFocus(View view) {
-        if (view.requestFocus()) {
-            getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
-        }
     }
 
     @Override

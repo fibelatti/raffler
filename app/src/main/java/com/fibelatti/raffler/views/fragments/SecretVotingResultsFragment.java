@@ -173,7 +173,9 @@ public class SecretVotingResultsFragment
             graphFirstPlace.setBottomTitle(resources.getQuantityString(R.plurals.secret_voting_results_graph_text_votes, quantity, quantity));
             textFirstPlace.setText(itemName);
 
-            if ((new ArrayList<>(orderedVotesMap.values())).get(0).size() > 1) buttonTieBreak.setVisibility(View.VISIBLE);
+            if ((new ArrayList<>(orderedVotesMap.values())).get(0).size() > 1) {
+                buttonTieBreak.setVisibility(View.VISIBLE);
+            }
 
             // Second place
             quantity = orderedVotesMap.size() > 1 ? (new ArrayList<>(orderedVotesMap.keySet())).get(1) : 0;

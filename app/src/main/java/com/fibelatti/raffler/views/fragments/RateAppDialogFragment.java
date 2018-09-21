@@ -2,11 +2,11 @@ package com.fibelatti.raffler.views.fragments;
 
 import android.app.Dialog;
 import android.content.ActivityNotFoundException;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
@@ -26,8 +26,6 @@ public class RateAppDialogFragment
 
     public static final String TAG = RateAppDialogFragment.class.getSimpleName();
 
-    private Context context;
-
     @BindView(R.id.rating_bar)
     RatingBar ratingBar;
     @BindView(R.id.layout_feedback_positive)
@@ -43,8 +41,8 @@ public class RateAppDialogFragment
     }
 
     @Override
+    @NonNull
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-        this.context = getActivity();
 
         View view = View.inflate(getContext(), R.layout.dialog_rate_app, null);
         ButterKnife.bind(this, view);
@@ -59,8 +57,9 @@ public class RateAppDialogFragment
             @Override
             public void onShow(final DialogInterface dialog) {
                 Button buttonNegative = ((AlertDialog) dialog).getButton(DialogInterface.BUTTON_NEGATIVE);
-                if (buttonNegative != null)
-                    buttonNegative.setTextColor(ContextCompat.getColor(context, R.color.colorGray));
+                if (buttonNegative != null) {
+                    buttonNegative.setTextColor(ContextCompat.getColor(buttonNegative.getContext(), R.color.colorGray));
+                }
             }
         });
 
@@ -109,6 +108,6 @@ public class RateAppDialogFragment
     }
 
     private Intent createPlayStoreIntent(String url) {
-        return new Intent(Intent.ACTION_VIEW, Uri.parse(String.format("%s?id=%s", url, context.getPackageName())));
+        return new Intent(Intent.ACTION_VIEW, Uri.parse(String.format("%s?id=%s", url, getContext().getPackageName())));
     }
 }

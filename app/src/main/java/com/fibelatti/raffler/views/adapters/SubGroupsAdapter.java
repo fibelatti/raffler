@@ -1,6 +1,6 @@
 package com.fibelatti.raffler.views.adapters;
 
-import android.content.Context;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,7 +19,6 @@ import butterknife.ButterKnife;
 public class SubGroupsAdapter
         extends RecyclerView.Adapter<SubGroupsAdapter.GroupViewHolder> {
 
-    private Context context;
     private List<Group> subgroupsList;
 
     public class GroupViewHolder
@@ -35,17 +34,13 @@ public class SubGroupsAdapter
         }
     }
 
-    public SubGroupsAdapter(Context context, List<Group> subgroupsList) {
-        this.context = context;
+    public SubGroupsAdapter(List<Group> subgroupsList) {
         this.subgroupsList = subgroupsList;
     }
 
-    private Context getContext() {
-        return context;
-    }
-
     @Override
-    public GroupViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    @NonNull
+    public GroupViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.list_row_sub_groups, parent, false);
 
@@ -53,6 +48,7 @@ public class SubGroupsAdapter
     }
 
     @Override
+    @NonNull
     public void onBindViewHolder(GroupViewHolder holder, int position) {
         Group group = subgroupsList.get(position);
         StringBuilder sb = new StringBuilder();

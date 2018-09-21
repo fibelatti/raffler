@@ -1,6 +1,5 @@
 package com.fibelatti.raffler.views.activities;
 
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,6 +8,7 @@ import android.support.design.widget.Snackbar;
 import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -16,8 +16,6 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.WindowManager;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageButton;
 
@@ -30,6 +28,7 @@ import com.fibelatti.raffler.models.GroupItem;
 import com.fibelatti.raffler.presenters.GroupFormPresenter;
 import com.fibelatti.raffler.presenters.IGroupFormPresenter;
 import com.fibelatti.raffler.presenters.IGroupFormPresenterView;
+import com.fibelatti.raffler.utils.KeyboardUtils;
 import com.fibelatti.raffler.utils.StringUtils;
 import com.fibelatti.raffler.views.adapters.GroupAdapter;
 import com.fibelatti.raffler.views.extensions.DividerItemDecoration;
@@ -45,9 +44,8 @@ import uk.co.deanwild.materialshowcaseview.MaterialShowcaseSequence;
 import uk.co.deanwild.materialshowcaseview.MaterialShowcaseView;
 
 public class GroupFormActivity
-        extends BaseActivity
+        extends AppCompatActivity
         implements IGroupFormPresenterView, IIncludeRangeListener, IEditNameListener {
-    private Context context;
     private IGroupFormPresenter presenter;
     private GroupAdapter adapter;
 
@@ -81,9 +79,8 @@ public class GroupFormActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        context = getApplicationContext();
-        presenter = GroupFormPresenter.createPresenter(context, this);
-        adapter = new GroupAdapter(this);
+        presenter = new GroupFormPresenter(this);
+        adapter = new GroupAdapter();
 
         if (savedInstanceState != null) {
             presenter.restoreGroup((Group) savedInstanceState.getParcelable(Constants.INTENT_EXTRA_GROUP));
@@ -199,7 +196,7 @@ public class GroupFormActivity
         String action = intent.getAction();
 
         if (Intent.ACTION_VIEW.equals(action)) {
-            return new FileHelper(context).readFromFile(intent.getData());
+            return FileHelper.readFromFile(this, intent.getData());
         }
 
         if (intent.hasExtra(Constants.INTENT_EXTRA_GROUP)) {
@@ -243,7 +240,7 @@ public class GroupFormActivity
 
         if (StringUtils.isNullOrEmpty(newGroupName)) {
             groupNameLayout.setError(getString(R.string.group_form_msg_validate_name));
-            requestFocus(groupName);
+            KeyboardUtils.showKeyboard(groupName);
             return false;
         } else {
             presenter.setGroupName(newGroupName);
@@ -257,7 +254,7 @@ public class GroupFormActivity
     private boolean validateItemName() {
         if (StringUtils.isNullOrEmpty(groupItemName.getText().toString())) {
             groupItemNameLayout.setError(getString(R.string.group_form_msg_validate_item_name));
-            requestFocus(groupItemName);
+            KeyboardUtils.showKeyboard(groupItemName);
             return false;
         } else {
             groupItemNameLayout.setError(null);
@@ -274,12 +271,6 @@ public class GroupFormActivity
         }
 
         return true;
-    }
-
-    private void requestFocus(View view) {
-        if (view.requestFocus()) {
-            getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
-        }
     }
 
     private void deleteItems() {
@@ -350,11 +341,11 @@ public class GroupFormActivity
                         .setTarget(groupNameLayout)
                         .withButtonDismissStyle()
                         .withPinkDismissButton()
-                        .setDismissTextColor(ContextCompat.getColor(context, R.color.colorWhite))
+                        .setDismissTextColor(ContextCompat.getColor(this, R.color.colorWhite))
                         .setDismissText(getString(R.string.hint_got_it))
                         .setSkipText(getString(R.string.hint_skip_tutorial))
                         .setContentText(getString(R.string.group_form_tutorial_group_name))
-                        .setMaskColour(ContextCompat.getColor(context, R.color.colorPrimary))
+                        .setMaskColour(ContextCompat.getColor(this, R.color.colorPrimary))
                         .withRectangleShape(true)
                         .build()
         );
@@ -364,11 +355,11 @@ public class GroupFormActivity
                         .setTarget(groupItemNameLayout)
                         .withButtonDismissStyle()
                         .withPinkDismissButton()
-                        .setDismissTextColor(ContextCompat.getColor(context, R.color.colorWhite))
+                        .setDismissTextColor(ContextCompat.getColor(this, R.color.colorWhite))
                         .setDismissText(getString(R.string.hint_got_it))
                         .setSkipText(getString(R.string.hint_skip_tutorial))
                         .setContentText(getString(R.string.group_form_tutorial_item_name))
-                        .setMaskColour(ContextCompat.getColor(context, R.color.colorPrimary))
+                        .setMaskColour(ContextCompat.getColor(this, R.color.colorPrimary))
                         .withRectangleShape(true)
                         .setDelay(200)
                         .build()
@@ -379,11 +370,11 @@ public class GroupFormActivity
                         .setTarget(buttonAddItem)
                         .withButtonDismissStyle()
                         .withPinkDismissButton()
-                        .setDismissTextColor(ContextCompat.getColor(context, R.color.colorWhite))
+                        .setDismissTextColor(ContextCompat.getColor(this, R.color.colorWhite))
                         .setDismissText(getString(R.string.hint_got_it))
                         .setSkipText(getString(R.string.hint_skip_tutorial))
                         .setContentText(getString(R.string.group_form_tutorial_add_item))
-                        .setMaskColour(ContextCompat.getColor(context, R.color.colorPrimary))
+                        .setMaskColour(ContextCompat.getColor(this, R.color.colorPrimary))
                         .setDelay(200)
                         .build()
         );
@@ -395,8 +386,7 @@ public class GroupFormActivity
         MaterialShowcaseSequence sequence = new MaterialShowcaseSequence(this, Constants.TUTORIAL_KEY_GROUP_FORM_SAVE);
 
         if (!sequence.hasFired()) {
-            InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-            imm.hideSoftInputFromWindow(buttonAddItem.getWindowToken(), 0);
+            KeyboardUtils.hideKeyboard(buttonAddItem);
         }
 
         sequence.addSequenceItem(
@@ -404,11 +394,11 @@ public class GroupFormActivity
                         .setTarget(fakeTutorialViewEditItem)
                         .withButtonDismissStyle()
                         .withPinkDismissButton()
-                        .setDismissTextColor(ContextCompat.getColor(context, R.color.colorWhite))
+                        .setDismissTextColor(ContextCompat.getColor(this, R.color.colorWhite))
                         .setDismissText(getString(R.string.hint_got_it))
                         .setSkipText(getString(R.string.hint_skip_tutorial))
                         .setContentText(getString(R.string.group_form_tutorial_edit))
-                        .setMaskColour(ContextCompat.getColor(context, R.color.colorPrimary))
+                        .setMaskColour(ContextCompat.getColor(this, R.color.colorPrimary))
                         .withRectangleShape(true)
                         .build()
         );
@@ -418,11 +408,11 @@ public class GroupFormActivity
                         .setTarget(fakeTutorialView)
                         .withButtonDismissStyle()
                         .withPinkDismissButton()
-                        .setDismissTextColor(ContextCompat.getColor(context, R.color.colorWhite))
+                        .setDismissTextColor(ContextCompat.getColor(this, R.color.colorWhite))
                         .setDismissText(getString(R.string.hint_got_it))
                         .setContentText(getString(R.string.group_form_tutorial_toolbar))
                         .setShapePadding(150)
-                        .setMaskColour(ContextCompat.getColor(context, R.color.colorPrimary))
+                        .setMaskColour(ContextCompat.getColor(this, R.color.colorPrimary))
                         .setDelay(200)
                         .build()
         );
