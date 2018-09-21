@@ -44,6 +44,7 @@ branches:
   only:
   - master
   - develop
+  - /^release.*$/
 
 notifications:
   email: false
