@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.CardView
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_gravity="center"
     android:layout_margin="@dimen/card_margin"
     android:background="?android:attr/selectableItemBackground"
-    card_view:cardCornerRadius="@dimen/card_radius">
+    app:cardCornerRadius="@dimen/card_radius">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -22,7 +21,7 @@
             android:layout_alignParentTop="true"
             android:textColor="@color/textPrimary"
             android:textSize="@dimen/text_size_regular"
-            android:textStyle="bold"/>
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/items"
@@ -30,7 +29,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/name"
             android:textColor="@color/textSecondary"
-            android:textSize="@dimen/text_size_regular"/>
+            android:textSize="@dimen/text_size_regular" />
     </RelativeLayout>
 
 </android.support.v7.widget.CardView>

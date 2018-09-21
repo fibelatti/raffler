@@ -3,7 +3,6 @@ package com.fibelatti.raffler;
 import android.app.Application;
 
 import com.fibelatti.raffler.db.Database;
-import com.squareup.leakcanary.LeakCanary;
 
 public class RafflerApplication
         extends Application {
@@ -23,8 +22,6 @@ public class RafflerApplication
 
         db = new Database(this);
         db.open();
-
-        LeakCanary.install(this);
     }
 
     @Override

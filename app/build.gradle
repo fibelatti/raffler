@@ -1,5 +1,4 @@
 apply plugin: 'com.android.application'
-apply plugin: 'android-apt'
 
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
@@ -19,6 +18,8 @@ android {
         versionName "1.6.0"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
+
+        resConfigs "en", "pt", "es"
     }
     buildTypes {
         release {
@@ -33,28 +34,24 @@ dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
 
     // Material Design
-    compile "com.android.support:appcompat-v7:$rootProject.ext.appCompatVersion"
-    compile "com.android.support:design:$rootProject.ext.designVersion"
-    compile "com.android.support:recyclerview-v7:$rootProject.ext.recyclerViewVersion"
-    compile "com.android.support:cardview-v7:$rootProject.ext.cardViewVersion"
-    compile "com.android.support:percent:$rootProject.ext.percentSupportVersion"
+    implementation "com.android.support:appcompat-v7:$rootProject.ext.appCompatVersion"
+    implementation "com.android.support:design:$rootProject.ext.designVersion"
+    implementation "com.android.support:cardview-v7:$rootProject.ext.cardViewVersion"
+    implementation "com.android.support:percent:$rootProject.ext.percentSupportVersion"
 
     // Butter Knife
-    compile "com.jakewharton:butterknife:$rootProject.ext.butterKnifeVersion"
-    apt "com.jakewharton:butterknife-compiler:$rootProject.ext.butterKnifeVersion"
+    implementation "com.jakewharton:butterknife:$rootProject.ext.butterKnifeVersion"
+    annotationProcessor "com.jakewharton:butterknife-compiler:$rootProject.ext.butterKnifeVersion"
 
     // Custom FAB
-    compile "com.github.clans:fab:$rootProject.ext.clansFabVersion"
+    implementation "com.github.clans:fab:$rootProject.ext.clansFabVersion"
 
     // Tutorials
-    compile "com.github.fibelatti:MaterialShowcaseView:$rootProject.ext.tutorialVersion"
+    implementation "com.github.fibelatti:MaterialShowcaseView:$rootProject.ext.tutorialVersion"
 
     // Charts
-    compile "me.itangqi.waveloadingview:library:$rootProject.ext.chartsVersion"
-
-    // Memory Leaks
-    debugCompile 'com.squareup.leakcanary:leakcanary-android:1.5'
+    implementation "me.itangqi.waveloadingview:library:$rootProject.ext.chartsVersion"
 
     // Testing
-    testCompile "junit:junit:$rootProject.ext.jUnitVersion"
+    testImplementation "junit:junit:$rootProject.ext.jUnitVersion"
 }
