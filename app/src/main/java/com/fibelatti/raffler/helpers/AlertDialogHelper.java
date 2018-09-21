@@ -9,14 +9,15 @@ import android.widget.Button;
 import com.fibelatti.raffler.R;
 
 public class AlertDialogHelper {
-    private Context context;
-
-    public AlertDialogHelper(Context context) {
-        this.context = context;
+    private AlertDialogHelper() {
     }
 
-    public void createOkOnlyDialog(CharSequence dialogTitle, CharSequence dialogMessage,
-                                   DialogInterface.OnClickListener positiveListener) {
+    public static void createOkOnlyDialog(
+            Context context,
+            CharSequence dialogTitle,
+            CharSequence dialogMessage,
+            DialogInterface.OnClickListener positiveListener
+    ) {
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
         builder.setTitle(dialogTitle);
         builder.setMessage(dialogMessage);
@@ -32,9 +33,13 @@ public class AlertDialogHelper {
             buttonPositive.setTextColor(ContextCompat.getColor(context, R.color.colorAccent));
     }
 
-    public void createYesNoDialog(CharSequence dialogTitle, CharSequence dialogMessage,
-                                  DialogInterface.OnClickListener positiveListener,
-                                  DialogInterface.OnClickListener negativeListener) {
+    public static void createYesNoDialog(
+            Context context,
+            CharSequence dialogTitle,
+            CharSequence dialogMessage,
+            DialogInterface.OnClickListener positiveListener,
+            DialogInterface.OnClickListener negativeListener
+    ) {
 
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
         builder.setTitle(dialogTitle);

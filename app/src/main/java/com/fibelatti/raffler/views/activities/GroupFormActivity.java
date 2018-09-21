@@ -284,8 +284,8 @@ public class GroupFormActivity
 
     private void deleteItems() {
         if (group.getSelectedItems().size() > 0) {
-            AlertDialogHelper dialogHelper = new AlertDialogHelper(this);
-            dialogHelper.createYesNoDialog(
+            AlertDialogHelper.createYesNoDialog(
+                    this,
                     getString(R.string.group_form_dialog_title_delete_items),
                     getString(R.string.group_form_dialog_msg_delete_items),
                     new DialogInterface.OnClickListener() {
@@ -303,8 +303,8 @@ public class GroupFormActivity
         boolean countHasChanged = group.getItemsCount() != 0 && group.getItemsCount() != initialItemCount;
 
         if (countHasChanged || (group.getId() == null && groupName.getText().length() > 0)) {
-            AlertDialogHelper dialogHelper = new AlertDialogHelper(this);
-            dialogHelper.createYesNoDialog(
+            AlertDialogHelper.createYesNoDialog(
+                    this,
                     getString(R.string.group_form_dialog_title_unsaved_changes),
                     getString(R.string.group_form_dialog_msg_unsaved_changes),
                     new DialogInterface.OnClickListener() {
@@ -312,7 +312,8 @@ public class GroupFormActivity
                             finish();
                         }
                     },
-                    null);
+                    null
+            );
         } else {
             finish();
         }
@@ -325,8 +326,8 @@ public class GroupFormActivity
 
     private void deleteAllItems() {
         if (group.getItems().size() > 0) {
-            AlertDialogHelper dialogHelper = new AlertDialogHelper(this);
-            dialogHelper.createYesNoDialog(
+            AlertDialogHelper.createYesNoDialog(
+                    this,
                     getString(R.string.group_form_dialog_title_delete_all_items),
                     getString(R.string.group_form_dialog_msg_delete_all_items),
                     new DialogInterface.OnClickListener() {
@@ -334,7 +335,8 @@ public class GroupFormActivity
                             presenter.deleteAllItems();
                         }
                     },
-                    null);
+                    null
+            );
         } else {
             Snackbar.make(layout, getString(R.string.group_form_msg_delete_items), Snackbar.LENGTH_LONG).show();
         }

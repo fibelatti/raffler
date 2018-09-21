@@ -50,7 +50,6 @@ public class GroupActivity
     private Context context;
     private IGroupPresenter presenter;
     private GroupAdapter adapter;
-    private AlertDialogHelper dialogHelper;
 
     private Group group;
     private boolean instanceRestored;
@@ -89,7 +88,6 @@ public class GroupActivity
         context = getApplicationContext();
         presenter = GroupPresenter.createPresenter(context, this);
         adapter = new GroupAdapter(this);
-        dialogHelper = new AlertDialogHelper(this);
 
         presenter.onCreate();
 
@@ -216,7 +214,7 @@ public class GroupActivity
                             .fromGroup(group)
                             .setItems(group.getSelectedItems())
                             .build();
-                    Navigator.startRandomWinnersActivity(GroupActivity.this,newGroup);
+                    Navigator.startRandomWinnersActivity(GroupActivity.this, newGroup);
                 }
             }
         });
@@ -229,7 +227,7 @@ public class GroupActivity
                             .fromGroup(group)
                             .setItems(group.getSelectedItems())
                             .build();
-                    Navigator.startSubGroupsActivity(GroupActivity.this,newGroup);
+                    Navigator.startSubGroupsActivity(GroupActivity.this, newGroup);
                 }
             }
         });
@@ -270,13 +268,18 @@ public class GroupActivity
     }
 
     private void showHelp() {
-        dialogHelper.createOkOnlyDialog(getString(R.string.group_dialog_title_help),
+        AlertDialogHelper.createOkOnlyDialog(
+                this,
+                getString(R.string.group_dialog_title_help),
                 getText(R.string.group_dialog_msg_help),
-                null);
+                null
+        );
     }
 
     private void deleteGroup() {
-        dialogHelper.createYesNoDialog(getString(R.string.group_dialog_title_delete),
+        AlertDialogHelper.createYesNoDialog(
+                this,
+                getString(R.string.group_dialog_title_delete),
                 getString(R.string.group_dialog_msg_delete),
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
@@ -289,7 +292,8 @@ public class GroupActivity
                         }
                     }
                 },
-                null);
+                null
+        );
     }
 
     private boolean validateSelection() {

@@ -34,7 +34,6 @@ public class SecretVotingVoteFragment
     private Context context;
     private ISecretVotingVoteListener listener;
     private VoteAdapter adapter;
-    private AlertDialogHelper dialogHelper;
 
     private Group group;
     private int voteIndex;
@@ -82,7 +81,6 @@ public class SecretVotingVoteFragment
 
         context = getActivity();
         adapter = new VoteAdapter(context);
-        dialogHelper = new AlertDialogHelper(getActivity());
 
         if (savedInstanceState != null) {
             this.group = savedInstanceState.getParcelable(Constants.INTENT_EXTRA_GROUP);
@@ -135,7 +133,8 @@ public class SecretVotingVoteFragment
     }
 
     private void showConfirmVoteDialog() {
-        dialogHelper.createYesNoDialog(
+        AlertDialogHelper.createYesNoDialog(
+                getContext(),
                 getString(R.string.secret_voting_vote_confirm_title),
                 getString(R.string.secret_voting_vote_confirm_message, group.getItemName(voteIndex)),
                 new DialogInterface.OnClickListener() {
@@ -150,6 +149,7 @@ public class SecretVotingVoteFragment
                         }
                         adapter.setGroupItems(group.getItems());
                     }
-                });
+                }
+        );
     }
 }
