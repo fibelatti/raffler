@@ -29,7 +29,6 @@ import java.util.LinkedHashMap;
 public class SecretVotingActivity
         extends BaseActivity
         implements ISecretVotingPresenterView, ISecretVotingMenuListener, ISecretVotingVoteListener, IPinEntryListener, ITieBreakListener {
-    private Navigator navigator;
     private SharedPreferences sharedPref;
     private ISecretVotingPresenter presenter;
     private Group group;
@@ -44,7 +43,6 @@ public class SecretVotingActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        navigator = new Navigator(this);
         sharedPref = getSharedPreferences(Constants.PREF_NAME_PIN, Context.MODE_PRIVATE);
         pinBackup = sharedPref.getString(SecretVotingActivity.class.getSimpleName(), "");
 
@@ -182,12 +180,12 @@ public class SecretVotingActivity
         keepPin = true;
 
         finish();
-        navigator.startSecretVotingActivity(group);
+        Navigator.startSecretVotingActivity(this, group);
     }
 
     @Override
     public void onRoulette(Group group) {
         finish();
-        navigator.startRouletteActivity(group);
+        Navigator.startRouletteActivity(this, group);
     }
 }

@@ -17,65 +17,62 @@ import com.fibelatti.raffler.views.activities.SettingsActivity;
 import com.fibelatti.raffler.views.activities.SubGroupsActivity;
 
 public class Navigator {
-    Activity activity;
-
-    public Navigator(Activity activity) {
-        this.activity = activity;
+    private Navigator() {
     }
 
-    public void startQuickDecisionResultActivity(QuickDecision quickDecision) {
+    public static void startQuickDecisionResultActivity(Activity activity, QuickDecision quickDecision) {
         Intent intent = new Intent(activity, QuickDecisionResultActivity.class);
         intent.putExtra(Constants.INTENT_EXTRA_QUICK_DECISION, quickDecision);
         activity.startActivity(intent);
     }
 
-    public void startGroupActivity(Group group) {
+    public static void startGroupActivity(Activity activity, Group group) {
         Intent intent = new Intent(activity, GroupActivity.class);
         intent.putExtra(Constants.INTENT_EXTRA_GROUP, group);
         activity.startActivityForResult(intent, Constants.REQUEST_CODE_GROUP_ACTION);
     }
 
-    public void startGroupFormActivity() {
-        startGroupFormActivity(null);
+    public static void startGroupFormActivity(Activity activity) {
+        startGroupFormActivity(activity,null);
     }
 
-    public void startGroupFormActivity(Group group) {
+    public static void startGroupFormActivity(Activity activity, Group group) {
         Intent intent = new Intent(activity, GroupFormActivity.class);
         if (group != null) intent.putExtra(Constants.INTENT_EXTRA_GROUP, group);
         activity.startActivityForResult(intent, Constants.REQUEST_CODE_GROUP_EDIT);
     }
 
-    public void startRandomWinnersActivity(Group group) {
+    public static void startRandomWinnersActivity(Activity activity, Group group) {
         Intent intent = new Intent(activity, RandomWinnersActivity.class);
         intent.putExtra(Constants.INTENT_EXTRA_GROUP, group);
         activity.startActivity(intent);
     }
 
-    public void startRouletteActivity(Group group) {
+    public static void startRouletteActivity(Activity activity, Group group) {
         Intent intent = new Intent(activity, RouletteActivity.class);
         intent.putExtra(Constants.INTENT_EXTRA_GROUP, group);
         activity.startActivity(intent);
     }
 
-    public void startSubGroupsActivity(Group group) {
+    public static void startSubGroupsActivity(Activity activity, Group group) {
         Intent intent = new Intent(activity, SubGroupsActivity.class);
         intent.putExtra(Constants.INTENT_EXTRA_GROUP, group);
         activity.startActivity(intent);
     }
 
-    public void startSecretVotingActivity(Group group) {
+    public static void startSecretVotingActivity(Activity activity, Group group) {
         Intent intent = new Intent(activity, SecretVotingActivity.class);
         intent.putExtra(Constants.INTENT_EXTRA_GROUP, group);
         activity.startActivity(intent);
     }
 
-    public void startCombinationActivity(Group group) {
+    public static void startCombinationActivity(Activity activity, Group group) {
         Intent intent = new Intent(activity, CombinationActivity.class);
         intent.putExtra(Constants.INTENT_EXTRA_GROUP, group);
         activity.startActivity(intent);
     }
 
-    public void startSettingsActivity() {
+    public static void startSettingsActivity(Activity activity) {
         Intent intent = new Intent(activity, SettingsActivity.class);
         activity.startActivity(intent);
     }

@@ -48,7 +48,6 @@ public class GroupActivity
         extends BaseActivity
         implements IGroupPresenterView, IPinEntryListener {
     private Context context;
-    private Navigator navigator;
     private IGroupPresenter presenter;
     private GroupAdapter adapter;
     private AlertDialogHelper dialogHelper;
@@ -88,7 +87,6 @@ public class GroupActivity
         super.onCreate(savedInstanceState);
 
         context = getApplicationContext();
-        navigator = new Navigator(this);
         presenter = GroupPresenter.createPresenter(context, this);
         adapter = new GroupAdapter(this);
         dialogHelper = new AlertDialogHelper(this);
@@ -158,7 +156,7 @@ public class GroupActivity
                 presenter.unselectAllItems();
                 return true;
             case R.id.action_edit:
-                navigator.startGroupFormActivity(group);
+                Navigator.startGroupFormActivity(this, group);
                 return true;
             case R.id.action_delete:
                 deleteGroup();
@@ -205,7 +203,7 @@ public class GroupActivity
                             .fromGroup(group)
                             .setItems(group.getSelectedItems())
                             .build();
-                    navigator.startRouletteActivity(newGroup);
+                    Navigator.startRouletteActivity(GroupActivity.this, newGroup);
                 }
             }
         });
@@ -218,7 +216,7 @@ public class GroupActivity
                             .fromGroup(group)
                             .setItems(group.getSelectedItems())
                             .build();
-                    navigator.startRandomWinnersActivity(newGroup);
+                    Navigator.startRandomWinnersActivity(GroupActivity.this,newGroup);
                 }
             }
         });
@@ -231,7 +229,7 @@ public class GroupActivity
                             .fromGroup(group)
                             .setItems(group.getSelectedItems())
                             .build();
-                    navigator.startSubGroupsActivity(newGroup);
+                    Navigator.startSubGroupsActivity(GroupActivity.this,newGroup);
                 }
             }
         });
@@ -256,7 +254,7 @@ public class GroupActivity
                             .fromGroup(group)
                             .setItems(group.getSelectedItems())
                             .build();
-                    navigator.startCombinationActivity(newGroup);
+                    Navigator.startCombinationActivity(GroupActivity.this, newGroup);
                 }
             }
         });
@@ -394,6 +392,6 @@ public class GroupActivity
                 .setName(group.getName())
                 .setItems(group.getSelectedItems())
                 .build();
-        navigator.startSecretVotingActivity(newGroup);
+        Navigator.startSecretVotingActivity(this, newGroup);
     }
 }

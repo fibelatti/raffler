@@ -41,7 +41,6 @@ public class RandomWinnersActivity
         extends BaseActivity
         implements IPinEntryListener {
     private Context context;
-    private Navigator navigator;
     private Group group;
     private Group raffledGroup;
     private RandomWinnersAdapter adapter;
@@ -73,7 +72,6 @@ public class RandomWinnersActivity
         super.onCreate(savedInstanceState);
 
         context = getApplicationContext();
-        navigator = new Navigator(this);
         group = fetchDataFromIntent();
         adapter = new RandomWinnersAdapter(this, winners);
 
@@ -147,7 +145,7 @@ public class RandomWinnersActivity
                         .fromGroup(raffledGroup)
                         .setItems(raffledGroup.getItems())
                         .build();
-                navigator.startCombinationActivity(newGroup);
+                Navigator.startCombinationActivity(RandomWinnersActivity.this, newGroup);
             }
         });
     }
@@ -213,6 +211,6 @@ public class RandomWinnersActivity
 
     @Override
     public void onPinEntrySuccess() {
-        navigator.startSecretVotingActivity(raffledGroup);
+        Navigator.startSecretVotingActivity(this, raffledGroup);
     }
 }

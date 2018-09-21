@@ -44,7 +44,6 @@ public class MainActivity
         extends BaseActivity
         implements SearchView.OnQueryTextListener {
     private Context context;
-    private Navigator navigator;
 
     private List<Group> groupList;
     private MainAdapter groupsAdapter;
@@ -74,7 +73,6 @@ public class MainActivity
         super.onCreate(savedInstanceState);
 
         context = getApplicationContext();
-        navigator = new Navigator(this);
         groupList = new ArrayList<>();
         groupsAdapter = new MainAdapter(this);
         quickDecisionList = new ArrayList<>();
@@ -137,7 +135,7 @@ public class MainActivity
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_settings:
-                navigator.startSettingsActivity();
+                Navigator.startSettingsActivity(this);
                 return true;
         }
 
@@ -160,7 +158,7 @@ public class MainActivity
                     @Override
                     public void onItemTouch(View view, int position) {
                         Group group = groupList.get(position);
-                        navigator.startGroupActivity(group);
+                        Navigator.startGroupActivity(MainActivity.this, group);
                     }
                 })
                 .build());
@@ -172,7 +170,7 @@ public class MainActivity
                     @Override
                     public void onItemTouch(View view, int position) {
                         int positionInList = position % quickDecisionList.size();
-                        navigator.startQuickDecisionResultActivity(quickDecisionList.get(positionInList));
+                        Navigator.startQuickDecisionResultActivity(MainActivity.this, quickDecisionList.get(positionInList));
                     }
                 })
                 .build());
@@ -182,7 +180,7 @@ public class MainActivity
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                navigator.startGroupFormActivity();
+                Navigator.startGroupFormActivity(MainActivity.this);
             }
         });
         fab.setShowAnimation(AnimationUtils.loadAnimation(this, R.anim.show_from_bottom));
